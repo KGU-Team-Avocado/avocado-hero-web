@@ -5,6 +5,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import DefaultLayout from './component/common/DefaultLayout';
 import SignInContainer from './container/sign/sign_in/SignInContainer';
 import SignUpContainer from './container/sign/sign_up/SignUpContainer';
+import ExampleContainer from './container/example/ExampleContainer';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<HomeContainer />} />
         <Route path="signin" element={<SignInContainer />} />
         <Route path="signup" element={<SignUpContainer />} />
+        <Route path="example" element={<ExampleContainer />} />
         <Route
           path="*"
           element={
