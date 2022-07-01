@@ -35,6 +35,9 @@ const HomeContainer = () => {
                 <Link to='signup'>회원가입 페이지</Link>
             </div>
             <div>
+                <Link to='user'>프로필 페이지</Link>
+            </div>
+            <div>
                 <Link to='example'>DB 예제 페이지</Link>
             </div>
             <div>
