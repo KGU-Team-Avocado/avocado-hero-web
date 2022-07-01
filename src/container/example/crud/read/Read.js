@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ReadAll from './ReadAll';
+import ReadOne from './ReadOne';
 
 export default () => {
     return (
@@ -8,12 +9,11 @@ export default () => {
             <h2>
                 Read
             </h2>
-            <div className='mb-3'>
+            <div className='my-2'>
                 <ReadAll/>
             </div>
-            <h4>특정 아이디값 가져오기</h4>
-            <div>
-                
+            <div className='my-2'>
+                <ReadOne/>
             </div>
         </>
     )
