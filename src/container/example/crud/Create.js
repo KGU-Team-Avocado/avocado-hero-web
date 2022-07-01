@@ -1,5 +1,12 @@
 export default () => {
-    return(
-        <div>Create</div>
+    return (
+        <>
+            <h2>
+                Create
+            </h2>
+            <div>
+                
+            </div>
+        </>
     )
 }

@@ -9,11 +9,15 @@ const ExampleContainer = () => {
 
     return(
         <div>
-            <h1>Node.js + Express.js + Mongoose + MongoDB 예제</h1>
+            <h1 className='mb-5'>Node.js + Express.js + Mongoose + MongoDB 예제</h1>
             <Create/>
+            <hr/>
             <Read/>
+            <hr/>
             <Update/>
+            <hr/>
             <Delete/>
+            <hr/>
         </div>
     )
 }

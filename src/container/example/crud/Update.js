@@ -1,5 +1,10 @@
 export default () => {
-    return(
-        <div>Update</div>
+    return (
+        <>
+            <h2>
+                Update
+            </h2>
+            <div></div>
+        </>
     )
 }

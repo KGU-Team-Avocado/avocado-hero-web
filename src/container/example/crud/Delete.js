@@ -1,5 +1,10 @@
 export default () => {
-    return(
-        <div>Delete</div>
+    return (
+        <>
+            <h2>
+                Delete
+            </h2>
+            <div></div>
+        </>
     )
 }
