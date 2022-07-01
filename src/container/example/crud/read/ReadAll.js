@@ -18,13 +18,17 @@ export default () => {
     }, []);
     return (
         <>
-            <h2>
-                Read
-            </h2>
+            <h4>전체 데이터 가져오기</h4>
             <div>
-                {data.map((item) => (
-                    <div key={item._id}>test_id: {item.test_id} | test_num : {item.test_num}</div>
-                ))}
+                {
+                    data.length == 0
+                        ?
+                        <div>데이터가 없습니다.</div>
+                        :
+                        data.map((item) => (
+                            <div key={item._id}>test_id: {item.test_id} | test_num : {item.test_num}</div>
+                        ))
+                }
             </div>
         </>
     )

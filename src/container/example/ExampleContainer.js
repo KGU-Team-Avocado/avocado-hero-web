@@ -1,23 +1,12 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import Create from './crud/Create';
-import Delete from './crud/Delete';
-import Read from './crud/Read';
-import Update from './crud/Update';
+import CrudExample from './crud/CrudExample';
 
 const ExampleContainer = () => {
 
     return(
         <div>
-            <h1 className='mb-5'>Node.js + Express.js + Mongoose + MongoDB 예제</h1>
-            <Create/>
-            <hr/>
-            <Read/>
-            <hr/>
-            <Update/>
-            <hr/>
-            <Delete/>
-            <hr/>
+            <CrudExample/>
         </div>
     )
 }
