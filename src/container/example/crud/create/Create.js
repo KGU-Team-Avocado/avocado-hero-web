@@ -1,3 +1,5 @@
+import CreateRandom from "./CreateRandom"
+
 export default () => {
     return (
         <>
@@ -5,7 +7,7 @@ export default () => {
                 Create
             </h2>
             <div>
-                
+                <CreateRandom/>
             </div>
         </>
     )
