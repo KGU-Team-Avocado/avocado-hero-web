@@ -23,7 +23,7 @@ const SignInContainer = () => {
       })
       .then((response) => {
         console.log(response.data);
-        if(response.data.success){
+        if(response.data.status === "success"){
           sessionStorage.setItem("user", JSON.stringify(response.data));
           window.location.href = "/";
         }
