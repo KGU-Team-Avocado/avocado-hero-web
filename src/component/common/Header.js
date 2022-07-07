@@ -4,16 +4,15 @@ import { useEffect, useState } from "react";
 
 const Header = () => {
   const [isSignIn, setSignIn] = useState(false); //임시로 해놓음
-  //   const [userInfo, setUserInfo] = useState(null);
+    const [userInfo, setUserInfo] = useState(null);
     const sessionStorage = window.sessionStorage;
-    console.log(sessionStorage.getItem("user"));
 
-  //   useEffect(() => {
-  //     if (!sessionStorage.getItem("user")) {
-  //       setUserInfo(sessionStorage.getItem("user"));
-  //       setSignIn(true);
-  //     }
-  //   }, []);
+    useEffect(() => {
+      if (sessionStorage.getItem("user")) {
+        setUserInfo(JSON.parse(sessionStorage.getItem("user")));
+        setSignIn(true);
+      }
+    }, []);
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">
@@ -100,9 +99,9 @@ const Header = () => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    {/* <Dropdown.Item href="#/action-0">
+                    <Dropdown.Item href="#/action-0">
                       {userInfo.user_id}
-                    </Dropdown.Item> */}
+                    </Dropdown.Item>
                     <Dropdown.Item href="#/action-1">프로필 보기</Dropdown.Item>
                     <Dropdown.Item
                       href="#/action-2"
