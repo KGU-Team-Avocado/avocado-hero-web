@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+import div from "react-bootstrap/Container";
 import axios from "axios";
 
 import React, { useState } from "react";
@@ -60,14 +60,10 @@ const SignUpContainer = () => {
   };
 
   return (
-    <div
-      style={{
-        width: "50%",
-      }}
-    >
-      <>회원가입 관련 메뉴</>
-      <div className="sign_up">
-        <Container className="panel">
+    <div className="d-flex justify-content-center pt-5">
+      <div className="card p-5 w-50" >
+        <h1>회원가입</h1>
+        <div className="py-3">
           <Form>
             <Form.Group
               as={Row}
@@ -78,7 +74,7 @@ const SignUpContainer = () => {
                 <Form.Control
                   name="userID"
                   type="text"
-                  placeholder="UserID"
+                  placeholder="아이디"
                   value={userID}
                   onChange={onUserIdHandler}
                 />
@@ -94,7 +90,7 @@ const SignUpContainer = () => {
                 <Form.Control
                   name="password"
                   type="password"
-                  placeholder="Password"
+                  placeholder="비밀번호"
                   value={password}
                   onChange={onPasswordHandler}
                 />
@@ -110,7 +106,7 @@ const SignUpContainer = () => {
                 <Form.Control
                   name="confirmPassword"
                   type="password"
-                  placeholder="Confirm Password"
+                  placeholder="비밀번호 확인"
                   value={confirmPassword}
                   onChange={onConfirmPasswordHandler}
                 />
@@ -126,7 +122,7 @@ const SignUpContainer = () => {
                 <Form.Control
                   name="userName"
                   type="text"
-                  placeholder="Username"
+                  placeholder="이름"
                   value={userName}
                   onChange={onUserNameHandler}
                 />
@@ -148,13 +144,14 @@ const SignUpContainer = () => {
 
             <div className="d-grid gap-1">
               <Button variant="secondary" type="submit" onClick={onClick}>
-                Sign Up
+                회원가입
               </Button>
             </div>
           </Form>
-        </Container>
+        </div>
       </div>
     </div>
+
   );
 };
 

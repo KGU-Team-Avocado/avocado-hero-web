@@ -27,10 +27,6 @@ const HomeContainer = () => {
                     </div>
                 </div>
             </div>
-
-            <div>
-                <Link to='signup'>회원가입 페이지</Link>
-            </div>
             <div>
                 <Link to='user'>프로필 페이지</Link>
             </div>

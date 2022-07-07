@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 const SignInContainer = () => {
   const [id, setId] = useState("");
@@ -23,7 +25,7 @@ const SignInContainer = () => {
       })
       .then((response) => {
         console.log(response.data);
-        if(response.data.status === "success"){
+        if (response.data.status === "success") {
           sessionStorage.setItem("user", JSON.stringify(response.data.user));
           window.location.href = "/";
         }
@@ -37,52 +39,50 @@ const SignInContainer = () => {
   };
 
   return (
-    <div>
-      {/* <img
-        className="mb-4"
-        src="/docs/5.2/assets/brand/bootstrap-logo.svg"
-        alt=""
-        width="72"
-        height="57"
-      /> */}
-      <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+    <div className="d-flex justify-content-center pt-5">
+      <div className="card p-5 w-50" >
+        <h1>로그인</h1>
+        <div className="py-3">
+          <div className="form-floating">
+            <input
+              type="id"
+              className="form-control"
+              id="floatingInput"
+              placeholder="아이디"
+              onChange={handleId}
+              value={id}
+            />
+            <label htmlFor="floatingInput">ID</label>
+          </div>
+          <div className="form-floating">
+            <input
+              type="password"
+              className="form-control"
+              id="floatingPassword"
+              placeholder="Password"
+              onChange={handlePassword}
+              value={password}
+            />
+            <label htmlFor="floatingPassword">Password</label>
+          </div>
 
-      <div className="form-floating">
-        <input
-          type="id"
-          className="form-control"
-          id="floatingInput"
-          placeholder="아이디"
-          onChange={handleId}
-          value={id}
-        />
-        <label htmlFor="floatingInput">ID</label>
+          <div className="checkbox">
+            <label>
+              <input type="checkbox" value="remember-me" /> Remember me
+            </label>
+          </div>
+          <div className="my-3">
+            <Link to='/signup'>아직 회원이 아니신가요?</Link>
+          </div>
+          <button
+            className="w-100 btn btn-lg btn-primary"
+            type="submit"
+            onClick={() => login()}
+          >
+            Sign in
+          </button>
+        </div>
       </div>
-      <div className="form-floating">
-        <input
-          type="password"
-          className="form-control"
-          id="floatingPassword"
-          placeholder="Password"
-          onChange={handlePassword}
-          value={password}
-        />
-        <label htmlFor="floatingPassword">Password</label>
-      </div>
-
-      <div className="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me" /> Remember me
-        </label>
-      </div>
-      <button
-        className="w-100 btn btn-lg btn-primary"
-        type="submit"
-        onClick={() => login()}
-      >
-        Sign in
-      </button>
-      <p className="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
     </div>
   );
 };
