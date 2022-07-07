@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import axios from "axios";
 
 import React, { useState } from "react";
 
@@ -33,12 +34,29 @@ const SignUpContainer = () => {
     setEmail(e.currentTarget.value);
   };
 
-  const onSubmit = (e) => {
+  const onClick = (e) => {
     e.preventDefault();
-
     if (password !== confirmPassword) {
       return alert("비밀번호 확인이 일치하지 않습니다.");
     }
+
+    console.log(userID + password + confirmPassword + userName + email);
+    axios
+      .post("/usersRouter/register", {
+        user_id: userID,
+        user_password: password,
+        user_name: userName,
+        user_email: email,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.success === true) {
+          window.location.href = "/";
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -129,7 +147,7 @@ const SignUpContainer = () => {
             <br />
 
             <div className="d-grid gap-1">
-              <Button variant="secondary" type="submit" onSubmit={onSubmit}>
+              <Button variant="secondary" type="submit" onClick={onClick}>
                 Sign Up
               </Button>
             </div>
