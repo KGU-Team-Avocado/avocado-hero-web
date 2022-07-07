@@ -61,7 +61,7 @@ const SignUpContainer = () => {
 
   return (
     <div className="d-flex justify-content-center pt-5">
-      <div className="card p-5 w-50" >
+      <div className="card p-5 w-100" style={{'maxWidth':'500px','minWidth':'300px'}} >
         <h1>회원가입</h1>
         <div className="py-3">
           <Form>
