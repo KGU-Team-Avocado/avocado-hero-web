@@ -14,6 +14,11 @@ const Header = () => {
       }
     }, []);
 
+    const logout = () => {
+      setSignIn(!isSignIn)
+      sessionStorage.clear();
+    }
+
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
@@ -105,19 +110,16 @@ const Header = () => {
                     <Dropdown.Item href="#/action-1">프로필 보기</Dropdown.Item>
                     <Dropdown.Item
                       href="#/action-2"
-                      onClick={() => setSignIn(!isSignIn)}
+                      onClick={() => logout()}
                     >
                       로그아웃
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               ) : (
-                <button
-                  className="btn btn-outline-success"
-                  onClick={() => setSignIn(!isSignIn)}
-                >
-                  로그인
-                </button>
+                  <Link to="/signin" className="btn btn-outline-success" aria-current="page">
+                    로그인
+                  </Link>
               )
             }
           </div>

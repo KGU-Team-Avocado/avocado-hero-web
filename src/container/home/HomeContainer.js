@@ -29,9 +29,6 @@ const HomeContainer = () => {
             </div>
 
             <div>
-                <Link to='signin'>로그인 페이지</Link>
-            </div>
-            <div>
                 <Link to='signup'>회원가입 페이지</Link>
             </div>
             <div>
