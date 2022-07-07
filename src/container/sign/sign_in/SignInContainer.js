@@ -4,6 +4,7 @@ import { useState } from "react";
 const SignInContainer = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const sessionStorage = window.sessionStorage;
 
   const handleId = (e) => {
     setId(e.currentTarget.value);
@@ -22,6 +23,8 @@ const SignInContainer = () => {
       })
       .then((response) => {
         console.log(response.data);
+        sessionStorage.setItem("user", response.data);
+        window.location.href = "/";
       })
       .catch(function (error) {
         console.log(error);
