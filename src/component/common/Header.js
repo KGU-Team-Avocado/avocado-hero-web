@@ -4,20 +4,20 @@ import { useEffect, useState } from "react";
 
 const Header = () => {
   const [isSignIn, setSignIn] = useState(false); //임시로 해놓음
-    const [userInfo, setUserInfo] = useState(null);
-    const sessionStorage = window.sessionStorage;
+  const [userInfo, setUserInfo] = useState(null);
+  const sessionStorage = window.sessionStorage;
 
-    useEffect(() => {
-      if (sessionStorage.getItem("user")) {
-        setUserInfo(JSON.parse(sessionStorage.getItem("user")));
-        setSignIn(true);
-      }
-    }, []);
-
-    const logout = () => {
-      setSignIn(!isSignIn)
-      sessionStorage.clear();
+  useEffect(() => {
+    if (sessionStorage.getItem("user")) {
+      setUserInfo(JSON.parse(sessionStorage.getItem("user")));
+      setSignIn(true);
     }
+  }, []);
+
+  const logout = () => {
+    setSignIn(!isSignIn)
+    sessionStorage.clear();
+  }
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">
@@ -104,12 +104,11 @@ const Header = () => {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-0">
+                    <Dropdown.Item>
                       {userInfo.user_id}
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/action-1">프로필 보기</Dropdown.Item>
+                    <Dropdown.Item href="user">프로필 보기</Dropdown.Item>
                     <Dropdown.Item
-                      href="#/action-2"
                       onClick={() => logout()}
                     >
                       로그아웃
@@ -117,9 +116,9 @@ const Header = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               ) : (
-                  <Link to="/signin" className="btn btn-outline-success" aria-current="page">
-                    로그인
-                  </Link>
+                <Link to="/signin" className="btn btn-outline-success" aria-current="page">
+                  로그인
+                </Link>
               )
             }
           </div>
