@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 const Header = () => {
   const [isSignIn, setSignIn] = useState(false); //임시로 해놓음
   //   const [userInfo, setUserInfo] = useState(null);
-  //   const sessionStorage = window.sessionStorage;
+    const sessionStorage = window.sessionStorage;
+    console.log(sessionStorage.getItem("user"));
 
   //   useEffect(() => {
   //     if (!sessionStorage.getItem("user")) {

@@ -23,8 +23,13 @@ const SignInContainer = () => {
       })
       .then((response) => {
         console.log(response.data);
-        sessionStorage.setItem("user", response.data);
-        window.location.href = "/";
+        if(response.data.success){
+          sessionStorage.setItem("user", JSON.stringify(response.data));
+          window.location.href = "/";
+        }
+        else {
+          return alert("아이디/비밀번호를 다시 입력해주세요.")
+        }
       })
       .catch(function (error) {
         console.log(error);
