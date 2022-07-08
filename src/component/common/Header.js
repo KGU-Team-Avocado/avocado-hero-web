@@ -92,22 +92,24 @@ const Header = () => {
                   <Dropdown.Toggle
                     variant=""
                     id="dropdown-basic"
-                    className="d-block link-dark text-decoration-none dropdown-toggle"
+                    className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
                   >
                     <img
                       src="https://github.com/mdo.png"
                       alt="mdo"
                       width="32"
                       height="32"
-                      className="rounded-circle"
+                      className="rounded-circle mx-1"
                     />
+                    <div className="mx-1">{userInfo.user_id}</div>
+
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item>
+                    {/* <Dropdown.Item>
                       {userInfo.user_id}
-                    </Dropdown.Item>
-                    <Dropdown.Item href={'user/'+userInfo.user_id}>프로필 보기</Dropdown.Item>
+                    </Dropdown.Item> */}
+                    <Dropdown.Item href={'user/' + userInfo.user_id}>프로필 보기</Dropdown.Item>
                     <Dropdown.Item
                       onClick={() => logout()}
                     >
