@@ -107,7 +107,7 @@ const Header = () => {
                     <Dropdown.Item>
                       {userInfo.user_id}
                     </Dropdown.Item>
-                    <Dropdown.Item href="user">프로필 보기</Dropdown.Item>
+                    <Dropdown.Item href={'user/'+userInfo.user_id}>프로필 보기</Dropdown.Item>
                     <Dropdown.Item
                       onClick={() => logout()}
                     >

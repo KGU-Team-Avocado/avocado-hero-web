@@ -18,7 +18,7 @@ function App() {
         <Route path="/" element={<HomeContainer />} />
         <Route path="signin" element={<SignInContainer />} />
         <Route path="signup" element={<SignUpContainer />} />
-        <Route path="user" element={<ProfileContainer />} />
+        <Route path="user/:id" element={<ProfileContainer />} />
         <Route path="example" element={<ExampleContainer />} />
         <Route
           path="*"
