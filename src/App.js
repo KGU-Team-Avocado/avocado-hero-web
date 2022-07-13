@@ -21,8 +21,6 @@ function App() {
         <Route path="signup" element={<SignUpContainer />} />
         {/* 프로필 보기 */}
         <Route path="user/:id" element={<ProfileContainer />} /> 
-        {/* 프로필 수정 */}
-        <Route path="user/:id/update" element={<ProfileUpdateContainer />} />
         <Route path="example" element={<ExampleContainer />} />
         <Route
           path="*"

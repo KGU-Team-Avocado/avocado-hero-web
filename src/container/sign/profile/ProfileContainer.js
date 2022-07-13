@@ -9,12 +9,36 @@ import Button from 'react-bootstrap/Button';
 import Form from "react-bootstrap/Form";
 
 const ProfileContainer = () => {
+
+    const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
+    const fileInput = useRef(null)
+
+    const params = useParams(); //url로 넘어온 파라미터를 받는 역할 (App.js 의 :id 참고)
+    const user_id = params.id; //(params의 :id를 받는 역할)
+    const [user, setUser] = useState(null);
+    useEffect(() => {
+        axios.post('/usersRouter/findUser', {
+            user_id: user_id
+        }).then((response) => { //서버로부터 받아온 id
+            // console.log(response.data);
+            if (response.data.status === "success") {
+                console.log(JSON.stringify(response.data.user))
+                setUser(response.data.user);
+            }
+            // else {
+            //   return alert("조회된 아이디가 없습니다.")
+            // }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }, []);
+
     const [isEdit, setIsEdit] = useState(false); 
     const onClickEdit = () => {
         setIsEdit(!isEdit);
     };
 
-    const [name, setName] = useState("");
+    const [name, setName] = useState('');
 
     const onNameHandler = (e) => {
         setName(e.currentTarget.value);
@@ -51,29 +75,6 @@ const ProfileContainer = () => {
     //     })
     // }
 
-    const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
-    const fileInput = useRef(null)
-
-    const params = useParams(); //url로 넘어온 파라미터를 받는 역할 (App.js 의 :id 참고)
-    const user_id = params.id; //(params의 :id를 받는 역할)
-    const [user, setUser] = useState(null);
-    useEffect(() => {
-        axios.post('/usersRouter/findUser', {
-            user_id: user_id
-        }).then((response) => { //서버로부터 받아온 id
-            // console.log(response.data);
-            if (response.data.status === "success") {
-                console.log(JSON.stringify(response.data.user))
-                setUser(response.data.user);
-            }
-            // else {
-            //   return alert("조회된 아이디가 없습니다.")
-            // }
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }, []);
-
     return (
     <>
     {
@@ -89,10 +90,8 @@ const ProfileContainer = () => {
                     <Card style={{ height: '30rem', margin: '10px 0' }}>
       <Card.Body>
         <div>
-        <Avatar
-        src={Image} 
-        size={150} 
-        onClickEdit={()=>{fileInput.current.click()}}/>
+        <div><img
+        src={Image} style={{ height: '150px' }}/></div>
             {
             isEdit ? (
                 <div><Button>변경</Button></div>
