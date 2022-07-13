@@ -40,6 +40,10 @@ const ProfileContainer = () => {
 
     const [name, setName] = useState('');
 
+    useEffect(()=>{
+        setName(user.user_name);
+        },[user.user_name]);
+
     const onNameHandler = (e) => {
         setName(e.currentTarget.value);
     }

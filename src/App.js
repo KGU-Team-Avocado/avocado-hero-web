@@ -7,7 +7,6 @@ import SignInContainer from './container/sign/sign_in/SignInContainer';
 import SignUpContainer from './container/sign/sign_up/SignUpContainer';
 import ExampleContainer from './container/example/ExampleContainer';
 import ProfileContainer from './container/sign/profile/ProfileContainer';
-import ProfileUpdateContainer from './container/sign/profile/ProfileUpdateContainer';
 
 function App() {
   return (
