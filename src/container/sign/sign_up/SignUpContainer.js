@@ -5,9 +5,15 @@ import Col from "react-bootstrap/Col";
 import div from "react-bootstrap/Container";
 import axios from "axios";
 
-import React, { useState } from "react";
+import { useRef, useState } from "react";
 
 const SignUpContainer = () => {
+  const UserIDInput = useRef();
+  const PasswordInput = useRef();
+  const ConfirmPasswordInput = useRef();
+  const UserNameInput = useRef();
+  const EmailInput = useRef();
+
   const [userID, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -36,32 +42,56 @@ const SignUpContainer = () => {
 
   const onClick = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      return alert("비밀번호 확인이 일치하지 않습니다.");
-    }
 
-    console.log(userID + password + confirmPassword + userName + email);
-    axios
-      .post("/usersRouter/register", {
-        user_id: userID,
-        user_password: password,
-        user_name: userName,
-        user_email: email,
-      })
-      .then((response) => {
-        console.log(response);
-        if (response.data.success === true) {
-          window.location.href = "/";
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (userID.length < 1) {
+      UserIDInput.current.focus();
+      return;
+    } else if (password.length < 1) {
+      PasswordInput.current.focus();
+      return;
+    } else if (confirmPassword.length < 1) {
+      ConfirmPasswordInput.current.focus();
+      return;
+    } else if (userName.length < 1) {
+      UserNameInput.current.focus();
+      return;
+    } else if (email.length < 1) {
+      EmailInput.current.focus();
+      return;
+    } else {
+      if (password !== confirmPassword) {
+        return alert("비밀번호 확인이 일치하지 않습니다.");
+      }
+
+      console.log(userID + password + confirmPassword + userName + email);
+      axios
+        .post("/usersRouter/register", {
+          user_id: userID,
+          user_password: password,
+          user_name: userName,
+          user_email: email,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.idCheck === false) {
+            alert("이미 사용중인 아이디입니다.");
+          }
+          if (response.data.success === true) {
+            window.location.href = "/";
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   };
 
   return (
     <div className="d-flex justify-content-center pt-5">
-      <div className="card p-5 w-100" style={{'maxWidth':'500px','minWidth':'300px'}} >
+      <div
+        className="card p-5 w-100"
+        style={{ maxWidth: "500px", minWidth: "300px" }}
+      >
         <h1>회원가입</h1>
         <div className="py-3">
           <Form>
@@ -76,6 +106,7 @@ const SignUpContainer = () => {
                   type="text"
                   placeholder="아이디"
                   value={userID}
+                  ref={UserIDInput}
                   onChange={onUserIdHandler}
                 />
               </Col>
@@ -92,6 +123,7 @@ const SignUpContainer = () => {
                   type="password"
                   placeholder="비밀번호"
                   value={password}
+                  ref={PasswordInput}
                   onChange={onPasswordHandler}
                 />
               </Col>
@@ -108,6 +140,7 @@ const SignUpContainer = () => {
                   type="password"
                   placeholder="비밀번호 확인"
                   value={confirmPassword}
+                  ref={ConfirmPasswordInput}
                   onChange={onConfirmPasswordHandler}
                 />
               </Col>
@@ -124,6 +157,7 @@ const SignUpContainer = () => {
                   type="text"
                   placeholder="이름"
                   value={userName}
+                  ref={UserNameInput}
                   onChange={onUserNameHandler}
                 />
               </Col>
@@ -136,6 +170,7 @@ const SignUpContainer = () => {
                   type="email"
                   placeholder="Email"
                   value={email}
+                  ref={EmailInput}
                   onChange={onEmailHandler}
                 />
               </Col>
@@ -151,7 +186,6 @@ const SignUpContainer = () => {
         </div>
       </div>
     </div>
-
   );
 };
 
