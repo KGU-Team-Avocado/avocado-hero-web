@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import Avatar from 'react-avatar';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
