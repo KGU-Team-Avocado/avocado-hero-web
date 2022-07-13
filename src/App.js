@@ -7,6 +7,7 @@ import SignInContainer from './container/sign/sign_in/SignInContainer';
 import SignUpContainer from './container/sign/sign_up/SignUpContainer';
 import ExampleContainer from './container/example/ExampleContainer';
 import ProfileContainer from './container/sign/profile/ProfileContainer';
+import ProfileUpdateContainer from './container/sign/profile/ProfileUpdateContainer';
 
 function App() {
   return (
@@ -18,7 +19,10 @@ function App() {
         <Route path="/" element={<HomeContainer />} />
         <Route path="signin" element={<SignInContainer />} />
         <Route path="signup" element={<SignUpContainer />} />
-        <Route path="user/:id" element={<ProfileContainer />} />
+        {/* 프로필 보기 */}
+        <Route path="user/:id" element={<ProfileContainer />} /> 
+        {/* 프로필 수정 */}
+        <Route path="user/:id/update" element={<ProfileUpdateContainer />} />
         <Route path="example" element={<ExampleContainer />} />
         <Route
           path="*"

@@ -1,8 +1,59 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import Avatar from 'react-avatar';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Form from "react-bootstrap/Form";
 
 const ProfileContainer = () => {
+    const [isEdit, setIsEdit] = useState(false); 
+    const onClickEdit = () => {
+        setIsEdit(!isEdit);
+    };
+
+    const [name, setName] = useState("");
+
+    const onNameHandler = (e) => {
+        setName(e.currentTarget.value);
+    }
+
+    const onClickSubmit = (e) => {
+        e.preventDefault();
+
+        console.log(name);
+        axios
+        .post("/usersRouter/profileUpdate", {
+            user_name: name,
+        })
+        .then((response) => {
+            console.log(response);
+            if (response.data.success === true) {
+                window.location.href = "/";
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        };
+
+    // const [newNickname, setNewNickname] = useState(profile.name);
+
+    // const nicknameInput = (e) => {
+    //     setNewNickname(e.target.value);
+    // };
+
+    // const onClickSubmit = () => {
+    //     const profile = profile.map((item) => {
+    //         ...item,
+    //     })
+    // }
+
+    const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
+    const fileInput = useRef(null)
+
     const params = useParams(); //url로 넘어온 파라미터를 받는 역할 (App.js 의 :id 참고)
     const user_id = params.id; //(params의 :id를 받는 역할)
     const [user, setUser] = useState(null);
@@ -24,21 +75,136 @@ const ProfileContainer = () => {
     }, []);
 
     return (
+    <>
+    {
+            isEdit ? (
+                <h1>프로필 수정</h1> 
+            ) : (
+                <h1>프로필</h1>
+            )
+    }
+            <Container>
+                <Row>
+                    <div class="col-md-3" >
+                    <Card style={{ height: '30rem', margin: '10px 0' }}>
+      <Card.Body>
         <div>
-            <h1>프로필</h1>
-            {/* 프로필이 올 곳
-            일단 계정 연동하지 말고 컴포넌트부터 대충 잡아놓고 시작하기 */}
+        <Avatar
+        src={Image} 
+        size={150} 
+        onClickEdit={()=>{fileInput.current.click()}}/>
             {
-                user
-                    ?
-                    JSON.stringify(user)
-                    :
-                    <div>
-                        존재하지 않는 계정입니다.
-                    </div>
-            }
+            isEdit ? (
+                <div><Button>변경</Button></div>
+            ) : (
+                <></>
+            )
+    }
         </div>
+        <div>
+            이름:  
+        {
+            isEdit ? (
+                <Form.Control type="text" 
+                value={name} 
+                onChange={onNameHandler} 
+                />
+            ) : (
+                <h1>
+            {
+              user
+              ?
+              JSON.stringify(user.user_name)
+              :
+              <div></div>
+            }
+            </h1>
+            )
+    }
+            
+            </div>
+        <div>id: 
+            {
+              user
+              ?
+              JSON.stringify(user.user_id)
+              :
+              <div></div>
+            }                
+            </div>    
+            <div>email:  
+            {
+              user
+              ?
+              JSON.stringify(user.user_email)
+              :
+              <div></div>
+            }   
+            {/* <Button>변경</Button>          */}
+            </div> 
+            <div>전화번호:
+
+                </div>
+                <div>생년월일:
+
+</div>     
+      </Card.Body>
+    </Card>
+                    </div>
+                    <div class="col-md-9">
+                    <Card style={{ height: '30rem', margin: '10px 0' }}>
+      <Card.Body>
+        <Card.Title>기본 정보</Card.Title>
+        <Card.Text>
+            <div>
+        이름:
+        {
+              user
+              ?
+              JSON.stringify(user.user_name)
+              :
+              <div></div>
+            }   
+            </div>
+        
+        <div>소속 </div>
+        <div>분야 </div>
+        <div>학력 </div>
+        <div>SNS </div>
+        </Card.Text>
+      </Card.Body>
+    </Card>
+                    </div>
+                    </Row>
+                    <Row>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9">
+                <Card style={{ height: '50rem', margin: '10px 0' }}>
+      <Card.Body>
+        <Card.Title>추가 정보</Card.Title>
+        <Card.Text>
+            <div>소개글</div>
+            <div>키워드</div>
+            <div>성향</div>
+        </Card.Text>
+      </Card.Body>
+    </Card>
+    </div>
+    </Row>
+    {
+            isEdit ? (
+                <Button variant="primary" 
+                // onClick={onClickSubmit}
+                >수정 완료</Button>  
+            ) : (
+                <Button variant="primary" onClick={onClickEdit}>프로필 수정</Button>  
+            )
+    }
+             
+</Container>
+    </>
     )
 }
 
 export default ProfileContainer;
+
