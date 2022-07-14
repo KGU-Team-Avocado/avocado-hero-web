@@ -15,9 +15,9 @@ const Header = () => {
   }, []);
 
   const logout = () => {
-    setSignIn(!isSignIn)
+    setSignIn(!isSignIn);
     sessionStorage.clear();
-  }
+  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">
@@ -48,38 +48,42 @@ const Header = () => {
                 Link
               </a>
             </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Action
+            {/* 기업전용 탭 시작 부분 */}
+            {isSignIn ? ( //로그인시에만 기업전용 탭을 띄워준다.
+              //#issue1 : 아직 기업인지 일반 사용자인지 확인은 못하는 상태
+              <>
+                <li className="nav-item dropdown">
+                  <a
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    기업전용
                   </a>
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        인재찾기
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        채용공고
+                      </a>
+                    </li>
+                  </ul>
                 </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </li>
+              </>
+            ) : (
+              <></> //로그인이 안되어있을시에는 아무것도 띄우지 않음.
+            )}
+
             <li className="nav-item">
               <a className="nav-link disabled">Disabled</a>
             </li>
@@ -102,23 +106,26 @@ const Header = () => {
                       className="rounded-circle mx-1"
                     />
                     <div className="mx-1">{userInfo.user_id}</div>
-
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
                     {/* <Dropdown.Item>
                       {userInfo.user_id}
                     </Dropdown.Item> */}
-                    <Dropdown.Item href={'user/' + userInfo.user_id}>프로필 보기</Dropdown.Item>
-                    <Dropdown.Item
-                      onClick={() => logout()}
-                    >
+                    <Dropdown.Item href={"user/" + userInfo.user_id}>
+                      프로필 보기
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => logout()}>
                       로그아웃
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               ) : (
-                <Link to="/signin" className="btn btn-outline-success" aria-current="page">
+                <Link
+                  to="/signin"
+                  className="btn btn-outline-success"
+                  aria-current="page"
+                >
                   로그인
                 </Link>
               )
