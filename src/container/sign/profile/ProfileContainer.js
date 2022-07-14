@@ -32,16 +32,12 @@ const ProfileContainer = () => {
         });
     }, []);
 
-    const [isEdit, setIsEdit] = useState(false); 
+    const [isEdit, setIsEdit] = useState(false);
     const onClickEdit = () => {
         setIsEdit(!isEdit);
     };
 
     const [name, setName] = useState('');
-
-    useEffect(()=>{
-        setName(user.user_name);
-        },[user.user_name]);
 
     const onNameHandler = (e) => {
         setName(e.currentTarget.value);
@@ -52,19 +48,19 @@ const ProfileContainer = () => {
 
         console.log(name);
         axios
-        .post("/usersRouter/profileUpdate", {
-            user_name: name,
-        })
-        .then((response) => {
-            console.log(response);
-            if (response.data.success === true) {
-                window.location.href = "/";
-              }
+            .post("/usersRouter/profileUpdate", {
+                user_name: name,
+            })
+            .then((response) => {
+                console.log(response);
+                if (response.data.success === true) {
+                    window.location.href = "/";
+                }
             })
             .catch(function (error) {
-              console.log(error);
+                console.log(error);
             });
-        };
+    };
 
     // const [newNickname, setNewNickname] = useState(profile.name);
 
@@ -79,132 +75,132 @@ const ProfileContainer = () => {
     // }
 
     return (
-    <>
-    {
-            isEdit ? (
-                <h1>프로필 수정</h1> 
-            ) : (
-                <h1>프로필</h1>
-            )
-    }
+        <>
+            {
+                isEdit ? (
+                    <h1>프로필 수정</h1>
+                ) : (
+                    <h1>프로필</h1>
+                )
+            }
             <Container>
                 <Row>
                     <div class="col-md-3" >
-                    <Card style={{ height: '30rem', margin: '10px 0' }}>
-      <Card.Body>
-        <div>
-        <div><img
-        src={Image} style={{ height: '150px' }}/></div>
-            {
-            isEdit ? (
-                <div><Button>변경</Button></div>
-            ) : (
-                <></>
-            )
-    }
-        </div>
-        <div>
-            이름:  
-        {
-            isEdit ? (
-                <Form.Control type="text" 
-                value={name} 
-                onChange={onNameHandler} 
-                />
-            ) : (
-                <h1>
-            {
-              user
-              ?
-              JSON.stringify(user.user_name)
-              :
-              <div></div>
-            }
-            </h1>
-            )
-    }
-            
-            </div>
-        <div>id: 
-            {
-              user
-              ?
-              JSON.stringify(user.user_id)
-              :
-              <div></div>
-            }                
-            </div>    
-            <div>email:  
-            {
-              user
-              ?
-              JSON.stringify(user.user_email)
-              :
-              <div></div>
-            }   
-            {/* <Button>변경</Button>          */}
-            </div> 
-            <div>전화번호:
+                        <Card style={{ height: '30rem', margin: '10px 0' }}>
+                            <Card.Body>
+                                <div>
+                                    <div><img
+                                        src={Image} style={{ height: '150px' }} /></div>
+                                    {
+                                        isEdit ? (
+                                            <div><Button>변경</Button></div>
+                                        ) : (
+                                            <></>
+                                        )
+                                    }
+                                </div>
+                                <div>
+                                    이름:
+                                    {
+                                        isEdit ? (
+                                            <Form.Control type="text"
+                                                value={name}
+                                                onChange={onNameHandler}
+                                            />
+                                        ) : (
+                                            <h1>
+                                                {
+                                                    user
+                                                        ?
+                                                        JSON.stringify(user.user_name)
+                                                        :
+                                                        <div></div>
+                                                }
+                                            </h1>
+                                        )
+                                    }
 
-                </div>
-                <div>생년월일:
+                                </div>
+                                <div>id:
+                                    {
+                                        user
+                                            ?
+                                            JSON.stringify(user.user_id)
+                                            :
+                                            <div></div>
+                                    }
+                                </div>
+                                <div>email:
+                                    {
+                                        user
+                                            ?
+                                            JSON.stringify(user.user_email)
+                                            :
+                                            <div></div>
+                                    }
+                                    {/* <Button>변경</Button>          */}
+                                </div>
+                                <div>전화번호:
 
-</div>     
-      </Card.Body>
-    </Card>
+                                </div>
+                                <div>생년월일:
+
+                                </div>
+                            </Card.Body>
+                        </Card>
                     </div>
                     <div class="col-md-9">
-                    <Card style={{ height: '30rem', margin: '10px 0' }}>
-      <Card.Body>
-        <Card.Title>기본 정보</Card.Title>
-        <Card.Text>
-            <div>
-        이름:
-        {
-              user
-              ?
-              JSON.stringify(user.user_name)
-              :
-              <div></div>
-            }   
-            </div>
-        
-        <div>소속 </div>
-        <div>분야 </div>
-        <div>학력 </div>
-        <div>SNS </div>
-        </Card.Text>
-      </Card.Body>
-    </Card>
+                        <Card style={{ height: '30rem', margin: '10px 0' }}>
+                            <Card.Body>
+                                <Card.Title>기본 정보</Card.Title>
+                                <Card.Text>
+                                    <div>
+                                        이름:
+                                        {
+                                            user
+                                                ?
+                                                JSON.stringify(user.user_name)
+                                                :
+                                                <div></div>
+                                        }
+                                    </div>
+
+                                    <div>소속 </div>
+                                    <div>분야 </div>
+                                    <div>학력 </div>
+                                    <div>SNS </div>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
                     </div>
-                    </Row>
-                    <Row>
+                </Row>
+                <Row>
                     <div class="col-md-3"></div>
                     <div class="col-md-9">
-                <Card style={{ height: '50rem', margin: '10px 0' }}>
-      <Card.Body>
-        <Card.Title>추가 정보</Card.Title>
-        <Card.Text>
-            <div>소개글</div>
-            <div>키워드</div>
-            <div>성향</div>
-        </Card.Text>
-      </Card.Body>
-    </Card>
-    </div>
-    </Row>
-    {
-            isEdit ? (
-                <Button variant="primary" 
-                // onClick={onClickSubmit}
-                >수정 완료</Button>  
-            ) : (
-                <Button variant="primary" onClick={onClickEdit}>프로필 수정</Button>  
-            )
-    }
-             
-</Container>
-    </>
+                        <Card style={{ height: '50rem', margin: '10px 0' }}>
+                            <Card.Body>
+                                <Card.Title>추가 정보</Card.Title>
+                                <Card.Text>
+                                    <div>소개글</div>
+                                    <div>키워드</div>
+                                    <div>성향</div>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </div>
+                </Row>
+                {
+                    isEdit ? (
+                        <Button variant="primary"
+                        // onClick={onClickSubmit}
+                        >수정 완료</Button>
+                    ) : (
+                        <Button variant="primary" onClick={onClickEdit}>프로필 수정</Button>
+                    )
+                }
+
+            </Container>
+        </>
     )
 }
 
