@@ -51,6 +51,7 @@ const Header = () => {
             {/* 기업전용 탭 시작 부분 */}
             {isSignIn ? ( //로그인시에만 기업전용 탭을 띄워준다.
               //#issue1 : 아직 기업인지 일반 사용자인지 확인은 못하는 상태
+              //#issue2 : href로 넣어놓은 상태여서 link로 하는 방법 찾아봐야 할듯
               <>
                 <li className="nav-item dropdown">
                   <a
@@ -68,12 +69,12 @@ const Header = () => {
                     aria-labelledby="navbarDropdown"
                   >
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <a className="dropdown-item" href="humanRes">
                         인재찾기
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <a className="dropdown-item" href="jobPosting">
                         채용공고
                       </a>
                     </li>
