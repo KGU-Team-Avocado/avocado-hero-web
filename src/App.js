@@ -9,6 +9,7 @@ import ExampleContainer from "./container/example/ExampleContainer";
 import ProfileContainer from "./container/sign/profile/ProfileContainer";
 import HumanResources from "./container/company/HumanResources";
 import JobPosting from "./container/company/JobPosting";
+import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
 
 function App() {
   return (
@@ -17,10 +18,15 @@ function App() {
       <Route path="/" element={<DefaultLayout />}>
         {/* DefaultLayout의 Outlet으로 연결되는 부분 시작 */}
         <Route path="/" element={<HomeContainer />} />
+
+        <Route path="groupFinder" element={<GroupFinderContainer/>}/>
+
         <Route path="signin" element={<SignInContainer />} />
         <Route path="signup" element={<SignUpContainer />} />
         {/* 프로필 보기 */}
         <Route path="user/:id" element={<ProfileContainer />} />
+
+
         <Route path="example" element={<ExampleContainer />} />
 
         {/* 기업용 버튼 */}

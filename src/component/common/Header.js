@@ -40,13 +40,13 @@ const Header = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link to="/" className="nav-link active" aria-current="page">
-                Home
+                홈
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Link
-              </a>
+              <Link className="nav-link" to="groupFinder">
+                그룹찾기
+              </Link>
             </li>
             {/* 기업전용 탭 시작 부분 */}
             {isSignIn ? ( //로그인시에만 기업전용 탭을 띄워준다.
@@ -85,9 +85,9 @@ const Header = () => {
               <></> //로그인이 안되어있을시에는 아무것도 띄우지 않음.
             )}
 
-            <li className="nav-item">
-              <a className="nav-link disabled">Disabled</a>
-            </li>
+            {/* <li className="nav-item">
+              <a className="nav-link disabled">워크스페이스</a>
+            </li> */}
           </ul>
           <div className="d-flex">
             {
@@ -115,6 +115,9 @@ const Header = () => {
                     </Dropdown.Item> */}
                     <Dropdown.Item href={"user/" + userInfo.user_id}>
                       프로필 보기
+                    </Dropdown.Item>
+                    <Dropdown.Item href="myWorkspace">
+                      내 워크스페이스
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => logout()}>
                       로그아웃
