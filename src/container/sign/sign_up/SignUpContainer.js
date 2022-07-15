@@ -19,6 +19,9 @@ const SignUpContainer = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [type, setType] = useState("개인");
+
+  //const [checkError, setCheckError] = useState("");
 
   const onUserIdHandler = (e) => {
     setUserId(e.currentTarget.value);
@@ -38,6 +41,10 @@ const SignUpContainer = () => {
 
   const onEmailHandler = (e) => {
     setEmail(e.currentTarget.value);
+  };
+
+  const handleRadiobutton = (e) => {
+    setType(e.target.value);
   };
 
   const onClick = (e) => {
@@ -70,11 +77,13 @@ const SignUpContainer = () => {
           user_password: password,
           user_name: userName,
           user_email: email,
+          user_type: type,
         })
         .then((response) => {
           console.log(response);
           if (response.data.idCheck === false) {
             alert("이미 사용중인 아이디입니다.");
+            //setCheckError("이미 사용중인 아이디입니다");
           }
           if (response.data.success === true) {
             window.location.href = "/";
@@ -110,6 +119,8 @@ const SignUpContainer = () => {
                   onChange={onUserIdHandler}
                 />
               </Col>
+              {/* <span id="checkMess">{checkError}</span> */}
+              {/* <Form.Text className="text-muted">{checkError}</Form.Text> */}
             </Form.Group>
 
             <Form.Group
@@ -175,8 +186,27 @@ const SignUpContainer = () => {
                 />
               </Col>
             </Form.Group>
+            <Form.Group>
+              <label>
+                <input
+                  type="radio"
+                  value="개인"
+                  checked={type === "개인"}
+                  onClick={handleRadiobutton}
+                />
+                개인
+              </label>
+              <label class="form-check form-check-inline">
+                <input
+                  type="radio"
+                  value="기업"
+                  checked={type === "기업"}
+                  onClick={handleRadiobutton}
+                />
+                기업
+              </label>
+            </Form.Group>
             <br />
-
             <div className="d-grid gap-1">
               <Button variant="secondary" type="submit" onClick={onClick}>
                 회원가입
