@@ -20,6 +20,13 @@ const HomeContainer = () => {
             <div>
                 <Link to='zz'>존재하지 않는 페이지</Link>
             </div>
+            <div className="bg-green-dark">ㅇㅇ</div>
+            <div className="bg-green">ㅇㅇ</div>
+            <div className="bg-green-light">ㅇㅇ</div>
+            <div className="bg-yellow">ㅇㅇ</div>
+            <div className="bg-yellow-light">ㅇㅇ</div>
+            <div className="bg-orange-dark">ㅇㅇ</div>
+            <div className="bg-orange">ㅇㅇ</div>
         </div>
     )
 }
