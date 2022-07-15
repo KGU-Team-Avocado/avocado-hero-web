@@ -1,0 +1,23 @@
+.bg-green-dark {
+    background-color: rgba(62, 121, 37);
+}
+.bg-green {
+    background-color: rgba(132, 150, 53);
+}
+.bg-green-light {
+    background-color: rgba(180, 203, 51);
+}
+.bg-yellow {
+    background-color: rgba(246, 199, 75);
+}
+.bg-yellow-light {
+    background-color: rgba(242, 231, 151);
+}
+.bg-orange-dark {
+    background-color: rgba(199, 130, 61);
+}
+.bg-orange {
+    background-color: rgba(227, 125, 78);
+}
+
+
