@@ -69,14 +69,14 @@ const Header = () => {
                     aria-labelledby="navbarDropdown"
                   >
                     <li>
-                      <a className="dropdown-item" href="humanRes">
+                      <Link className="dropdown-item" to="humanRes">
                         인재찾기
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="jobPosting">
+                      <Link className="dropdown-item" to="jobPosting">
                         채용공고
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </li>
