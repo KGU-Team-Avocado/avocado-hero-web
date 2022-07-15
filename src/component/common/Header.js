@@ -48,6 +48,11 @@ const Header = () => {
                 그룹찾기
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="jobFinder">
+                채용공고란
+              </Link>
+            </li>
             {/* 기업전용 탭 시작 부분 */}
             {isSignIn ? ( //로그인시에만 기업전용 탭을 띄워준다.
               //#issue1 : 아직 기업인지 일반 사용자인지 확인은 못하는 상태
@@ -69,14 +74,14 @@ const Header = () => {
                     aria-labelledby="navbarDropdown"
                   >
                     <li>
-                      <Link className="dropdown-item" to="humanRes">
+                      <a className="dropdown-item" href="humanRes">
                         인재찾기
-                      </Link>
+                      </a>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="jobPosting">
+                      <a className="dropdown-item" href="jobPosting">
                         채용공고
-                      </Link>
+                      </a>
                     </li>
                   </ul>
                 </li>
