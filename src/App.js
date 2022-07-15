@@ -10,6 +10,7 @@ import ProfileContainer from "./container/sign/profile/ProfileContainer";
 import HumanResources from "./container/company/HumanResources";
 import JobPosting from "./container/company/JobPosting";
 import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
+import JobFinderContainer from "./container/jobFinder/JobFinderContainer";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<HomeContainer />} />
 
         <Route path="groupFinder" element={<GroupFinderContainer/>}/>
+        <Route path="jobFinder" element={<JobFinderContainer/>}/>
 
         <Route path="signin" element={<SignInContainer />} />
         <Route path="signup" element={<SignUpContainer />} />
