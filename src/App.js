@@ -11,6 +11,7 @@ import HumanResources from "./container/company/HumanResources";
 import JobPosting from "./container/company/JobPosting";
 import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
 import JobFinderContainer from "./container/jobFinder/JobFinderContainer";
+import RankContainer from "./container/example/RankContainer";
 
 function App() {
   return (
@@ -28,8 +29,8 @@ function App() {
         {/* 프로필 보기 */}
         <Route path="user/:id" element={<ProfileContainer />} />
 
-
         <Route path="example" element={<ExampleContainer />} />
+        <Route path="bestworker" element={<RankContainer/>}/>
 
         {/* 기업용 버튼 */}
         <Route path="humanRes" element={<HumanResources />} />

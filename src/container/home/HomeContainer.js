@@ -9,16 +9,19 @@ const HomeContainer = () => {
         <div>
             <MainTitle/>
             {/* divider 조만간 삭제 예정. 경계명 보여주기 위해 넣음 */}
-            <div className="b-example-divider"></div>
+            {/* <div className="b-example-divider"></div> */}
             <CenteredHero/>
-            <div className="b-example-divider"></div>
+            {/* <div className="b-example-divider"></div> */}
             <CenteredScreenshotHero/>
-            <div className="b-example-divider"></div>
+            {/* <div className="b-example-divider"></div> */}
             <div>
                 <Link to='example'>DB 예제 페이지</Link>
             </div>
             <div>
                 <Link to='zz'>존재하지 않는 페이지</Link>
+            </div>
+            <div>
+                <Link to='bestworker'>포인트 계산기</Link>
             </div>
             <div className="bg-green-dark">ㅇㅇ</div>
             <div className="bg-green">ㅇㅇ</div>
