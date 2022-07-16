@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import BorderHero from "../../component/home/heroes/BorderHero";
 import CenteredHero from "../../component/home/heroes/CenteredHero";
 import CenteredScreenshotHero from "../../component/home/heroes/CenteredScreenshotHero";
+import ResponsiveLeftAlignedHero from "../../component/home/heroes/ResponsiveLeftAlignedHero";
+import VerticallyCenteredHero from "../../component/home/heroes/VerticallyCenteredHero";
 import MainTitle from "../../component/home/title/MainTitle";
 import './home.css'
 
@@ -14,6 +17,9 @@ const HomeContainer = () => {
             {/* <div className="b-example-divider"></div> */}
             <CenteredScreenshotHero/>
             {/* <div className="b-example-divider"></div> */}
+            <ResponsiveLeftAlignedHero/>
+            <VerticallyCenteredHero/>
+            <BorderHero/>
         </div>
     )
 }
