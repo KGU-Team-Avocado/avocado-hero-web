@@ -30,7 +30,7 @@ function App() {
         <Route path="user/:id" element={<ProfileContainer />} />
 
         <Route path="example" element={<ExampleContainer />} />
-        <Route path="bestworker" element={<RankContainer/>}/>
+        <Route path="example/bestworker" element={<RankContainer/>}/>
 
         {/* 기업용 버튼 */}
         <Route path="humanRes" element={<HumanResources />} />
