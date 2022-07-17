@@ -5,7 +5,11 @@ export default (props) => {
         <div className="modal-dialog" role="document">
             <div className="modal-content rounded-4 shadow">
                 <div className="modal-body p-5">
-                    <h2 className="fw-bold mb-0">신청하기</h2>
+                    <div className="modal-header">
+                        <h2 className="fw-bold mb-0">신청하기</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
                     <div className="d-grid my-5 list-unstyled">
                         {
                             group &&
@@ -29,10 +33,10 @@ export default (props) => {
                                 </div>
                                 <hr />
                                 <h5>팀장</h5>
-                                <div><Link target="_blank" to={'/user/'+group.manager}>{group.manager}</Link></div>
+                                <div><Link target="_blank" to={'/user/' + group.manager}>{group.manager}</Link></div>
                                 <hr />
                                 <h5>자기소개서</h5>
-                                <textarea/>
+                                <textarea />
                             </>
                         }
 
