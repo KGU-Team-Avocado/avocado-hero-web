@@ -64,11 +64,12 @@ export default () => {
                             user.map((user) => (
                                 <div key={user.user_id} className=' my-2'>
                                     <div className='d-flex justify-content-between'>
-                                        <div>[{user.user_id}]</div>
-                                        <div>총 {user.visited_date.size}점</div>
+                                        <h4>[{user.user_id}]</h4>
+                                        <h4>총 {user.visited_date.size}점</h4>
                                     </div>
                                     <div>접속일자</div>
                                     <div>{Array.from(user.visited_date).map((d)=><div>{d}</div>)}</div>
+                                    <hr/>
                                 </div>
                             ))
                             :
