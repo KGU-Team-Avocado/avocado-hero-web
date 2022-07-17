@@ -1,6 +1,7 @@
 import { useState } from "react"
 import GroupCard from "../../../component/group/card/GroupCard"
-import GroupCeateModal from "./GroupCeateModal";
+import GroupCeateModal from "../../../component/group/modal/GroupCeateModal";
+import GroupJoinModal from "../../../component/group/modal/GroupJoinModal";
 
 export default () => {
 
@@ -37,7 +38,7 @@ export default () => {
                 <h2>프로젝트 찾기</h2>
                 <div className="row">
                     <div className="col-sm-6">훌륭한 팀을 구해보아요</div>
-                    <div className="col-sm-6 text-end"><a className="mx-2" href="#">정렬▿</a><a className="mx-2" href="#">필터링▿</a><a href="#" className="mx-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">프로젝트 등록하기</a></div>
+                    <div className="col-sm-6 text-end"><a className="mx-2" href="#">정렬▿</a><a className="mx-2" href="#">필터링▿</a><a href="#" className="mx-2" data-bs-toggle="modal" data-bs-target="#group_create">프로젝트 등록하기</a></div>
                 </div>
             </div>
             <div className="row">
@@ -55,8 +56,11 @@ export default () => {
                 }
             </div>
             {/* <!-- Modal --> */}
-            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div className="modal fade" id="group_create" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <GroupCeateModal />
+            </div>
+            <div className="modal fade" id="group_join" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <GroupJoinModal />
             </div>
         </>
     )
