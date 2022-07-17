@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react"
 
@@ -5,6 +6,7 @@ export default () => {
 
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
+    const [isListOpen, setListOpen] = useState(true);
 
     useEffect(() => {
         axios.get('/testsRouter/findLogs')
@@ -57,19 +59,33 @@ export default () => {
             <div>
                 <h1>포인트 계산기</h1>
                 <div className="my-3">
-                    <h3>유저별 포인트</h3>
+                    <div className='d-flex justify-content-between'>
+                        <h3>유저별 포인트</h3>
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onClick={()=>setListOpen(!isListOpen)}>
+                                {isListOpen?"닫기▵":"펼치기▿"}
+                            </button>
+                        </h2>
+                    </div>
                     <div>
                         {user.length > 0
                             ?
                             user.map((user) => (
                                 <div key={user.user_id} className=' my-2'>
                                     <div className='d-flex justify-content-between'>
-                                        <h4>[{user.user_id}]</h4>
+                                        <h4>[<Link className="" to={'/user/' + user.user_id}>{user.user_id}</Link>]</h4>
                                         <h4>총 {user.visited_date.size * 2}점</h4>
                                     </div>
-                                    <div>접속일자</div>
-                                    <div>{Array.from(user.visited_date).map((d)=><div>{d} (+2점)</div>)}</div>
-                                    <hr/>
+                                    <div class="accordion-item">
+                                        <div class="accordion-item">
+                                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div>{Array.from(user.visited_date).map((d) => <div>{d} (+2점)</div>)}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
                                 </div>
                             ))
                             :
@@ -84,7 +100,7 @@ export default () => {
                         data.length > 0
                             ?
                             data.map((log) => (
-                                <div key={log.secure_num}>{log.secure_num} {log.time} {log.user_id} </div>
+                                <div key={log.secure_num}>{log.secure_num} {log.time} <Link to={'/user/' + log.user_id}>{log.user_id}</Link> </div>
                             ))
                             :
                             <div>데이터가 없습니다.</div>
