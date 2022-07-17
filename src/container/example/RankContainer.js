@@ -62,8 +62,8 @@ export default () => {
                 <div className="my-3">
                     <div className='d-flex justify-content-between'>
                         <h3>유저별 포인트</h3>
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onClick={() => setListOpen(!isListOpen)}>
+                        <h2 className="accordion-header" id="headingOne">
+                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onClick={() => setListOpen(!isListOpen)}>
                                 {isListOpen ? "닫기▵" : "펼치기▿"}
                             </button>
                         </h2>
@@ -77,10 +77,10 @@ export default () => {
                                         <h4>[<Link className="" to={'/user/' + user.user_id}>{user.user_id}</Link>]</h4>
                                         <h4>총 {user.visited_date.size * 2}점</h4>
                                     </div>
-                                    <div class="accordion-item">
-                                        <div class="accordion-item">
-                                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
+                                    <div className="accordion-item">
+                                        <div className="accordion-item">
+                                            <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div className="accordion-body">
                                                     <div>{Array.from(user.visited_date).map((d) => <div>{d} (+2점)</div>)}</div>
                                                 </div>
                                             </div>

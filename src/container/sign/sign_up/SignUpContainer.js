@@ -196,7 +196,7 @@ const SignUpContainer = () => {
                 />
                 개인
               </label>
-              <label class="form-check form-check-inline">
+              <label className="form-check form-check-inline">
                 <input
                   type="radio"
                   value="기업"

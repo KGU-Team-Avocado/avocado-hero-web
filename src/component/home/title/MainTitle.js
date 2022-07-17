@@ -1,3 +1,4 @@
+import logo from "../../../assets/brand/avocado.png";
 export default () => {
     return (
         <>
@@ -5,8 +6,17 @@ export default () => {
             <div className="p-5 mb-4 bg-light rounded-3">
                 <div className="container-fluid py-5">
                     <h1 className="display-5 fw-bold">Avocado Hero</h1>
-                    <p className="col-md-8 fs-4">아보카도 히어로는 팀 프로젝트의 시작 전부터 끝난 후까지 책임져주는 국내 유일의 서비스입니다. 아보카도 히어로는 팀 프로젝트의 시작 전부터 끝난 후까지 책임져주는 국내 유일의 서비스입니다. </p>
-                    <button className="btn btn-primary btn-lg" type="button">Example button</button>
+                    <div className="row d-flex align-items-center">
+                        <div className="col-md-8 fs-4">
+                            <p className="">
+                            아보카도 히어로는 팀 프로젝트의 시작 전부터 끝난 후까지 책임지는 국내 유일의 서비스입니다. 아보카도 히어로는 팀 프로젝트의 시작 전부터 끝난 후까지 책임지는 국내 유일의 서비스입니다. 아보카도 히어로는 팀 프로젝트의 시작 전부터 끝난 후까지 책임지는 국내 유일의 서비스입니다. 
+                            </p>
+                        </div>
+                        <div className="col-md-4 text-center">
+                            <img className="img-thumbnail" src={logo} style={{maxHeight:'250px'}}/>
+                        </div>
+                    </div>
+                    {/* <button className="btn btn-primary btn-lg" type="button">Example button</button> */}
                 </div>
             </div>
 

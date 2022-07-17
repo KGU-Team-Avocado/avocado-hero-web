@@ -85,7 +85,7 @@ const ProfileContainer = () => {
             }
             <Container>
                 <Row>
-                    <div class="col-md-3" >
+                    <div className="col-md-3" >
                         <Card style={{ height: '30rem', margin: '10px 0' }}>
                             <Card.Body>
                                 <div>
@@ -149,7 +149,7 @@ const ProfileContainer = () => {
                             </Card.Body>
                         </Card>
                     </div>
-                    <div class="col-md-9">
+                    <div className="col-md-9">
                         <Card style={{ height: '30rem', margin: '10px 0' }}>
                             <Card.Body>
                                 <Card.Title>기본 정보</Card.Title>
@@ -175,8 +175,8 @@ const ProfileContainer = () => {
                     </div>
                 </Row>
                 <Row>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-9">
+                    <div className="col-md-3"></div>
+                    <div className="col-md-9">
                         <Card style={{ height: '50rem', margin: '10px 0' }}>
                             <Card.Body>
                                 <Card.Title>추가 정보</Card.Title>
