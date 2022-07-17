@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react"
+import LodingSpinner from "../../component/common/LodingSpinner";
 
 export default () => {
 
@@ -62,8 +63,8 @@ export default () => {
                     <div className='d-flex justify-content-between'>
                         <h3>유저별 포인트</h3>
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onClick={()=>setListOpen(!isListOpen)}>
-                                {isListOpen?"닫기▵":"펼치기▿"}
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onClick={() => setListOpen(!isListOpen)}>
+                                {isListOpen ? "닫기▵" : "펼치기▿"}
                             </button>
                         </h2>
                     </div>
@@ -89,7 +90,7 @@ export default () => {
                                 </div>
                             ))
                             :
-                            <div>데이터가 없습니다.</div>
+                            <LodingSpinner/>
                         }
                     </div>
 
@@ -103,7 +104,7 @@ export default () => {
                                 <div key={log.secure_num}>{log.secure_num} {log.time} <Link to={'/user/' + log.user_id}>{log.user_id}</Link> </div>
                             ))
                             :
-                            <div>데이터가 없습니다.</div>
+                            <LodingSpinner/>
                     }
                 </div>
             </div>
