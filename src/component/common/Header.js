@@ -44,12 +44,12 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="groupFinder">
+              <Link className="nav-link" to="/groupFinder">
                 프로젝트
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="jobFinder">
+              <Link className="nav-link" to="/jobFinder">
                 일자리
               </Link>
             </li>
@@ -114,7 +114,7 @@ const Header = () => {
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <Link className="dropdown-item" to="example">
+                    <Link className="dropdown-item" to="/example">
                       테스트
                     </Link>
                   </li>
@@ -156,10 +156,10 @@ const Header = () => {
                     {/* <Dropdown.Item>
                       {userInfo.user_id}
                     </Dropdown.Item> */}
-                    <Dropdown.Item href={"user/" + userInfo.user_id}>
+                    <Dropdown.Item href={"/user/" + userInfo.user_id}>
                       프로필 보기
                     </Dropdown.Item>
-                    <Dropdown.Item href="myWorkspace">
+                    <Dropdown.Item href="/myWorkspace">
                       내 워크스페이스
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => logout()}>
