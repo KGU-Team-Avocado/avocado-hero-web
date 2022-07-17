@@ -96,11 +96,40 @@ const Header = () => {
                 )
             }
 
-            <li className="nav-item">
-              <Link className="nav-link" to="example">
-                테스트
-              </Link>
-            </li>
+
+            <>
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  개발모드
+                </a>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="navbarDropdown"
+                >
+                  <li>
+                    <Link className="dropdown-item" to="example">
+                      테스트
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link className="dropdown-item" to="/example/bestworker">
+                      활동포인트
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+            </>
+
+
+
 
           </ul>
           <div className="d-flex">
