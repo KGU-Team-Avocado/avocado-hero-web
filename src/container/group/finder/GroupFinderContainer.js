@@ -8,29 +8,39 @@ export default () => {
     const [groups, setGroups] = useState([
         {
             _id: 0,
+            manager:"gabrielyoon7",
             name: "아보카도",
             title: "콘솔",
-            description: "우리 같이 개발해요",
+            intro_text: "우리 같이 개발해요",
+            description:"상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
         },
         {
             _id: 1,
+            manager:"wlstn",
             name: "아보카도",
             title: "리액트 튜토리얼",
-            description: "우리 같이 개발해요",
+            intro_text: "우리 같이 개발해요",
+            description:"상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
         },
         {
             _id: 2,
+            manager:"yeonsu",
             name: "아보카도",
             title: "히어로",
-            description: "우리 같이 개발해요",
+            intro_text: "우리 같이 개발해요",
+            description:"상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
         },
         {
             _id: 3,
+            manager:"seeun",
             name: "팀 명",
             title: "프로젝트명",
-            description: "우리 같이 개발해요 우리 같이 개발해요 ",
+            intro_text: "우리 같이 개발해요 우리 같이 개발해요 ",
+            description:"상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
         },
     ]);
+
+    const [selectedGroup, setSelectedGroup] = useState(null);
 
     return (
         <>
@@ -49,6 +59,7 @@ export default () => {
                             <GroupCard
                                 key={group._id}
                                 group={group}
+                                setSelectedGroup={setSelectedGroup}
                             />
                         ))
                         :
@@ -60,7 +71,9 @@ export default () => {
                 <GroupCeateModal />
             </div>
             <div className="modal fade" id="group_join" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <GroupJoinModal />
+                <GroupJoinModal
+                    selectedGroup={selectedGroup}
+                />
             </div>
         </>
     )
