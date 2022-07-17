@@ -65,10 +65,10 @@ export default () => {
                                 <div key={user.user_id} className=' my-2'>
                                     <div className='d-flex justify-content-between'>
                                         <h4>[{user.user_id}]</h4>
-                                        <h4>총 {user.visited_date.size}점</h4>
+                                        <h4>총 {user.visited_date.size * 2}점</h4>
                                     </div>
                                     <div>접속일자</div>
-                                    <div>{Array.from(user.visited_date).map((d)=><div>{d}</div>)}</div>
+                                    <div>{Array.from(user.visited_date).map((d)=><div>{d} (+2점)</div>)}</div>
                                     <hr/>
                                 </div>
                             ))
