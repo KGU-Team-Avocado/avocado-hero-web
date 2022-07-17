@@ -9,6 +9,8 @@ import './home.css'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LoadingSpinner from '../../component/common/LodingSpinner';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const HomeContainer = () => {
     const [url, setURL] = useState(null)
@@ -19,20 +21,47 @@ const HomeContainer = () => {
             setURL('http://' + response.data + ':3000')
         })
     }, []);
+
+    const copyURL = () => {
+        try {
+            navigator.clipboard.writeText(url)
+            toast('주소가 클립보드에 복사됐습니다.');
+        } catch (error) {
+            const ask = window.confirm('http://localhost:3000에서만 복사가 가능합니다. 해당 페이지로 이동하시겠습니까?')
+            if (ask) {
+                window.location.href = 'http://localhost:3000'
+            }
+        }
+    }
+
     return (
         <div>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             {
-                    (
-                        url == null
-                            ?
-                            <LoadingSpinner />
-                            :
-                            <div className="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>알림!</strong> 모바일에서 테스트하고 싶으시면 <b>스마트폰과 PC에서 같은 공유기에 연결 후</b> <a href={url}>{url}</a> 으로 접속하세요
-                                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                    )
-                    
+                (
+                    url == null
+                        ?
+                        <LoadingSpinner />
+                        :
+                        <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                            <div><strong>알림!</strong></div>
+                            <div>모바일에서 테스트하고 싶으시면 <b>스마트폰과 PC를 같은 공유기에 연결 후</b>
+                                <a href={url}>{url}</a> 으로 접속하세요. </div>
+                            <button className="btn btn-outline-success" onClick={() => copyURL()}>주소를 클립보드로 복사하기</button>
+                            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                )
+
             }
             <MainTitle />
             {/* divider 조만간 삭제 예정. 경계명 보여주기 위해 넣음 */}
