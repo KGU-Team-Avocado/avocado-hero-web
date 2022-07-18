@@ -14,6 +14,7 @@ import JobFinderContainer from "./container/jobFinder/JobFinderContainer";
 import RankContainer from "./container/example/RankContainer";
 import WorkSpaceContainer from "./container/sign/workspace/WorkSpaceContainer";
 import ProjectContainer from "./container/group/project/ProjectContainer";
+import ProjectDefaultLayout from "./component/project/ProjectDefaultLayout";
 
 function App() {
   return (
@@ -33,9 +34,6 @@ function App() {
         {/* 워크스페이스 */}
         <Route path="myWorkspace" element={<WorkSpaceContainer />} />
 
-        {/* 프로젝트 대쉬보드 */}
-        <Route path="project/:id" element={<ProjectContainer />} />
-
         <Route path="example" element={<ExampleContainer />} />
         <Route path="example/bestworker" element={<RankContainer/>}/>
 
@@ -52,6 +50,11 @@ function App() {
           }
         />
         {/* DefaultLayout의 Outlet으로 연결되는 부분 끝 */}
+      </Route>
+      
+      <Route path="project/" element={<ProjectDefaultLayout />}>
+        {/* 프로젝트 대쉬보드 */}
+        <Route path=":id" element={<ProjectContainer />} />
       </Route>
     </Routes>
   );
