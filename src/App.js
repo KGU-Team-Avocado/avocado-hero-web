@@ -15,6 +15,11 @@ import RankContainer from "./container/example/RankContainer";
 import WorkSpaceContainer from "./container/sign/workspace/WorkSpaceContainer";
 import ProjectContainer from "./container/group/project/ProjectContainer";
 import ProjectDefaultLayout from "./component/project/ProjectDefaultLayout";
+import ProjectCalendarContainer from "./container/group/project/ProjectCalendarContainer";
+import ProjectTodoContainer from "./container/group/project/ProjectTodoContainer";
+import ProjectRoleContainer from "./container/group/project/ProjectRoleContainer";
+import ProjectMembersContainer from "./container/group/project/ProjectMembersContainer";
+import ProjectEndContainer from "./container/group/project/ProjectEndContainer";
 
 function App() {
   return (
@@ -55,6 +60,11 @@ function App() {
       <Route path="project/" element={<ProjectDefaultLayout />}>
         {/* 프로젝트 대쉬보드 */}
         <Route path=":id" element={<ProjectContainer />} />
+        <Route path="calendar/:id" element={<ProjectCalendarContainer />} />
+        <Route path="todo/:id" element={<ProjectTodoContainer />} />
+        <Route path="role/:id" element={<ProjectRoleContainer />} />
+        <Route path="members/:id" element={<ProjectMembersContainer />} />
+        <Route path="end/:id" element={<ProjectEndContainer />} />
       </Route>
     </Routes>
   );

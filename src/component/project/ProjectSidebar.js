@@ -1,43 +1,48 @@
+import { Link, useParams } from "react-router-dom";
+
 export default () => {
+    const params = useParams();
+    const project_id = params.id;
+
     return (
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
+                        <Link className="nav-link" aria-current="page" to={"/project/" + project_id}>
                             <i class="bi bi-megaphone align-top me-1"></i>
                             공지사항
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <Link className="nav-link" to={"/project/calendar/" + project_id}>
                             <i class="bi bi-calendar3 align-top me-1"></i>
                             일정
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <Link className="nav-link" to={"/project/todo/" + project_id}>
                             <i class="bi bi-list-task align-top me-1"></i>
                             Todo
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <Link className="nav-link" to={"/project/role/" + project_id}>
                             <i class="bi bi-person-lines-fill align-top me-1"></i>
                             역할
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <Link className="nav-link" to={"/project/members/" + project_id}>
                             <i class="bi bi-people align-top me-1"></i>
                             멤버관리
-                        </a>
+                        </Link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <Link className="nav-link" to={"/project/end/" + project_id}>
                             <i class="bi bi-power align-top me-1"></i>
                             프로젝트 종료
-                        </a>
+                        </Link>
                     </li>
                 </ul>
 
