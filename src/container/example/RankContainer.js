@@ -7,6 +7,7 @@ export default () => {
 
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
+    const [attendances,  setAttendances] = useState([]);
     const [isListOpen, setListOpen] = useState(true);
 
     useEffect(() => {
@@ -94,6 +95,10 @@ export default () => {
                         }
                     </div>
 
+                </div>
+                <h3>출석부</h3>
+                <div>
+                    ㅇㅇ
                 </div>
                 <h3>전체 로그</h3>
                 <div>
