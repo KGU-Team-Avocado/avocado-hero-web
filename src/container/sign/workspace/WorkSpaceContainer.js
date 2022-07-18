@@ -1,5 +1,4 @@
 import { useState } from "react";
-import GroupCard from "../../../component/group/card/GroupCard";
 import ProjectCard from "../../../component/workspace/card/ProjectCard";
 
 export default () => {
@@ -38,7 +37,7 @@ export default () => {
                         projects.map((project) => (
                             <ProjectCard
                                 key={project._id}
-                                group={project}
+                                project={project}
                             />
                         ))
                         :

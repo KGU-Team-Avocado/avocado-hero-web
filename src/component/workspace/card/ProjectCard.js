@@ -1,17 +1,17 @@
 export default (props) => {
     return (
         <div className="col-lg-4 my-2">
-            <a href={"/project/" + props.group._id} className="text-decoration-none text-dark" >
+            <a href={"/project/" + props.project._id} className="text-decoration-none text-dark" >
                 <div className="card p-3">
                     <div className="row">
                         <div className="text-center col-xxl-4 py-4">
                             <svg className="img-thumbnail rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                            <div>{props.group.manager}</div>
+                            <div>{props.project.manager}</div>
                         </div>
                         <div className="col-xxl-8 py-3">
-                            <h4>{props.group.name}</h4>
-                            <h5>{props.group.title}</h5>
-                            <p>{props.group.intro_text}</p>
+                            <h4>{props.project.name}</h4>
+                            <h5>{props.project.title}</h5>
+                            <p>{props.project.intro_text}</p>
                             <div>
                                 <span className="badge text-bg-primary">Primary</span>
                                 <span className="badge text-bg-secondary">Secondary</span>
