@@ -12,6 +12,7 @@ import JobPosting from "./container/company/JobPosting";
 import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
 import JobFinderContainer from "./container/jobFinder/JobFinderContainer";
 import RankContainer from "./container/example/RankContainer";
+import WorkSpaceContainer from "./container/sign/workspace/WorkSpaceContainer";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
         <Route path="signup" element={<SignUpContainer />} />
         {/* 프로필 보기 */}
         <Route path="user/:id" element={<ProfileContainer />} />
+        {/* 워크스페이스 */}
+        <Route path="myWorkspace/:id" element={<WorkSpaceContainer />} />
 
         <Route path="example" element={<ExampleContainer />} />
         <Route path="example/bestworker" element={<RankContainer/>}/>
