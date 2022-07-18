@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import TechStack from "../../common/TechStack";
 export default (props) => {
     const group = props.selectedGroup
     return (
@@ -22,14 +23,7 @@ export default (props) => {
                                 <hr />
                                 <h5>Tech Stack</h5>
                                 <div>
-                                    <span className="badge text-bg-primary">Primary</span>
-                                    <span className="badge text-bg-secondary">Secondary</span>
-                                    <span className="badge text-bg-success">Success</span>
-                                    <span className="badge text-bg-danger">Danger</span>
-                                    <span className="badge text-bg-warning">Warning</span>
-                                    <span className="badge text-bg-info">Info</span>
-                                    <span className="badge text-bg-light">Light</span>
-                                    <span className="badge text-bg-dark">Dark</span>
+                                    <TechStack/>
                                 </div>
                                 <hr />
                                 <h5>팀장</h5>

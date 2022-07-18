@@ -63,6 +63,10 @@ const HomeContainer = () => {
                 )
 
             }
+            <div className="alert alert-success alert-dismissible fade show" role="alert">
+                <div><strong>[공지]</strong> 기록 인정을 위해 반드시 로그인 후 작업해주세요.</div>
+                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             <MainTitle />
             {/* divider 조만간 삭제 예정. 경계명 보여주기 위해 넣음 */}
             {/* <div className="b-example-divider"></div> */}
