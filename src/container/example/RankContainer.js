@@ -36,10 +36,10 @@ export default () => {
         user_set.forEach((id) => { //중복 없는 아이디 전원에게 다음과 같은 json을 부여함
             temp.push({ //부여한 json은 temp에 계속 push 해줌
                 user_id: id, //user 아이디랑
-                visited_date: new Set(data.filter(log => log.user_id == id).map((log)=>yymmdd(log.time))), //set 함수 하나
+                visited_date: new Set(data.filter(log => log.user_id == id).map((log)=>yymmdd(log.time))), //중복 없는 날짜를 저장해줄 set 함수 하나
             });
         });
-        setUser(temp); // 이렇게 완성된 temp는 곧, user의 정보와 동일하므로 저장
+        setUser(temp); // 위와 같이 완성된 temp는 곧 user의 정보와 동일하므로 user state에 저장
     }, [data]); //data state가 변경되는 이후에만 동작함
 
     const yymmdd = (t) => {
