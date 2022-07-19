@@ -15,31 +15,31 @@ export default () => {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" aria-current="page" to={"/project/calendar/" + project_id}>
+                        <Link className="nav-link" to={"/project/calendar/" + project_id}>
                             <i className="bi bi-calendar3 align-top me-1"></i>
                             일정
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" aria-current="page" to={"/project/todo/" + project_id}>
+                        <Link className="nav-link" to={"/project/todo/" + project_id}>
                             <i className="bi bi-list-task align-top me-1"></i>
                             Todo
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" aria-current="page" to={"/project/role/" + project_id}>
+                        <Link className="nav-link" to={"/project/role/" + project_id}>
                             <i className="bi bi-person-lines-fill align-top me-1"></i>
                             역할
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" aria-current="page" to={"/project/members/" + project_id}>
+                        <Link className="nav-link" to={"/project/members/" + project_id}>
                             <i className="bi bi-people align-top me-1"></i>
                             멤버관리
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" aria-current="page" to={"/project/end/" + project_id}>
+                        <Link className="nav-link" to={"/project/end/" + project_id}>
                             <i className="bi bi-power align-top me-1"></i>
                             프로젝트 종료
                         </Link>

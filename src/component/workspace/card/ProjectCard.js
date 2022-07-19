@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom"
+
 export default (props) => {
     return (
         <div className="col-lg-4 my-2">
-            <a href={"/project/" + props.project._id} className="text-decoration-none text-dark" >
+            <Link to={"/project/" + props.project._id} className="text-decoration-none text-dark">
                 <div className="card p-3">
                     <div className="row">
                         <div className="text-center col-xxl-4 py-4">
@@ -25,7 +27,7 @@ export default (props) => {
                         </div>
                     </div>
                 </div>
-            </a>
+            </Link>
         </div>
     )
 }
