@@ -9,7 +9,9 @@ export default function ProjectDefaultLayout() {
             <div className="container-fluid">
                 <div className="row">
                     <ProjectSidebar />
-                    <Outlet />
+                    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                        <Outlet />
+                    </main>
                 </div>
             </div>
         </>
