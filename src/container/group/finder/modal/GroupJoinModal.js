@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import TechStack from "../../common/TechStack";
+import TechStack from "../../../../component/common/TechStack";
 export default (props) => {
     const group = props.selectedGroup
     return (
