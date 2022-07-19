@@ -32,19 +32,12 @@ export default () => {
 
     useEffect(() => {
         let temp = []; //user 배열을 만들어주기 위한 임시 변수
-        let user_set = new Set(); //user_id의 집합을 얻기 위한 임시 변수
-        data.map((log) => {
-            user_set.add(log.user_id); //로그를 모조리 뒤져서 user_set에 중복 없이 아이디를 수집함
-        });
+        let user_set = new Set(data.map((log)=>log.user_id)); //로그를 모조리 뒤져서 user_set에 중복 없이 아이디를 수집함
         user_set.forEach((id) => { //중복 없는 아이디 전원에게 다음과 같은 json을 부여함
             temp.push({ //부여한 json은 temp에 계속 push 해줌
                 user_id: id, //user 아이디랑
-                visited_date: new Set(), //set 함수 하나
+                visited_date: new Set(data.filter(log => log.user_id == id).map((log)=>yymmdd(log.time))), //set 함수 하나
             });
-        });
-        data.map((log) => { //다시 로그를 모조리 뒤져서
-            const index = temp.findIndex((item) => item.user_id == log.user_id); //현재 뒤지고 있는 로그의 사용자 아이디와, 위 temp 리스트의 사용자 아이디가 일치하는 곳을 찾는다
-            temp[index].visited_date = temp[index].visited_date.add(yymmdd(log.time)); //해당 temp 위치에 있는 사용자 아이디에 있는 visited_date에 현재 뒤지고 있는 로그의 한국 시간 넣는 것을 시도해봄 (단, visited_date는 set함수이기 때문에 중복이라면 아무런 일이 일어나지 않는다.)
         });
         setUser(temp); // 이렇게 완성된 temp는 곧, user의 정보와 동일하므로 저장
     }, [data]); //data state가 변경되는 이후에만 동작함
