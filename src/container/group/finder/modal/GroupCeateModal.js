@@ -1,4 +1,16 @@
+import { useState } from "react"
+
 export default () => {
+
+    const [project, setProject] = useState({
+        group_name:'',
+        project_name:'',
+        short_description:'',
+        long_description:''
+    })
+
+    
+
     return (
         <div className="modal-dialog" role="document">
             <div className="modal-content rounded-4 shadow">
@@ -10,17 +22,13 @@ export default () => {
 
                     <div className="d-grid my-5 list-unstyled">
                         <h4>그룹명</h4>
-                        <input />
-                        <hr />
+                        <input type="text" class="form-control mb-4" value={project.group_name}/>
                         <h4>프로젝트명</h4>
-                        <input />
-                        <hr />
+                        <input type="text" class="form-control mb-4" value={project.project_name}/>
                         <h4>간단소개글</h4>
-                        <input />
-                        <hr />
+                        <input type="text" class="form-control mb-4" value={project.short_description}/>
                         <h4>상세소개글</h4>
-                        <input />
-                        <hr />
+                        <input type="text" class="form-control mb-4" value={project.long_description} />
                         <h4>Tech Stack</h4>
                         <select />
                     </div>

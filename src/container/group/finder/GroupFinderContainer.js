@@ -1,43 +1,43 @@
 import { useState } from "react"
 import { Link } from "react-router-dom";
 import GroupCard from "../../../component/group/card/GroupCard"
-import GroupCeateModal from "../../../component/group/modal/GroupCeateModal";
-import GroupJoinModal from "../../../component/group/modal/GroupJoinModal";
+import GroupCeateModal from "./modal/GroupCeateModal";
+import GroupJoinModal from "./modal/GroupJoinModal";
 
 export default () => {
 
     const [groups, setGroups] = useState([
         {
             _id: 0,
-            manager:"gabrielyoon7",
+            manager: "gabrielyoon7",
             name: "아보카도",
             title: "콘솔",
             intro_text: "우리 같이 개발해요",
-            description:"상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
+            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
         },
         {
             _id: 1,
-            manager:"wlstn",
+            manager: "wlstn",
             name: "아보카도",
             title: "리액트 튜토리얼",
             intro_text: "우리 같이 개발해요",
-            description:"상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
+            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
         },
         {
             _id: 2,
-            manager:"yeonsu",
+            manager: "yeonsu",
             name: "아보카도",
             title: "히어로",
             intro_text: "우리 같이 개발해요",
-            description:"상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
+            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
         },
         {
             _id: 3,
-            manager:"seeun",
+            manager: "seeun",
             name: "팀 명",
             title: "프로젝트명",
             intro_text: "우리 같이 개발해요 우리 같이 개발해요 ",
-            description:"상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
+            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
         },
     ]);
 
@@ -52,11 +52,12 @@ export default () => {
                     </div>
                     <div>
                         <Link className="btn btn-outline-success" to='/myWorkspace/'>내 워크스페이스 보기</Link>
+                        <a className="btn btn-primary mx-2" href="#" data-bs-toggle="modal" data-bs-target="#group_create">프로젝트 등록하기</a>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-sm-6">훌륭한 팀을 구해보아요</div>
-                    <div className="col-sm-6 text-end"><a className="mx-2" href="#">정렬▿</a><a className="mx-2" href="#">필터링▿</a><a href="#" className="mx-2" data-bs-toggle="modal" data-bs-target="#group_create">프로젝트 등록하기</a></div>
+                    <div className="col-sm-6 text-end"><a className="mx-2" href="#">정렬▿</a><a className="mx-2" href="#">필터링▿</a></div>
                 </div>
             </div>
             <div className="row">
