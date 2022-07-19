@@ -9,8 +9,8 @@ export default function ProjectDefaultLayout() {
               <ProjectHeader />
           </div>
           <div>
-              <div class="container-fluid">
-                  <div class="row">
+              <div className="container-fluid">
+                  <div className="row">
                       <ProjectSidebar />
                       <Outlet />
                   </div>
