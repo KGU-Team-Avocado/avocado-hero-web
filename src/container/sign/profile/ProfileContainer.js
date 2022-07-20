@@ -21,35 +21,44 @@ const ProfileContainer = () => {
         }).then((response) => { //서버로부터 받아온 id
             // console.log(response.data);
             if (response.data.status === "success") {
-                console.log(JSON.stringify(response.data.user))
+                // console.log(JSON.stringify(response.data.user));
                 setUser(response.data.user);
             }
-            // else {
-            //   return alert("조회된 아이디가 없습니다.")
-            // }
+            else {
+              return alert("조회된 아이디가 없습니다.")
+            }
         }).catch(function (error) {
             console.log(error);
         });
     }, []);
+    console.log(user);
 
-    const [isEdit, setIsEdit] = useState(false);
-    const onClickEdit = () => {
-        setIsEdit(!isEdit);
-    };
+    const [isEdit, setIsEdit] = useState(true);
 
-    const [name, setName] = useState('');
+    const[inputs, setInputs] = useState({
+        nickname: '',
+        email: '',
+        phoneNum: '',
+        birth: '',
+      });
 
-    const onNameHandler = (e) => {
-        setName(e.currentTarget.value);
-    }
+      const onChange =(e) => { // 입력 함수
+        const { value, name } = e.target;
+        setInputs({
+          ...inputs, 
+          [name]: value
+        });
+      };
 
-    const onClickSubmit = (e) => {
+      const { nickname, email, phoneNum, birth } = inputs;
+
+    const onClickSubmit = (e) => { 
         e.preventDefault();
 
-        console.log(name);
         axios
             .post("/usersRouter/profileUpdate", {
-                user_name: name,
+                user_id: user_id,
+                user_nickname: nickname,
             })
             .then((response) => {
                 console.log(response);
@@ -60,6 +69,8 @@ const ProfileContainer = () => {
             .catch(function (error) {
                 console.log(error);
             });
+
+            setIsEdit(!isEdit);
     };
 
     // const [newNickname, setNewNickname] = useState(profile.name);
@@ -76,133 +87,36 @@ const ProfileContainer = () => {
 
     return (
         <>
-            {
-                isEdit ? (
-                    <h1>프로필 수정</h1>
-                ) : (
-                    <h1>프로필</h1>
-                )
-            }
-            <Container>
-                <Row>
-                    <div class="col-md-3" >
-                        <Card style={{ height: '30rem', margin: '10px 0' }}>
-                            <Card.Body>
-                                <div>
-                                    <div><img
-                                        src={Image} style={{ height: '150px' }} /></div>
-                                    {
-                                        isEdit ? (
-                                            <div><Button>변경</Button></div>
-                                        ) : (
-                                            <></>
-                                        )
-                                    }
-                                </div>
-                                <div>
-                                    이름:
-                                    {
-                                        isEdit ? (
-                                            <Form.Control type="text"
-                                                value={name}
-                                                onChange={onNameHandler}
-                                            />
-                                        ) : (
-                                            <h1>
-                                                {
-                                                    user
-                                                        ?
-                                                        JSON.stringify(user.user_name)
-                                                        :
-                                                        <div></div>
-                                                }
-                                            </h1>
-                                        )
-                                    }
-
-                                </div>
-                                <div>id:
-                                    {
-                                        user
-                                            ?
-                                            JSON.stringify(user.user_id)
-                                            :
-                                            <div></div>
-                                    }
-                                </div>
-                                <div>email:
-                                    {
-                                        user
-                                            ?
-                                            JSON.stringify(user.user_email)
-                                            :
-                                            <div></div>
-                                    }
-                                    {/* <Button>변경</Button>          */}
-                                </div>
-                                <div>전화번호:
-
-                                </div>
-                                <div>생년월일:
-
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                    <div class="col-md-9">
-                        <Card style={{ height: '30rem', margin: '10px 0' }}>
-                            <Card.Body>
-                                <Card.Title>기본 정보</Card.Title>
-                                <Card.Text>
-                                    <div>
-                                        이름:
-                                        {
-                                            user
-                                                ?
-                                                JSON.stringify(user.user_name)
-                                                :
-                                                <div></div>
-                                        }
+        {
+            isEdit ? ( // isEdit 모드 on/off로 한 번에 나타내게 변경
+                <>
+                <h1>프로필 수정</h1>
+                <Container>
+                                <Row>
+                                <div class="col-md-3" >
+                    <Card style={{ height: '30rem', margin: '10px 0' }}>
+                        <Card.Body>
+                            <div>
+                            <div><img
+                                    src={Image} style={{ height: '150px' }} /></div>
+                                    <div><Button>변경</Button></div>
                                     </div>
-
-                                    <div>소속 </div>
-                                    <div>분야 </div>
-                                    <div>학력 </div>
-                                    <div>SNS </div>
-                                </Card.Text>
+                                    테스트로 닉네임만 수정 중인데 안 됨
+                                <Form.Control type="text" name="nickname" value={nickname} placeholder="닉네임" onChange={onChange} />
                             </Card.Body>
-                        </Card>
-                    </div>
-                </Row>
-                <Row>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-9">
-                        <Card style={{ height: '50rem', margin: '10px 0' }}>
-                            <Card.Body>
-                                <Card.Title>추가 정보</Card.Title>
-                                <Card.Text>
-                                    <div>소개글</div>
-                                    <div>키워드</div>
-                                    <div>성향</div>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                </Row>
-                {
-                    isEdit ? (
-                        <Button variant="primary"
-                        // onClick={onClickSubmit}
-                        >수정 완료</Button>
-                    ) : (
-                        <Button variant="primary" onClick={onClickEdit}>프로필 수정</Button>
-                    )
-                }
+                            </Card>
+                            </div>
+                            <Button onClick={onClickSubmit}>프로필 수정</Button>
+                                </Row>
+                </Container>
+                </>
 
-            </Container>
-        </>
+            ) : 
+            <div></div>
+        }
+
+</>
     )
 }
 
 export default ProfileContainer;
-
