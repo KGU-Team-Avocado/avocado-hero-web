@@ -1,15 +1,17 @@
 import { useState } from "react"
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 export default () => {
 
     const [project, setProject] = useState({
-        group_name:'',
-        project_name:'',
-        short_description:'',
-        long_description:''
+        group_name: '',
+        project_name: '',
+        short_description: '',
+        long_description: ''
     })
 
-    
+
 
     return (
         <div className="modal-dialog" role="document">
@@ -22,13 +24,20 @@ export default () => {
 
                     <div className="d-grid my-5 list-unstyled">
                         <h4>그룹명</h4>
-                        <input type="text" class="form-control mb-4" value={project.group_name}/>
+                        <input type="text" class="form-control mb-4" value={project.group_name} />
                         <h4>프로젝트명</h4>
-                        <input type="text" class="form-control mb-4" value={project.project_name}/>
+                        <input type="text" class="form-control mb-4" value={project.project_name} />
                         <h4>간단소개글</h4>
-                        <input type="text" class="form-control mb-4" value={project.short_description}/>
+                        <input type="text" class="form-control mb-4" value={project.short_description} />
                         <h4>상세소개글</h4>
                         <input type="text" class="form-control mb-4" value={project.long_description} />
+                        <Editor
+                            // editorState={editorState}
+                            toolbarClassName="toolbarClassName"
+                            wrapperClassName="wrapperClassName"
+                            editorClassName="editorClassName"
+                            // onEditorStateChange={this.onEditorStateChange}
+                        />
                         <h4>Tech Stack</h4>
                         <select />
                     </div>
