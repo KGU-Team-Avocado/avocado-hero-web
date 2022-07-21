@@ -8,7 +8,16 @@ import Chart from "chart.js/auto";
 export default () => {
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
-    const [attendances, setAttendances] = useState([]);
+    const attendances = {
+        "gabrielyoon7" : 3,
+        "wlstn": 2, 
+        "123" : 2,
+        "201912069": 3,
+        "hido" : 3,
+        "seeun" : 3,
+        "yeonsu" : 3
+    }  //6월 30일 이후 출석 기록 (백엔드로 만들기 귀찮아서 일단 이렇게 해둠)
+
     const [isListOpen, setListOpen] = useState(true);
 
     useEffect(() => {
@@ -32,11 +41,12 @@ export default () => {
 
     useEffect(() => {
         let temp = []; //user 배열을 만들어주기 위한 임시 변수
-        let user_set = new Set(data.map((log)=>log.user_id)); //로그를 모조리 뒤져서 user_set에 중복 없이 아이디를 수집함
+        let user_set = new Set(data.map((log) => log.user_id)); //로그를 모조리 뒤져서 user_set에 중복 없이 아이디를 수집함
         user_set.forEach((id) => { //중복 없는 아이디 전원에게 다음과 같은 json을 부여함
             temp.push({ //부여한 json은 temp에 계속 push 해줌
                 user_id: id, //user 아이디랑
-                visited_date: new Set(data.filter(log => log.user_id == id).map((log)=>yymmdd(log.time))), //중복 없는 날짜를 저장해줄 set 함수 하나
+                visited_date: new Set(data.filter(log => log.user_id == id).map((log) => yymmdd(log.time))), //중복 없는 날짜를 저장해줄 set 함수 하나
+                attendances_times : attendances[id]
             });
         });
         setUser(temp); // 위와 같이 완성된 temp는 곧 user의 정보와 동일하므로 user state에 저장
@@ -73,11 +83,11 @@ export default () => {
     const datachart = {
 
         //각 막대별 라벨
-        labels: user.map((user)=>user.user_id),
+        labels: user.map((user) => user.user_id),
         datasets: [
             {
                 borderWidth: 1, // 테두리 두께
-                data: user.map((user)=>user.visited_date.size * 2), // 수치
+                data: user.map((user) => user.attendances_times*5 + user.visited_date.size * 2), // 수치
                 backgroundColor: [
                     "rgba(62, 121, 37)",
                     "rgba(132, 150, 53)",
@@ -98,7 +108,7 @@ export default () => {
                 <div className="my-3">
                     <div className="my-3">
                         <h3>그래프</h3>
-                        <Bar data={datachart} width={300} height={200} options={options} />
+                        <Bar data={datachart} height={100} options={options} />
                     </div>
                     <div className="d-flex justify-content-between">
                         <h3>유저별 포인트</h3>
@@ -128,7 +138,7 @@ export default () => {
                                             </Link>
                                             ]
                                         </h4>
-                                        <h4>총 {user.visited_date.size * 2}점</h4>
+                                        <h4>총 {user.attendances_times * 5 + user.visited_date.size * 2}점</h4>
                                     </div>
                                     <div className="accordion-item">
                                         <div className="accordion-item">
@@ -140,8 +150,9 @@ export default () => {
                                             >
                                                 <div className="accordion-body">
                                                     <div>
+                                                        <div>- 대면 회의 출석 횟수 {user.attendances_times}회 (+{user.attendances_times*5}점)</div>
                                                         {Array.from(user.visited_date).map((d) => (
-                                                            <div>{d} (+2점)</div>
+                                                            <div>- {d} (+2점)</div>
                                                         ))}
                                                     </div>
                                                 </div>
@@ -156,8 +167,6 @@ export default () => {
                         )}
                     </div>
                 </div>
-                <h3>출석부</h3>
-                <div>ㅇㅇ</div>
                 <h3>전체 로그</h3>
                 <div>
                     {data.length > 0 ? (
