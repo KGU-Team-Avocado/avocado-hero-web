@@ -9,14 +9,15 @@ export default () => {
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
     const attendances = {
-        "gabrielyoon7" : 3,
-        "wlstn": 2, 
-        "123" : 2,
+        "gabrielyoon7": 3,
+        "wlstn": 2,
+        "123": 2,
         "201912069": 3,
-        "hido" : 3,
-        "seeun" : 3,
-        "yeonsu" : 3
+        "hido": 3,
+        "seeun": 3,
+        "yeonsu": 3
     }  //6월 30일 이후 출석 기록 (백엔드로 만들기 귀찮아서 일단 이렇게 해둠)
+    const [sum, setSum] = useState(0);
 
     const [isListOpen, setListOpen] = useState(true);
 
@@ -46,11 +47,17 @@ export default () => {
             temp.push({ //부여한 json은 temp에 계속 push 해줌
                 user_id: id, //user 아이디랑
                 visited_date: new Set(data.filter(log => log.user_id == id).map((log) => yymmdd(log.time))), //중복 없는 날짜를 저장해줄 set 함수 하나
-                attendances_times : attendances[id]
+                attendances_times: attendances[id]
             });
         });
         setUser(temp); // 위와 같이 완성된 temp는 곧 user의 정보와 동일하므로 user state에 저장
     }, [data]); //data state가 변경되는 이후에만 동작함
+
+    useEffect(()=>{
+        let sum = 0
+        user.map((u)=>sum+=(u.attendances_times * 5 + u.visited_date.size * 2))
+        setSum(sum)
+    }, [user])
 
     const yymmdd = (t) => {
         const date = t.split(". ");
@@ -87,7 +94,7 @@ export default () => {
         datasets: [
             {
                 borderWidth: 1, // 테두리 두께
-                data: user.map((user) => user.attendances_times*5 + user.visited_date.size * 2), // 수치
+                data: user.map((user) => user.attendances_times * 5 + user.visited_date.size * 2), // 수치
                 backgroundColor: [
                     "rgba(62, 121, 37)",
                     "rgba(132, 150, 53)",
@@ -150,7 +157,7 @@ export default () => {
                                             >
                                                 <div className="accordion-body">
                                                     <div>
-                                                        <div>- 대면 회의 출석 횟수 {user.attendances_times}회 (+{user.attendances_times*5}점)</div>
+                                                        <div>- 대면 회의 출석 횟수 {user.attendances_times}회 (+{user.attendances_times * 5}점)</div>
                                                         {Array.from(user.visited_date).map((d) => (
                                                             <div>- {d} (+2점)</div>
                                                         ))}
@@ -166,6 +173,19 @@ export default () => {
                             <LodingSpinner />
                         )}
                     </div>
+                </div>
+                <h3>장학금 예상 수령 금액</h3>
+                <div>
+                    {
+                        user.length > 0
+                            ?
+                            (
+                                user.map((user) => <div>{user.user_id +" : "+ parseInt((user.attendances_times * 5 + user.visited_date.size * 2)/sum*(400000+(8*100000)+300000))+"원"}</div>)
+                            )
+                            :
+                            (
+                                <div>데이터가 없습니다.</div>
+                            )}
                 </div>
                 <h3>전체 로그</h3>
                 <div>
