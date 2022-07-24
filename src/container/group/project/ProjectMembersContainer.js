@@ -12,7 +12,6 @@ export default () => {
                     This week
                 </button>
             </div>
-            
         </div>
     )
 }
