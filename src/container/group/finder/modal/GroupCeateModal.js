@@ -3,29 +3,19 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
-
+import { MultiSelect } from "react-multi-select-component";
 export default () => {
 
     const [project, setProject] = useState({
         group_name: '',
         project_name: '',
         short_description: '',
-        tech_stack: []
     })
 
     const [editorState, setEditorState] = useState(
         () => EditorState.createEmpty(),
     );
     const [convertedContent, setConvertedContent] = useState(null);
-
-    const [techStack, setTechStack] = useState({
-        multiValue: [],
-        filterOptions: [
-          { value: "foo", label: "Foo" },
-          { value: "bar", label: "Bar" },
-          { value: "bat", label: "Bat" }
-        ]
-      })
 
     const handleEditorChange = (state) => {
         setEditorState(state);
@@ -44,12 +34,13 @@ export default () => {
         })
     }
 
-    const handleMultiChange = (option) => {
-        setTechStack({
-            ...techStack,
-            ['multiValue']: option
-        });
-      }
+      
+    const [selected, setSelected] = useState([]);  
+    const options = [
+        { label: "Grapes 🍇", value: "grapes" },
+        { label: "Mango 🥭", value: "mango" },
+        { label: "Strawberry 🍓", value: "strawberry", disabled: true },
+    ];
 
     return (
         <div className="modal-dialog" role="document">
@@ -67,16 +58,18 @@ export default () => {
                         <input type="text" className="form-control mb-4" value={project.project_name} id="project_name" onChange={handleInput} />
                         <h4>간단소개글</h4>
                         <input type="text" className="form-control mb-4" value={project.short_description} id="short_description" onChange={handleInput} />
-                        <h4>Tech Stack</h4>
-                        <div>{project.tech_stack.map((tech)=><div>{tech}</div>)}</div>
-                        {/* <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                            <option selected></option>
-                            <option value="React">React</option>
-                            <option value="Node.js">Node.js</option>
-                            <option value="MongoDB">MongoDB</option>
-                        </select> */}
+                        <div>
+                            <h4>Tech Stack</h4>
+                            <pre>{JSON.stringify(selected)}</pre>
+                            <MultiSelect
+                                options={options}
+                                value={selected}
+                                onChange={setSelected}
+                                labelledBy="Select"
+                            />
+                        </div>
                         <h4>상세소개글</h4>
-                        <div className="w-100">
+                        <div>
                             <Editor
                                 editorState={editorState}
                                 toolbarClassName="toolbarClassName"
