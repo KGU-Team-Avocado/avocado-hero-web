@@ -36,6 +36,10 @@ export default () => {
         setDescription("");
     }
 
+    const deleteNotice = (id) => {
+        setNotices(notices.filter((notice) => notice._id !== id));
+    }
+
     return (
         <>
             <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -45,8 +49,9 @@ export default () => {
                         <button type="button" className="btn btn-sm btn-outline-secondary">Share</button>
                         <button type="button" className="btn btn-sm btn-outline-secondary">Export</button>
                     </div>
+                    {/* 공지사항 추가하기는 추후 팀장만 볼 수 있게 수정 */}
                     <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
-                        공지사항 수정하기
+                        공지사항 추가하기
                     </button>
                 </div>
             </div>
@@ -61,7 +66,12 @@ export default () => {
                         </h2>
                         <div id={"panelsStayOpen-collapse" + notice._id} className="accordion-collapse collapse show" aria-labelledby={"panelsStayOpen-heading" + notice._id}>
                             <div className="accordion-body">
-                                {notice.description}
+                                <div>{notice.description}</div>
+                                {/* 수정 삭제는 추후 팀장만 볼 수 있게 수정 */}
+                                <div className="d-flex justify-content-end">
+                                    <button type="button" className="btn btn-secondary me-2" >수정</button>
+                                    <button type="button" className="btn btn-danger" onClick={() => deleteNotice(notice._id)} >삭제</button>
+                                </div>
                             </div>
                         </div>
                     </div>
