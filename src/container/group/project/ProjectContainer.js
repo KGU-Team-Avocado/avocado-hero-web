@@ -27,6 +27,8 @@ export default () => {
     const [title, setTitle] = useState(""); //공지사항 제목
     const [description, setDescription] = useState(""); //공지사항 내용
     const [id, setId] = useState(4); //추후 0으로 교체
+    const [isEdit, setIsEdit] = useState(false); //수정 모드 여부
+    const [key, setKey] = useState(-1); //수정할 공지의 id
 
     const saveNewNotice = () => {
         const newNotice = {_id: id, title: title, description: description};
@@ -38,6 +40,21 @@ export default () => {
 
     const deleteNotice = (id) => {
         setNotices(notices.filter((notice) => notice._id !== id));
+    }
+
+    const showModifyModal = (notice) => {
+        setTitle(notice.title);
+        setDescription(notice.description);
+        setKey(notice._id);
+        setIsEdit(true);
+    }
+
+    const modifyNotice = () => {
+        setNotices(notices.map((notice) => notice._id === key ? {...notice, title: title, description: description} : notice));
+        setTitle("");
+        setDescription("");
+        setKey(0);
+        setIsEdit(false);
     }
 
     return (
@@ -69,7 +86,7 @@ export default () => {
                                 <div>{notice.description}</div>
                                 {/* 수정 삭제는 추후 팀장만 볼 수 있게 수정 */}
                                 <div className="d-flex justify-content-end">
-                                    <button type="button" className="btn btn-secondary me-2" >수정</button>
+                                    <button type="button" className="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => showModifyModal(notice)} >수정</button>
                                     <button type="button" className="btn btn-danger" onClick={() => deleteNotice(notice._id)} >삭제</button>
                                 </div>
                             </div>
@@ -99,7 +116,8 @@ export default () => {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                            <button type="button" class="btn btn-primary" onClick={() => saveNewNotice()} data-bs-dismiss="modal">저장</button>
+                            {isEdit ? <button type="button" class="btn btn-primary" onClick={() => modifyNotice()} data-bs-dismiss="modal">수정</button> 
+                            : <button type="button" class="btn btn-primary" onClick={() => saveNewNotice()} data-bs-dismiss="modal">저장</button>}
                         </div>
                     </div>
                 </div>
