@@ -1,10 +1,31 @@
 import { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import '../../../css/project/Calendar.css';
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import moment from 'moment'
+
+const localizer = momentLocalizer(moment)
 
 export default () => {
-    const [date, setDate] = useState(new Date());
+    const [events, setEvents] = useState([{
+        id: 0,
+        title: "All Day Event very long title",
+        allDay: true,
+        start: new Date(2022, 6, 0),
+        end: new Date(2022, 6, 1)
+      },
+      {
+        id: 1,
+        title: "Long Event",
+        start: new Date(2022, 6, 7),
+        end: new Date(2022, 6, 10)
+      },
+    
+      {
+        id: 2,
+        title: "DTS STARTS",
+        start: new Date(2022, 6, 13, 0, 0, 0),
+        end: new Date(2022, 6, 20, 0, 0, 0)
+      }]);
 
     return (
         <>
@@ -23,7 +44,13 @@ export default () => {
 
             </div>
             <div className='calendar-container'>
-                <Calendar onChange={setDate} value={date} />
+                <Calendar
+                    localizer={localizer}
+                    events={events}
+                    startAccessor="start"
+                    endAccessor="end"
+                    style={{ height: 500 }}
+                />
             </div>
         </>
     )
