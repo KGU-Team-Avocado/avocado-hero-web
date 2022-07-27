@@ -8,7 +8,7 @@ export default (props) => {
                 <div className="modal-body p-5">
                     <div className="modal-header">
                         <h2 className="fw-bold mb-0">신청하기</h2>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div className="d-grid my-5 list-unstyled">

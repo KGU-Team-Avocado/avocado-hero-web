@@ -4,6 +4,13 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
 import { MultiSelect } from "react-multi-select-component";
+const options = [
+    { label: "React", value: "react" },
+    { label: "Node.js", value: "nodejs" },
+    { label: "Mongo DB", value: "mongodb"},
+    { label: "??", value: "??", disabled: true },
+
+];
 export default () => {
 
     const [project, setProject] = useState({
@@ -36,11 +43,15 @@ export default () => {
 
       
     const [selected, setSelected] = useState([]);  
-    const options = [
-        { label: "Grapes 🍇", value: "grapes" },
-        { label: "Mango 🥭", value: "mango" },
-        { label: "Strawberry 🍓", value: "strawberry", disabled: true },
-    ];
+
+    const makeGroup = ()=>{
+        const newGroupData = {
+            ...project,
+            long_description : convertedContent,
+            tech_stack : selected
+        }
+        console.log(newGroupData)
+    }
 
     return (
         <div className="modal-dialog" role="document">
@@ -60,7 +71,7 @@ export default () => {
                         <input type="text" className="form-control mb-4" value={project.short_description} id="short_description" onChange={handleInput} />
                         <div>
                             <h4>Tech Stack</h4>
-                            <pre>{JSON.stringify(selected)}</pre>
+                            {/* <pre>{JSON.stringify(selected)}</pre> */}
                             <MultiSelect
                                 options={options}
                                 value={selected}
@@ -79,7 +90,7 @@ export default () => {
                             />
                         </div>
                     </div>
-                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" data-bs-dismiss="modal">등록하기</button>
+                    <button type="button" className="btn btn-lg btn-success mt-5 w-100"onClick={()=>makeGroup()}>등록하기</button>
                 </div>
             </div>
         </div>
