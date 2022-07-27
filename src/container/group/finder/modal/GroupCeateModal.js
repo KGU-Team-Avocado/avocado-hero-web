@@ -69,7 +69,7 @@ export default () => {
                         <input type="text" className="form-control mb-4" value={project.project_name} id="project_name" onChange={handleInput} />
                         <h4>간단소개글</h4>
                         <input type="text" className="form-control mb-4" value={project.short_description} id="short_description" onChange={handleInput} />
-                        <div>
+                        <div className="mb-4">
                             <h4>Tech Stack</h4>
                             {/* <pre>{JSON.stringify(selected)}</pre> */}
                             <MultiSelect
