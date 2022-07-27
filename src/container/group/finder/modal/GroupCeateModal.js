@@ -4,10 +4,13 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
 import { MultiSelect } from "react-multi-select-component";
+import axios from "axios";
+
+
 const options = [
     { label: "React", value: "react" },
     { label: "Node.js", value: "nodejs" },
-    { label: "Mongo DB", value: "mongodb"},
+    { label: "Mongo DB", value: "mongodb" },
     { label: "??", value: "??", disabled: true },
 
 ];
@@ -41,16 +44,25 @@ export default () => {
         })
     }
 
-      
-    const [selected, setSelected] = useState([]);  
 
-    const makeGroup = ()=>{
+    const [selected, setSelected] = useState([]);
+
+    const createGroup = () => {
         const newGroupData = {
             ...project,
-            long_description : convertedContent,
-            tech_stack : selected
+            long_description: convertedContent,
+            tech_stack: selected.map((s)=>s.value)
         }
         console.log(newGroupData)
+        axios
+            .post("/groupsRouter/create", newGroupData)
+            .then((response) => {
+                console.log(response.data);
+                window.location.reload()
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     return (
@@ -90,7 +102,7 @@ export default () => {
                             />
                         </div>
                     </div>
-                    <button type="button" className="btn btn-lg btn-success mt-5 w-100"onClick={()=>makeGroup()}>등록하기</button>
+                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" onClick={() => createGroup()}>등록하기</button>
                 </div>
             </div>
         </div>
