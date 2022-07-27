@@ -45,7 +45,7 @@ export default () => {
     return (
         <div className="modal-dialog" role="document">
             <div className="modal-content rounded-4 shadow">
-                <div className="modal-body p-5">
+                <div className="modal-body p-5  w-100">
                     <div className="modal-header">
                         <h2 className="fw-bold mb-0">프로젝트 그룹 만들기</h2>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

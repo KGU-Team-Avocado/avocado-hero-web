@@ -21,4 +21,8 @@
     background-color: rgba(227, 125, 78);
 }
 
+.modal-body{
+    word-break: break-all;
+  }
+
 
