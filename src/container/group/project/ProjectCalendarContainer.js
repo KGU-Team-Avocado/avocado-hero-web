@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar'
-import 'react-big-calendar/lib/css/react-big-calendar.css';
-import moment from 'moment'
-
-const localizer = momentLocalizer(moment)
+import FullCalendar from '@fullcalendar/react' // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import interactionPlugin from "@fullcalendar/interaction";
 
 export default () => {
     const [events, setEvents] = useState([{
@@ -12,24 +10,28 @@ export default () => {
         allDay: true,
         start: new Date(2022, 6, 0),
         end: new Date(2022, 6, 1)
-      },
-      {
+    },
+    {
         id: 1,
         title: "Long Event",
         start: new Date(2022, 6, 7),
         end: new Date(2022, 6, 10)
-      },
-    
-      {
+    },
+
+    {
         id: 2,
         title: "DTS STARTS",
         start: new Date(2022, 6, 13, 0, 0, 0),
         end: new Date(2022, 6, 20, 0, 0, 0)
-      }]);
+    }]);
+
+    const handleDateClick = (arg) => { // bind with an arrow function
+        console.log(arg)
+    }
 
     return (
         <>
-            <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            {/* <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 className="h2">일정</h1>
                 <div className="btn-toolbar mb-2 mb-md-0">
                     <div className="btn-group me-2">
@@ -42,14 +44,19 @@ export default () => {
                     </button>
                 </div>
 
-            </div>
+            </div> */}
             <div className='calendar-container'>
-                <Calendar
-                    localizer={localizer}
+                <FullCalendar
+                    plugins={[dayGridPlugin, interactionPlugin]}
+                    initialView="dayGridMonth"
                     events={events}
-                    startAccessor="start"
-                    endAccessor="end"
-                    style={{ height: 500 }}
+                    contentHeight={700}
+                    selectable={true}
+                    dateClick={handleDateClick} // 날짜 하나 선택
+                    select={handleDateClick} //여러 날짜 드래그로 선택
+                    editable={true} // 일정 드래그앤드롭으로 변경
+                    droppable={true}
+                    eventResizableFromStart={true}
                 />
             </div>
         </>
