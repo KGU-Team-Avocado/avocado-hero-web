@@ -1,5 +1,5 @@
 import JobFinderFilter from  "../../component/jobFinder/JobFinderFilter";
-
+import JobFinderList from "../jobFinder/JobFinderList"
 const JobFinderContainer = () =>  {
     return (
         <div>
@@ -9,8 +9,8 @@ const JobFinderContainer = () =>  {
                 <JobFinderFilter/>
                 </div>
             </div>
-            <div className="card m-3" >
-                채용공고 리스트 보여주는곳
+            <div className="m-3" >
+                <JobFinderList/>
             </div>
             
         </div>      
