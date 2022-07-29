@@ -5,6 +5,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from "@fullcalendar/interaction";
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
+import { Tooltip } from "bootstrap";
 
 export default () => {
     const [events, setEvents] = useState([{
@@ -86,14 +87,14 @@ export default () => {
                             info.revert();
                         }
                     }}
-                    // eventDidMount={(info) => {
-                    //     var tooltip = new Tooltip(info.el, {
-                    //         title: info.event.extendedProps.description,
-                    //         placement: 'top',
-                    //         trigger: 'hover',
-                    //         container: 'body'
-                    //     });
-                    // }}
+                    eventDidMount={(info) => {
+                        var tooltip = new Tooltip(info.el, {
+                            title: info.event.extendedProps.description,
+                            placement: 'top',
+                            trigger: 'hover',
+                            container: 'body'
+                        });
+                    }}
                 />
             </div>
         </div>
