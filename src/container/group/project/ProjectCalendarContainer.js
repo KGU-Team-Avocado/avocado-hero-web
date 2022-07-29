@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
 import interactionPlugin from "@fullcalendar/interaction";
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 
@@ -40,7 +42,7 @@ export default () => {
         <div className='mt-3'>
             <div className='calendar-container'>
                 <FullCalendar
-                    plugins={[dayGridPlugin, interactionPlugin, bootstrap5Plugin]}
+                    plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin, bootstrap5Plugin]}
                     initialView="dayGridMonth"
                     events={events}
                     contentHeight={700}
@@ -51,9 +53,9 @@ export default () => {
                     droppable={true}
                     dayMaxEventRows={true}  // 하루에 보여지는 일정 수 조정(나머지는 +n 으로 표시)
                     headerToolbar= {{
-                        left: 'prevYear,prev',
+                        left: 'prevYear,prev today',
                         center: 'title',
-                        right: 'next,nextYear'
+                        right: 'dayGridMonth,timeGridWeek,listWeek next,nextYear'
                       }}
                     eventResizableFromStart={true}
                     themeSystem={'bootstrap5'}
