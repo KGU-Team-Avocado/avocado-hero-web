@@ -6,13 +6,24 @@ import listPlugin from '@fullcalendar/list';
 import interactionPlugin from "@fullcalendar/interaction";
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 import { Tooltip } from "bootstrap";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
 export default () => {
+    const [show, setShow] = useState(false);
+    const [startDay, setStartDay] = useState('');
+    const [endDay, setEndDay] = useState('');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [allday, setAllday] = useState(false);
+    const [daysOfWeek, setDaysOfWeek] = useState('');
+    const [backgroundColor, setBackgroundColor] = useState('');
     const [events, setEvents] = useState([{
         id: 0,  // 매주 반복하는 일정
         title: "All Day Event very long title",
         description: 'description for All Day Event1',
-        daysOfWeek: [ '4' ],
+        daysOfWeek: ['4'],
         startTime: '10:45:00',
         endTime: '12:45:00',
         color: 'red'
@@ -30,7 +41,7 @@ export default () => {
         description: 'description for All Day Event3',
         start: '2022-07-11T10:45:00',
         end: '2022-07-11T11:45:00',
-        borderColor: 'red'
+        backgroundColor: 'red'
     },
     {
         id: 3, // 긴 일정
@@ -45,58 +56,135 @@ export default () => {
         console.log(arg)
     }
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => {setShow(true); console.log(123)};
+
     return (
-        <div className='mt-3'>
-            <div className='calendar-container'>
-                <FullCalendar
-                    plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin, bootstrap5Plugin]}
-                    initialView="dayGridMonth"
-                    events={events}
-                    contentHeight={700}
-                    selectable={true}
-                    select={handleDateClick} //여러 날짜 드래그로 선택
-                    editable={true} // 일정 드래그앤드롭으로 변경 (allday가 아닌 일정은 늘리고 줄이기 불가)
-                    droppable={true}
-                    dayMaxEventRows={true}  // 하루에 보여지는 일정 수 조정(나머지는 +n 으로 표시)
-                    customButtons={{
-                        createNewEvent: {
-                            text: '새일정',
-                            click: function () {
-                                alert('새일정 만들기!');
+        <>
+            <div className='mt-3'>
+                <div className='calendar-container'>
+                    <FullCalendar
+                        plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin, bootstrap5Plugin]}
+                        initialView="dayGridMonth"
+                        events={events}
+                        contentHeight={700}
+                        selectable={true}
+                        select={handleDateClick} //여러 날짜 드래그로 선택
+                        editable={true} // 일정 드래그앤드롭으로 변경 (allday가 아닌 일정은 늘리고 줄이기 불가)
+                        droppable={true}
+                        dayMaxEventRows={true}  // 하루에 보여지는 일정 수 조정(나머지는 +n 으로 표시)
+                        customButtons={{
+                            createNewEvent: {
+                                text: '새일정',
+                                click: function () { handleShow() }
                             }
-                        }
-                    }}
-                    headerToolbar= {{
-                        left: 'prevYear,prev today createNewEvent',
-                        center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,listWeek next,nextYear'
-                    }}
-                    eventResizableFromStart={true}
-                    themeSystem={'bootstrap5'}
-                    eventDrop={(info) => {  // 일정 드래그앤드롭으로 변경할 때 발생하는 이벤트
-                        alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+                        }}
+                        headerToolbar={{
+                            left: 'prevYear,prev today createNewEvent',
+                            center: 'title',
+                            right: 'dayGridMonth,timeGridWeek,listWeek next,nextYear'
+                        }}
+                        eventResizableFromStart={true}
+                        themeSystem={'bootstrap5'}
+                        eventDrop={(info) => {  // 일정 드래그앤드롭으로 변경할 때 발생하는 이벤트
+                            alert(info.event.title + " was dropped on " + info.event.start.toISOString());
 
-                        if (!window.confirm("Are you sure about this change?")) {
-                            info.revert();
-                        }
-                    }}
-                    eventResize={(info) => { // 일정 기간 조정 시 발생하는 이벤트
-                        alert(info.event.title + " end is now " + info.event.end.toISOString());
+                            if (!window.confirm("Are you sure about this change?")) {
+                                info.revert();
+                            }
+                        }}
+                        eventResize={(info) => { // 일정 기간 조정 시 발생하는 이벤트
+                            alert(info.event.title + " end is now " + info.event.end.toISOString());
 
-                        if (!window.confirm("is this okay?")) {
-                            info.revert();
-                        }
-                    }}
-                    eventDidMount={(info) => {
-                        var tooltip = new Tooltip(info.el, {
-                            title: info.event.extendedProps.description,
-                            placement: 'top',
-                            trigger: 'hover',
-                            container: 'body'
-                        });
-                    }}
-                />
+                            if (!window.confirm("is this okay?")) {
+                                info.revert();
+                            }
+                        }}
+                        eventDidMount={(info) => {
+                            var tooltip = new Tooltip(info.el, {
+                                title: info.event.extendedProps.description,
+                                placement: 'top',
+                                trigger: 'hover',
+                                container: 'body'
+                            });
+                        }}
+                    />
+                    <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Modal title</Modal.Title>
+                        </Modal.Header>
+
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                    <Form.Label>시작일</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="start day"
+                                        value={startDay}
+                                        autoFocus
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput12">
+                                    <Form.Label>종료일</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="end day"
+                                        value={endDay}
+                                        autoFocus
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+                                    <Form.Label>제목</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="title"
+                                        value={title}
+                                        autoFocus
+                                    />
+                                </Form.Group>
+                                <Form.Group
+                                    className="mb-3"
+                                    controlId="exampleForm.ControlTextarea1"
+                                >
+                                    <Form.Label>설명</Form.Label>
+                                    <Form.Control as="textarea" rows={3} value={description} />
+                                </Form.Group>
+                                <Form.Check
+                                    type="switch"
+                                    id="custom-switch"
+                                    label="하루종일"
+                                />
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput4" value={daysOfWeek} >
+                                    <Form.Label>반복 (구현예정)</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="daysOfWeek"
+                                        autoFocus
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput5" value={backgroundColor} >
+                                    <Form.Label>색상 (구현예정)</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="backgroundColor"
+                                        autoFocus
+                                    />
+                                </Form.Group>
+                            </Form>
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>Close</Button>
+                            <Button variant="primary" onClick={handleClose}>Save changes</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
