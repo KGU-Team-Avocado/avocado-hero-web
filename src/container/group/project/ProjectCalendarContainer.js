@@ -2,6 +2,7 @@ import { useState } from 'react';
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin from "@fullcalendar/interaction";
+import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 
 export default () => {
     const [events, setEvents] = useState([{
@@ -39,7 +40,7 @@ export default () => {
         <div className='mt-3'>
             <div className='calendar-container'>
                 <FullCalendar
-                    plugins={[dayGridPlugin, interactionPlugin]}
+                    plugins={[dayGridPlugin, interactionPlugin, bootstrap5Plugin]}
                     initialView="dayGridMonth"
                     events={events}
                     contentHeight={700}
