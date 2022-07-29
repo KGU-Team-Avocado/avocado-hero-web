@@ -56,6 +56,20 @@ export default () => {
                       }}
                     eventResizableFromStart={true}
                     themeSystem={'bootstrap5'}
+                    eventDrop={(info) => {  // 일정 드래그앤드롭으로 변경할 때 발생하는 이벤트
+                        alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+
+                        if (!window.confirm("Are you sure about this change?")) {
+                            info.revert();
+                        }
+                    }}
+                    eventResize={(info) => { // 일정 기간 조정 시 발생하는 이벤트
+                        alert(info.event.title + " end is now " + info.event.end.toISOString());
+
+                        if (!window.confirm("is this okay?")) {
+                            info.revert();
+                        }
+                    }}
                 />
             </div>
         </div>
