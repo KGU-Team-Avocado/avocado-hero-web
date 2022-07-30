@@ -9,9 +9,9 @@ export default (props) => {
                             <div>{props.group.manager}</div>
                         </div>
                         <div className="col-xxl-8 py-3">
-                            <h4>{props.group.name}</h4>
-                            <h5>{props.group.title}</h5>
-                            <p>{props.group.intro_text}</p>
+                            <h4>{props.group.group_name}</h4>
+                            <h5>{props.group.project_name}</h5>
+                            <p>{props.group.short_description}</p>
                             <div>
                                 <span className="badge text-bg-primary">Primary</span>
                                 <span className="badge text-bg-secondary">Secondary</span>

@@ -1,4 +1,5 @@
-import { useState } from "react"
+import axios from "axios";
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import GroupCard from "../../../component/group/card/GroupCard"
 import GroupCeateModal from "./modal/GroupCeateModal";
@@ -6,40 +7,17 @@ import GroupJoinModal from "./modal/GroupJoinModal";
 
 export default () => {
 
-    const [groups, setGroups] = useState([
-        {
-            _id: 0,
-            manager: "gabrielyoon7",
-            name: "아보카도",
-            title: "콘솔",
-            intro_text: "우리 같이 개발해요",
-            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
-        },
-        {
-            _id: 1,
-            manager: "wlstn",
-            name: "아보카도",
-            title: "리액트 튜토리얼",
-            intro_text: "우리 같이 개발해요",
-            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
-        },
-        {
-            _id: 2,
-            manager: "yeonsu",
-            name: "아보카도",
-            title: "히어로",
-            intro_text: "우리 같이 개발해요",
-            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
-        },
-        {
-            _id: 3,
-            manager: "seeun",
-            name: "팀 명",
-            title: "프로젝트명",
-            intro_text: "우리 같이 개발해요 우리 같이 개발해요 ",
-            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
-        },
-    ]);
+    const [groups, setGroups] = useState([]);
+
+    useEffect(() => {
+        axios.get("/groupsRouter/getGroup").then((response) => {
+            console.log(JSON.stringify(response.data))
+            setGroups(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }, [])
+    
 
     const [selectedGroup, setSelectedGroup] = useState(null);
 
