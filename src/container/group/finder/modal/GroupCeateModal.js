@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { convertToHTML } from 'draft-convert';
@@ -12,9 +12,17 @@ const options = [
     { label: "Node.js", value: "nodejs" },
     { label: "Mongo DB", value: "mongodb" },
     { label: "??", value: "??", disabled: true },
-
 ];
+
 export default () => {
+
+    const [userInfo, setUserInfo] = useState(null);
+
+    useEffect(() => {
+        if (sessionStorage.getItem("user")) {
+            setUserInfo(JSON.parse(sessionStorage.getItem("user")));
+        }
+    }, []);
 
     const [project, setProject] = useState({
         group_name: '',
@@ -51,7 +59,8 @@ export default () => {
         const newGroupData = {
             ...project,
             long_description: convertedContent,
-            tech_stack: selected.map((s)=>s.value)
+            tech_stack: selected.map((s) => s.value),
+            manager: userInfo.user_id
         }
         console.log(newGroupData)
         axios
