@@ -17,6 +17,7 @@ const Header = () => {
   const logout = () => {
     setSignIn(!isSignIn);
     sessionStorage.clear();
+    window.location.href='/'
   };
 
   return (

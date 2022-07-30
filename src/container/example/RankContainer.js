@@ -9,12 +9,12 @@ export default () => {
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
     const attendances = {
-        "gabrielyoon7": 3,
-        "wlstn": 2,
+        "gabrielyoon7": 4,
+        "wlstn": 3,
         "123": 2,
         "201912069": 3,
-        "hido": 3,
-        "seeun": 3,
+        "hido": 4,
+        "seeun": 4,
         "yeonsu": 3
     }  //6월 30일 이후 출석 기록 (백엔드로 만들기 귀찮아서 일단 이렇게 해둠)
     const [sum, setSum] = useState(0);
@@ -133,6 +133,7 @@ export default () => {
                             </button>
                         </h2>
                     </div>
+                    <p>대면 회의 출석 횟수 기준일 : 2022-07-28</p>
                     <div>
                         {user.length > 0 ? (
                             user.map((user) => (
