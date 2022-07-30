@@ -1,34 +1,15 @@
-export default () => {
+import { options } from '../../assets/tag/Tech'
+
+export default (props) => {
     //사용된 tech 기술 번호만 넘겨서 해당하는 것만 return 해줄 계획으로 만듦
-    const tech = [
-        {
-            _id: 0,
-            type : 'fe',
-            name : 'react',
-            color : ''
-        },
-        {
-            _id: 1,
-            type : 'be',
-            name : 'node.js',
-            color : ''
-        },
-        {
-            _id: 2,
-            type : 'design',
-            name : 'bootstrap',
-            color : ''
-        },
-        {
-            _id: 3,
-            type : 'db',
-            name : 'mongodb',
-            color : ''
-        },
-    ]
+    const findTech = (t) => {
+        const idx = options.findIndex((tech)=>tech.value===t)
+        return options[idx]
+    }
+
     return (
         <div>
-            {tech.map((t)=><span className="badge text-bg-primary me-1">{t.name}</span>)}
+            {props.tech_stack.map((t)=><span className="badge me-1" style={{"backgroundColor":findTech(t).bgColor, "color":findTech(t).txtColor}}>{findTech(t).label}</span>)}
         </div>
     )
 }

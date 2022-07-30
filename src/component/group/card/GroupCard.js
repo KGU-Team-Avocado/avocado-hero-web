@@ -1,3 +1,5 @@
+import TechStack from "../../common/TechStack"
+
 export default (props) => {
     return (
         <div className="col-lg-4 my-2">
@@ -13,7 +15,8 @@ export default (props) => {
                             <h5>{props.group.project_name}</h5>
                             <p>{props.group.short_description}</p>
                             <div>
-                                {props.group.tech_stack.map((tech)=><span className="badge text-bg-dark me-1">{tech}</span>)}
+                                {/* {props.group.tech_stack.map((tech)=><span className="badge text-bg-dark me-1">{tech}</span>)} */}
+                                <TechStack tech_stack={props.group.tech_stack} />
                                 {/* <span className="badge text-bg-primary">Primary</span>
                                 <span className="badge text-bg-secondary">Secondary</span>
                                 <span className="badge text-bg-success">Success</span>
