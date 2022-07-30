@@ -1,6 +1,16 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TechStack from "../../../../component/common/TechStack";
 export default (props) => {
+        
+    const [userInfo, setUserInfo] = useState(null);
+  
+    useEffect(() => {
+      if (sessionStorage.getItem("user")) {
+        setUserInfo(JSON.parse(sessionStorage.getItem("user")));
+      }
+    }, []);
+    
     const group = props.selectedGroup
     return (
         <div className="modal-dialog" role="document">
@@ -35,7 +45,7 @@ export default (props) => {
                         }
 
                     </div>
-                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" data-bs-dismiss="modal">신청하기</button>
+                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" data-bs-dismiss="modal" disabled={userInfo?"":"disabled"}>신청하기</button>
                 </div>
             </div>
         </div>
