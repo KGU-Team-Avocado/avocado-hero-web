@@ -33,7 +33,7 @@ export default (props) => {
                                 <hr />
                                 <h5>Tech Stack</h5>
                                 <div>
-                                    {group.tech_stack.map((tech)=><span className="badge text-bg-dark me-1">{tech}</span>)}
+                                    <TechStack tech_stack={group.tech_stack} />
                                 </div>
                                 <hr />
                                 <h5>팀장</h5>

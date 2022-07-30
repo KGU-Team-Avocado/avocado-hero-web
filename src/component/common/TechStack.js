@@ -9,7 +9,7 @@ export default (props) => {
 
     return (
         <div>
-            {props.tech_stack.map((t)=><span className="badge me-1" style={{"backgroundColor":findTech(t).bgColor, "color":findTech(t).txtColor}}>{findTech(t).label}</span>)}
+            {props.tech_stack.map((t)=><span key={t} className="badge me-1" style={{"backgroundColor":findTech(t).bgColor, "color":findTech(t).txtColor}}>{findTech(t).label}</span>)}
         </div>
     )
 }

@@ -11,7 +11,7 @@ export default () => {
 
     useEffect(() => {
         axios.get("/groupsRouter/getGroup").then((response) => {
-            console.log(JSON.stringify(response.data))
+            // console.log(JSON.stringify(response.data))
             setGroups(response.data);
         }).catch(function (error) {
             console.log(error);
