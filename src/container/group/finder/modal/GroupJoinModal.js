@@ -25,15 +25,15 @@ export default (props) => {
                         {
                             group &&
                             <>
-                                <h4>{group.name}</h4>
-                                <h3>{group.title}</h3>
-                                <h5>{group.intro_text}</h5>
+                                <h4>{group.group_name}</h4>
+                                <h3>{group.project_name}</h3>
+                                <h5>{group.short_description}</h5>
                                 <hr />
-                                <p>{group.description}</p>
+                                <p>{group.long_description}</p>
                                 <hr />
                                 <h5>Tech Stack</h5>
                                 <div>
-                                    <TechStack/>
+                                    {group.tech_stack.map((tech)=><span className="badge text-bg-dark me-1">{tech}</span>)}
                                 </div>
                                 <hr />
                                 <h5>팀장</h5>

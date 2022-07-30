@@ -28,7 +28,7 @@ export default () => {
     ]
     return (
         <div>
-            {tech.map((t)=><span className="badge text-bg-primary">{t.name}</span>)}
+            {tech.map((t)=><span className="badge text-bg-primary me-1">{t.name}</span>)}
         </div>
     )
 }

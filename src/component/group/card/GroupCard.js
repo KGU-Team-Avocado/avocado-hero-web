@@ -13,14 +13,15 @@ export default (props) => {
                             <h5>{props.group.project_name}</h5>
                             <p>{props.group.short_description}</p>
                             <div>
-                                <span className="badge text-bg-primary">Primary</span>
+                                {props.group.tech_stack.map((tech)=><span className="badge text-bg-dark me-1">{tech}</span>)}
+                                {/* <span className="badge text-bg-primary">Primary</span>
                                 <span className="badge text-bg-secondary">Secondary</span>
                                 <span className="badge text-bg-success">Success</span>
                                 <span className="badge text-bg-danger">Danger</span>
                                 <span className="badge text-bg-warning">Warning</span>
                                 <span className="badge text-bg-info">Info</span>
                                 <span className="badge text-bg-light">Light</span>
-                                <span className="badge text-bg-dark">Dark</span>
+                                <span className="badge text-bg-dark">Dark</span> */}
                             </div>
                         </div>
                     </div>
