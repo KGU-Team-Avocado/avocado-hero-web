@@ -5,14 +5,14 @@ import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
 import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
+import { options } from '../../../../assets/tag/Tech'
 
-
-const options = [
-    { label: "React", value: "react" },
-    { label: "Node.js", value: "nodejs" },
-    { label: "Mongo DB", value: "mongodb" },
-    { label: "??", value: "??", disabled: true },
-];
+// const options = [
+//     { label: "React", value: "react" },
+//     { label: "Node.js", value: "nodejs" },
+//     { label: "Mongo DB", value: "mongodb" },
+//     { label: "??", value: "??", disabled: true },
+// ];
 
 export default () => {
 
