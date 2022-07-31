@@ -54,10 +54,25 @@ export default () => {
 
     const handleDateClick = (arg) => { // bind with an arrow function
         console.log(arg)
+        setStartDay(arg.startStr);
+        setEndDay(arg.endStr);
+        setAllday(arg.allDay);
     }
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => {setShow(true); console.log(123)};
+    const handleClose = () => {
+        const id = events[events.length - 1].id + 1;
+        const newEvent = {
+            id: id,
+            title: title,
+            description: description,
+            start: startDay,
+            end: endDay,
+            // backgroundColor: backgroundColor
+        }
+        setEvents([...events, newEvent]);
+        setShow(false);
+    }
+    const handleShow = () => {setShow(true);};
 
     return (
         <>
@@ -126,6 +141,7 @@ export default () => {
                                         type="text"
                                         placeholder="start day"
                                         value={startDay}
+                                        onChange={(e) => setStartDay(e.target.value)}
                                         autoFocus
                                     />
                                 </Form.Group>
@@ -135,6 +151,7 @@ export default () => {
                                         type="text"
                                         placeholder="end day"
                                         value={endDay}
+                                        onChange={(e) => setEndDay(e.target.value)}
                                         autoFocus
                                     />
                                 </Form.Group>
@@ -144,6 +161,7 @@ export default () => {
                                         type="text"
                                         placeholder="title"
                                         value={title}
+                                        onChange={(e) => setTitle(e.target.value)}
                                         autoFocus
                                     />
                                 </Form.Group>
@@ -152,11 +170,13 @@ export default () => {
                                     controlId="exampleForm.ControlTextarea1"
                                 >
                                     <Form.Label>설명</Form.Label>
-                                    <Form.Control as="textarea" rows={3} value={description} />
+                                    <Form.Control as="textarea" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} />
                                 </Form.Group>
                                 <Form.Check
                                     type="switch"
                                     id="custom-switch"
+                                    checked={allday}
+                                    onChange={() => setAllday(!allday)}
                                     label="하루종일"
                                 />
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4" value={daysOfWeek} >
@@ -165,6 +185,8 @@ export default () => {
                                         type="text"
                                         placeholder="daysOfWeek"
                                         autoFocus
+                                        value={daysOfWeek}
+                                        onChange={(e) => setDaysOfWeek(e.target.value)}
                                     />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput5" value={backgroundColor} >
@@ -173,6 +195,8 @@ export default () => {
                                         type="text"
                                         placeholder="backgroundColor"
                                         autoFocus
+                                        value={backgroundColor}
+                                        onChange={(e) => setBackgroundColor(e.target.value)}
                                     />
                                 </Form.Group>
                             </Form>
