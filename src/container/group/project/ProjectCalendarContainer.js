@@ -1,68 +1,101 @@
-import { useState } from 'react';
-import FullCalendar from '@fullcalendar/react' // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
+import { useState } from "react";
+import FullCalendar from "@fullcalendar/react" // must go before plugins
+import dayGridPlugin from "@fullcalendar/daygrid" // a plugin!
+import timeGridPlugin from "@fullcalendar/timegrid";
+import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
-import bootstrap5Plugin from '@fullcalendar/bootstrap5';
+import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import { Tooltip } from "bootstrap";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import Badge from 'react-bootstrap/Badge';
 
 export default () => {
     const [show, setShow] = useState(false);
-    const [startDay, setStartDay] = useState('');
-    const [endDay, setEndDay] = useState('');
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+    const [startDay, setStartDay] = useState("");
+    const [endDay, setEndDay] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [allday, setAllday] = useState(false);
-    const [daysOfWeek, setDaysOfWeek] = useState('');
-    const [backgroundColor, setBackgroundColor] = useState('');
+    const [daysOfWeek, setDaysOfWeek] = useState("");
+    const [backgroundColor, setBackgroundColor] = useState("");
     const [events, setEvents] = useState([{
         id: 0,  // 매주 반복하는 일정
         title: "All Day Event very long title",
-        description: 'description for All Day Event1',
-        daysOfWeek: ['4'],
-        startTime: '10:45:00',
-        endTime: '12:45:00',
-        color: 'red'
+        description: "description for All Day Event1",
+        daysOfWeek: ["4"],
+        startTime: "10:45:00",
+        endTime: "12:45:00",
+        color: "red"
     },
     {
         id: 1, // 하루 일정 (종일)
         title: "Long Event",
-        description: 'description for All Day Event2',
-        date: '2022-07-11',
-        backgroundColor: 'rgba(62, 121, 37)'
+        description: "description for All Day Event2",
+        date: "2022-07-11",
+        backgroundColor: "rgba(62, 121, 37)"
     },
     {
         id: 2, // 하루 일정 (특정 시간)
         title: "Long Event",
-        description: 'description for All Day Event3',
-        start: '2022-07-11T10:45:00',
-        end: '2022-07-11T11:45:00',
-        backgroundColor: 'red'
+        description: "description for All Day Event3",
+        start: "2022-07-11T10:45:00",
+        end: "2022-07-11T11:45:00",
+        backgroundColor: "red"
     },
     {
         id: 3, // 긴 일정
-        groupId: 'blueEvents',
+        groupId: "blueEvents",
         title: "DTS STARTS",
-        description: 'description for All Day Event4',
-        start: '2022-07-10T10:45:00',
-        end: '2022-07-13T10:45:00',
+        description: "description for All Day Event4",
+        start: "2022-07-10T10:45:00",
+        end: "2022-07-13T10:45:00",
     }]);
 
     const handleDateClick = (arg) => { // bind with an arrow function
         console.log(arg)
+        setStartDay(arg.startStr);
+        setEndDay(arg.endStr);
+        setAllday(arg.allDay);
     }
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => {setShow(true); console.log(123)};
+    const handleSave = () => {
+        const id = events[events.length - 1].id + 1;
+        const newEvent = {
+            id: id,
+            title: title,
+            description: description,
+            start: startDay,
+            end: endDay,
+            backgroundColor: backgroundColor
+        };
+        setEvents([...events, newEvent]);
+        setStartDay("");
+        setEndDay("");
+        setAllday("");
+        setBackgroundColor("");
+        setDaysOfWeek("");
+        setDescription("");
+        setTitle("");
+        setShow(false);
+    }
+    const handleClose = () => {
+        setStartDay("");
+        setEndDay("");
+        setAllday("");
+        setBackgroundColor("");
+        setDaysOfWeek("");
+        setDescription("");
+        setTitle("");
+        setShow(false);
+    }
+    const handleShow = () => {setShow(true);};
 
     return (
         <>
-            <div className='mt-3'>
-                <div className='calendar-container'>
+            <div className="mt-3">
+                <div className="calendar-container">
                     <FullCalendar
                         plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin, bootstrap5Plugin]}
                         initialView="dayGridMonth"
@@ -75,17 +108,17 @@ export default () => {
                         dayMaxEventRows={true}  // 하루에 보여지는 일정 수 조정(나머지는 +n 으로 표시)
                         customButtons={{
                             createNewEvent: {
-                                text: '새일정',
+                                text: "새일정",
                                 click: function () { handleShow() }
                             }
                         }}
                         headerToolbar={{
-                            left: 'prevYear,prev today createNewEvent',
-                            center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,listWeek next,nextYear'
+                            left: "prevYear,prev today createNewEvent",
+                            center: "title",
+                            right: "dayGridMonth,timeGridWeek,listWeek next,nextYear"
                         }}
                         eventResizableFromStart={true}
-                        themeSystem={'bootstrap5'}
+                        themeSystem={"bootstrap5"}
                         eventDrop={(info) => {  // 일정 드래그앤드롭으로 변경할 때 발생하는 이벤트
                             alert(info.event.title + " was dropped on " + info.event.start.toISOString());
 
@@ -103,9 +136,9 @@ export default () => {
                         eventDidMount={(info) => {
                             var tooltip = new Tooltip(info.el, {
                                 title: info.event.extendedProps.description,
-                                placement: 'top',
-                                trigger: 'hover',
-                                container: 'body'
+                                placement: "top",
+                                trigger: "hover",
+                                container: "body"
                             });
                         }}
                     />
@@ -126,6 +159,7 @@ export default () => {
                                         type="text"
                                         placeholder="start day"
                                         value={startDay}
+                                        onChange={(e) => setStartDay(e.target.value)}
                                         autoFocus
                                     />
                                 </Form.Group>
@@ -135,6 +169,7 @@ export default () => {
                                         type="text"
                                         placeholder="end day"
                                         value={endDay}
+                                        onChange={(e) => setEndDay(e.target.value)}
                                         autoFocus
                                     />
                                 </Form.Group>
@@ -144,6 +179,7 @@ export default () => {
                                         type="text"
                                         placeholder="title"
                                         value={title}
+                                        onChange={(e) => setTitle(e.target.value)}
                                         autoFocus
                                     />
                                 </Form.Group>
@@ -152,11 +188,13 @@ export default () => {
                                     controlId="exampleForm.ControlTextarea1"
                                 >
                                     <Form.Label>설명</Form.Label>
-                                    <Form.Control as="textarea" rows={3} value={description} />
+                                    <Form.Control as="textarea" rows={3} autoFocus value={description} onChange={(e) => setDescription(e.target.value)} />
                                 </Form.Group>
                                 <Form.Check
                                     type="switch"
                                     id="custom-switch"
+                                    checked={allday}
+                                    onChange={() => setAllday(!allday)}
                                     label="하루종일"
                                 />
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput4" value={daysOfWeek} >
@@ -165,22 +203,49 @@ export default () => {
                                         type="text"
                                         placeholder="daysOfWeek"
                                         autoFocus
+                                        value={daysOfWeek}
+                                        onChange={(e) => setDaysOfWeek(e.target.value)}
                                     />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput5" value={backgroundColor} >
-                                    <Form.Label>색상 (구현예정)</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="backgroundColor"
-                                        autoFocus
-                                    />
+                                    <Form.Label>색상 (추가 예정)</Form.Label>
+                                    <div key={"inline-radio"} className="mb-3" onChange={(e) => setBackgroundColor(e.target.id)}>
+                                        <Form.Check
+                                            inline
+                                            label={<div className="rounded bg-green-dark">&nbsp;&nbsp;&nbsp;&nbsp;</div>}
+                                            name="group1"
+                                            type="radio"
+                                            id={"rgba(62, 121, 37)"}
+                                        />
+                                        <Form.Check
+                                            inline
+                                            label={<div className="rounded bg-green-light">&nbsp;&nbsp;&nbsp;&nbsp;</div>}
+                                            name="group1"
+                                            type="radio"
+                                            id={"rgba(180, 203, 51)"}
+                                        />
+                                        <Form.Check
+                                            inline
+                                            name="group1"
+                                            label={<div className="rounded bg-yellow-light">&nbsp;&nbsp;&nbsp;&nbsp;</div>}
+                                            type="radio"
+                                            id={"rgba(242, 231, 151)"}
+                                        />
+                                        <Form.Check
+                                            inline
+                                            name="group1"
+                                            label={<div className="rounded bg-orange">&nbsp;&nbsp;&nbsp;&nbsp;</div>}
+                                            type="radio"
+                                            id={"rgba(227, 125, 78)"}
+                                        />
+                                    </div>
                                 </Form.Group>
                             </Form>
                         </Modal.Body>
 
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>Close</Button>
-                            <Button variant="primary" onClick={handleClose}>Save changes</Button>
+                            <Button variant="primary" onClick={handleSave}>Save changes</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>
