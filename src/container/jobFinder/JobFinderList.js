@@ -5,27 +5,64 @@ import JobFinderViewModal from "../jobFinder/JobFinderViewModal";
 
 export default () => {
 
-    const [postings, setPostings] = useState([]);
+    const [postings, setPostings] = useState([
+        {
+            _id: 0,
+            manager:"yeonsu",
+            groupName: "아보카도콘솔",
+            postingTitle: "프론트엔드 개발자 채용",
+            description:"경력/신입",
+        },
+        {
+            _id: 1,
+            manager:"yeonsu",
+            groupName: "아보카도콘솔히어로",
+            postingTitle: "백엔드 개발자 채용",
+            description:"경력/신입",
+        }
+    ]);
 
     useEffect(()=>{
-        axios.get("/companiesRouter/getPost").then((response) => {
-            console.log(JSON.stringify(response.data))
-            setPostings(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        });
+        console.log('리스트')
     },[]);
 
-    const [selectedPosting, setSelectedPosting] = useState(null);
 
-    useEffect(()=>{
-        console.log('하이')
-    },[selectedPosting]);
+    // const [postings, setPostings] = useState([]);
 
+    // useEffect(()=>{
+    //     axios.get("/companiesRouter/getPost").then((response) => {
+    //         console.log(JSON.stringify(response.data))
+    //         setPostings(response.data);
+    //     }).catch(function (error) {
+    //         console.log(error);
+    //     });
+    // },[]);
+
+    // const [selectedPosting, setSelectedPosting] = useState(null);
+
+    // useEffect(()=>{
+    //     console.log('하이')
+    // },[selectedPosting]);
 
     return (
         <>
-            <div className="wer">
+            <div>
+                {
+                    postings.length > 0
+                        ?
+                        postings.map((postings) => (
+                            <JobPostingCard
+                                key={postings._id}
+                                postings={postings}
+                            />
+                        ))
+                        :
+                        <div>채용공고가 없습니다.</div>
+                }
+            </div>
+
+
+            {/* <div className="wer">
                 <h2>프로젝트 찾기</h2>
                 <div className="row">
                     <div className="col-sm-6">훌륭한 팀을 구해보아요</div>
@@ -46,16 +83,18 @@ export default () => {
                         :
                         <div>그룹이 없습니다.</div>
                 }
-            </div>
+            </div> */}
             {/* <!-- Modal --> */}
             {/* <div className="modal fade" id="group_create" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <GroupCeateModal />
             </div> */}
-            <div className="modal fade" id="group_join" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            {/* <div className="modal fade" id="group_join" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <JobFinderViewModal
                     setSelectedPosting={setSelectedPosting}
                 />
-            </div>
+            </div> */}
+
+
         </>
     )
 }

@@ -5,14 +5,17 @@ const JobFinderContainer = () =>  {
         <div>
             <div className="card m-3" >
                 <div className="card-body">
-                <h3>채용공고 상세검색</h3>
+                <h2>채용공고 상세검색</h2>
                 <JobFinderFilter/>
                 </div>
             </div>
-            <div className="m-3" >
-                <JobFinderList/>
+            <div className="card m-3" >
+                <div className="card-body">
+                    <h2>채용공고 리스트</h2>
+                    <JobFinderList />
+                </div>
             </div>
-            
+
         </div>      
     )
 }
