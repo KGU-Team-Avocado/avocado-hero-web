@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react" // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid" // a plugin!
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -34,6 +34,8 @@ export default () => {
         title: "Long Event",
         description: "description for All Day Event2",
         date: "2022-07-11",
+        start: "2022-07-11",
+        end: "2022-07-12",
         backgroundColor: "rgba(62, 121, 37)"
     },
     {
@@ -60,6 +62,10 @@ export default () => {
         setAllday(arg.allDay);
     }
 
+    useEffect(() => {
+        console.log(events);
+    }, [events])
+
     const handleSave = () => {
         const id = events[events.length - 1].id + 1;
         const newEvent = {
@@ -80,6 +86,7 @@ export default () => {
         setTitle("");
         setShow(false);
     }
+
     const handleClose = () => {
         setStartDay("");
         setEndDay("");
@@ -90,6 +97,7 @@ export default () => {
         setTitle("");
         setShow(false);
     }
+
     const handleShow = () => {setShow(true);};
 
     return (
@@ -120,18 +128,21 @@ export default () => {
                         eventResizableFromStart={true}
                         themeSystem={"bootstrap5"}
                         eventDrop={(info) => {  // 일정 드래그앤드롭으로 변경할 때 발생하는 이벤트
-                            alert(info.event.title + " was dropped on " + info.event.start.toISOString());
+                            alert(info.event.id + " was dropped on " + info.event.start.toISOString());
 
                             if (!window.confirm("Are you sure about this change?")) {
                                 info.revert();
                             }
+                            setEvents(events.map((event) => event.id == info.event.id ? {...event, start: info.event.startStr, end: info.event.endStr} : event));
                         }}
                         eventResize={(info) => { // 일정 기간 조정 시 발생하는 이벤트
                             alert(info.event.title + " end is now " + info.event.end.toISOString());
+                            console.log(info.event.id)
 
                             if (!window.confirm("is this okay?")) {
                                 info.revert();
                             }
+                            setEvents(events.map((event) => event.id == info.event.id ? {...event, start: info.event.startStr, end: info.event.endStr} : event))
                         }}
                         eventDidMount={(info) => {
                             var tooltip = new Tooltip(info.el, {
