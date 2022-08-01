@@ -62,10 +62,6 @@ export default () => {
         setAllday(arg.allDay);
     }
 
-    useEffect(() => {
-        console.log(events);
-    }, [events])
-
     const handleSave = () => {
         const id = events[events.length - 1].id + 1;
         const newEvent = {
@@ -132,8 +128,9 @@ export default () => {
 
                             if (!window.confirm("Are you sure about this change?")) {
                                 info.revert();
+                            }else {
+                                setEvents(events.map((event) => event.id == info.event.id ? {...event, start: info.event.startStr, end: info.event.endStr} : event))
                             }
-                            setEvents(events.map((event) => event.id == info.event.id ? {...event, start: info.event.startStr, end: info.event.endStr} : event));
                         }}
                         eventResize={(info) => { // 일정 기간 조정 시 발생하는 이벤트
                             alert(info.event.title + " end is now " + info.event.end.toISOString());
@@ -141,8 +138,9 @@ export default () => {
 
                             if (!window.confirm("is this okay?")) {
                                 info.revert();
+                            }else {
+                                setEvents(events.map((event) => event.id == info.event.id ? {...event, start: info.event.startStr, end: info.event.endStr} : event))
                             }
-                            setEvents(events.map((event) => event.id == info.event.id ? {...event, start: info.event.startStr, end: info.event.endStr} : event))
                         }}
                         eventDidMount={(info) => {
                             var tooltip = new Tooltip(info.el, {
@@ -151,6 +149,13 @@ export default () => {
                                 trigger: "hover",
                                 container: "body"
                             });
+                        }}
+                        eventClick={(info) => {
+                            if (!window.confirm("삭제하시겠습니까?")) {
+                                info.revert();
+                            } else {
+                                setEvents(events.filter((event) => event.id != info.event.id))
+                            }
                         }}
                     />
                     <Modal
