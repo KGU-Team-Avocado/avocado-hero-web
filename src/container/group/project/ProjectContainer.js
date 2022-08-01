@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Accordion from 'react-bootstrap/Accordion';
 
 export default () => {
     const [notices, setNotices] = useState([ //공지사항 배열
@@ -73,27 +74,21 @@ export default () => {
                 </div>
             </div>
 
-            <div className="accordion mb-3" id="accordionPanelsStayOpenExample">
+            <Accordion alwaysOpen>
                 {notices.map((notice) => (
-                    <div className="accordion-item" key={notice._id} id={"panelsStayOpen-heading" + notice._id}>
-                        <h2 className="accordion-header">
-                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={"#panelsStayOpen-collapse" + notice._id} aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                {notice.title}
-                            </button>
-                        </h2>
-                        <div id={"panelsStayOpen-collapse" + notice._id} className="accordion-collapse collapse show" aria-labelledby={"panelsStayOpen-heading" + notice._id}>
-                            <div className="accordion-body">
-                                <div>{notice.description}</div>
-                                {/* 수정 삭제는 추후 팀장만 볼 수 있게 수정 */}
-                                <div className="d-flex justify-content-end">
-                                    <button type="button" className="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => showModifyModal(notice)} >수정</button>
-                                    <button type="button" className="btn btn-danger" onClick={() => deleteNotice(notice._id)} >삭제</button>
-                                </div>
+                    <Accordion.Item eventKey={notice._id}>
+                        <Accordion.Header>{notice.title}</Accordion.Header>
+                        <Accordion.Body>
+                            {notice.description}
+                            {/* 수정 삭제는 추후 팀장만 볼 수 있게 수정 */}
+                            <div className="d-flex justify-content-end">
+                                <button type="button" className="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => showModifyModal(notice)} >수정</button>
+                                <button type="button" className="btn btn-danger" onClick={() => deleteNotice(notice._id)} >삭제</button>
                             </div>
-                        </div>
-                    </div>
+                        </Accordion.Body>
+                    </Accordion.Item>
                 ))}
-            </div>
+            </Accordion>
 
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
