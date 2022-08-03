@@ -11,7 +11,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Badge from 'react-bootstrap/Badge';
 
-export default () => {
+const ProjecCalendarContainer = () => {
     const [show, setShow] = useState(false);
     const [startDay, setStartDay] = useState("");
     const [endDay, setEndDay] = useState("");
@@ -129,7 +129,7 @@ export default () => {
                             if (!window.confirm("Are you sure about this change?")) {
                                 info.revert();
                             }else {
-                                setEvents(events.map((event) => event.id == info.event.id ? {...event, start: info.event.startStr, end: info.event.endStr} : event))
+                                setEvents(events.map((event) => event.id === info.event.id ? {...event, start: info.event.startStr, end: info.event.endStr} : event))
                             }
                         }}
                         eventResize={(info) => { // 일정 기간 조정 시 발생하는 이벤트
@@ -139,7 +139,7 @@ export default () => {
                             if (!window.confirm("is this okay?")) {
                                 info.revert();
                             }else {
-                                setEvents(events.map((event) => event.id == info.event.id ? {...event, start: info.event.startStr, end: info.event.endStr} : event))
+                                setEvents(events.map((event) => event.id === info.event.id ? {...event, start: info.event.startStr, end: info.event.endStr} : event))
                             }
                         }}
                         eventDidMount={(info) => {
@@ -154,7 +154,7 @@ export default () => {
                             if (!window.confirm("삭제하시겠습니까?")) {
                                 info.revert();
                             } else {
-                                setEvents(events.filter((event) => event.id != info.event.id))
+                                setEvents(events.filter((event) => event.id !== info.event.id))
                             }
                         }}
                     />
@@ -269,3 +269,5 @@ export default () => {
         </>
     )
 }
+
+export default ProjecCalendarContainer;

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-export default () => {
+const ProjectRoleContainer = () => {
     const [members, setMembers] = useState([ //탬원 역할 배열
         {
             user_id: '201912069',
@@ -88,3 +88,5 @@ export default () => {
         </>
     )
 }
+
+export default ProjectRoleContainer;

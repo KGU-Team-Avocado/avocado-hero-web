@@ -1,7 +1,9 @@
-export default () => {
+const ProjectEndContainer = () => {
     return (
         <>
         end
         </>
     )
 }
+
+export default ProjectEndContainer;
