@@ -1,16 +1,35 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TechStack from "../../../../component/common/TechStack";
+import DOMPurify from "dompurify";
+
 export default (props) => {
-        
+
     const [userInfo, setUserInfo] = useState(null);
-  
+
     useEffect(() => {
-      if (sessionStorage.getItem("user")) {
-        setUserInfo(JSON.parse(sessionStorage.getItem("user")));
-      }
+        if (sessionStorage.getItem("user")) {
+            setUserInfo(JSON.parse(sessionStorage.getItem("user")));
+        }
     }, []);
+
+    // // 정규식을 이용한 HTML 태그 제거 시작
+    // const tagRemoved = (text) => {
+    //     let content = text.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
+    //     content = content.replace(/<br\/>/ig, "\n");
+    //     content = content.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
+    //     content = content.replace(/(<([^>]+)>)/gi, "");
+    //     content = content.replace(/&nbsp;/gi, "");
+    //     return content
+    // }
+    // // 정규식을 이용한 HTML 태그 제거 끝
     
+    const createMarkup = (html) => {
+        return {
+            __html: DOMPurify.sanitize(html)
+        }
+    };
+
     const group = props.selectedGroup
     return (
         <div className="modal-dialog" role="document">
@@ -29,7 +48,7 @@ export default (props) => {
                                 <h3>{group.project_name}</h3>
                                 <h5>{group.short_description}</h5>
                                 <hr />
-                                <p>{group.long_description}</p>
+                                <div dangerouslySetInnerHTML={createMarkup(group.long_description)}></div>
                                 <hr />
                                 <h5>Tech Stack</h5>
                                 <div>
@@ -45,7 +64,7 @@ export default (props) => {
                         }
 
                     </div>
-                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" data-bs-dismiss="modal" disabled={userInfo?"":"disabled"}>신청하기</button>
+                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" data-bs-dismiss="modal" disabled={userInfo ? "" : "disabled"}>신청하기</button>
                 </div>
             </div>
         </div>

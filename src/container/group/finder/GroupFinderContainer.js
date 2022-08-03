@@ -48,7 +48,7 @@ export default () => {
                     <div className="col-sm-6 text-end"><a className="mx-2" href="#">정렬▿</a><a className="mx-2" href="#">필터링▿</a></div>
                 </div>
             </div>
-            <div className="row">
+            <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                 {
                     groups.length > 0
                         ?
