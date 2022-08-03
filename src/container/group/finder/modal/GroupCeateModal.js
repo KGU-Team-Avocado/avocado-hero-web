@@ -63,7 +63,13 @@ export default () => {
             manager: userInfo.user_id
         }
         console.log(newGroupData)
-        axios
+
+        const hasValue = Object.values(newGroupData).includes("");
+        if(hasValue){
+            alert('빈 칸을 모두 채워주세요')
+        }
+        else{
+            axios
             .post("/groupsRouter/create", newGroupData)
             .then((response) => {
                 console.log(response.data);
@@ -72,6 +78,7 @@ export default () => {
             .catch(function (error) {
                 console.log(error);
             });
+        }
     }
 
     return (

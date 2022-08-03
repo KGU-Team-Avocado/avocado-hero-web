@@ -17,7 +17,7 @@ const Header = () => {
   const logout = () => {
     setSignIn(!isSignIn);
     sessionStorage.clear();
-    window.location.href='/'
+    window.location.href = '/'
   };
 
   return (
@@ -62,33 +62,24 @@ const Header = () => {
                   //#issue1 : 아직 기업인지 일반 사용자인지 확인은 못하는 상태
                   //#issue2 : href로 넣어놓은 상태여서 link로 하는 방법 찾아봐야 할듯 --> (윤주현) : 해결됐나요?
                   <>
-                    <li className="nav-item dropdown">
-                      <a
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        variant=""
+                        id="dropdown-basic"
                         className="nav-link dropdown-toggle"
-                        href="#"
-                        id="navbarDropdown"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
                       >
                         기업전용
-                      </a>
-                      <ul
-                        className="dropdown-menu"
-                        aria-labelledby="navbarDropdown"
-                      >
-                        <li>
-                          <Link className="dropdown-item" to="humanRes">
-                            인재찾기
-                          </Link>
-                        </li>
-                        <li>
-                          <Link className="dropdown-item" to="jobPosting">
-                            채용공고하기
-                          </Link>
-                        </li>
-                      </ul>
-                    </li>
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        <Dropdown.Item href={"/humanRes"}>
+                          인재찾기
+                        </Dropdown.Item>
+                        <Dropdown.Item href="/jobPosting">
+                          채용공고하기
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </>
                 )
                 :
@@ -99,34 +90,24 @@ const Header = () => {
 
 
             <>
-              <li className="nav-item dropdown">
-                <a
+              <Dropdown>
+                <Dropdown.Toggle
+                  variant=""
+                  id="dropdown-basic"
                   className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
                 >
                   개발모드
-                </a>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <li>
-                    <Link className="dropdown-item" to="/example">
-                      테스트
-                    </Link>
-                  </li>
+                </Dropdown.Toggle>
 
-                  <li>
-                    <Link className="dropdown-item" to="/example/bestworker">
-                      활동포인트
-                    </Link>
-                  </li>
-                </ul>
-              </li>
+                <Dropdown.Menu>
+                  <Dropdown.Item href="/example">
+                    테스트
+                  </Dropdown.Item>
+                  <Dropdown.Item href="/example/bestworker">
+                    활동포인트
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </>
 
 
