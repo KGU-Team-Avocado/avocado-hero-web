@@ -53,7 +53,7 @@ export default () => {
 
             <div className="row">
                 {members.map(member => (
-                    <div className="col-xl-4 col-lg-6 my-2">
+                    <div className="col-xl-4 col-lg-6 my-2" key={member.user_id}>
                         <div className="card p-3">
                             <div className="row g-0 align-items-center">
                                 <div className="text-center col-xxl-4 py-4">
@@ -62,28 +62,22 @@ export default () => {
                                 <div className="col-xxl-8">
                                     <div className="card-body">
                                         <h4 className="card-title">{member.role}</h4>
-                                        <h6 class="card-subtitle mb-2 text-muted">{member.name}</h6>
+                                        <h6 className="card-subtitle mb-2 text-muted">{member.name}</h6>
                                         {edit === member.user_id ?
                                             <div>
-                                                <textarea className="card-text" ref={inputRef} >{member.description}</textarea>
+                                                <textarea className="card-text" ref={inputRef} defaultValue={member.description} />
                                                 <div className="d-flex justify-content-end">
                                                     <button type="button" className="btn btn-secondary me-2" onClick={() => modifyRole(member)} >저장</button>
-                                                    <button type="button" class="btn btn-danger" onClick={() => setEdit("")} data-bs-dismiss="modal">취소</button>
+                                                    <button type="button" className="btn btn-danger" onClick={() => setEdit("")} data-bs-dismiss="modal">취소</button>
                                                 </div>
                                             </div>
                                             : <div>
                                                 <p className="card-text">{member.description}</p>
                                                 <div className="d-flex justify-content-end">
-                                                    <button type="button" className="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => setEdit(member.user_id)} >수정</button>
+                                                    <button type="button" className="btn btn-secondary me-2" onClick={() => setEdit(member.user_id)} >수정</button>
                                                 </div>
                                             </div>
                                         }
-                                        {/* <div>
-                                            <p className="card-text">{member.description}</p>
-                                            <div className="d-flex justify-content-end">
-                                                <button type="button" className="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => modifyRole(member)} >수정</button>
-                                            </div>
-                                        </div> */}
                                     </div>
                                 </div>
                             </div>
