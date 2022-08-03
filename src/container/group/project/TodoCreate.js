@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import "../project/Todo.css";
 import Form from "react-bootstrap/Form";
-import ReactDOM from "react-dom";
 
 const TodoCreate = ({ onCreate }) => {
   const todoInput = useRef();
