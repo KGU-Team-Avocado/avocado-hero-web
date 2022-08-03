@@ -1,6 +1,6 @@
 import React from "react";
 import { BsCheckCircleFill, BsCheckCircle } from "react-icons/bs";
-import "../project/TodoItem.css";
+import "../project/Todo.css";
 
 const TodoItem = ({ todo }) => {
   const { id, text, checked } = todo;

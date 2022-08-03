@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import TodoList from "./TodoList";
+import TodoCreate from "./TodoCreate";
 
 export default () => {
   const [todos, setTodos] = useState([
@@ -19,6 +20,20 @@ export default () => {
       checked: true,
     },
   ]);
+
+  const dataId = useRef(0);
+
+  const onCreate = (todo) => {
+    const newItem = {
+      text: todo,
+      id: dataId.current,
+      checked: false,
+    };
+    dataId.current += 1;
+
+    setTodos([...todos, newItem]);
+    console.log(newItem);
+  };
 
   return (
     <div>
@@ -59,6 +74,7 @@ export default () => {
           </button>
         </div>
       </div>
+      <TodoCreate onCreate={onCreate} />
       <TodoList todos={todos} />
     </div>
   );
