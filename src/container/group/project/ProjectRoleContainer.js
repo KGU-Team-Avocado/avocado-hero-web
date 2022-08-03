@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default () => {
     const [members, setMembers] = useState([ //공지사항 배열
@@ -27,6 +27,13 @@ export default () => {
             description: "BackEnd test"
         },
     ]);
+    const [edit, setEdit] = useState('');
+    const inputRef = useRef();
+
+    const modifyRole = (member) => {
+        setEdit("");
+        setMembers(members.map(mem => mem.user_id === member.user_id ? {...mem, description: inputRef.current.value} : mem))
+    }
 
     return (
         <>
@@ -45,19 +52,38 @@ export default () => {
             </div>
 
             <div className="row">
-                {members.map((member) => (
+                {members.map(member => (
                     <div className="col-xl-4 col-lg-6 my-2">
                         <div className="card p-3">
                             <div className="row g-0 align-items-center">
                                 <div className="text-center col-xxl-4 py-4">
                                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" width="200" height="200" className="img-fluid rounded-circle my-3" alt="..." />
                                 </div>
-                                <div className="col-md-8">
+                                <div className="col-xxl-8">
                                     <div className="card-body">
                                         <h4 className="card-title">{member.role}</h4>
                                         <h6 class="card-subtitle mb-2 text-muted">{member.name}</h6>
-                                        <p className="card-text">{member.description}</p>
-                                        {/* <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p> */}
+                                        {edit === member.user_id ?
+                                            <div>
+                                                <textarea className="card-text" ref={inputRef} >{member.description}</textarea>
+                                                <div className="d-flex justify-content-end">
+                                                    <button type="button" className="btn btn-secondary me-2" onClick={() => modifyRole(member)} >저장</button>
+                                                    <button type="button" class="btn btn-danger" onClick={() => setEdit("")} data-bs-dismiss="modal">취소</button>
+                                                </div>
+                                            </div>
+                                            : <div>
+                                                <p className="card-text">{member.description}</p>
+                                                <div className="d-flex justify-content-end">
+                                                    <button type="button" className="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => setEdit(member.user_id)} >수정</button>
+                                                </div>
+                                            </div>
+                                        }
+                                        {/* <div>
+                                            <p className="card-text">{member.description}</p>
+                                            <div className="d-flex justify-content-end">
+                                                <button type="button" className="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => modifyRole(member)} >수정</button>
+                                            </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
