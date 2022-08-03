@@ -12,6 +12,7 @@ export default () => {
             groupName: "아보카도콘솔",
             postingTitle: "프론트엔드 개발자 채용",
             description:"경력/신입",
+            deadline:"2022.08.10"
         },
         {
             _id: 1,
@@ -19,6 +20,7 @@ export default () => {
             groupName: "아보카도콘솔히어로",
             postingTitle: "백엔드 개발자 채용",
             description:"경력/신입",
+            deadline:"2022.08.20"
         }
     ]);
 
@@ -55,7 +57,7 @@ export default () => {
                                 key={postings._id}
                                 postings={postings}
                             />
-                        ))
+                            ))
                         :
                         <div>채용공고가 없습니다.</div>
                 }
