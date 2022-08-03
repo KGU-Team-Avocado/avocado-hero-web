@@ -7,10 +7,12 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from "react-bootstrap/Form";
 import { MultiSelect } from "react-multi-select-component";
-
+import AddInput from "./AddInput";
+import './profile.css';
 
 
 const ProfileContainer = () => {
+
 
     const [Image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png")
     const fileInput = useRef(null)
@@ -42,8 +44,6 @@ const ProfileContainer = () => {
         nickname: '',
         email: '',
         phoneNum: '',
-        birth: '',
-        belong: '',
       });
 
       const onChange =(e) => { // 입력 함수
@@ -54,7 +54,11 @@ const ProfileContainer = () => {
         });
       };
 
-      const { nickname, email, phoneNum, birth, belong } = inputs;
+      const { nickname, name, email, phoneNum, intro } = inputs;
+
+      const [selectedFields, setSelectedFields] = useState([]);
+      const [selectedKeywords, setSelectedKeywords] = useState([]);
+      const [selectedPersonals, setSelectedPersonals] = useState([]);
 
     const onClickSubmit = (e) => { 
         e.preventDefault();
@@ -62,11 +66,14 @@ const ProfileContainer = () => {
         axios
             .post("/usersRouter/profileUpdate", {
                 user_id: user_id,
+                user_name: name,
                 user_nickname: nickname,
                 user_email: email,
                 user_phoneNum: phoneNum,
-                user_birth: birth,
-                user_belong: belong,
+                user_intro: intro,
+                user_field: selectedFields.map((s)=>s.value),
+                user_keyword: selectedKeywords.map((s)=>s.value),
+                user_personal: selectedPersonals.map((s)=>s.value)
             })
             .then((response) => {
                 console.log(response);
@@ -81,23 +88,53 @@ const ProfileContainer = () => {
             setIsEdit(!isEdit);
     };
 
-    const options = [
-        { label: "React", value: "react" },
-        { label: "Node.js", value: "nodejs" },
-        { label: "Mongo DB", value: "mongodb" },
-        { label: "??", value: "??", disabled: true },
-    
+    const fields = [
+        { label: "프론트", value: "front-end" },
+        { label: "백엔드", value: "back-end" },
+        { label: "서버", value: "server" },
+        { label: "기획", value: "enterprise", disabled: true },
+        { label: "개발", value: "coding", disabled: true },
     ];
 
-    // const [countList, setCountList] = useState([0])
+    const keywords = [
+        { label: "#리액트", value: "react" },
+        { label: "#자바", value: "java" },
+        { label: "#html", value: "html" },
+    ];
 
-    // const onAddDetailDiv = () => {
-    //   let countArr = [...countList]
-    //   let counter = countArr.slice(-1)[0]
-    //   counter += 1
-    //   countArr.push(counter)	// index 사용 X
-    //   // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
-    //   setCountList(countArr)
+    const personals = [
+        { label: "호기심많은", value: "curious" },
+    ];
+
+    const [countList, setCountList] = useState([0]);
+
+    const [countLink, setCountLink] = useState([0]);
+
+    const onAddDetailDiv = () => {
+        let countArr = [...countList]
+        let counter = countArr.slice(-1)[0]
+        counter += 1
+        countArr.push(counter)	// index 사용 X
+        // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+        setCountList(countArr)
+      }
+
+      const onAddLink = () => {
+        let countArr = [...countLink]
+        let counter = countArr.slice(-1)[0]
+        counter += 1
+        countArr.push(counter)	// index 사용 X
+        // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+        setCountLink(countArr)
+      }
+    
+
+    // const onAddLink = () => {
+    //     let countLink = [...countList];
+    //     let counter = countLink.slice(-1)[0];
+    //     counter += 1;
+    //     countLink.push(counter);
+    //     setCountList(countLink);
     // }
 
     return (
@@ -109,53 +146,194 @@ const ProfileContainer = () => {
                 <Container>
                                 <Row>
                                 <div class="col-md-3" >
-                    <Card style={{ height: '30rem', margin: '10px 0' }}>
+                    <Card style={{ margin: '10px 0' }}>
                         <Card.Body>
                             <div>
                             <div><img
                                     src={Image} style={{ height: '150px' }} /></div>
-                                    <div><Button>변경</Button></div>
+                                    <div class="item"><Button>변경</Button></div>
                                     </div>
-                                <Form.Control type="text" name="nickname" value={nickname} placeholder="닉네임" onChange={onChange} />
-                                <Form.Control type="text" name="email" value={email} placeholder="이메일" onChange={onChange} />
-                                <Form.Control type="text" name="phoneNum" value={phoneNum} placeholder="전화번호" onChange={onChange} />
-                                <Form.Control type="text" name="birth" value={birth} placeholder="생년월일" onChange={onChange} /> 
-                                {/* date형으로 바꿔야 함 */}
+                                    
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+    <Form.Label>닉네임</Form.Label>
+    <Form.Control type="text" name="title" placeholder="" onChange={onChange}
+        value={nickname} />
+  </Form.Group>
+                                
+  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+    <Form.Label>이름</Form.Label>
+    <Form.Control type="text" name="name" placeholder="" onChange={onChange}
+        value={name} />
+  </Form.Group>
+  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+    <Form.Label>이메일</Form.Label>
+    <Form.Control type="text" name="email" placeholder="" onChange={onChange}
+        value={email} />
+  </Form.Group>
+  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+    <Form.Label>전화번호</Form.Label>
+    <Form.Control type="text" name="phoneNum" placeholder="" onChange={onChange}
+        value={phoneNum} />
+  </Form.Group>
                             </Card.Body>
                             </Card>
                             </div>
                             <div class="col-md-9">
-                            <Card style={{ height: '30rem', margin: '10px 0' }}>
+                            <Card style={{ margin: '10px 0' }}>
                             <Card.Body>
                                 <Card.Title>기본 정보</Card.Title>
                                 <Card.Text>
+                                <div class="item"><div class="contentTitle">소속</div>
+                                        <AddInput countList={countList} />
+                                        <Button onClick={onAddDetailDiv}>+</Button>
+                                    </div>
+                                    <div class="item"><div class="contentTitle">분야</div>
                                 <MultiSelect
-                                options={options}
+                                options={fields}
+                                value={selectedFields}
+                                onChange={setSelectedFields}
                                 // value={selected}
                                 // onChange={setSelected}
-                                labelledBy="Select"
-                            />    
-
-
-      {/* <DetailList countList={countList} /> */}
-      {/* <Button onClick={onAddDetailDiv}>
-        추가
-      </Button> */}
-                                    
-                                    {/* <Form.Control type="text" name="belong" value={belong} placeholder="소속" onChange={onChange} /> 
-                                    <Button onClick={onAddText}>+</Button> */}
+                                label="dd"
+                            />   
+                            </div>
+                            
+                            <div class="item"><div class="contentTitle">링크</div>
+                                        <AddInput countList={countLink} />
+                                        <Button onClick={onAddLink}>+</Button>
+                                    </div>
                                 
                                     </Card.Text>
                             </Card.Body>
                         </Card>
-                        </div>
-                            <Button onClick={onClickSubmit}>프로필 수정</Button>
+    
+                    <Card style={{ margin: '10px 0' }}>
+                        <Card.Body>
+                            <Card.Title>세부 정보</Card.Title>
+                            <Card.Text>
+                            <div class="item"><div class="contentTitle">키워드</div>
+                            <MultiSelect
+                                options={keywords}
+                                value={selectedKeywords}
+                                onChange={setSelectedKeywords}
+                                // value={selected}
+                                // onChange={setSelected}
+                                label="dd"
+                            />   
+                            </div>
+                            <div class="item"><div class="contentTitle">성향</div>
+                            <MultiSelect
+                                options={personals}
+                                value={selectedPersonals}
+                                onChange={setSelectedPersonals}
+                                // value={selected}
+                                // onChange={setSelected}
+                                label="dd"
+                            />  
+                            </div>
+                                <div class="item">
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+    <Form.Label>소개글</Form.Label>
+    <Form.Control as="textarea" name="content" placeholder="" rows={3}  onChange={onChange}
+        value={intro}/>
+  </Form.Group>
+                                </div>
+                            </Card.Text>
+                        </Card.Body>
+                        </Card>
+                    </div>
+                            <Button onClick={onClickSubmit}>수정 완료</Button>
                                 </Row>
                 </Container>
                 </>
 
             ) : 
-            <div></div>
+            <>
+            <h1>프로필</h1>
+            <Container>
+                            <Row>
+                                <div class="col-md-3">
+                <Card style={{ height: '30rem', margin: '10px 0' }}>
+                    <Card.Body>
+                        <div>
+                        <div><img
+                                src={Image} style={{ height: '150px' }} /></div>
+                                </div>
+                               {
+                user
+                    ?
+                    (
+                        <>
+                        <div class="itemCenter">
+                        <h4>닉네임{user.user_nickname}</h4>
+                        </div>
+                        <div class="itemCenter">
+                        <div>{user.user_name}</div>
+                        </div>
+                        <div class="itemCenter">
+                        <div>avocado@naver.com{user.user_email}</div>
+                        </div>
+                                                <div class="itemCenter">
+                        <div>010-xxxx-xxxx{user.user_phoneNum}</div>
+                        </div>
+                        </>
+
+                    )
+                    :
+                    <div>
+                        존재하지 않는 계정입니다.
+                    </div>
+            }
+                        </Card.Body>
+                        </Card>
+                        </div>
+                        <div class="col-md-9">
+                        <Card style={{ margin: '10px 0' }}>
+                        <Card.Body>
+                        <Card.Title>기본 정보</Card.Title>
+                            <Card.Text>
+                                <div class="item">
+                            <div class="contentTitle">소속</div>
+                        <div>아보카도 | {user.user_belong}</div>
+                        </div>
+                        <div class="item">
+                        <div class="contentTitle">분야</div>
+                        <div>프론트 | {user.user_field}</div>
+                        </div>
+                        
+                        <div class="item">
+                        <div class="contentTitle">링크</div>
+                        <div><a href="https://github.com/KGU-Team-Avocado">링크1</a>{user.user_link}</div>
+                        </div>
+                                </Card.Text>
+                        </Card.Body>
+                    </Card>
+                    <Card style={{ margin: '10px 0' }}>
+                        <Card.Body>
+                            <Card.Title>세부 정보</Card.Title>
+                            <Card.Text>
+                                
+                                <div class="item">
+                        <div class="contentTitle">키워드</div>
+                        <div>#리액트 | {user.user_keyword}</div>
+                        </div>
+                        <div class="item">
+                        <div class="contentTitle">성향</div>
+                        <div>호기심많은 | {user.user_personal}</div>
+                        </div>
+                        <div class="item">
+                                <div class="contentTitle">소개글</div>
+                        <div>소개글 {user.user_intro}</div>
+                                </div>
+                            </Card.Text>
+                        </Card.Body>
+                        </Card>
+                    </div>
+                        <Button onClick={onClickSubmit}>프로필 수정</Button>
+                            </Row>
+            </Container>
+            </>
+            
         }
 
 </>
