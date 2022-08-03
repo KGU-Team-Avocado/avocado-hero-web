@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 
 export default () => {
-    const [members, setMembers] = useState([ //공지사항 배열
+    const [members, setMembers] = useState([ //탬원 역할 배열
         {
             user_id: '201912069',
             name: "박소영",
