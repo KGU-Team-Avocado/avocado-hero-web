@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import TodoList from "./TodoList";
 import TodoCreate from "./TodoCreate";
 
-export default () => {
+const ProjectTodoContainer = () => {
   const [todos, setTodos] = useState([
     {
       id: 1,
@@ -79,3 +79,5 @@ export default () => {
     </div>
   );
 };
+
+export default ProjectTodoContainer;

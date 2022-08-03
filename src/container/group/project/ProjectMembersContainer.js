@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 
-export default () => {
+const ProjectMembersContainer = () => {
     const [applicants, setApplicants] = useState([ // 프로젝트 지원자 배열
         {
             user_id: 'gabrielyoon7',
@@ -158,3 +158,5 @@ export default () => {
         </>
     )
 }
+
+export default ProjectMembersContainer;

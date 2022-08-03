@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Accordion from 'react-bootstrap/Accordion';
 
-export default () => {
+const ProjectContainer = () => {
     const [notices, setNotices] = useState([ //공지사항 배열
         {
             _id: 0,
@@ -120,3 +120,5 @@ export default () => {
         </>
     )
 }
+
+export default ProjectContainer;
