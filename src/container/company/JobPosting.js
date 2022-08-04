@@ -123,42 +123,42 @@ const JobPosting = () => {
     <div>
 
       <div className="input-group" type="text" value={companyID} ref={CompanyIDInput} onChange={onCompanyIDHandler}>
-        <span className="input-group-text">companyID</span>
+        <span className="input-group-text w-25 text-center">companyID</span>
         <textarea className="form-control" aria-label="With textarea"></textarea>
       </div>
 
       <div className="input-group" type="text" value={companyName} ref={CompanyNameInput} onChange={onCompanyNameHandler}>
-        <span className="input-group-text">companyName</span>
+        <span className="input-group-text w-25 text-center">companyName</span>
         <textarea className="form-control" aria-label="With textarea"></textarea>
       </div>
 
       <div className="input-group" type="text" value={companyTitle} ref={CompanyTitleInput} onChange={onCompanyTitleHandler}>
-        <span className="input-group-text">companyTitle</span>
+        <span className="input-group-text w-25 text-center">companyTitle</span>
         <textarea className="form-control" aria-label="With textarea"></textarea>
       </div>
 
       <div className="input-group" type="text" value={companyField} ref={CompanyFieldInput} onChange={onCompanyFieldHandler}>
-        <span className="input-group-text">companyField</span>
+        <span className="input-group-text w-25 text-center">companyField</span>
         <textarea className="form-control" aria-label="With textarea"></textarea>
       </div>
 
       <div className="input-group" type="text" value={companyRecruitNumber} ref={CompanyRecruitNumberInput} onChange={onCompanyRecruitNumberHandler}>
-        <span className="input-group-text">companyRecruitNumber</span>
+        <span className="input-group-text w-25 text-center">companyRecruitNumber</span>
         <textarea className="form-control" aria-label="With textarea"></textarea>
       </div>
 
       <div className="input-group" type="text" value={companyTag} ref={CompanyTagInput} onChange={onCompanyTagHandler}>
-        <span className="input-group-text">companyTag</span>
+        <span className="input-group-text w-25 text-center">companyTag</span>
         <textarea className="form-control" aria-label="With textarea"></textarea>
       </div>
 
       <div className="input-group" type="text" value={companyPeriod} ref={CompanyPeriodInput} onChange={onCompanyPeriodHandler}>
-        <span className="input-group-text">companyPeriod</span>
+        <span className="input-group-text w-25 text-center">companyPeriod</span>
         <textarea className="form-control" aria-label="With textarea"></textarea>
       </div>
 
       <div className="input-group" type="text" value={companySite} ref={CompanySiteInput} onChange={onCompanySiteHandler}>
-        <span className="input-group-text">companySite</span>
+        <span className="input-group-text w-25 text-center">companySite</span>
         <textarea className="form-control" aria-label="With textarea"></textarea>
       </div>
 
