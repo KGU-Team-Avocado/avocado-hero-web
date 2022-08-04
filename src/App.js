@@ -7,6 +7,7 @@ import SignInContainer from "./container/sign/sign_in/SignInContainer";
 import SignUpContainer from "./container/sign/sign_up/SignUpContainer";
 import ExampleContainer from "./container/example/ExampleContainer";
 import ProfileContainer from "./container/sign/profile/ProfileContainer";
+import HomeLayout from "./component/common/HomeLayout";
 import HumanResources from "./container/company/HumanResources";
 import JobPosting from "./container/company/JobPosting";
 import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
@@ -25,9 +26,11 @@ function App() {
   return (
     <Routes>
       {/* 이 Layout 안에 갇히게 됨... nested된 Container들은 Layout의 Outlet으로 연결된다 */}
+      <Route path="/" element={<HomeLayout/>}>
+        <Route path="/" element={<HomeContainer />} />
+      </Route>
       <Route path="/" element={<DefaultLayout />}>
         {/* DefaultLayout의 Outlet으로 연결되는 부분 시작 */}
-        <Route path="/" element={<HomeContainer />} />
 
         <Route path="groupFinder" element={<GroupFinderContainer/>}/>
         <Route path="jobFinder" element={<JobFinderContainer/>}/>

@@ -9,13 +9,13 @@ export default () => {
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
     const attendances = {
-        "gabrielyoon7": 4,
-        "wlstn": 3,
+        "gabrielyoon7": 5,
+        "wlstn": 4,
         "123": 2,
-        "201912069": 3,
-        "hido": 4,
+        "201912069": 4,
+        "hido": 5,
         "seeun": 4,
-        "yeonsu": 3
+        "yeonsu": 4
     }  //6월 30일 이후 출석 기록 (백엔드로 만들기 귀찮아서 일단 이렇게 해둠)
     const [sum, setSum] = useState(0);
 
