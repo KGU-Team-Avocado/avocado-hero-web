@@ -1,6 +1,6 @@
 export default (props) => {
     return (
-        <div className=" my-2">
+        <div>
         
             {/* <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#group_join" onClick={() => props.setSelectedPosting(props.posting)}> */}
                 {/* <div className="card p-3">
@@ -14,24 +14,25 @@ export default (props) => {
                 </div> */}
 
 
-                <div className="list-group list-group-light">
-                <a href="#" className="list-group-item list-group-item-action px-3 border-0">
+            <div className="list-group list-group-light">
+                <a href="#" className="list-group-item list-group-item-action px-3 py-3 border-0 border-top border-bottom">
                     <div className="row">
                         <div className="col">
-                        <h5>{props.postings.groupName}</h5> 
+                            <h5>{props.postings.groupName}</h5>
                         </div>
                         <div className="col-6">
-                        <h5>{props.postings.postingTitle}</h5>
+                            <h5>{props.postings.postingTitle}</h5>
                         </div>
                         <div className="col">
-                        <p>{props.postings.description}</p>
-                        <p>~{props.postings.deadline}</p> 
+                            <p>{props.postings.description}</p>
+                            <p>~{props.postings.deadline}</p>
                         </div>
-                    </div>  
+                    </div>
                 </a>
-            {/* </a> */}
+
+                {/* </a> */}
             </div>
-            
+
         </div>
     )
 }
