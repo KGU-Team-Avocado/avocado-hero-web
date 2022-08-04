@@ -1,13 +1,22 @@
-import logo from "../../../assets/brand/avocado.png";
+import title from "../../../assets/img/title.jpg";
 export default () => {
     return (
         <>
-            <div className="row align-items-md-stretch mb-4 ">
-                <div className="col">
-                    <div className="h-100 p-5 text-white bg-dark rounded-3">
-                        <h2>동료를 찾으세요</h2>
-                        <p>그룹 활동을 지원합니다. 팀원을 찾으세요. </p>
-                        <button className="btn btn-outline-light" type="button">Example button</button>
+
+            <div className="p-5 rounded-3 hero" 
+            >
+                <div className="hero-text">
+                    <h1 className="">Avocado Hero</h1>
+                    <div className="fs-2">
+                        <div>
+                        아보카도 히어로는
+                        </div>
+                        <div>
+                        팀 프로젝트의 처음부터 끝까지 함께하는 
+                        </div>
+                        <div>
+                        국내 유일의 서비스입니다.
+                        </div>
                     </div>
                 </div>
             </div>
