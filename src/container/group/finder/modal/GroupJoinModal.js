@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TechStack from "../../../../component/common/TechStack";
 import DOMPurify from "dompurify";
+import axios from "axios";
 
 export default (props) => {
 
@@ -32,6 +33,16 @@ export default (props) => {
 
     const groupApply = () => {
         console.log('깔깔')
+        axios.post('/groupsRouter/apply', {
+            user_id: userInfo.user_id,
+            group_id:group._id,
+            status:"대기"
+            // 자기소개서 까지 추가로 줘야함
+        }).then((response) => { //서버로부터 받아온 id
+            console.log(response.data)
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     const group = props.selectedGroup
@@ -68,7 +79,7 @@ export default (props) => {
                         }
 
                     </div>
-                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" data-bs-dismiss="modal" disabled={userInfo ? "" : "disabled"} onClick={()=>groupApply()}>신청하기</button>
+                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" disabled={userInfo ? "" : "disabled"} onClick={()=>groupApply()}>신청하기</button>
                 </div>
             </div>
         </div>
