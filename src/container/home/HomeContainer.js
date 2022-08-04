@@ -36,7 +36,9 @@ const HomeContainer = () => {
 
     return (
         <div>
-            <div className="container">
+            
+            <MainTitle />
+            <div className="container my-3">
                 <ToastContainer
                     position="top-center"
                     autoClose={3000}
@@ -69,14 +71,9 @@ const HomeContainer = () => {
                     <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
-            <MainTitle />
             <div className="container">
-                {/* divider 조만간 삭제 예정. 경계명 보여주기 위해 넣음 */}
-                {/* <div className="b-example-divider"></div> */}
                 <CenteredHero />
-                {/* <div className="b-example-divider"></div> */}
                 <CenteredScreenshotHero />
-                {/* <div className="b-example-divider"></div> */}
                 <ResponsiveLeftAlignedHero />
                 <VerticallyCenteredHero />
                 <BorderHero />

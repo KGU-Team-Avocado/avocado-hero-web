@@ -30,6 +30,10 @@ export default (props) => {
         }
     };
 
+    const groupApply = () => {
+        console.log('깔깔')
+    }
+
     const group = props.selectedGroup
     return (
         <div className="modal-dialog" role="document">
@@ -64,7 +68,7 @@ export default (props) => {
                         }
 
                     </div>
-                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" data-bs-dismiss="modal" disabled={userInfo ? "" : "disabled"}>신청하기</button>
+                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" data-bs-dismiss="modal" disabled={userInfo ? "" : "disabled"} onClick={()=>groupApply()}>신청하기</button>
                 </div>
             </div>
         </div>
