@@ -21,7 +21,7 @@ const ProjecCalendarContainer = () => {
     const [daysOfWeek, setDaysOfWeek] = useState("");
     const [backgroundColor, setBackgroundColor] = useState("");
     const [events, setEvents] = useState([{
-        id: 0,  // 매주 반복하는 일정
+        id: '0',  // 매주 반복하는 일정
         title: "All Day Event very long title",
         description: "description for All Day Event1",
         daysOfWeek: ["4"],
@@ -30,7 +30,7 @@ const ProjecCalendarContainer = () => {
         color: "red"
     },
     {
-        id: 1, // 하루 일정 (종일)
+        id: '1', // 하루 일정 (종일)
         title: "Long Event",
         description: "description for All Day Event2",
         date: "2022-07-11",
@@ -39,7 +39,7 @@ const ProjecCalendarContainer = () => {
         backgroundColor: "rgba(62, 121, 37)"
     },
     {
-        id: 2, // 하루 일정 (특정 시간)
+        id: '2', // 하루 일정 (특정 시간)
         title: "Long Event",
         description: "description for All Day Event3",
         start: "2022-07-11T10:45:00",
@@ -47,7 +47,7 @@ const ProjecCalendarContainer = () => {
         backgroundColor: "red"
     },
     {
-        id: 3, // 긴 일정
+        id: '3', // 긴 일정
         groupId: "blueEvents",
         title: "DTS STARTS",
         description: "description for All Day Event4",
