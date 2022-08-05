@@ -7,13 +7,6 @@ import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
 import { options } from '../../../../assets/tag/Tech'
 
-// const options = [
-//     { label: "React", value: "react" },
-//     { label: "Node.js", value: "nodejs" },
-//     { label: "Mongo DB", value: "mongodb" },
-//     { label: "??", value: "??", disabled: true },
-// ];
-
 export default () => {
 
     const [userInfo, setUserInfo] = useState(null);
@@ -60,7 +53,9 @@ export default () => {
             ...project,
             long_description: convertedContent,
             tech_stack: selected.map((s) => s.value),
-            manager: userInfo.user_id
+            manager: userInfo.user_id,
+            members: [],
+            applied : [],
         }
         console.log(newGroupData)
 
