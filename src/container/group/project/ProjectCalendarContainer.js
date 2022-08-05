@@ -74,6 +74,7 @@ const ProjecCalendarContainer = () => {
             id: id,
             title: inputTitle.current.value,
             description: inputDesc.current.value,
+            allDay: allday,
             start: startDay,
             end: endDay,
             color: backgroundColor
@@ -173,31 +174,79 @@ const ProjecCalendarContainer = () => {
                             <Form>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                     <Form.Label>시작일</Form.Label>
-                                    <DatePicker
-                                        selected={startDay}
-                                        placeholderText="start day"
-                                        onChange={(date) => setStartDay(date)}
-                                        customInput={
-                                            <Form.Control
-                                                type="text"
-                                            />
-                                        }
-                                        dateFormat="yyyy-MM-dd"
-                                    />
+                                    {allday ?
+                                        <DatePicker
+                                            selected={startDay}
+                                            selectsStart
+                                            startDate={startDay}
+                                            endDate={endDay}
+                                            placeholderText="start day"
+                                            onChange={(date) => setStartDay(date)}
+                                            customInput={
+                                                <Form.Control
+                                                    type="text"
+                                                />
+                                            }
+                                            dateFormat="yyyy-MM-dd"
+                                        />
+                                        :
+                                        <DatePicker
+                                            selected={startDay}
+                                            selectsStart
+                                            startDate={startDay}
+                                            endDate={endDay}
+                                            placeholderText="start day"
+                                            onChange={(date) => setStartDay(date)}
+                                            showTimeSelect
+                                            timeFormat="HH:mm"
+                                            timeIntervals={5}
+                                            timeCaption="time"
+                                            customInput={
+                                                <Form.Control
+                                                    type="text"
+                                                />
+                                            }
+                                            dateFormat="yyyy-MM-dd hh:mm"
+                                        />
+                                    }
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput12">
                                     <Form.Label>종료일</Form.Label>
-                                    <DatePicker
-                                        selected={endDay}
-                                        placeholderText="end day"
-                                        onChange={(date) => setEndDay(date)}
-                                        customInput={
-                                            <Form.Control
-                                                type="text"
-                                            />
-                                        }
-                                        dateFormat="yyyy-MM-dd"
-                                    />
+                                    {allday ?
+                                        <DatePicker
+                                            selected={endDay}
+                                            selectsEnd
+                                            startDate={startDay}
+                                            endDate={endDay}
+                                            placeholderText="end day"
+                                            onChange={(date) => setEndDay(date)}
+                                            customInput={
+                                                <Form.Control
+                                                    type="text"
+                                                />
+                                            }
+                                            dateFormat="yyyy-MM-dd"
+                                        />
+                                        :
+                                        <DatePicker
+                                            selected={endDay}
+                                            selectsEnd
+                                            startDate={startDay}
+                                            endDate={endDay}
+                                            placeholderText="end day"
+                                            onChange={(date) => setEndDay(date)}
+                                            showTimeSelect
+                                            timeFormat="HH:mm"
+                                            timeIntervals={5}
+                                            timeCaption="time"
+                                            customInput={
+                                                <Form.Control
+                                                    type="text"
+                                                />
+                                            }
+                                            dateFormat="yyyy-MM-dd hh:mm"
+                                        />
+                                    }
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
                                     <Form.Label>제목</Form.Label>
