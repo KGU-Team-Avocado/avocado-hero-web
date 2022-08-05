@@ -6,6 +6,14 @@ import axios from "axios";
 
 export default (props) => {
 
+    const [message, setMessage] = useState('');
+
+    const handleMessageChange = event => {
+      setMessage(event.target.value);
+      console.log(event.target.value);
+    };
+
+
     const [userInfo, setUserInfo] = useState(null);
 
     useEffect(() => {
@@ -24,7 +32,7 @@ export default (props) => {
     //     return content
     // }
     // // 정규식을 이용한 HTML 태그 제거 끝
-    
+
     const createMarkup = (html) => {
         return {
             __html: DOMPurify.sanitize(html)
@@ -35,9 +43,9 @@ export default (props) => {
         console.log('깔깔')
         axios.post('/groupsRouter/apply', {
             user_id: userInfo.user_id,
-            group_id:group._id,
-            status:"대기"
-            // 자기소개서 까지 추가로 줘야함
+            group_id: group._id,
+            status: "대기",
+            message:message,
         }).then((response) => { //서버로부터 받아온 id
             console.log(response.data)
         }).catch(function (error) {
@@ -74,12 +82,17 @@ export default (props) => {
                                 <div><Link target="_blank" to={'/user/' + group.manager}>{group.manager}</Link></div>
                                 <hr />
                                 <h5>자기소개서</h5>
-                                <textarea />
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    value={message}
+                                    onChange={handleMessageChange}
+                                />
                             </>
                         }
 
                     </div>
-                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" disabled={userInfo ? "" : "disabled"} onClick={()=>groupApply()}>신청하기</button>
+                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" disabled={userInfo ? "" : "disabled"} onClick={() => groupApply()}>신청하기</button>
                 </div>
             </div>
         </div>
