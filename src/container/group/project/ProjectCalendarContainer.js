@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FullCalendar from "@fullcalendar/react" // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid" // a plugin!
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -10,13 +10,17 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Badge from 'react-bootstrap/Badge';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const ProjecCalendarContainer = () => {
     const [show, setShow] = useState(false);
     const [startDay, setStartDay] = useState("");
     const [endDay, setEndDay] = useState("");
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+    // const [title, setTitle] = useState("");
+    // const [description, setDescription] = useState("");
+    const inputTitle = useRef();
+    const inputDesc = useRef();
     const [allday, setAllday] = useState(false);
     const [daysOfWeek, setDaysOfWeek] = useState("");
     const [backgroundColor, setBackgroundColor] = useState("");
@@ -24,9 +28,11 @@ const ProjecCalendarContainer = () => {
         id: '0',  // 매주 반복하는 일정
         title: "All Day Event very long title",
         description: "description for All Day Event1",
-        daysOfWeek: ["4"],
+        startRecur: "2022-07-14",
+        endRecur: "2022-08-12",
         startTime: "10:45:00",
         endTime: "12:45:00",
+        daysOfWeek: ["4","5"],
         color: "red"
     },
     {
@@ -35,16 +41,16 @@ const ProjecCalendarContainer = () => {
         description: "description for All Day Event2",
         date: "2022-07-11",
         start: "2022-07-11",
-        end: "2022-07-12",
-        backgroundColor: "rgba(62, 121, 37)"
+        end: "2022-07-11",
+        color: "rgba(62, 121, 37)"
     },
     {
         id: '2', // 하루 일정 (특정 시간)
         title: "Long Event",
         description: "description for All Day Event3",
-        start: "2022-07-11T10:45:00",
-        end: "2022-07-11T11:45:00",
-        backgroundColor: "red"
+        start: "2022-07-11 10:45:00",
+        end: "2022-07-11 11:45:00",
+        color: "red"
     },
     {
         id: '3', // 긴 일정
@@ -57,8 +63,8 @@ const ProjecCalendarContainer = () => {
 
     const handleDateClick = (arg) => { // bind with an arrow function
         console.log(arg)
-        setStartDay(arg.startStr);
-        setEndDay(arg.endStr);
+        setStartDay(arg.start);
+        setEndDay(arg.end - 1);
         setAllday(arg.allDay);
     }
 
@@ -66,11 +72,11 @@ const ProjecCalendarContainer = () => {
         const id = events[events.length - 1].id + 1;
         const newEvent = {
             id: id,
-            title: title,
-            description: description,
+            title: inputTitle.current.value,
+            description: inputDesc.current.value,
             start: startDay,
             end: endDay,
-            backgroundColor: backgroundColor
+            color: backgroundColor
         };
         setEvents([...events, newEvent]);
         setStartDay("");
@@ -78,8 +84,6 @@ const ProjecCalendarContainer = () => {
         setAllday("");
         setBackgroundColor("");
         setDaysOfWeek("");
-        setDescription("");
-        setTitle("");
         setShow(false);
     }
 
@@ -89,8 +93,6 @@ const ProjecCalendarContainer = () => {
         setAllday("");
         setBackgroundColor("");
         setDaysOfWeek("");
-        setDescription("");
-        setTitle("");
         setShow(false);
     }
 
@@ -171,22 +173,30 @@ const ProjecCalendarContainer = () => {
                             <Form>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                     <Form.Label>시작일</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="start day"
-                                        value={startDay}
-                                        onChange={(e) => setStartDay(e.target.value)}
-                                        autoFocus
+                                    <DatePicker
+                                        selected={startDay}
+                                        placeholderText="start day"
+                                        onChange={(date) => setStartDay(date)}
+                                        customInput={
+                                            <Form.Control
+                                                type="text"
+                                            />
+                                        }
+                                        dateFormat="yyyy-MM-dd"
                                     />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput12">
                                     <Form.Label>종료일</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="end day"
-                                        value={endDay}
-                                        onChange={(e) => setEndDay(e.target.value)}
-                                        autoFocus
+                                    <DatePicker
+                                        selected={endDay}
+                                        placeholderText="end day"
+                                        onChange={(date) => setEndDay(date)}
+                                        customInput={
+                                            <Form.Control
+                                                type="text"
+                                            />
+                                        }
+                                        dateFormat="yyyy-MM-dd"
                                     />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
@@ -194,8 +204,7 @@ const ProjecCalendarContainer = () => {
                                     <Form.Control
                                         type="text"
                                         placeholder="title"
-                                        value={title}
-                                        onChange={(e) => setTitle(e.target.value)}
+                                        ref={inputTitle}
                                         autoFocus
                                     />
                                 </Form.Group>
@@ -204,7 +213,10 @@ const ProjecCalendarContainer = () => {
                                     controlId="exampleForm.ControlTextarea1"
                                 >
                                     <Form.Label>설명</Form.Label>
-                                    <Form.Control as="textarea" rows={3} autoFocus value={description} onChange={(e) => setDescription(e.target.value)} />
+                                    <Form.Control 
+                                        as="textarea" 
+                                        rows={3} 
+                                        ref={inputDesc} />
                                 </Form.Group>
                                 <Form.Check
                                     type="switch"

@@ -29,6 +29,7 @@
     "react-bootstrap": "^2.4.0",
     "react-calendar": "^3.7.0",
     "react-chartjs-2": "^4.3.1",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-draft-wysiwyg": "^1.15.0",
     "react-icons": "^4.4.0",
