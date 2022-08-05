@@ -6,7 +6,7 @@ import ProjectCard from "../../../component/workspace/card/ProjectCard";
 
 export default () => {
     const [projects, setProjects] = useState([]);
-    // 이 부분은 추후에 승인 기능이 추가된 이후 서버에서 받아올 예정
+    // 이 부분은 추후에 승인 기능이 추가된 이후 서버에서 받아올 예정, 프로필쪽에서 해줘야 할듯 함
 
     const [appliedGroups, setAppliedGroups] = useState([]);
     const sessionStorage = window.sessionStorage;

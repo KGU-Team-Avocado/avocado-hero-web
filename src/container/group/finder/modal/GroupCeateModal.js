@@ -54,7 +54,7 @@ export default () => {
             long_description: convertedContent,
             tech_stack: selected.map((s) => s.value),
             manager: userInfo.user_id,
-            members: [],
+            members: [].concat(userInfo.user_id),
             applied : [],
         }
         console.log(newGroupData)
