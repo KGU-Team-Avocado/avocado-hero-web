@@ -1,26 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import GroupCard from "../../../component/group/card/GroupCard";
 import ProjectCard from "../../../component/workspace/card/ProjectCard";
 
 export default () => {
-    const [projects, setProjects] = useState([
-        {
-            _id: 0,
-            manager: "gabrielyoon7",
-            name: "아보카도",
-            title: "콘솔",
-            intro_text: "우리 같이 개발해요",
-            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
-        },
-        {
-            _id: 1,
-            manager: "wlstn",
-            name: "아보카도",
-            title: "리액트 튜토리얼",
-            intro_text: "우리 같이 개발해요",
-            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
-        }
-    ]);
+    const [projects, setProjects] = useState([]);
+    // 이 부분은 추후에 승인 기능이 추가된 이후 서버에서 받아올 예정
 
     const [appliedGroups, setAppliedGroups] = useState([]);
     const sessionStorage = window.sessionStorage;
@@ -32,6 +18,13 @@ export default () => {
                 user_id: userInfo.user_id,
             }).then((response) => {
                 setAppliedGroups(response.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+            axios.post("/groupsRouter/getMyGroup", {
+                user_id: userInfo.user_id,
+            }).then((response) => {
+                setProjects(response.data);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -47,24 +40,31 @@ export default () => {
                     <div className="col-sm-6 text-end"><a className="mx-2" href="#">정렬▿</a><a className="mx-2" href="#">필터링▿</a></div>
                 </div>
             </div>
-            <div className="row">
-                {
-                    projects.length > 0
-                        ?
-                        <>
-                            {
-                                projects.map((project) => (
-                                    <ProjectCard
-                                        key={project._id}
-                                        project={project}
-                                    />
-                                ))
-                            }
-                            <div>{JSON.stringify(appliedGroups)}</div>
-                        </>
-                        :
-                        <div>프로젝트가 없습니다.</div>
-                }
+            <div className="my-3">
+                <h3>소속된 그룹</h3>
+                <div className="row">
+                    {
+                        projects.length > 0
+                            ?
+                            <>
+                                {
+                                    projects.map((project) => (
+                                        <Link to={"/project/" + project._id} className="text-decoration-none text-dark">
+                                            <div>{project.project_name}</div>
+                                        </Link>
+                                    ))
+                                }
+                            </>
+                            :
+                            <div>프로젝트가 없습니다.</div>
+                    }
+                </div>
+            </div>
+            <div className="my-3">
+                <h3>신청한 그룹</h3>
+                <div className="row">
+                    <div>{JSON.stringify(appliedGroups)}</div>
+                </div>
             </div>
         </>
     )
