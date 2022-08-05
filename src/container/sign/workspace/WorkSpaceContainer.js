@@ -1,25 +1,42 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import ProjectCard from "../../../component/workspace/card/ProjectCard";
 
 export default () => {
     const [projects, setProjects] = useState([
         {
             _id: 0,
-            manager:"gabrielyoon7",
+            manager: "gabrielyoon7",
             name: "아보카도",
             title: "콘솔",
             intro_text: "우리 같이 개발해요",
-            description:"상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
+            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
         },
         {
             _id: 1,
-            manager:"wlstn",
+            manager: "wlstn",
             name: "아보카도",
             title: "리액트 튜토리얼",
             intro_text: "우리 같이 개발해요",
-            description:"상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
+            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
         }
     ]);
+
+    const [appliedGroups, setAppliedGroups] = useState([]);
+    const sessionStorage = window.sessionStorage;
+
+    useEffect(() => {
+        if (sessionStorage.getItem("user")) {
+            const userInfo = JSON.parse(sessionStorage.getItem("user"))
+            axios.post("/groupsRouter/getAppliedGroup", {
+                user_id: userInfo.user_id,
+            }).then((response) => {
+                setAppliedGroups(response.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, []);
 
     return (
         <>
@@ -34,12 +51,17 @@ export default () => {
                 {
                     projects.length > 0
                         ?
-                        projects.map((project) => (
-                            <ProjectCard
-                                key={project._id}
-                                project={project}
-                            />
-                        ))
+                        <>
+                            {
+                                projects.map((project) => (
+                                    <ProjectCard
+                                        key={project._id}
+                                        project={project}
+                                    />
+                                ))
+                            }
+                            <div>{JSON.stringify(appliedGroups)}</div>
+                        </>
                         :
                         <div>프로젝트가 없습니다.</div>
                 }
