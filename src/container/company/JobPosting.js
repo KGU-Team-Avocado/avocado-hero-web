@@ -90,7 +90,7 @@ const JobPosting = () => {
     }
      else {
 
-      console.log(companyID + companyName + companyTitle + companyField + companyRecruitNumber);
+      console.log(companyID);
       axios
         .post("/companiesRouter/jobPost", {
           company_id: companyID,
@@ -104,12 +104,13 @@ const JobPosting = () => {
         })
         .then((response) => {
           console.log(response);
-          if (response.data.idCheck === false) {
-            alert("이미 사용중인 아이디입니다.");
+          if (response.data.compIdCheck === false) {
+            alert("이미 사용중인 기업아이디입니다.");
             //setCheckError("이미 사용중인 아이디입니다");
           }
           if (response.data.success === true) {
             window.location.href = "/";
+            alert("채용공고 등록 성공.");
           }
         })
         .catch(function (error) {
