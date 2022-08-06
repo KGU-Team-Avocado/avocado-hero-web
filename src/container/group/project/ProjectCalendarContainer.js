@@ -100,7 +100,7 @@ const ProjecCalendarContainer = () => {
     }
 
     const handleSave = () => {
-        const id = events[events.length - 1].id + 1;
+        const id = parseInt(events[events.length - 1].id) + 1;
         let newEvent = {id: id,
             title: inputTitle.current.value,
             description: inputDesc.current.value,
@@ -109,7 +109,7 @@ const ProjecCalendarContainer = () => {
         const endDayArr = endDay.toISOString().split('T')
         console.log(startDayArr[1].split('.')[0])
         console.log(startDay)
-        if (daysOfWeek.length !== 0){
+        if (daysOfWeek.length === 0){
             newEvent = { 
                 ...newEvent,
                 start: startDay,
