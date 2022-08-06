@@ -61,8 +61,8 @@ const ProjecCalendarContainer = () => {
         description: "description for All Day Event1",
         startRecur: "2022-07-14",
         endRecur: "2022-08-12",
-        startTime: "10:45:00",
-        endTime: "12:45:00",
+        startTime: "10:45",
+        endTime: "22:45",
         daysOfWeek: ["0","6"],
         color: "red"
     },
@@ -101,31 +101,35 @@ const ProjecCalendarContainer = () => {
 
     const handleSave = () => {
         const id = parseInt(events[events.length - 1].id) + 1;
-        let newEvent = {id: id,
+        let newEvent = {
+            id: id,
             title: inputTitle.current.value,
             description: inputDesc.current.value,
-            color: backgroundColor};
-        const startDayArr = startDay.toISOString().split('T')
-        const endDayArr = endDay.toISOString().split('T')
-        console.log(startDayArr[1].split('.')[0])
-        console.log(startDay)
+            color: backgroundColor,
+            allDay: allday
+        };
+        const newStartDate = new Date(startDay);
+        const newEndDate = new Date(endDay);
+
+        console.log(newStartDate.getHours() + ':' + newStartDate.getMinutes())
+        console.log(newEndDate.getHours() + ':' + newEndDate.getMinutes())
         if (daysOfWeek.length === 0){
             newEvent = { 
                 ...newEvent,
                 start: startDay,
-                allDay: allday,
                 end: endDay
             };
         } else {
             newEvent = {
                 ...newEvent,
-                startRecur: startDayArr[0],
-                endRecur: endDayArr[0],
-                startTime: startDayArr[1].split('.')[0],
-                endTime: endDayArr[1].split('.')[0],
+                startRecur: newStartDate.toLocaleDateString(),
+                endRecur: newEndDate.toLocaleDateString(),
+                startTime: newStartDate.getHours() + ':' + newStartDate.getMinutes(),
+                endTime: newEndDate.getHours() + ':' + newEndDate.getMinutes(),
                 daysOfWeek: daysOfWeek,
             };
         }
+        
         setEvents([...events, newEvent]);
         setStartDay("");
         setEndDay("");
