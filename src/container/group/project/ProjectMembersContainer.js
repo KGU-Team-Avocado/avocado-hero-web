@@ -74,43 +74,48 @@ const ProjectMembersContainer = () => {
                 </div>
             </div>
 
-            {close ? null :
-                <>
-                    <div className="d-flex justify-content-between">
-                        <h2>신청자 목록</h2>
-                        <button type="button" className="btn btn-success btn-sm" onClick={() => setClose(true)} >마감</button>
-                    </div>
-                    <div className="table-responsive">
-                        <table className="table table-hover">
-                            <thead className="table-light text-center">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">아이디</th>
-                                    <th scope="col">이름</th>
-                                    <th scope="col">이메일</th>
-                                    <th scope="col">승인/반려</th>
-                                </tr>
-                            </thead>
-                            <tbody className="table-group-divider text-center">
-                                {applicants.map((applicant) => (
-                                    applicant.joined ? null :
-                                        <tr key={applicant.user_id}>
-                                            <th onClick={() => handleShow(applicant)} scope="row">1</th>
-                                            <td onClick={() => handleShow(applicant)}>{applicant.user_id}</td>
-                                            <td onClick={() => handleShow(applicant)}>{applicant.name}</td>
-                                            <td onClick={() => handleShow(applicant)}>{applicant.email}</td>
-                                            <td>
-                                                <button type="button" className="btn btn-primary btn-sm me-2" onClick={() => acceptMember(applicant)} >승인</button>
-                                                <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(applicant)} >반려</button>
-                                            </td>
-                                        </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </>
+            <div className="d-flex justify-content-between">
+                <h2>신청자 목록</h2>
+                <div className="form-check form-switch align-self-center">
+                    <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" onChange={() => setClose(!close)} />
+                    <label className="form-check-label" for="flexSwitchCheckChecked">마감</label>
+                </div>
+            </div>
+
+            {close ?
+                <div className="alert alert-warning" role="alert">팀원 신청이 마감되었습니다.</div>
+                :
+                <div className="table-responsive">
+                    <table className="table table-hover">
+                        <thead className="table-light text-center">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">아이디</th>
+                                <th scope="col">이름</th>
+                                <th scope="col">이메일</th>
+                                <th scope="col">승인/반려</th>
+                            </tr>
+                        </thead>
+                        <tbody className="table-group-divider text-center">
+                            {applicants.map((applicant) => (
+                                applicant.joined ? null :
+                                    <tr key={applicant.user_id}>
+                                        <th onClick={() => handleShow(applicant)} scope="row">1</th>
+                                        <td onClick={() => handleShow(applicant)}>{applicant.user_id}</td>
+                                        <td onClick={() => handleShow(applicant)}>{applicant.name}</td>
+                                        <td onClick={() => handleShow(applicant)}>{applicant.email}</td>
+                                        <td>
+                                            <button type="button" className="btn btn-primary btn-sm me-2" onClick={() => acceptMember(applicant)} >승인</button>
+                                            <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(applicant)} >반려</button>
+                                        </td>
+                                    </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             }
 
+            <hr />
 
             <div className="table-responsive">
                 <h2>현재 팀원</h2>
@@ -122,7 +127,7 @@ const ProjectMembersContainer = () => {
                             <th scope="col">이름</th>
                             <th scope="col">이메일</th>
                             {close ? null :
-                                <th scope="col">승인 취소</th>
+                                <th scope="col">방출</th>
                             }
                         </tr>
                     </thead>
@@ -136,7 +141,7 @@ const ProjectMembersContainer = () => {
                                     <td>{applicant.email}</td>
                                     {close ? null :
                                         <td>
-                                            <button type="button" className="btn btn-danger btn-sm" onClick={() => cancleAccept(applicant)} >취소</button>
+                                            <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(applicant)} >방출</button>
                                         </td>
                                     }
                                 </tr>
