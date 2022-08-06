@@ -6,26 +6,32 @@ import JobFinderViewModal from "../jobFinder/JobFinderViewModal";
 export default () => {
 
     const [postings, setPostings] = useState([
-        {
-            _id: 0,
-            manager:"yeonsu",
-            groupName: "아보카도콘솔",
-            postingTitle: "프론트엔드 개발자 채용",
-            description:"경력/신입",
-            deadline:"2022.08.10"
-        },
-        {
-            _id: 1,
-            manager:"yeonsu",
-            groupName: "아보카도콘솔히어로",
-            postingTitle: "백엔드 개발자 채용",
-            description:"경력/신입",
-            deadline:"2022.08.20"
-        }
+        // {
+        //     _id: 0,
+        //     manager:"yeonsu",
+        //     groupName: "아보카도콘솔",
+        //     postingTitle: "프론트엔드 개발자 채용",
+        //     description:"경력/신입",
+        //     deadline:"2022.08.10"
+        // },
+        // {
+        //     _id: 1,
+        //     manager:"yeonsu",
+        //     groupName: "아보카도콘솔히어로",
+        //     postingTitle: "백엔드 개발자 채용",
+        //     description:"경력/신입",
+        //     deadline:"2022.08.20"
+        // }
     ]);
 
     useEffect(()=>{
         console.log('리스트')
+        axios.get("/companiesRouter/getPost").then((response) => {
+            console.log(JSON.stringify(response.data))
+            setPostings(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
     },[]);
 
 
@@ -52,11 +58,12 @@ export default () => {
                 {
                     postings.length > 0
                         ?
-                        postings.map((postings) => (
+                        postings.map((posting) => (
                             <JobPostingCard
-                                key={postings._id}
-                                postings={postings}
+                                key={posting._id}
+                                posting={posting}
                             />
+                            // <div>{posting.company_title}</div>
                             ))
                         :
                         <div>채용공고가 없습니다.</div>
