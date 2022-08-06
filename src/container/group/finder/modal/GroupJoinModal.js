@@ -42,12 +42,17 @@ export default (props) => {
     const groupApply = () => {
         console.log('깔깔')
         axios.post('/groupsRouter/apply', {
-            user_id: userInfo.user_id,
             group_id: group._id,
+            user_id: userInfo.user_id,
+            user_name: userInfo.user_name,
+            user_email: userInfo.user_email,
             status: "대기",
             message:message,
         }).then((response) => { //서버로부터 받아온 id
             console.log(response.data)
+            if(response.data.success===true){
+                window.location.reload()
+            }
         }).catch(function (error) {
             console.log(error);
         });

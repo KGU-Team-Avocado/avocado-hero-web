@@ -1,36 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from 'react-bootstrap/Modal';
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const ProjectMembersContainer = () => {
+
+    const params = useParams();
+    const project_id = params.id;
+
+    useEffect(()=>{
+        axios.post("/groupsRouter/getApplicants", {
+            group_id: project_id,
+        }).then((response) => {
+            console.log(response.data);
+            setApplicants(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },[]);
+
     const [applicants, setApplicants] = useState([ // 프로젝트 지원자 배열
-        {
-            user_id: 'gabrielyoon7',
-            name: "윤주현",
-            email: 'gabrielyoon7@gmail.com',
-            about_me: "열심히하겠습니다!",
-            joined: false
-        },
-        {
-            user_id: 'yeonsu',
-            name: "김연수",
-            email: 'yeonsu@gmail.com',
-            about_me: "열심히하겠습니다!!",
-            joined: false
-        },
-        {
-            user_id: "hido",
-            name: "김도희",
-            email: 'hido@gmail.com',
-            about_me: "열심히하겠습니다!!!",
-            joined: false
-        },
-        {
-            user_id: "123",
-            name: "함현준",
-            email: '123@gmail.com',
-            about_me: "열심히하겠습니다!!!",
-            joined: false
-        },
+        // {
+        //     user_id: 'gabrielyoon7',
+        //     user_name: "윤주현",
+        //     user_email: 'gabrielyoon7@gmail.com',
+        //     message: "열심히하겠습니다!",
+        //     joined: false
+        // },
+        // {
+        //     user_id: 'yeonsu',
+        //     user_name: "김연수",
+        //     user_email: 'yeonsu@gmail.com',
+        //     message: "열심히하겠습니다!!",
+        //     joined: false
+        // },
+        // {
+        //     user_id: "hido",
+        //     user_name: "김도희",
+        //     user_email: 'hido@gmail.com',
+        //     message: "열심히하겠습니다!!!",
+        //     joined: false
+        // },
+        // {
+        //     user_id: "123",
+        //     user_name: "함현준",
+        //     user_email: '123@gmail.com',
+        //     message: "열심히하겠습니다!!!",
+        //     joined: false
+        // },
     ]);
     const [show, setShow] = useState('null');
     const [close, setClose] = useState(false)
@@ -102,8 +119,8 @@ const ProjectMembersContainer = () => {
                                     <tr key={applicant.user_id}>
                                         <th onClick={() => handleShow(applicant)} scope="row">1</th>
                                         <td onClick={() => handleShow(applicant)}>{applicant.user_id}</td>
-                                        <td onClick={() => handleShow(applicant)}>{applicant.name}</td>
-                                        <td onClick={() => handleShow(applicant)}>{applicant.email}</td>
+                                        <td onClick={() => handleShow(applicant)}>{applicant.user_name}</td>
+                                        <td onClick={() => handleShow(applicant)}>{applicant.user_email}</td>
                                         <td>
                                             <button type="button" className="btn btn-primary btn-sm me-2" onClick={() => acceptMember(applicant)} >승인</button>
                                             <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(applicant)} >반려</button>
@@ -137,8 +154,8 @@ const ProjectMembersContainer = () => {
                                 <tr key={applicant.user_id}>
                                     <th scope="row">1</th>
                                     <td>{applicant.user_id}</td>
-                                    <td>{applicant.name}</td>
-                                    <td>{applicant.email}</td>
+                                    <td>{applicant.user_name}</td>
+                                    <td>{applicant.user_email}</td>
                                     {close ? null :
                                         <td>
                                             <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(applicant)} >방출</button>
@@ -152,9 +169,9 @@ const ProjectMembersContainer = () => {
 
             <Modal show={show !== 'null'} onHide={handleClose} animation={false} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>{show.name}</Modal.Title>
+                    <Modal.Title>{show.user_name}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{show.about_me}</Modal.Body>
+                <Modal.Body>{show.message}</Modal.Body>
                 <Modal.Footer>
                     <button type="button" className="btn btn-primary btn-sm me-2" onClick={() => { acceptMember(show) }} >승인</button>
                     <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(show)} >반려</button>
