@@ -1,5 +1,7 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Accordion from 'react-bootstrap/Accordion';
+import NoticeAcordion from "../../../component/project/workspace/notice/NoticeAcordion";
+import NoticeModal from "../../../component/project/workspace/notice/NoticeModal";
 
 const ProjectContainer = () => {
     const [notices, setNotices] = useState([ //공지사항 배열
@@ -31,8 +33,11 @@ const ProjectContainer = () => {
     const [isEdit, setIsEdit] = useState(false); //수정 모드 여부
     const [key, setKey] = useState(-1); //수정할 공지의 id
 
+    const inputTitle = useRef();
+    const inputDesc = useRef();
+
     const saveNewNotice = () => {
-        const newNotice = {_id: id, title: title, description: description};
+        const newNotice = {_id: id, title: inputTitle.current.value, description: inputDesc.current.value};
         setNotices([newNotice, ...notices]);
         setId(id + 1);
         setTitle("");
@@ -51,7 +56,7 @@ const ProjectContainer = () => {
     }
 
     const modifyNotice = () => {
-        setNotices(notices.map((notice) => notice._id === key ? {...notice, title: title, description: description} : notice));
+        setNotices(notices.map((notice) => notice._id === key ? {...notice, title: inputTitle.current.value, description: inputDesc.current.value} : notice));
         setTitle("");
         setDescription("");
         setKey(0);
@@ -74,49 +79,21 @@ const ProjectContainer = () => {
                 </div>
             </div>
 
-            <Accordion alwaysOpen>
-                {notices.map((notice) => (
-                    <Accordion.Item eventKey={notice._id}>
-                        <Accordion.Header>{notice.title}</Accordion.Header>
-                        <Accordion.Body>
-                            {notice.description}
-                            {/* 수정 삭제는 추후 팀장만 볼 수 있게 수정 */}
-                            <div className="d-flex justify-content-end">
-                                <button type="button" className="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => showModifyModal(notice)} >수정</button>
-                                <button type="button" className="btn btn-danger" onClick={() => deleteNotice(notice._id)} >삭제</button>
-                            </div>
-                        </Accordion.Body>
-                    </Accordion.Item>
-                ))}
-            </Accordion>
+            <NoticeAcordion
+                notices={notices}
+                deleteNotice={deleteNotice}
+                showModifyModal={showModifyModal}
+            />
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">새 공지사항</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">제목</label>
-                                    <input type="text" class="form-control" id="recipient-name" value={title} onChange={(e) => setTitle(e.target.value)} />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">내용</label>
-                                    <textarea class="form-control" id="message-text" value={description} onChange={(e) => setDescription(e.target.value)} ></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                            {isEdit ? <button type="button" class="btn btn-primary" onClick={() => modifyNotice()} data-bs-dismiss="modal">수정</button> 
-                            : <button type="button" class="btn btn-primary" onClick={() => saveNewNotice()} data-bs-dismiss="modal">저장</button>}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <NoticeModal 
+                title={title}
+                description={description}
+                isEdit={isEdit}
+                inputTitle={inputTitle}
+                inputDesc={inputDesc}
+                modifyNotice={modifyNotice}
+                saveNewNotice={saveNewNotice}
+            />
         </>
     )
 }
