@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GroupCard from "../../../component/group/card/GroupCard";
 import ProjectCard from "../../../component/workspace/card/ProjectCard";
-import MoveToWorkSpaceModal from "./modal/MoveToWorkSpaceModal";
 
 export default () => {
     const [groups, setGroups] = useState([]);
@@ -43,13 +42,13 @@ export default () => {
             <div className="position-sticky">
                 <h2>내 워크스페이스</h2>
                 <div className="row">
-                    <div className="col-sm-6">훌륭한 팀을 구해보아요</div>
+                    <div className="col-sm-6">소속한 팀과 신청한 팀을 확인해보아요</div>
                     <div className="col-sm-6 text-end"><a className="mx-2" href="#">정렬▿</a><a className="mx-2" href="#">필터링▿</a></div>
                 </div>
             </div>
             <div className="my-3">
                 <h3>소속된 그룹</h3>
-                <div className="row">
+                <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
                         groups.length > 0
                             ?
@@ -75,11 +74,6 @@ export default () => {
                     <div>{JSON.stringify(appliedGroups)}</div>
                 </div>
             </div>
-            {/* <div className="modal fade" id="group_join" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <MoveToWorkSpaceModal
-                    selectedGroup={selectedGroup}
-                />
-            </div> */}
         </>
     )
 }

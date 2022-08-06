@@ -13,7 +13,7 @@ import JobPosting from "./container/company/JobPosting";
 import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
 import JobFinderContainer from "./container/jobFinder/JobFinderContainer";
 import RankContainer from "./container/example/RankContainer";
-import WorkSpaceContainer from "./container/sign/workspace/WorkSpaceContainer";
+import WorkSpaceContainer from "./container/group/workspace/WorkSpaceContainer";
 import ProjectContainer from "./container/group/project/ProjectContainer";
 import ProjectDefaultLayout from "./component/project/ProjectDefaultLayout";
 import ProjectCalendarContainer from "./container/group/project/ProjectCalendarContainer";
