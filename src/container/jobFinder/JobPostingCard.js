@@ -18,14 +18,14 @@ export default (props) => {
                 <a href="#" className="list-group-item list-group-item-action px-3 py-3 border-0 border-top border-bottom">
                     <div className="row">
                         <div className="col">
-                            <h5>{props.postings.groupName}</h5>
+                            <h5>{props.posting.company_company_name}</h5>
                         </div>
                         <div className="col-6">
-                            <h5>{props.postings.postingTitle}</h5>
+                            <h5>{props.posting.company_title}</h5>
                         </div>
                         <div className="col">
-                            <p>{props.postings.description}</p>
-                            <p>~{props.postings.deadline}</p>
+                            <p>{props.posting.company_field}</p>
+                            <p>~{props.posting.company_period}</p>
                         </div>
                     </div>
                 </a>
