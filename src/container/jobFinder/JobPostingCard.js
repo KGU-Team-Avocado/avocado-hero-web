@@ -1,21 +1,14 @@
 export default (props) => {
     return (
         <div>
-        
-            {/* <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#group_join" onClick={() => props.setSelectedPosting(props.posting)}> */}
-                {/* <div className="card p-3">
-                    <div className="row">
-                        <div className="col-xxl-8 py-3">
-                            <h4>{props.postings.groupName}</h4>
-                            <h5>{props.postings.postingTitle}</h5>
-                            <p>{props.postings.description}</p>
-                        </div>
-                    </div>
-                </div> */}
-
-
             <div className="list-group list-group-light">
-                <a href="#" className="list-group-item list-group-item-action px-3 py-3 border-0 border-top border-bottom">
+                <a
+                    href="#"
+                    className="list-group-item list-group-item-action px-3 py-3 border-0 border-top border-bottom"
+                    data-bs-toggle="modal"
+                    data-bs-target="#job_modal"
+                    onClick={() => props.setSelected(props.posting)}
+                >
                     <div className="row">
                         <div className="col">
                             <h5>{props.posting.company_company_name}</h5>
@@ -29,8 +22,6 @@ export default (props) => {
                         </div>
                     </div>
                 </a>
-
-                {/* </a> */}
             </div>
 
         </div>

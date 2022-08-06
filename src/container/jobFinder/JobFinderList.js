@@ -24,7 +24,7 @@ export default () => {
         // }
     ]);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log('리스트')
         axios.get("/companiesRouter/getPost").then((response) => {
             console.log(JSON.stringify(response.data))
@@ -32,8 +32,10 @@ export default () => {
         }).catch(function (error) {
             console.log(error);
         });
-    },[]);
+    }, []);
 
+
+    const [selected, setSelected] = useState(null);
 
     // const [postings, setPostings] = useState([]);
 
@@ -62,14 +64,38 @@ export default () => {
                             <JobPostingCard
                                 key={posting._id}
                                 posting={posting}
+                                setSelected={setSelected}
                             />
                             // <div>{posting.company_title}</div>
-                            ))
+                        ))
                         :
                         <div>채용공고가 없습니다.</div>
                 }
             </div>
 
+            <div className="modal" id="job_modal" tabindex="-1" aria-labelledby="..." aria-hidden="true">
+                <div className="modal-dialog modal-lg">
+                    <div className="modal-content rounded-4 shadow">
+                        {
+                            selected &&
+                            <>
+                                <div className="modal-body p-5">
+                                    <div className="modal-header">
+                                        <h2 className="fw-bold mb-0">{selected.company_title}</h2>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div>
+                                        {
+                                            JSON.stringify(selected)
+                                        }
+                                    </div>
+                                </div>
+                            </>
+                        }
+
+                    </div>
+                </div>
+            </div>
 
             {/* <div className="wer">
                 <h2>프로젝트 찾기</h2>
