@@ -8,6 +8,8 @@ import axios from "axios";
 import { useRef, useState } from "react";
 
 const JobPosting = () => {
+
+
   const CompanyIDInput = useRef();
   const CompanyNameInput = useRef();
   const CompanyTitleInput = useRef();
