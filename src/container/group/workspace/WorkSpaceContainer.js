@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GroupCard from "../../../component/group/card/GroupCard";
 import ProjectCard from "../../../component/workspace/card/ProjectCard";
+import Table from "../../../component/common/Table";
 
 export default () => {
     const [groups, setGroups] = useState([]);
@@ -70,9 +71,11 @@ export default () => {
             </div>
             <div className="my-3">
                 <h3>신청한 그룹</h3>
-                <div className="row">
+                {/* <div className="row">
                     <div>{JSON.stringify(appliedGroups)}</div>
-                </div>
+                </div> */}
+                <div>아래 테이블은 임시로 띄움</div>
+                <Table data={appliedGroups} rowsPerPage={10} />
             </div>
         </>
     )
