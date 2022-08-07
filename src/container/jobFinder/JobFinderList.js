@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import axios from "axios";
 import JobPostingCard from "../jobFinder/JobPostingCard"
 import JobFinderViewModal from "../jobFinder/JobFinderViewModal";
+import Button from "react-bootstrap/Button";
+import { BiBookmark } from "react-icons/bi";
 
 export default () => {
 
@@ -36,6 +38,16 @@ export default () => {
 
 
     const [selected, setSelected] = useState(null);
+
+    const onClick = (e) => {
+        window.location.href = "/jobFinder";
+        alert("지원이 완료되었습니다.");
+    }
+
+    const bookMark = (e) => {
+        window.location.href = "/jobFinder";
+        alert("북마크에 추가되었습니다.");
+    }
 
     // const [postings, setPostings] = useState([]);
 
@@ -85,9 +97,33 @@ export default () => {
                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div>
-                                        {
+                                        {/* {
                                             JSON.stringify(selected)
-                                        }
+                                        } */}
+
+                                       
+                                        <h5 style={{ marginTop: 16}}><b>회사명</b></h5>
+                                        <p>{selected.company_company_name}</p>
+                                        <hr />
+                                        <h5><b>주요업무/세부사항</b></h5>
+                                        <p>{selected.company_field}</p>
+                                        <hr />
+                                        <h5><b>모집인원</b></h5>
+                                        <p>{selected.company_recruit_number}</p>
+                                        <hr />
+                                        <h5><b>마감일</b></h5>
+                                        <p>{selected.company_period}</p>
+                                        <hr />
+                                        <h5><b>홈페이지</b></h5>
+                                        <p>{selected.company_site}</p>
+                                        <hr />
+                                        <h5><b>태그</b></h5>
+                                        <p>{selected.company_tag}</p>
+                                        <button type="button" className="btn btn-outline-primary" onClick={bookMark}>
+                                        <BiBookmark/>북마크
+                                        </button>
+                                        <button className="btn btn-primary" type="submit" onClick={onClick}>지원하기</button>
+                                        
                                     </div>
                                 </div>
                             </>
@@ -96,6 +132,7 @@ export default () => {
                     </div>
                 </div>
             </div>
+            
 
             {/* <div className="wer">
                 <h2>프로젝트 찾기</h2>
