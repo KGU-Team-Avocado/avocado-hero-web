@@ -8,6 +8,7 @@ import Chart from "chart.js/auto";
 export default () => {
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
+    const realUser = ["gabrielyoon7", "wlstn", "123", "201912069", "hido", "seeun", "yeonsu"]
     const attendances = {
         "gabrielyoon7": 5,
         "wlstn": 4,
@@ -32,6 +33,7 @@ export default () => {
                         log["time"] = koreanTime(log.time); //로그의 모든 시간을 한국 시간으로 변경 후 저장
                     }); //서버쪽에서 실수로 영국시간 받고 있었어서 부득이하게 이렇게 조치함
                 }
+                temp = temp.filter((log)=>realUser.includes(log.user_id))
                 setData(temp); //로그를 data state에 저장
                 setUser([]); //혹시 몰라서 user를 한번 비워줌 (전에 핫 리프레시 하다가 몇 번 버그 생겼어서 이렇게 함)
             })
