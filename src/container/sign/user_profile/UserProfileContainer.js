@@ -29,7 +29,7 @@ export default () => {
     return (
         <>
             <ProfileCard
-                profile={user}
+                user={user}
             />
         </>
     )
