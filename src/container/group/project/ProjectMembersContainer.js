@@ -19,36 +19,20 @@ const ProjectMembersContainer = () => {
         });
     },[]);
 
-    const [applicants, setApplicants] = useState([ // 프로젝트 지원자 배열
-        // {
-        //     user_id: 'gabrielyoon7',
-        //     user_name: "윤주현",
-        //     user_email: 'gabrielyoon7@gmail.com',
-        //     message: "열심히하겠습니다!",
-        //     joined: false
-        // },
-        // {
-        //     user_id: 'yeonsu',
-        //     user_name: "김연수",
-        //     user_email: 'yeonsu@gmail.com',
-        //     message: "열심히하겠습니다!!",
-        //     joined: false
-        // },
-        // {
-        //     user_id: "hido",
-        //     user_name: "김도희",
-        //     user_email: 'hido@gmail.com',
-        //     message: "열심히하겠습니다!!!",
-        //     joined: false
-        // },
-        // {
-        //     user_id: "123",
-        //     user_name: "함현준",
-        //     user_email: '123@gmail.com',
-        //     message: "열심히하겠습니다!!!",
-        //     joined: false
-        // },
-    ]);
+    useEffect(()=>{
+        axios.post("/groupsRouter/getGroup", {
+            _id: project_id,
+        }).then((response) => {
+            console.log(response.data);
+            setMembers(response.data.members)
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },[]);
+
+    const [applicants, setApplicants] = useState([]); // 프로젝트 지원자 배열
+    const [members, setMembers] = useState([]); //멤버 배열
+
     const [show, setShow] = useState('null');
     const [close, setClose] = useState(false)
 
@@ -59,8 +43,19 @@ const ProjectMembersContainer = () => {
     }
 
     const acceptMember = (applicant) => {
-        setShow('null');
-        setApplicants(applicants.map((user) => user.user_id === applicant.user_id ? { ...user, joined: true } : user));
+        console.log(applicant)
+        // setShow('null');
+        // setApplicants(applicants.map((user) => user.user_id === applicant.user_id ? { ...user, joined: true } : user));
+        axios.post("/groupsRouter/acceptApplicant", {
+            _id: applicant._id,
+            group_id: applicant.group_id,
+            user_id:applicant.user_id
+        }).then((response) => {
+            console.log(response.data);
+            // setApplicants(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     const rejectMember = (applicant) => {
@@ -136,6 +131,7 @@ const ProjectMembersContainer = () => {
 
             <div className="table-responsive">
                 <h2>현재 팀원</h2>
+                {JSON.stringify(members)}
                 <table className="table table-hover">
                     <thead className="table-light text-center">
                         <tr>

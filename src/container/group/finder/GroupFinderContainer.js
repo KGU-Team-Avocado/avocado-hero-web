@@ -10,7 +10,7 @@ export default () => {
     const [groups, setGroups] = useState([]);
 
     useEffect(() => {
-        axios.get("/groupsRouter/getGroup").then((response) => {
+        axios.get("/groupsRouter/getGroups").then((response) => {
             // console.log(JSON.stringify(response.data))
             setGroups(response.data);
         }).catch(function (error) {
