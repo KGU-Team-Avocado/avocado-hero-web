@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom";
-import NoticeAcordion from "../../../component/project/workspace/notice/NoticeAcordion";
-import NoticeModal from "../../../component/project/workspace/notice/NoticeModal";
+import NoticeAcordion from "../../../component/project/notice/NoticeAcordion";
+import NoticeModal from "../../../component/project/notice/NoticeModal";
 
 const ProjectContainer = () => {
     const [groupManager, setGroupManager] = useState({});
