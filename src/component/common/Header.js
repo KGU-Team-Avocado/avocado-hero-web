@@ -141,6 +141,9 @@ const Header = () => {
                     <Dropdown.Item href={"/user/" + userInfo.user_id}>
                       프로필 보기
                     </Dropdown.Item>
+                    <Dropdown.Item href={"/userProfile/" + userInfo.user_id}>
+                      프로필 보기 v2
+                    </Dropdown.Item>
                     <Dropdown.Item href="/myWorkspace">
                       내 워크스페이스
                     </Dropdown.Item>
