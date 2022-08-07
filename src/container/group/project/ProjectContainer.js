@@ -1,56 +1,72 @@
-import { useRef, useState } from "react"
+import axios from "axios";
+import { useEffect, useRef, useState } from "react"
+import { useParams } from "react-router-dom";
 import NoticeAcordion from "../../../component/project/workspace/notice/NoticeAcordion";
 import NoticeModal from "../../../component/project/workspace/notice/NoticeModal";
 
 const ProjectContainer = () => {
-    const [notices, setNotices] = useState([ //공지사항 배열
-        {
-            _id: 0,
-            title: "콘솔",
-            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
-        },
-        {
-            _id: 1,
-            title: "콘솔",
-            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
-        },
-        {
-            _id: 2,
-            title: "콘솔",
-            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
-        },
-        {
-            _id: 3,
-            title: "콘솔",
-            description: "상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 상세설명 ",
-        },
-    ]);
+    const [notices, setNotices] = useState([]); // 공지사항 배열
 
+    const [show, setShow] = useState(false);
     const [title, setTitle] = useState(""); //공지사항 제목
     const [description, setDescription] = useState(""); //공지사항 내용
-    const [id, setId] = useState(4); //추후 0으로 교체
     const [isEdit, setIsEdit] = useState(false); //수정 모드 여부
     const [key, setKey] = useState(-1); //수정할 공지의 id
 
     const inputTitle = useRef();
     const inputDesc = useRef();
 
+    const params = useParams();
+    const project_id = params.id;
+
+    useEffect(()=>{
+        axios.post("/groupsRouter/getGroup", {
+            _id: project_id,
+        }).then((response) => {
+            console.log(response.data);
+            setNotices(response.data.notices)
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },[]);
+
     const saveNewNotice = () => {
-        const newNotice = {_id: id, title: inputTitle.current.value, description: inputDesc.current.value};
-        setNotices([newNotice, ...notices]);
-        setId(id + 1);
-        setTitle("");
-        setDescription("");
+        const newNotice = {title: inputTitle.current.value, description: inputDesc.current.value};
+        axios.post("/groupsRouter/saveNewNotice", {
+            _id: project_id,
+            notice: newNotice
+        }).then((response) => {
+            console.log(response.data);
+            setTitle("");
+            setDescription("");
+            setShow(false);
+            setNotices(response.data)
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
-    const deleteNotice = (id) => {
-        setNotices(notices.filter((notice) => notice._id !== id));
+    const handleClose = () => {
+        setShow(false);
     }
+    // const deleteNotice = (id) => {
+    //     setNotices(notices.filter((notice) => notice._id !== id));
+    //     axios.post("/groupsRouter/deleteNotice", {
+    //         _id: project_id,
+    //         notice_id: id
+    //     }).then((response) => {
+    //         console.log(response.data);
+    //         setNotices(response.data)
+    //     }).catch(function (error) {
+    //         console.log(error);
+    //     });
+    // }
 
     const showModifyModal = (notice) => {
         setTitle(notice.title);
         setDescription(notice.description);
         setKey(notice._id);
+        setShow(true);
         setIsEdit(true);
     }
 
@@ -72,7 +88,7 @@ const ProjectContainer = () => {
                         <button type="button" className="btn btn-sm btn-outline-secondary">Export</button>
                     </div>
                     {/* 공지사항 추가하기는 추후 팀장만 볼 수 있게 수정 */}
-                    <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                    <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => setShow(true)} >
                         공지사항 추가하기
                     </button>
                 </div>
@@ -86,12 +102,14 @@ const ProjectContainer = () => {
 
             <NoticeModal 
                 title={title}
+                show={show}
                 description={description}
                 isEdit={isEdit}
                 inputTitle={inputTitle}
                 inputDesc={inputDesc}
                 modifyNotice={modifyNotice}
                 saveNewNotice={saveNewNotice}
+                handleClose={handleClose}
             />
         </>
     )

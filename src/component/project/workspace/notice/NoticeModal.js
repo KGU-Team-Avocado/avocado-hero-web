@@ -1,32 +1,55 @@
-const NoticeModal = ({title, description, modifyNotice, saveNewNotice, isEdit, inputTitle, inputDesc}) => {
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+
+const NoticeModal = ({ show, title, description, modifyNotice, saveNewNotice, isEdit, inputTitle, inputDesc, handleClose }) => {
     return (
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">새 공지사항</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">제목</label>
-                                <input type="text" class="form-control" id="recipient-name" defaultValue={title} ref={inputTitle} />
-                            </div>
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label">내용</label>
-                                <textarea class="form-control" id="message-text" defaultValue={description} ref={inputDesc} ></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                        {isEdit ? <button type="button" class="btn btn-primary" onClick={() => modifyNotice()} data-bs-dismiss="modal">수정</button>
-                            : <button type="button" class="btn btn-primary" onClick={() => saveNewNotice()} data-bs-dismiss="modal">저장</button>}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Modal
+            show={show}
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}>
+            <Modal.Header closeButton>
+                <Modal.Title>새 공지사항</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+                <Form>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+                        <Form.Label>제목</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="title"
+                            defaultValue={title}
+                            ref={inputTitle}
+                            autoFocus
+                        />
+                    </Form.Group>
+
+                    <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                    >
+                        <Form.Label>설명</Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            rows={3}
+                            placeholder="description"
+                            defaultValue={description}
+                            ref={inputDesc} />
+                    </Form.Group>
+                </Form>
+            </Modal.Body>
+
+            <Modal.Footer>
+                <Button variant="danger" onClick={handleClose}>취소</Button>
+                {isEdit ?
+                    <Button variant="primary" onClick={() => modifyNotice()}>수정</Button>
+                    :
+                    <Button variant="primary" onClick={() => saveNewNotice()}>저장</Button>
+                }
+            </Modal.Footer >
+        </Modal >
     )
 }
 
