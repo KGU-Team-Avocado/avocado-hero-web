@@ -44,45 +44,43 @@ const ProfileContainer = () => {
     }, []);
     console.log(user);
 
+    // const handleInput = (state) => {
+    //     console.log(state)
+    //     setProfile({
+    //         ...profile,
+    //         [state.target.name]: state.target.value
+    //     })
+    // }
 
+    // const onClickSubmit = (e) => { // 수정완료 함수
+    //     const newProfile = {
+    //         ...profile,
 
-    const handleInput = (state) => {
-        console.log(state)
-        setProfile({
-            ...profile,
-            [state.target.name]: state.target.value
-        })
-    }
+    //     }
+    //     console.log(newProfile);
+    //     e.preventDefault();
 
-    const onClickSubmit = (e) => { // 수정완료 함수
-        const newProfile = {
-            ...profile,
-
-        }
-        console.log(newProfile);
-        e.preventDefault();
-
-        axios
-            .post("/usersRouter/profileUpdate", newProfile)
-            .then((response) => {
-                console.log(response);
-                if (response.data.success === true) {
-                    window.location.href = "/";
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
+    //     axios
+    //         .post("/usersRouter/profileUpdate", newProfile)
+    //         .then((response) => {
+    //             console.log(response);
+    //             if (response.data.success === true) {
+    //                 window.location.href = "/";
+    //             }
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
+    // };
 
     return (
         <>
-        <ProfileCard
-        profile={profile}
-        />
+            <ProfileCard
+                profile={profile}
+            />
 
         </>
-            )
+    )
 }
 
 export default ProfileContainer;

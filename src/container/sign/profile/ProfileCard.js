@@ -9,13 +9,15 @@ import TechStack from "../../../component/common/TechStack";
 import { Link } from 'react-router-dom';
 
 export default (props) => {
-    const onClickEdit = () => {
-        return (
-            <ProfileUpdate />
-        )
-    }
+    // const onClickEdit = (user) => {
+    //     window.location.href="./ProfileUpdate"
+    //     return (
+    //         <ProfileUpdate />
+    //     )
+    // }
 
     const user = props.profile;
+    console.log(user);
     // const belongs = user.belong;
     // const fields = user.field;
     // const links = user.link;
@@ -114,10 +116,7 @@ export default (props) => {
                             </Card.Body>
                         </Card>
                     </div>
-                    <Link to="./ProfileUpdate">
-                    <Button>프로필 수정</Button>
-                    </Link>
-                    
+                    {/* <Button href={"./ProfileUpdate" + user.user_id}>프로필 수정</Button>                    */}
                 </Row>
             </Container>
         </>

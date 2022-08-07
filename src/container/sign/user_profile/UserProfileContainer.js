@@ -16,7 +16,7 @@ export default () => {
             if (response.data.status === "success") {
                 // console.log(JSON.stringify(response.data.user));
                 const foundUser = response.data.user;
-                console.log(foundUser)
+                console.log(foundUser);
                 setUser(foundUser);
             }
             else {
@@ -29,7 +29,7 @@ export default () => {
     return (
         <>
             <ProfileCard
-                user={user}
+                profile={user}
             />
         </>
     )

@@ -11,10 +11,16 @@ import AddInput from "./AddInput";
 import './profile.css';
 
 export default (props) => {
-    const [profile, setProfile] = useState(null);
+    const user = props.user;
+    console.log(user);
+    const [profile, setProfile] = useState({
+        nickname: user.nickname
+    })
+
         const handleInput = (e) => {
+            console.log(e);
         setProfile({
-            ...props.profile,
+            ...profile,
             [e.target.name]: e.target.value
         })
     }
@@ -35,12 +41,12 @@ export default (props) => {
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>닉네임</Form.Label>
                                 <Form.Control type="text" name="nickname" placeholder="" 
+                                // value={profile.nickname}
                                 onChange={handleInput}
-                                    // value={profile.nickname}
                                     />
                             </Form.Group>
 
-                            {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            {/* <Form.Group className="mb-3" contro lId="exampleForm.ControlInput1">
                                 <Form.Label>이름</Form.Label>
                                 <Form.Control type="text" name="name" placeholder="" onChange={handleInput}
                                     value={name} />
