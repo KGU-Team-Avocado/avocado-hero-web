@@ -46,10 +46,6 @@ const ProjectContainer = () => {
         });
     }
 
-    const handleClose = () => {
-        setShow(false);
-    }
-
     const deleteNotice = (id) => {
         axios.post("/groupsRouter/deleteNotice", {
             _id: project_id,
@@ -71,11 +67,26 @@ const ProjectContainer = () => {
     }
 
     const modifyNotice = () => {
-        setNotices(notices.map((notice) => notice._id === key ? {...notice, title: inputTitle.current.value, description: inputDesc.current.value} : notice));
-        setTitle("");
-        setDescription("");
-        setKey(0);
-        setIsEdit(false);
+        const newNotice = {title: inputTitle.current.value, description: inputDesc.current.value};
+        axios.post("/groupsRouter/modifyNotice", {
+            _id: project_id,
+            notice_id: key,
+            notice: newNotice
+        }).then((response) => {
+            console.log(response.data);
+            setTitle("");
+            setDescription("");
+            setKey(0);
+            setIsEdit(false);
+            setShow(false);
+            setNotices(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    const handleClose = () => {
+        setShow(false);
     }
 
     return (
