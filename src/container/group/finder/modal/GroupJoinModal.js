@@ -6,11 +6,13 @@ import axios from "axios";
 
 export default (props) => {
 
+    const group = props.selectedGroup
+
     const [message, setMessage] = useState('');
 
     const handleMessageChange = event => {
-      setMessage(event.target.value);
-      console.log(event.target.value);
+        setMessage(event.target.value);
+        console.log(event.target.value);
     };
 
 
@@ -40,6 +42,7 @@ export default (props) => {
     };
 
     const groupApply = () => {
+
         console.log('깔깔')
         axios.post('/groupsRouter/apply', {
             group_id: group._id,
@@ -47,10 +50,10 @@ export default (props) => {
             user_name: userInfo.user_name,
             user_email: userInfo.user_email,
             status: "대기",
-            message:message,
+            message: message,
         }).then((response) => { //서버로부터 받아온 id
             console.log(response.data)
-            if(response.data.success===true){
+            if (response.data.success === true) {
                 window.location.reload()
             }
         }).catch(function (error) {
@@ -58,7 +61,6 @@ export default (props) => {
         });
     }
 
-    const group = props.selectedGroup
     return (
         <div className="modal-dialog" role="document">
             <div className="modal-content rounded-4 shadow">
@@ -67,11 +69,11 @@ export default (props) => {
                         <h2 className="fw-bold mb-0">신청하기</h2>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    {
+                        group &&
+                        <>
+                            <div className="d-grid my-5 list-unstyled">
 
-                    <div className="d-grid my-5 list-unstyled">
-                        {
-                            group &&
-                            <>
                                 <h4>{group.group_name}</h4>
                                 <h3>{group.project_name}</h3>
                                 <h5>{group.short_description}</h5>
@@ -93,11 +95,13 @@ export default (props) => {
                                     value={message}
                                     onChange={handleMessageChange}
                                 />
-                            </>
-                        }
 
-                    </div>
-                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" disabled={userInfo ? "" : "disabled"} onClick={() => groupApply()}>신청하기</button>
+
+
+                            </div>
+                            <button type="button" className="btn btn-lg btn-success mt-5 w-100" disabled={userInfo && userInfo.user_id != group.manager ? "" : "disabled"} onClick={() => groupApply()}>신청하기</button>
+                        </>
+                    }
                 </div>
             </div>
         </div>
