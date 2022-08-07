@@ -5,6 +5,7 @@ import NoticeAcordion from "../../../component/project/workspace/notice/NoticeAc
 import NoticeModal from "../../../component/project/workspace/notice/NoticeModal";
 
 const ProjectContainer = () => {
+    const [groupManager, setGroupManager] = useState({});
     const [notices, setNotices] = useState([]); // 공지사항 배열
 
     const [show, setShow] = useState(false);
@@ -12,6 +13,7 @@ const ProjectContainer = () => {
     const [description, setDescription] = useState(""); //공지사항 내용
     const [isEdit, setIsEdit] = useState(false); //수정 모드 여부
     const [key, setKey] = useState(-1); //수정할 공지의 id
+    const [user, setUser] = useState({user_id: ''})
 
     const inputTitle = useRef();
     const inputDesc = useRef();
@@ -19,19 +21,25 @@ const ProjectContainer = () => {
     const params = useParams();
     const project_id = params.id;
 
-    useEffect(()=>{
+    useEffect(() => {
+        if (sessionStorage.getItem("user")) {
+            console.log()
+            setUser(JSON.parse(sessionStorage.getItem("user")));
+        }
+
         axios.post("/groupsRouter/getGroup", {
             _id: project_id,
         }).then((response) => {
             console.log(response.data);
-            setNotices(response.data.notices)
+            setGroupManager(response.data.manager);
+            setNotices(response.data.notices);
         }).catch(function (error) {
             console.log(error);
         });
-    },[]);
+    }, []);
 
     const saveNewNotice = () => {
-        const newNotice = {title: inputTitle.current.value, description: inputDesc.current.value};
+        const newNotice = { title: inputTitle.current.value, description: inputDesc.current.value };
         axios.post("/groupsRouter/saveNewNotice", {
             _id: project_id,
             notice: newNotice
@@ -67,7 +75,7 @@ const ProjectContainer = () => {
     }
 
     const modifyNotice = () => {
-        const newNotice = {title: inputTitle.current.value, description: inputDesc.current.value};
+        const newNotice = { title: inputTitle.current.value, description: inputDesc.current.value };
         axios.post("/groupsRouter/modifyNotice", {
             _id: project_id,
             notice_id: key,
@@ -98,10 +106,13 @@ const ProjectContainer = () => {
                         <button type="button" className="btn btn-sm btn-outline-secondary">Share</button>
                         <button type="button" className="btn btn-sm btn-outline-secondary">Export</button>
                     </div>
-                    {/* 공지사항 추가하기는 추후 팀장만 볼 수 있게 수정 */}
-                    <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => setShow(true)} >
-                        공지사항 추가하기
-                    </button>
+                    {
+                        user.user_id === groupManager ?
+                            <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => setShow(true)} >
+                                공지사항 추가하기
+                            </button>
+                            : null
+                    }
                 </div>
             </div>
 
@@ -109,9 +120,11 @@ const ProjectContainer = () => {
                 notices={notices}
                 deleteNotice={deleteNotice}
                 showModifyModal={showModifyModal}
+                user={user}
+                groupMgr={groupManager}
             />
 
-            <NoticeModal 
+            <NoticeModal
                 title={title}
                 show={show}
                 description={description}
