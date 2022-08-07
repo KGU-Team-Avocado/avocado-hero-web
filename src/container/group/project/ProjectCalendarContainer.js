@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import ProjectEventCalendar from "../../../component/project/workspace/calendar/ProjectEventCalenda";
-import CalendarModal from "../../../component/project/workspace/calendar/CalendarModal";
+import ProjectEventCalendar from "../../../component/project/calendar/ProjectEventCalenda";
+import CalendarModal from "../../../component/project/calendar/CalendarModal";
 
 const DayOfTheWeek = [
     {
