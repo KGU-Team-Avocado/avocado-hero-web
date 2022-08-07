@@ -59,11 +59,19 @@ const ProjectMembersContainer = () => {
     }
 
     const rejectMember = (applicant) => {
-        setShow('null');
+        // setShow('null');
         if (!window.confirm('변려한 신청자는 신청자 목록에서 사라지게 됩니다. 삭제하시겠습니까?')) {
             return;
         }
-        setApplicants(applicants.filter((user) => user.user_id !== applicant.user_id))
+        // setApplicants(applicants.filter((user) => user.user_id !== applicant.user_id))
+        axios.post("/groupsRouter/rejectApplicant", {
+            _id: applicant._id,
+        }).then((response) => {
+            console.log(response.data);
+            // setApplicants(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     const cancleAccept = (applicant) => {
