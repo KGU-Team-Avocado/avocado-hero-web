@@ -49,18 +49,18 @@ const ProjectContainer = () => {
     const handleClose = () => {
         setShow(false);
     }
-    // const deleteNotice = (id) => {
-    //     setNotices(notices.filter((notice) => notice._id !== id));
-    //     axios.post("/groupsRouter/deleteNotice", {
-    //         _id: project_id,
-    //         notice_id: id
-    //     }).then((response) => {
-    //         console.log(response.data);
-    //         setNotices(response.data)
-    //     }).catch(function (error) {
-    //         console.log(error);
-    //     });
-    // }
+
+    const deleteNotice = (id) => {
+        axios.post("/groupsRouter/deleteNotice", {
+            _id: project_id,
+            notice_id: id
+        }).then((response) => {
+            console.log(response.data);
+            setNotices(response.data)
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
 
     const showModifyModal = (notice) => {
         setTitle(notice.title);
