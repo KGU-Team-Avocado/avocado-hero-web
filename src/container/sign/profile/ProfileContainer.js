@@ -23,6 +23,7 @@ const ProfileContainer = () => {
                 const foundUser = response.data.user;
                 setUser(foundUser);
                 setProfile({
+                    user_id:foundUser.user_id,
                     name: foundUser.user_name,
                     nickname: foundUser.user_nickname,
                     email: foundUser.user_email,

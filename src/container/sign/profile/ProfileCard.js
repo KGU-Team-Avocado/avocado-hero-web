@@ -116,7 +116,7 @@ export default (props) => {
                             </Card.Body>
                         </Card>
                     </div>
-                    {/* <Button href={"./ProfileUpdate" + user.user_id}>프로필 수정</Button>                    */}
+                    <Button href={"./ProfileUpdate/" + (user && user.user_id)}>프로필 수정</Button>                   
                 </Row>
             </Container>
         </>
