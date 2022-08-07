@@ -42,7 +42,7 @@ function App() {
         {/* 프로필 보기 */}
         <Route path="user/:id" element={<ProfileContainer />} />
         <Route path="userProfile/:id" element={<UserProfileContainer />} />
-        <Route path="user/:id/ProfileUpdate" element={<ProfileUpdate />} />
+        <Route path="user/ProfileUpdate/:id" element={<ProfileUpdate />} />
         {/* 워크스페이스 */}
         <Route path="myWorkspace" element={<WorkSpaceContainer />} />
 
