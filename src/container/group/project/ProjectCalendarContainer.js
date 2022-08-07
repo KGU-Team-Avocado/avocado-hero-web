@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import ProjectEventCalendar from "../../../component/project/workspace/calendar/ProjectEventCalenda";
-import CalendarModal from "../../../component/project/workspace/calendar/CalendarModal";
+import ProjectEventCalendar from "../../../component/project/calendar/ProjectEventCalenda";
+import CalendarModal from "../../../component/project/calendar/CalendarModal";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const DayOfTheWeek = [
     {
@@ -81,6 +83,20 @@ const ProjecCalendarContainer = () => {
         start: "2022-07-10T10:45:00",
         end: "2022-07-13T10:45:00",
     }]);
+
+    const params = useParams();
+    const project_id = params.id;
+
+    useEffect(() => {
+        axios.post("/groupsRouter/getGroup", {
+            _id: project_id,
+        }).then((response) => {
+            console.log(response.data);
+            setEvents([...response.data.events.recursive, ...response.data.events.nonrecursive]);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }, []);
 
     const handleDateClick = (arg) => { // bind with an arrow function
         console.log(arg)
