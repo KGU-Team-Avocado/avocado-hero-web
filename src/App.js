@@ -22,6 +22,7 @@ import ProjectRoleContainer from "./container/group/project/ProjectRoleContainer
 import ProjectMembersContainer from "./container/group/project/ProjectMembersContainer";
 import ProjectEndContainer from "./container/group/project/ProjectEndContainer";
 import UserProfileContainer from "./container/sign/user_profile/UserProfileContainer";
+import ProfileUpdate from "./container/sign/profile/ProfileUpdate";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         {/* 프로필 보기 */}
         <Route path="user/:id" element={<ProfileContainer />} />
         <Route path="userProfile/:id" element={<UserProfileContainer />} />
+        <Route path="user/:id/ProfileUpdate" element={<ProfileUpdate />} />
         {/* 워크스페이스 */}
         <Route path="myWorkspace" element={<WorkSpaceContainer />} />
 
