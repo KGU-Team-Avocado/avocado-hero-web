@@ -47,42 +47,7 @@ const ProjecCalendarContainer = () => {
     const [allday, setAllday] = useState(false);
     const [daysOfWeek, setDaysOfWeek] = useState([]);
     const [color, setColor] = useState("");
-    const [events, setEvents] = useState([{
-        id: '0',  // 매주 반복하는 일정
-        title: "All Day Event very long title",
-        description: "description for All Day Event1",
-        startRecur: "2022-07-14",
-        endRecur: "2022-08-12",
-        startTime: "10:45",
-        endTime: "22:45",
-        daysOfWeek: ["0","6"],
-        color: "red"
-    },
-    {
-        id: '1', // 하루 일정 (종일)
-        title: "Long Event",
-        description: "description for All Day Event2",
-        date: "2022-07-11",
-        start: "2022-07-11",
-        end: "2022-07-11",
-        color: "rgba(62, 121, 37)"
-    },
-    {
-        id: '2', // 하루 일정 (특정 시간)
-        title: "Long Event",
-        description: "description for All Day Event3",
-        start: "2022-07-11 10:45:00",
-        end: "2022-07-11 11:45:00",
-        color: "red"
-    },
-    {
-        id: '3', // 긴 일정
-        groupId: "blueEvents",
-        title: "DTS STARTS",
-        description: "description for All Day Event4",
-        start: "2022-07-10T10:45:00",
-        end: "2022-07-13T10:45:00",
-    }]);
+    const [events, setEvents] = useState([]);
 
     const params = useParams();
     const project_id = params.id;
@@ -122,12 +87,11 @@ const ProjecCalendarContainer = () => {
     }
 
     const handleSave = () => {
-        const id = parseInt(events[events.length - 1].id) + 1;
         const newStartDate = new Date(startDay);
         const newEndDate = new Date(endDay);
+        let mode = '';
 
         let newEvent = {
-            id: id,
             title: inputTitle.current.value,
             description: inputDesc.current.value,
             color: color,
@@ -135,12 +99,14 @@ const ProjecCalendarContainer = () => {
         };
 
         if (daysOfWeek.length === 0){
+            mode = 'nonrecursive';
             newEvent = { 
                 ...newEvent,
                 start: startDay,
                 end: endDay
             };
         } else {
+            mode = 'recursive';
             newEvent = {
                 ...newEvent,
                 startRecur: newStartDate.toLocaleDateString(),
@@ -151,13 +117,25 @@ const ProjecCalendarContainer = () => {
             };
         }
 
-        setEvents([...events, newEvent]);
-        setStartDay("");
-        setEndDay("");
-        setAllday("");
-        setColor("");
-        setDaysOfWeek([]);
-        setShow(false);
+        console.log(newEvent)
+
+        axios.post("/groupsRouter/saveNewEvent", {
+            _id: project_id,
+            event: newEvent,
+            mode: mode
+        }).then((response) => {
+            console.log(response.data);
+            setEvents([...response.data.recursive, ...response.data.nonrecursive]);
+            // setEvents([...events, newEvent]);
+            setStartDay("");
+            setEndDay("");
+            setAllday("");
+            setColor("");
+            setDaysOfWeek([]);
+            setShow(false);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     const handleClose = () => {
