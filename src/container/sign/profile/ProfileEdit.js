@@ -11,9 +11,6 @@ import AddInput from "./AddInput";
 import './profile.css';
 
 export default (props) => {
-    const [selectedFields, setSelectedFields] = useState([]);
-    const [selectedKeywords, setSelectedKeywords] = useState([]);
-    const [selectedPersonals, setSelectedPersonals] = useState([]);
 
     const fields = [
         { label: "프론트", value: "front-end" },
@@ -33,13 +30,31 @@ export default (props) => {
         { label: "호기심많은", value: "curious" },
     ];
 
-    const [profile, setProfile] = useState()
+    const [profile, setProfile] = useState();
+
+    const [selectedFields, setSelectedFields] = useState([]);
+    const [selectedKeywords, setSelectedKeywords] = useState([]);
+    const [selectedPersonals, setSelectedPersonals] = useState([]);
 
     useEffect(() => {
         setProfile(props.profile);
     }, [props.profile]);
 
+    // profile.user_field.length > 0 
+    // ? 
+    // (
+    //     profile.user_field.map((profile.user_field) => 
+    //     setSelectedFields(profile.user_field))
+    // )
+    // :
+    // (
+
+    // )
     
+    // useEffect(() => {
+    //     setSelectedFields(props.profile.user_field)
+    // }, [props.profile.user_field]);
+
     const handleInput = (e) => {
         console.log(e);
         setProfile({
@@ -48,12 +63,7 @@ export default (props) => {
         })
     }
 
-    const nicknameInput = useRef();
-    const newContentInput = useRef();
-
-    const onClickSubmit = (e) => {
-        e.preventDefault();
-
+    const onClickSubmit = () => {
         axios
             .post("/usersRouter/profileUpdate", {
                 user_id: profile.user_id,
@@ -75,6 +85,8 @@ export default (props) => {
             .catch(function (error) {
                 console.log(error);
             });
+
+            window.location.href="../../user/" + profile.user_id;
     };
 
 
@@ -97,7 +109,7 @@ export default (props) => {
 
                                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                             <Form.Label>닉네임</Form.Label>
-                                            <Form.Control type="text" name="nickname" placeholder=""
+                                            <Form.Control type="text" name="user_nickname" placeholder=""
                                                 value={profile.user_nickname}
                                                 onChange={handleInput}
                                             />
@@ -105,17 +117,17 @@ export default (props) => {
 
                                         <Form.Group className="mb-3" contro lId="exampleForm.ControlInput1">
                                 <Form.Label>이름</Form.Label>
-                                <Form.Control type="text" name="name" placeholder="" onChange={handleInput}
+                                <Form.Control type="text" name="user_name" placeholder="" onChange={handleInput}
                                     value={profile.user_name} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>이메일</Form.Label>
-                                <Form.Control type="text" name="email" placeholder="" onChange={handleInput}
+                                <Form.Control type="text" name="user_email" placeholder="" onChange={handleInput}
                                     value={profile.user_email} />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>전화번호</Form.Label>
-                                <Form.Control type="text" name="phoneNum" placeholder="" onChange={handleInput}
+                                <Form.Control type="text" name="user_phoneNum" placeholder="" onChange={handleInput}
                                     value={profile.user_phoneNum} />
                             </Form.Group>
                                     </Card.Body>
@@ -134,8 +146,7 @@ export default (props) => {
                                     <MultiSelect
                                         options={fields}
                                         value={selectedFields}
-                                        handleInput={setSelectedFields}
-                                        label="dd"
+                                        onChange={setSelectedFields}
                                     />
                                 </div>
 
@@ -156,22 +167,20 @@ export default (props) => {
                                     <MultiSelect
                                         options={keywords}
                                         value={selectedKeywords}
-                                        handleInput={setSelectedKeywords}
-                                        label="dd"
+                                        onChange={setSelectedKeywords}
                                     />
                                 </div>
                                 <div class="item"><div class="contentTitle">성향</div>
                                     <MultiSelect
                                         options={personals}
                                         value={selectedPersonals}
-                                        handleInput={setSelectedPersonals}
-                                        label="dd"
+                                        onChange={setSelectedPersonals}
                                     />
                                 </div>
                                 <div class="item">
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                         <Form.Label>소개글</Form.Label>
-                                        <Form.Control as="textarea" name="content" placeholder="" rows={3} handleInput={handleInput}
+                                        <Form.Control as="textarea" name="user_intro" placeholder="" rows={3} onChange={handleInput}
                                             value={profile.user_intro} />
                                     </Form.Group>
                                 </div>
@@ -179,7 +188,7 @@ export default (props) => {
                         </Card.Body>
                     </Card>
                 </div>
-                            <Button onClick={() => console.log(profile)}>수정 완료</Button>
+                            <Button onClick={onClickSubmit}>수정 완료</Button>
                         </Row>
                     </Container>
                 </>
