@@ -204,12 +204,27 @@ const ProjecCalendarContainer = () => {
     }
 
     const deleteEvent = (info) => {
-        {
-            if (!window.confirm("삭제하시겠습니까?")) {
-                info.revert();
-            } else {
-                setEvents(events.filter((event) => event.id !== info.event.id))
-            }
+        const event = events.filter((event) => event._id === info.event.id)
+        let mode = 'nonrecursive';
+        if(event[0].daysOfWeek){
+            mode = 'recursive'
+        }
+
+        if (!window.confirm("삭제하시겠습니까?")) {
+            info.revert();
+        } else {
+            axios.post("/groupsRouter/deleteEvent", {
+                _id: project_id,
+                event_id: info.event.id,
+                mode: mode
+            }).then((response) => {
+                console.log(response.data);
+                const recursive = response.data.recursive.map(rec => { return {...rec, id: rec._id} })
+                const nonrecursive = response.data.nonrecursive.map(non => { return {...non, id: non._id} })
+                setEvents([...recursive, ...nonrecursive]);
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
     }
 
