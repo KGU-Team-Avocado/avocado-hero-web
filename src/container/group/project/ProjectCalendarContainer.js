@@ -40,8 +40,6 @@ const ProjecCalendarContainer = () => {
     const [show, setShow] = useState(false);
     const [startDay, setStartDay] = useState("");
     const [endDay, setEndDay] = useState("");
-    // const [title, setTitle] = useState("");
-    // const [description, setDescription] = useState("");
     const inputTitle = useRef();
     const inputDesc = useRef();
     const [allday, setAllday] = useState(false);
@@ -56,8 +54,10 @@ const ProjecCalendarContainer = () => {
         axios.post("/groupsRouter/getGroup", {
             _id: project_id,
         }).then((response) => {
-            console.log(response.data);
-            setEvents([...response.data.events.recursive, ...response.data.events.nonrecursive]);
+            const recursive = response.data.events.recursive.map((rec) => { return {...rec, id: rec._id} })
+            const nonrecursive = response.data.events.nonrecursive.map((non) => { return {...non, id: non._id} })
+            setEvents([...recursive, ...nonrecursive]);
+            console.log([...recursive, ...nonrecursive])
         }).catch(function (error) {
             console.log(error);
         });
@@ -125,8 +125,9 @@ const ProjecCalendarContainer = () => {
             mode: mode
         }).then((response) => {
             console.log(response.data);
-            setEvents([...response.data.recursive, ...response.data.nonrecursive]);
-            // setEvents([...events, newEvent]);
+            const recursive = response.data.recursive.map(rec => { return {...rec, id: rec._id} })
+            const nonrecursive = response.data.nonrecursive.map(non => { return {...non, id: non._id} })
+            setEvents([...recursive, ...nonrecursive]);
             setStartDay("");
             setEndDay("");
             setAllday("");
@@ -164,20 +165,43 @@ const ProjecCalendarContainer = () => {
         if (!window.confirm("Are you sure about this change?")) {
             info.revert();
         } else {
-            setEvents(events.map((event) => event.id === info.event.id ? { ...event, start: info.event.start, end: info.event.end } : event))
+            modifyEvent(info);
         }
     };
 
     const resizeEvent = (info) => { // 일정 기간 조정 시 발생하는 이벤트
         alert(info.event.title + " end is now " + info.event.end.toISOString());
-        console.log(info.event.id)
+        console.log(info.event)
 
         if (!window.confirm("is this okay?")) {
             info.revert();
         } else {
-            setEvents(events.map((event) => event.id === info.event.id ? { ...event, start: info.event.start, end: info.event.end } : event))
+            modifyEvent(info);
         }
     };
+
+    const modifyEvent = (info) => {
+        const event = events.filter((event) => event._id === info.event.id)
+        if(event[0].daysOfWeek){
+            alert('반복일정은 수정이 불가합니다.');
+            info.revert();
+            return;
+        }
+
+        axios.post("/groupsRouter/modifyEvent", {
+            _id: project_id,
+            event_id: info.event.id,
+            start: info.event.start,
+            end: info.event.end,
+        }).then((response) => {
+            console.log(response.data);
+            const recursive = response.data.recursive.map(rec => { return {...rec, id: rec._id} })
+            const nonrecursive = response.data.nonrecursive.map(non => { return {...non, id: non._id} })
+            setEvents([...recursive, ...nonrecursive]);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
 
     const deleteEvent = (info) => {
         {
