@@ -46,6 +46,8 @@ export default (props) => {
         console.log('깔깔')
         axios.post('/groupsRouter/apply', {
             group_id: group._id,
+            group_name: group.group_name,
+            project_name: group.project_name,
             user_id: userInfo.user_id,
             user_name: userInfo.user_name,
             user_email: userInfo.user_email,
