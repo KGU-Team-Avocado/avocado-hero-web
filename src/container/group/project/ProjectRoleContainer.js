@@ -1,4 +1,7 @@
 import { useRef, useState } from "react";
+import { role } from "../../../assets/tag/Role";
+import ModifyRole from "../../../component/project/role/ModifyRole";
+import RoleBadge from "../../../component/project/role/RoleBadge";
 
 const ProjectRoleContainer = () => {
     const [members, setMembers] = useState([ //탬원 역할 배열
@@ -6,33 +9,45 @@ const ProjectRoleContainer = () => {
             user_id: '201912069',
             name: "박소영",
             role: "팀장",
-            description: "PM FrontEnd"
+            description: []
         },
         {
             user_id: 'gabrielyoon7',
             name: "윤주현",
             role: "팀원",
-            description: "rontEnd 일정관리"
+            description: []
         },
         {
             user_id: 'yeonsu',
             name: "김연수",
             role: "팀원",
-            description: "BackEnd 디자인설계"
+            description: []
         },
         {
             user_id: "hido",
             name: "김도희",
             role: "팀원",
-            description: "BackEnd test"
+            description: []
         },
     ]);
     const [edit, setEdit] = useState('');
+    const [selected, setSelected] = useState([]);
     const inputRef = useRef();
 
     const modifyRole = (member) => {
         setEdit("");
-        setMembers(members.map(mem => mem.user_id === member.user_id ? {...mem, description: inputRef.current.value} : mem))
+        setSelected([]);
+        const selecteRole = selected.map((s) => {return s.value})
+        setMembers(members.map(mem => mem.user_id === member.user_id ? {...mem, description: selecteRole} : mem))
+    }
+
+    const editWho = (edit) => {
+        setEdit(edit);
+    }
+
+    const findRole = (r) => {
+        const idx = role.findIndex((role)=>role.value===r)
+        return role[idx]
     }
 
     return (
@@ -64,19 +79,21 @@ const ProjectRoleContainer = () => {
                                         <h4 className="card-title">{member.role}</h4>
                                         <h6 className="card-subtitle mb-2 text-muted">{member.name}</h6>
                                         {edit === member.user_id ?
-                                            <div>
-                                                <textarea className="card-text" ref={inputRef} defaultValue={member.description} />
-                                                <div className="d-flex justify-content-end">
-                                                    <button type="button" className="btn btn-secondary me-2" onClick={() => modifyRole(member)} >저장</button>
-                                                    <button type="button" className="btn btn-danger" onClick={() => setEdit("")} data-bs-dismiss="modal">취소</button>
-                                                </div>
-                                            </div>
-                                            : <div>
-                                                <p className="card-text">{member.description}</p>
-                                                <div className="d-flex justify-content-end">
-                                                    <button type="button" className="btn btn-secondary me-2" onClick={() => setEdit(member.user_id)} >수정</button>
-                                                </div>
-                                            </div>
+                                            <ModifyRole
+                                                role={role}
+                                                member={member}
+                                                selected={selected}
+                                                setSelected={setSelected}
+                                                modifyRole={modifyRole}
+                                                cancleEdit={editWho}
+                                            />
+                                            : 
+                                            <RoleBadge
+                                                findRole={findRole}
+                                                member={member}
+                                                selected={selected}
+                                                editWho={editWho}
+                                            />
                                         }
                                     </div>
                                 </div>
