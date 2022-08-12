@@ -24,6 +24,7 @@ import ProjectEndContainer from "./container/group/project/ProjectEndContainer";
 import UserProfileContainer from "./container/sign/user_profile/UserProfileContainer";
 import ProfileUpdate from "./container/sign/profile/ProfileUpdate";
 import DatabaseContainer from "./container/example/DatabaseContainer";
+import MultiSelectExampleContainer from "./container/example/MultiSelectExampleContainer";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="example" element={<ExampleContainer />} />
         <Route path="example/bestworker" element={<RankContainer/>}/>
         <Route path="example/database" element={<DatabaseContainer/>}/>
+        <Route path="example/multiSelectExample" element={<MultiSelectExampleContainer/>}/>
 
         {/* 기업용 버튼 */}
         <Route path="humanRes" element={<HumanResources />} />

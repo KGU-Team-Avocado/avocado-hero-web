@@ -107,7 +107,10 @@ const Header = () => {
                     활동포인트
                   </Dropdown.Item>
                   <Dropdown.Item href="/example/database">
-                    디비 조회
+                    프로젝트 데이터베이스 조회
+                  </Dropdown.Item>
+                  <Dropdown.Item href="/example/multiSelectExample">
+                    테스트(멀티셀렉트)
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
