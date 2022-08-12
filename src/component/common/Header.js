@@ -106,6 +106,9 @@ const Header = () => {
                   <Dropdown.Item href="/example/bestworker">
                     활동포인트
                   </Dropdown.Item>
+                  <Dropdown.Item href="/example/database">
+                    디비 조회
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </>
