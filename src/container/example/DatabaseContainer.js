@@ -20,7 +20,8 @@ export default () => {
         <>
             <div>
                 <h1>Users</h1>
-                <Table data={users} rowsPerPage={10} />
+                {JSON.stringify(users)}
+                {/* <Table data={users} rowsPerPage={10} /> */}
             </div>
         </>
     )
