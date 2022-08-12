@@ -40,6 +40,13 @@ export default (props) => {
         setProfile(props.profile);
     }, [props.profile]);
 
+    // props.profile.user_field.map(())
+
+    // setSelectedFields = [
+    //     { label: ,
+    //     value: }
+    // ]
+
     // profile.user_field.length > 0 
     // ? 
     // (
