@@ -8,10 +8,10 @@ import Table from "../../../component/common/Table";
 export default () => {
     const [groups, setGroups] = useState([]);
     // const [selectedGroup, setSelectedGroup] = useState(null);
-    const setSelectedGroup = (group) =>{
+    const setSelectedGroup = (group) => {
         // alert(JSON.stringify(group))
-        if(window.confirm(group.project_name+'으로 이동하시겠습니까?')){
-            window.location.href="/project/" + group._id;
+        if (window.confirm(group.project_name + '으로 이동하시겠습니까?')) {
+            window.location.href = "/project/" + group._id;
         }
     }
 
@@ -71,11 +71,29 @@ export default () => {
             </div>
             <div className="my-3">
                 <h3>신청한 그룹</h3>
-                {/* <div className="row">
-                    <div>{JSON.stringify(appliedGroups)}</div>
-                </div> */}
-                <div>아래 테이블은 임시로 띄움</div>
-                <Table data={appliedGroups} rowsPerPage={10} />
+                <div className="table-responsive">
+                    <table className="table table-hover">
+                        <thead className="table-light text-center">
+                            <tr>
+                                <th scope="col">그룹명</th>
+                                <th scope="col">프로젝트명</th>
+                                <th scope="col">상태</th>
+                            </tr>
+                        </thead>
+                        <tbody className="table-group-divider text-center">
+                            {
+                                appliedGroups.map((log) => (
+                                    <tr key={log._id}>
+                                        <td>{log.group_name}</td>
+                                        <td>{log.project_name}</td>
+                                        <td>{log.status}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                {/* <Table data={appliedGroups} rowsPerPage={10} /> */}
             </div>
         </>
     )
