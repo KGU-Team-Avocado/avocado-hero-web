@@ -8,7 +8,7 @@ const ProjectMembersContainer = () => {
     const params = useParams();
     const project_id = params.id;
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.post("/groupsRouter/getApplicants", {
             group_id: project_id,
         }).then((response) => {
@@ -17,21 +17,23 @@ const ProjectMembersContainer = () => {
         }).catch(function (error) {
             console.log(error);
         });
-    },[]);
+    }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.post("/groupsRouter/getGroup", {
             _id: project_id,
         }).then((response) => {
             console.log(response.data);
             setMembers(response.data.members)
+            setManager(response.data.manager)
         }).catch(function (error) {
             console.log(error);
         });
-    },[]);
+    }, []);
 
     const [applicants, setApplicants] = useState([]); // 프로젝트 지원자 배열
     const [members, setMembers] = useState([]); //멤버 배열
+    const [manager, setManager] = useState('');
 
     const [show, setShow] = useState('null');
     const [close, setClose] = useState(false)
@@ -124,17 +126,16 @@ const ProjectMembersContainer = () => {
                         </thead>
                         <tbody className="table-group-divider text-center">
                             {applicants.map((applicant) => (
-                                applicant.joined ? null :
-                                    <tr key={applicant.user_id}>
-                                        <th onClick={() => handleShow(applicant)} scope="row">1</th>
-                                        <td onClick={() => handleShow(applicant)}>{applicant.user_id}</td>
-                                        <td onClick={() => handleShow(applicant)}>{applicant.user_name}</td>
-                                        <td onClick={() => handleShow(applicant)}>{applicant.user_email}</td>
-                                        <td>
-                                            <button type="button" className="btn btn-primary btn-sm me-2" onClick={() => acceptMember(applicant)} >승인</button>
-                                            <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(applicant)} >반려</button>
-                                        </td>
-                                    </tr>
+                                <tr key={applicant.user_id}>
+                                    <th onClick={() => handleShow(applicant)} scope="row">1</th>
+                                    <td onClick={() => handleShow(applicant)}>{applicant.user_id}</td>
+                                    <td onClick={() => handleShow(applicant)}>{applicant.user_name}</td>
+                                    <td onClick={() => handleShow(applicant)}>{applicant.user_email}</td>
+                                    <td>
+                                        <button type="button" className="btn btn-primary btn-sm me-2" onClick={() => acceptMember(applicant)} >승인</button>
+                                        <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(applicant)} >반려</button>
+                                    </td>
+                                </tr>
                             ))}
                         </tbody>
                     </table>
@@ -145,7 +146,6 @@ const ProjectMembersContainer = () => {
 
             <div className="table-responsive">
                 <h2>현재 팀원</h2>
-                {JSON.stringify(members)}
                 <table className="table table-hover">
                     <thead className="table-light text-center">
                         <tr>
@@ -160,6 +160,7 @@ const ProjectMembersContainer = () => {
                     </thead>
                     <tbody className="table-group-divider text-center">
                         {members.map((member) => (
+                            member.user_id === manager ? null :
                                 <tr key={member.user_id}>
                                     <th scope="row">1</th>
                                     <td>{member.user_id}</td>
