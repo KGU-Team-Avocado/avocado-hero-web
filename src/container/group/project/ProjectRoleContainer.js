@@ -31,11 +31,24 @@ const ProjectRoleContainer = () => {
         setEdit("");
         setSelected([]);
         const selecteRole = selected.map((s) => {return s.value})
-        setMembers(members.map(mem => mem.user_id === member.user_id ? {...mem, description: selecteRole} : mem))
+        
+        axios.post("/groupsRouter/updateRole", {
+            _id: project_id,
+            user_id: member.user_id,
+            user_role: selecteRole
+        }).then((response) => {
+            console.log(response.data);
+            setMembers(response.data)
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     const editWho = (edit) => {
+        const user = members.find((mem) => mem.user_id === edit)
+        const select = user.user_role.map((role) => {return findRole(role)})
         setEdit(edit);
+        setSelected(select)
     }
 
     const findRole = (r) => {
