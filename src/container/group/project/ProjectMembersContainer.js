@@ -49,7 +49,13 @@ const ProjectMembersContainer = () => {
         axios.post("/groupsRouter/acceptApplicant", {
             _id: applicant._id,
             group_id: applicant.group_id,
-            user_id:applicant.user_id
+            data: {
+                user_id: applicant.user_id,
+                user_name: applicant.user_name,
+                user_email: applicant.user_email,
+                user_role: []
+            }
+            // user_id:applicant.user_id
         }).then((response) => {
             console.log(response.data);
             // setApplicants(response.data);
@@ -153,16 +159,15 @@ const ProjectMembersContainer = () => {
                         </tr>
                     </thead>
                     <tbody className="table-group-divider text-center">
-                        {applicants.map((applicant) => (
-                            !applicant.joined ? null :
-                                <tr key={applicant.user_id}>
+                        {members.map((member) => (
+                                <tr key={member.user_id}>
                                     <th scope="row">1</th>
-                                    <td>{applicant.user_id}</td>
-                                    <td>{applicant.user_name}</td>
-                                    <td>{applicant.user_email}</td>
+                                    <td>{member.user_id}</td>
+                                    <td>{member.user_name}</td>
+                                    <td>{member.user_email}</td>
                                     {close ? null :
                                         <td>
-                                            <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(applicant)} >방출</button>
+                                            <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(member)} >방출</button>
                                         </td>
                                     }
                                 </tr>
