@@ -1,38 +1,31 @@
-import { useRef, useState } from "react";
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import { role } from "../../../assets/tag/Role";
 import ModifyRole from "../../../component/project/role/ModifyRole";
 import RoleBadge from "../../../component/project/role/RoleBadge";
 
 const ProjectRoleContainer = () => {
-    const [members, setMembers] = useState([ //탬원 역할 배열
-        {
-            user_id: '201912069',
-            name: "박소영",
-            role: "팀장",
-            description: []
-        },
-        {
-            user_id: 'gabrielyoon7',
-            name: "윤주현",
-            role: "팀원",
-            description: []
-        },
-        {
-            user_id: 'yeonsu',
-            name: "김연수",
-            role: "팀원",
-            description: []
-        },
-        {
-            user_id: "hido",
-            name: "김도희",
-            role: "팀원",
-            description: []
-        },
-    ]);
+    const params = useParams();
+    const project_id = params.id;
+
     const [edit, setEdit] = useState('');
     const [selected, setSelected] = useState([]);
     const inputRef = useRef();
+    const [members, setMembers] = useState([]); //멤버 배열
+    const [manager, setManager] = useState(''); //팀장
+
+    useEffect(()=>{
+        axios.post("/groupsRouter/getGroup", {
+            _id: project_id,
+        }).then((response) => {
+            console.log(response.data.members);
+            setMembers(response.data.members);
+            setManager(response.data.manager);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    },[]);
 
     const modifyRole = (member) => {
         setEdit("");
@@ -76,8 +69,12 @@ const ProjectRoleContainer = () => {
                                 </div>
                                 <div className="col-xxl-8">
                                     <div className="card-body">
-                                        <h4 className="card-title">{member.role}</h4>
-                                        <h6 className="card-subtitle mb-2 text-muted">{member.name}</h6>
+                                        {member.user_id === manager ? 
+                                        <h4 className="card-title">팀장</h4>
+                                        :
+                                        <h4 className="card-title">팀원</h4>
+                                        }
+                                        <h6 className="card-subtitle mb-2 text-muted">{member.user_name}</h6>
                                         {edit === member.user_id ?
                                             <ModifyRole
                                                 role={role}
