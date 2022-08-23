@@ -7,6 +7,9 @@ import { BiBookmark } from "react-icons/bi";
 
 export default () => {
 
+    const [userInfo, setUserInfo] = useState(null);
+    const sessionStorage = window.sessionStorage;
+
     const [postings, setPostings] = useState([
         // {
         //     _id: 0,
@@ -28,12 +31,18 @@ export default () => {
 
     useEffect(() => {
         console.log('리스트')
+        if (sessionStorage.getItem("user")) {   
+            setUserInfo(JSON.parse(sessionStorage.getItem("user")));
+        }
+
         axios.get("/companiesRouter/getPost").then((response) => {
             console.log(JSON.stringify(response.data))
             setPostings(response.data);
         }).catch(function (error) {
             console.log(error);
         });
+
+        
     }, []);
 
 
@@ -44,9 +53,23 @@ export default () => {
         alert("지원이 완료되었습니다.");
     }
 
-    const bookMark = (e) => {
-        window.location.href = "/jobFinder";
-        alert("북마크에 추가되었습니다.");
+    const bookMark = (company_id) => {
+        // window.location.href = "/jobFinder";
+        
+        axios
+            .post("/bookmarksRouter/bookmarkSave", {
+                user_id: userInfo.user_id,
+                company_id: company_id,
+            })
+            .then((response) => {
+                console.log(response.data);
+                alert("북마크에 추가되었습니다.");
+                window.location.href = "/jobFinder";
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        
     }
 
     // const [postings, setPostings] = useState([]);
@@ -68,6 +91,9 @@ export default () => {
 
     return (
         <>
+            <div>
+                북마크
+            </div>
             <div>
                 {
                     postings.length > 0
@@ -119,7 +145,7 @@ export default () => {
                                         <hr />
                                         <h5><b>태그</b></h5>
                                         <p>{selected.company_tag}</p>
-                                        <button type="button" className="btn btn-outline-primary" onClick={bookMark}>
+                                        <button type="button" className="btn btn-outline-primary" onClick={()=>bookMark(selected.company_id)}>
                                         <BiBookmark/>북마크
                                         </button>
                                         <button className="btn btn-primary" type="submit" onClick={onClick}>지원하기</button>
