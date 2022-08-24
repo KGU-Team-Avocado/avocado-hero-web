@@ -46,8 +46,7 @@ const ProjectMembersContainer = () => {
 
     const acceptMember = (applicant) => {
         console.log(applicant)
-        // setShow('null');
-        // setApplicants(applicants.map((user) => user.user_id === applicant.user_id ? { ...user, joined: true } : user));
+
         axios.post("/groupsRouter/acceptApplicant", {
             _id: applicant._id,
             group_id: applicant.group_id,
@@ -57,33 +56,45 @@ const ProjectMembersContainer = () => {
                 user_email: applicant.user_email,
                 user_role: []
             }
-            // user_id:applicant.user_id
         }).then((response) => {
             console.log(response.data);
-            // setApplicants(response.data);
+            setApplicants(response.data.applicants);
+            setMembers(response.data.members)
         }).catch(function (error) {
             console.log(error);
         });
     }
 
     const rejectMember = (applicant) => {
-        // setShow('null');
         if (!window.confirm('변려한 신청자는 신청자 목록에서 사라지게 됩니다. 삭제하시겠습니까?')) {
             return;
         }
-        // setApplicants(applicants.filter((user) => user.user_id !== applicant.user_id))
+
         axios.post("/groupsRouter/rejectApplicant", {
             _id: applicant._id,
+            group_id: applicant.group_id
         }).then((response) => {
             console.log(response.data);
-            // setApplicants(response.data);
+            setApplicants(response.data);
         }).catch(function (error) {
             console.log(error);
         });
     }
 
-    const cancleAccept = (applicant) => {
-        setApplicants(applicants.map((user) => user.user_id === applicant.user_id ? { ...user, joined: false } : user))
+    const cancleAccept = (member) => {
+        if (!window.confirm(member.name + ' 멤버를 방출하시겠습니까?')) {
+            return;
+        } 
+
+        axios.post("/groupsRouter/cancleAccept", {
+            user_id: member.user_id,
+            project_id: project_id
+        }).then((response) => {
+            console.log(response.data);
+            setMembers(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (
@@ -168,7 +179,7 @@ const ProjectMembersContainer = () => {
                                     <td>{member.user_email}</td>
                                     {close ? null :
                                         <td>
-                                            <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(member)} >방출</button>
+                                            <button type="button" className="btn btn-danger btn-sm" onClick={() => cancleAccept(member)} >방출</button>
                                         </td>
                                     }
                                 </tr>
