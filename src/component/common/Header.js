@@ -72,11 +72,11 @@ const Header = () => {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        <Dropdown.Item href={"/humanRes"}>
-                          인재찾기
+                        <Dropdown.Item>
+                          <Link className="nav-link" to={"/humanRes"}>인재찾기</Link>
                         </Dropdown.Item>
-                        <Dropdown.Item href="/jobPosting">
-                          채용공고하기
+                        <Dropdown.Item>
+                        <Link className="nav-link" to="/jobPosting">채용공고하기</Link>
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
