@@ -11,6 +11,7 @@ import { Editor } from "react-draft-wysiwyg";
 import { convertToHTML } from 'draft-convert';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { right } from "@popperjs/core";
+import * as API from "../../api/API"
 
 
 const JobPosting = () => {
@@ -50,7 +51,7 @@ const JobPosting = () => {
     setConvertedContent(currentContentAsHTML);
 };
 
-  const onClick = (e) => {
+  const onClick = async (e) => {
     e.preventDefault();
     // console.log(Object.keys(company).map((key)=>company[key]))
     if (company.name.length < 1) {
@@ -69,25 +70,10 @@ const JobPosting = () => {
       return;
     }
      else {
-      axios
-        .post("/companiesRouter/jobPost", {
-          ...company,
-          description:convertedContent
-        })
-        .then((response) => {
-          console.log(response);
-          if (response.data.compIdCheck === false) {
-            alert("이미 사용중인 제목입니다.");
-            //setCheckError("이미 사용중인 아이디입니다");
-          }
-          if (response.data.success === true) {
-            window.location.href = "/";
-            alert("채용공고 등록 성공.");
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      await API.saveJobPost({
+        ...company,
+        description:convertedContent
+      });
     }
   };
 
