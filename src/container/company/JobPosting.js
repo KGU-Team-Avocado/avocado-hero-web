@@ -77,7 +77,7 @@ const JobPosting = () => {
         .then((response) => {
           console.log(response);
           if (response.data.compIdCheck === false) {
-            alert("이미 사용중인 기업아이디입니다.");
+            alert("이미 사용중인 제목입니다.");
             //setCheckError("이미 사용중인 아이디입니다");
           }
           if (response.data.success === true) {
