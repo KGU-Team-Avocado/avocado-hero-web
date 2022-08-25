@@ -6,103 +6,73 @@ import div from "react-bootstrap/Container";
 import axios from "axios";
 
 import { useRef, useState } from "react";
+import { EditorState } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import { convertToHTML } from 'draft-convert';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { right } from "@popperjs/core";
+
 
 const JobPosting = () => {
+  
+  const [company,setCompany]=useState({
+    name:'',
+    title:'',
+    field:'',
+    recruit_number:'',
+    tag:'',
+    period:'',
+    site:'',
+    // description:'',
+  })
 
-
-  const CompanyIDInput = useRef();
-  const CompanyNameInput = useRef();
-  const CompanyTitleInput = useRef();
-  const CompanyFieldInput = useRef();
-  const CompanyRecruitNumberInput = useRef();
-  const CompanyTagInput = useRef();
-  const CompanyPeriodInput = useRef();
-  const CompanySiteInput = useRef();
-
-  const [companyID, setCompanyID] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [companyTitle, setCompanyTitle] = useState("");
-  const [companyField, setCompanyField] = useState("");
-  const [companyRecruitNumber, setCompanyRecruitNumber] = useState("");
-  const [companyTag, setCompanyTag] = useState("");
-  const [companyPeriod, setCompanyPeriod] = useState("");
-  const [companySite, setCompanySite] = useState("");
+  const [editorState, setEditorState] = useState(
+    () => EditorState.createEmpty(),
+);
+  const [convertedContent, setConvertedContent] = useState(null);
 
   //const [checkError, setCheckError] = useState("");
 
-  const onCompanyIDHandler = (e) => {
-    setCompanyID(e.target.value);
+  const onInputHandler = (e) => {
+    console.log(company)
+    setCompany({
+      ...company,
+      [e.target.id]:e.target.value,
+    });
   };
 
-  const onCompanyNameHandler = (e) => {
-    setCompanyName(e.target.value);
-  };
-
-  const onCompanyTitleHandler = (e) => {
-    setCompanyTitle(e.target.value);
-  };
-
-  const onCompanyFieldHandler = (e) => {
-    setCompanyField(e.target.value);
-  };
-
-  const onCompanyRecruitNumberHandler = (e) => {
-    setCompanyRecruitNumber(e.target.value);
-  };
-
-  const onCompanyTagHandler = (e) => {
-    setCompanyTag(e.target.value);
-  };
-
-  const onCompanyPeriodHandler = (e) => {
-    setCompanyPeriod(e.target.value);
-  };
-
-  const onCompanySiteHandler = (e) => {
-    setCompanySite(e.target.value);
-  };
+  const handleEditorChange = (state) => {
+    setEditorState(state);
+    convertContentToHTML();
+};
+  const convertContentToHTML = () => {
+    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
+    setConvertedContent(currentContentAsHTML);
+};
 
   const onClick = (e) => {
     e.preventDefault();
-
-    if (companyID.length < 1) {
-      CompanyIDInput.current.focus();
+    // console.log(Object.keys(company).map((key)=>company[key]))
+    if (company.name.length < 1) {
       return;
-    } else if (companyName.length < 1) {
-      CompanyNameInput.current.focus();
+    } else if (company.title.length < 1) {
       return;
-    } else if (companyTitle.length < 1) {
-      CompanyTitleInput.current.focus();
+    } else if (company.field.length < 1) {
       return;
-    } else if (companyField.length < 1) {
-      CompanyFieldInput.current.focus();
+    } else if (company.recruit_number.length < 1) {
       return;
-    } else if (companyRecruitNumber.length < 1) {
-      CompanyRecruitNumberInput.current.focus();
+    } else if (company.tag.length < 1) {
       return;
-    } else if (companyTag.length < 1) {
-      CompanyTagInput.current.focus();
+    } else if (company.period.length < 1) {
       return;
-    } else if (companyPeriod.length < 1) {
-      CompanyPeriodInput.current.focus();
-      return;
-    } else if (companySite.length < 1) {
-      CompanySiteInput.current.focus();
+    } else if (company.site.length < 1) {
       return;
     }
      else {
-
-      console.log(companyID);
       axios
         .post("/companiesRouter/jobPost", {
-          company_id: companyID,
-          company_company_name: companyName,
-          company_title: companyTitle,
-          company_field: companyField,
-          company_recruit_number: companyRecruitNumber,
-          company_tag: companyTag,
-          company_period: companyPeriod,
-          company_site: companySite,
+          ...company,
+          description:convertedContent
         })
         .then((response) => {
           console.log(response);
@@ -125,50 +95,63 @@ const JobPosting = () => {
 
     <div>
 
-      <div className="input-group" type="text" value={companyID} ref={CompanyIDInput} onChange={onCompanyIDHandler}>
-        <span className="input-group-text w-25 text-center">companyID</span>
-        <textarea className="form-control" aria-label="With textarea"></textarea>
-      </div>
-
-      <div className="input-group" type="text" value={companyName} ref={CompanyNameInput} onChange={onCompanyNameHandler}>
-        <span className="input-group-text w-25 text-center">companyName</span>
-        <textarea className="form-control" aria-label="With textarea"></textarea>
-      </div>
-
-      <div className="input-group" type="text" value={companyTitle} ref={CompanyTitleInput} onChange={onCompanyTitleHandler}>
-        <span className="input-group-text w-25 text-center">companyTitle</span>
-        <textarea className="form-control" aria-label="With textarea"></textarea>
-      </div>
-
-      <div className="input-group" type="text" value={companyField} ref={CompanyFieldInput} onChange={onCompanyFieldHandler}>
-        <span className="input-group-text w-25 text-center">companyField</span>
-        <textarea className="form-control" aria-label="With textarea"></textarea>
-      </div>
-
-      <div className="input-group" type="text" value={companyRecruitNumber} ref={CompanyRecruitNumberInput} onChange={onCompanyRecruitNumberHandler}>
-        <span className="input-group-text w-25 text-center">companyRecruitNumber</span>
-        <textarea className="form-control" aria-label="With textarea"></textarea>
-      </div>
-
-      <div className="input-group" type="text" value={companyTag} ref={CompanyTagInput} onChange={onCompanyTagHandler}>
-        <span className="input-group-text w-25 text-center">companyTag</span>
-        <textarea className="form-control" aria-label="With textarea"></textarea>
-      </div>
-
-      <div className="input-group" type="text" value={companyPeriod} ref={CompanyPeriodInput} onChange={onCompanyPeriodHandler}>
-        <span className="input-group-text w-25 text-center">companyPeriod</span>
-        <textarea className="form-control" aria-label="With textarea"></textarea>
-      </div>
-
-      <div className="input-group" type="text" value={companySite} ref={CompanySiteInput} onChange={onCompanySiteHandler}>
-        <span className="input-group-text w-25 text-center">companySite</span>
-        <textarea className="form-control" aria-label="With textarea"></textarea>
-      </div>
-
-      <button onClick={onClick}>
-        das
-      </button>
       
+      <div className="input-group" type="text" style={{margin:30}}>
+        <span className="input-group-text w-25 text-center">회사명</span>
+        <textarea className="form-control" aria-label="With textarea" id="name" value={company.name} onChange={onInputHandler}></textarea>
+      </div>
+
+      <div className="input-group" type="text" style={{margin:30}}>
+        <span className="input-group-text w-25 text-center">제목</span>
+        <textarea className="form-control" aria-label="With textarea" id="title" value={company.title} onChange={onInputHandler}></textarea>
+      </div>
+
+      <div className="input-group" type="text" style={{margin:30}}>
+        <span className="input-group-text w-25 text-center">주요업무</span>
+        <textarea className="form-control" aria-label="With textarea" id="field" value={company.field} onChange={onInputHandler} ></textarea>
+      </div>
+
+      <div className="input-group" type="text" style={{margin:30}}>
+        <span className="input-group-text w-25 text-center">모집인원</span>
+        <textarea className="form-control" aria-label="With textarea" id="recruit_number" value={company.recruit_number} onChange={onInputHandler}></textarea>
+      </div>
+
+      <div className="input-group" type="text" style={{margin:30}}>
+        <span className="input-group-text w-25 text-center">태그</span>
+        <textarea className="form-control" aria-label="With textarea" id="tag" value={company.tag} onChange={onInputHandler}></textarea>
+      </div>
+
+      <div className="input-group" type="text" style={{margin:30}}>
+        <span className="input-group-text w-25 text-center">마감일</span>
+        <textarea className="form-control" aria-label="With textarea" id="period" value={company.period} onChange={onInputHandler}></textarea>
+      </div>
+
+      <div className="input-group" type="text" style={{margin:30}}>
+        <span className="input-group-text w-25 text-center">홈페이지</span>
+        <textarea className="form-control" aria-label="With textarea" id="site" value={company.site} onChange={onInputHandler}></textarea>
+      </div>
+      <div style={{margin:30}}>
+        <h4>상세소개글</h4>
+                          <div>
+                              <Editor
+                                  style={{margin:30}}
+                                  toolbarClassName="toolbarClassName"
+                                  wrapperClassName="wrapperClassName"
+                                  editorClassName="editorClassName"
+                                  onEditorStateChange={handleEditorChange}
+                                  
+                                  editorStyle={{ height: 200, margin: 12, borderWidth: 0.5,padding: 10,borderRadius: "2px" }}
+
+                                  
+                              />
+                              
+                          </div>
+      </div>
+      <div  style={{display: "flex", justifyContent: "center", alignItems: "center", margin:100}}>
+        <Button onClick={onClick} variant="primary" size="lg">
+          등록하기
+        </Button>
+      </div>
 
 
       
