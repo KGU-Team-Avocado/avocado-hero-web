@@ -35,6 +35,12 @@ const ProjectTodoContainer = () => {
     console.log(newItem);
   };
 
+  const onDelete = (targetId) => {
+    const newTodoList = todos.filter((it) => it.id !== targetId);
+    setTodos(newTodoList);
+    alert("삭제되었습니다");
+  };
+
   return (
     <div>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -75,7 +81,7 @@ const ProjectTodoContainer = () => {
         </div>
       </div>
       <TodoCreate onCreate={onCreate} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onDelete={onDelete} />
     </div>
   );
 };

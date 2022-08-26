@@ -40,5 +40,10 @@
 .content.checked .text {
     color: gray;
     text-decoration: line-through;
+    font-style: italic;
     opacity: 0.5;
+}
+
+.TodoItemButton {
+    margin-left: auto;
 }
