@@ -11,14 +11,14 @@ export default (props) => {
                 >
                     <div className="row">
                         <div className="col">
-                            <h5>{props.posting.company_company_name}</h5>
+                            <h5>{props.posting.name}</h5>
                         </div>
                         <div className="col-6">
-                            <h5>{props.posting.company_title}</h5>
+                            <h5>{props.posting.title}</h5>
                         </div>
                         <div className="col">
-                            <p>{props.posting.company_field}</p>
-                            <p>~{props.posting.company_period}</p>
+                            <p>{props.posting.field}</p>
+                            <p>~{props.posting.period}</p>
                         </div>
                     </div>
                 </a>

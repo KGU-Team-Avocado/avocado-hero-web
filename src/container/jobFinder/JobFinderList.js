@@ -4,34 +4,20 @@ import JobPostingCard from "../jobFinder/JobPostingCard"
 import JobFinderViewModal from "../jobFinder/JobFinderViewModal";
 import Button from "react-bootstrap/Button";
 import { BiBookmark } from "react-icons/bi";
+import JobList from  "../../component/jobFinder/JobList";
 
 export default () => {
 
+    const [onOff, setOnOff] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
     const sessionStorage = window.sessionStorage;
 
-    const [postings, setPostings] = useState([
-        // {
-        //     _id: 0,
-        //     manager:"yeonsu",
-        //     groupName: "아보카도콘솔",
-        //     postingTitle: "프론트엔드 개발자 채용",
-        //     description:"경력/신입",
-        //     deadline:"2022.08.10"
-        // },
-        // {
-        //     _id: 1,
-        //     manager:"yeonsu",
-        //     groupName: "아보카도콘솔히어로",
-        //     postingTitle: "백엔드 개발자 채용",
-        //     description:"경력/신입",
-        //     deadline:"2022.08.20"
-        // }
-    ]);
+    const [postings, setPostings] = useState([]);
+    const [bookmarks, setBookmarks] = useState([]);
 
     useEffect(() => {
         console.log('리스트')
-        if (sessionStorage.getItem("user")) {   
+        if (sessionStorage.getItem("user")) {
             setUserInfo(JSON.parse(sessionStorage.getItem("user")));
         }
 
@@ -43,122 +29,42 @@ export default () => {
         });
 
         
+
     }, []);
 
-
-    const [selected, setSelected] = useState(null);
-
-    const onClick = (e) => {
-        window.location.href = "/jobFinder";
-        alert("지원이 완료되었습니다.");
-    }
-
-    const bookMark = (company_id) => {
-        // window.location.href = "/jobFinder";
-        
-        axios
-            .post("/bookmarksRouter/bookmarkSave", {
-                user_id: userInfo.user_id,
-                company_id: company_id,
-            })
-            .then((response) => {
-                console.log(response.data);
-                alert("북마크에 추가되었습니다.");
-                window.location.href = "/jobFinder";
-            })
-            .catch(function (error) {
+    useEffect(() => {
+        if (userInfo) {
+            axios.post("/bookmarksRouter/getMyBookmark", {user_id: userInfo.user_id}).then((response) => {
+                console.log(JSON.stringify(response.data))
+                setBookmarks(response.data);
+            }).catch(function (error) {
                 console.log(error);
             });
-        
-    }
+        }
+       
+    }, [userInfo]);
 
-    // const [postings, setPostings] = useState([]);
-
-    // useEffect(()=>{
-    //     axios.get("/companiesRouter/getPost").then((response) => {
-    //         console.log(JSON.stringify(response.data))
-    //         setPostings(response.data);
-    //     }).catch(function (error) {
-    //         console.log(error);
-    //     });
-    // },[]);
-
-    // const [selectedPosting, setSelectedPosting] = useState(null);
-
-    // useEffect(()=>{
-    //     console.log('하이')
-    // },[selectedPosting]);
 
     return (
         <>
             <div>
-                북마크
-            </div>
-            <div>
                 {
-                    postings.length > 0
+                    onOff
                         ?
-                        postings.map((posting) => (
-                            <JobPostingCard
-                                key={posting._id}
-                                posting={posting}
-                                setSelected={setSelected}
-                            />
-                            // <div>{posting.company_title}</div>
-                        ))
+                        <>
+                            <Button onClick={() => setOnOff(false)}>전체보기</Button>
+                            {/* <JobList postings={bookmarks} userInfo={userInfo} /> */}
+                        </>
                         :
-                        <div>채용공고가 없습니다.</div>
+                        <>
+                            <Button onClick={() => setOnOff(true)}>북마크 보기</Button>
+                            <JobList postings={postings} userInfo={userInfo} />
+                        </>
                 }
             </div>
 
-            <div className="modal" id="job_modal" tabindex="-1" aria-labelledby="..." aria-hidden="true">
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content rounded-4 shadow">
-                        {
-                            selected &&
-                            <>
-                                <div className="modal-body p-5">
-                                    <div className="modal-header">
-                                        <h2 className="fw-bold mb-0">{selected.company_title}</h2>
-                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div>
-                                        {/* {
-                                            JSON.stringify(selected)
-                                        } */}
 
-                                       
-                                        <h5 style={{ marginTop: 16}}><b>회사명</b></h5>
-                                        <p>{selected.company_company_name}</p>
-                                        <hr />
-                                        <h5><b>주요업무/세부사항</b></h5>
-                                        <p>{selected.company_field}</p>
-                                        <hr />
-                                        <h5><b>모집인원</b></h5>
-                                        <p>{selected.company_recruit_number}</p>
-                                        <hr />
-                                        <h5><b>마감일</b></h5>
-                                        <p>{selected.company_period}</p>
-                                        <hr />
-                                        <h5><b>홈페이지</b></h5>
-                                        <p>{selected.company_site}</p>
-                                        <hr />
-                                        <h5><b>태그</b></h5>
-                                        <p>{selected.company_tag}</p>
-                                        <button type="button" className="btn btn-outline-primary" onClick={()=>bookMark(selected.company_id)}>
-                                        <BiBookmark/>북마크
-                                        </button>
-                                        <button className="btn btn-primary" type="submit" onClick={onClick}>지원하기</button>
-                                        
-                                    </div>
-                                </div>
-                            </>
-                        }
 
-                    </div>
-                </div>
-            </div>
-            
 
             {/* <div className="wer">
                 <h2>프로젝트 찾기</h2>
@@ -203,16 +109,4 @@ export default () => {
 
 
 
-
-
-
-
-// const JobPosting = () => {
-//   //체용공고 페이지
-//   return (
-//     <>
-//       <h2>jobPosting</h2>
-//     </>
-//   );
-// };
 
