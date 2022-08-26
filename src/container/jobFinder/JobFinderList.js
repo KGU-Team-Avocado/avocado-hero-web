@@ -53,7 +53,8 @@ export default () => {
                         ?
                         <>
                             <Button onClick={() => setOnOff(false)}>전체보기</Button>
-                            {/* <JobList postings={bookmarks} userInfo={userInfo} /> */}
+                            {/* {JSON.stringify(bookmarks)} */}
+                            <JobList postings={bookmarks} userInfo={userInfo} />
                         </>
                         :
                         <>
