@@ -15,7 +15,7 @@ import JobFinderContainer from "./container/jobFinder/JobFinderContainer";
 import RankContainer from "./container/example/RankContainer";
 import GroupListContainer from "./container/group/workspace/GroupListContainer";
 import ProjectContainer from "./container/group/project/ProjectContainer";
-import ProjectDefaultLayout from "./component/project/ProjectDefaultLayout";
+import ProjectDefaultLayout from "./container/group/workspace/ProjectDefaultLayout";
 import ProjectCalendarContainer from "./container/group/project/ProjectCalendarContainer";
 import ProjectTodoContainer from "./container/group/project/ProjectTodoContainer";
 import ProjectRoleContainer from "./container/group/project/ProjectRoleContainer";
