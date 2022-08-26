@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import * as API from "../../../api/API";
 
 const ProjectMembersContainer = () => {
 
@@ -17,19 +18,16 @@ const ProjectMembersContainer = () => {
         }).catch(function (error) {
             console.log(error);
         });
+
+        getGroup();
     }, []);
 
-    useEffect(() => {
-        axios.post("/groupsRouter/getGroup", {
-            _id: project_id,
-        }).then((response) => {
-            console.log(response.data);
-            setMembers(response.data.members)
-            setManager(response.data.manager)
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }, []);
+    const getGroup = async () => {
+        const group = await API.getGroupById({ _id: project_id })
+
+        setMembers(group.members)
+        setManager(group.manager)
+    }
 
     const [applicants, setApplicants] = useState([]); // 프로젝트 지원자 배열
     const [members, setMembers] = useState([]); //멤버 배열

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { role } from "../../../assets/tag/Role";
 import ModifyRole from "../../../component/project/role/ModifyRole";
 import RoleBadge from "../../../component/project/role/RoleBadge";
+import * as API from "../../../api/API";
 
 const ProjectRoleContainer = () => {
     const params = useParams();
@@ -16,17 +17,15 @@ const ProjectRoleContainer = () => {
     const [manager, setManager] = useState(''); //팀장
 
     useEffect(()=>{
-        axios.post("/groupsRouter/getGroup", {
-            _id: project_id,
-        }).then((response) => {
-            console.log(response.data.members);
-            setMembers(response.data.members);
-            setManager(response.data.manager);
-        }).catch(function (error) {
-            console.log(error);
-        });
-    },[]);
+        getGroup();
+    }, []);
 
+    const getGroup = async () => {
+        const group = await API.getGroupById({ _id: project_id })
+
+        setMembers(group.members)
+        setManager(group.manager)
+    }
     const modifyRole = (member) => {
         setEdit("");
         setSelected([]);

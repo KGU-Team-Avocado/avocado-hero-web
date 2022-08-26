@@ -31,3 +31,15 @@ export const saveJobPost = async (company) => {
     }
 
 }
+
+
+export const getGroupById = async (group_id) => {
+    try {
+        const response = await axios.post("/groupsRouter/getGroup", group_id);
+        console.log(response)
+        return response.data;
+    } catch (err) {
+        console.log("Error >>", err);
+        return [];
+    }
+}

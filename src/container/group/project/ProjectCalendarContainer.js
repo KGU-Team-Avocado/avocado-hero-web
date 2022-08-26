@@ -4,6 +4,7 @@ import ProjectEventCalendar from "../../../component/project/calendar/ProjectEve
 import CalendarModal from "../../../component/project/calendar/CalendarModal";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import * as API from "../../../api/API";
 
 const DayOfTheWeek = [
     {
@@ -61,7 +62,17 @@ const ProjecCalendarContainer = () => {
         }).catch(function (error) {
             console.log(error);
         });
+
+        getGroup();
     }, []);
+
+    const getGroup = async () => {
+        const group = await API.getGroupById({ _id: project_id })
+
+        const recursive = group.events.recursive.map((rec) => { return { ...rec, id: rec._id } })
+        const nonrecursive = group.events.nonrecursive.map((non) => { return { ...non, id: non._id } })
+        setEvents([...recursive, ...nonrecursive]);
+    }
 
     const handleDateClick = (arg) => { // bind with an arrow function
         console.log(arg)

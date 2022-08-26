@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom";
+import * as API from "../../../api/API";
 import NoticeAcordion from "../../../component/project/notice/NoticeAcordion";
 import NoticeModal from "../../../component/project/notice/NoticeModal";
 
@@ -26,17 +27,16 @@ const ProjectContainer = () => {
             console.log()
             setUser(JSON.parse(sessionStorage.getItem("user")));
         }
-
-        axios.post("/groupsRouter/getGroup", {
-            _id: project_id,
-        }).then((response) => {
-            console.log(response.data);
-            setGroupManager(response.data.manager);
-            setNotices(response.data.notices);
-        }).catch(function (error) {
-            console.log(error);
-        });
+        
+        getGroup();
     }, []);
+
+    const getGroup = async () => {
+        const group = await API.getGroupById({ _id: project_id })
+
+        setGroupManager(group.manager);
+        setNotices(group.notices);
+    }
 
     const saveNewNotice = () => {
         const newNotice = { title: inputTitle.current.value, description: inputDesc.current.value };

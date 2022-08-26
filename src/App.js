@@ -13,7 +13,7 @@ import JobPosting from "./container/company/JobPosting";
 import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
 import JobFinderContainer from "./container/jobFinder/JobFinderContainer";
 import RankContainer from "./container/example/RankContainer";
-import WorkSpaceContainer from "./container/group/workspace/WorkSpaceContainer";
+import GroupListContainer from "./container/group/workspace/GroupListContainer";
 import ProjectContainer from "./container/group/project/ProjectContainer";
 import ProjectDefaultLayout from "./component/project/ProjectDefaultLayout";
 import ProjectCalendarContainer from "./container/group/project/ProjectCalendarContainer";
@@ -46,7 +46,7 @@ function App() {
         <Route path="userProfile/:id" element={<UserProfileContainer />} />
         <Route path="user/ProfileUpdate/:id" element={<ProfileUpdate />} />
         {/* 워크스페이스 */}
-        <Route path="myWorkspace" element={<WorkSpaceContainer />} />
+        <Route path="myWorkspace" element={<GroupListContainer />} />
 
         <Route path="example" element={<ExampleContainer />} />
         <Route path="example/bestworker" element={<RankContainer/>}/>
