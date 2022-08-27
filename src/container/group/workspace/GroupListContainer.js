@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import GroupCard from "../../../component/group/card/GroupCard";
-import ProjectCard from "../../../component/workspace/card/ProjectCard";
 import Table from "../../../component/common/Table";
 
 export default () => {
