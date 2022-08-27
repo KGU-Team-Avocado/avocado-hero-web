@@ -9,10 +9,10 @@ export default (props) => {
                     <div className="row">
                         <div className="text-center col-xxl-4 py-4">
                             <svg className="img-thumbnail rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                            <b>{props.group.group_name}</b>
                             <div>{props.group.manager}</div>
                         </div>
-                        <div className="col-xxl-8 py-3">
-                            <h4>{props.group.group_name}</h4>
+                        <div className="col-xxl-8 py-xxl-5">
                             <h5>{props.group.project_name}</h5>
                             <p>{props.group.short_description}</p>
                             <div>
