@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { BsCheckCircleFill, BsCheckCircle } from "react-icons/bs";
-import "../project/Todo.css";
+import "../workspace/Todo.css";
 
 const TodoItem = ({ todo, onDelete }) => {
   const { id, text, checked } = todo;
