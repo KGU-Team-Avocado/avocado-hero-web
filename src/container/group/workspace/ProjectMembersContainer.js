@@ -25,8 +25,9 @@ const ProjectMembersContainer = () => {
     const getGroup = async () => {
         const group = await API.getGroupById({ _id: project_id })
 
-        setMembers(group.members)
-        setManager(group.manager)
+        setMembers(group.members);
+        setManager(group.manager);
+        setClose(group.close_application);
     }
 
     const [applicants, setApplicants] = useState([]); // 프로젝트 지원자 배열
@@ -95,6 +96,18 @@ const ProjectMembersContainer = () => {
         });
     }
 
+    const handleCloseApplication = (isClose) => {
+        axios.post("/groupsRouter/modifyClose", {
+            project_id: project_id,
+            close_application: isClose
+        }).then((response) => {
+            console.log(response.data);
+            setClose(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
     return (
         <>
             <div className="pt-3 pb-2 mb-3 border-bottom">
@@ -104,7 +117,7 @@ const ProjectMembersContainer = () => {
             <div className="d-flex justify-content-between">
                 <h2>신청자 목록</h2>
                 <div className="form-check form-switch align-self-center">
-                    <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" onChange={() => setClose(!close)} />
+                    <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked={close} onChange={() => handleCloseApplication(!close)} />
                     <label className="form-check-label" for="flexSwitchCheckChecked">마감</label>
                 </div>
             </div>
