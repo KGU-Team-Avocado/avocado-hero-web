@@ -2,6 +2,7 @@ import JobPostingCard from "../../container/jobFinder/JobPostingCard"
 import { useEffect, useState } from "react"
 import axios from "axios";
 import { BiBookmark } from "react-icons/bi";
+import DOMPurify from "dompurify";
 
 
 export default (props) => {
@@ -31,6 +32,12 @@ export default (props) => {
             });
     }
         
+    const createMarkup = (html) => {
+        return {
+            __html: DOMPurify.sanitize(html)
+        }
+    };
+
     return (
         <>
             <div>
@@ -71,8 +78,8 @@ export default (props) => {
                                         <h5><b>태그</b></h5>
                                         <p>{selected.tag}</p>
                                         <hr />
-                                        <h5><b>상세소개글</b></h5>
-                                        <p>{selected.description}</p>
+                                        <h5><b >상세소개글</b></h5>                             
+                                        <div dangerouslySetInnerHTML={createMarkup(selected.description)}></div>
                                         <hr />
                                         <h5><b>모집인원</b></h5>
                                         <p>{selected.recruit_number}</p>
