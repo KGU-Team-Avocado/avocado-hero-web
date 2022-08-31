@@ -1,7 +1,7 @@
-export default ({ user }) => {
+export default ({ user, convertProfile }) => {
     return (
         <div className="col">
-            <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#group_join" onClick={() => console.log('어어')}>
+            <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#profile_modal" onClick={() => convertProfile(user)}>
                 <div className="card p-3 rounded-4">
                     <div className="row">
                         <div className="text-center col-xxl-4">
@@ -16,7 +16,7 @@ export default ({ user }) => {
                             <div>평점 : </div>
                             <div>대표 프로젝트 : </div>
                             <div>선호하는 기술 : </div>
-                            <div>나이 : </div>
+                            <div>평점 : </div>
                         </div>
                     </div>
                 </div>
