@@ -77,17 +77,156 @@ const JobPosting = () => {
     }
   };
 
+  const line = {
+    height: "2px",
+        width: "500px",
+        overflow: "visible",
+        color: "#999",
+        position: "relative",
+        margin: "2em auto",
+        background: "linear-gradient(to right, transparent, #999, transparent)",
+  }
+
   return (
 
-    <div>
+    <div className="container" style={{padding: "90px"}}>
 
+      {/* <div style={{
+        height: "2px",
+        width: "500px",
+        overflow: "visible",
+        color: "#999",
+        position: "relative",
+        margin: "2em auto",
+        background: "linear-gradient(to right, transparent, #999, transparent)",
+      }}>
+      </div> */}
+
+
+        <div style={{
+          // margin:30, 
+          width: "200px", textAlign: "center", fontSize: "20px"}}>회사명
+            <div style={{
+            height: "2px",
+            overflow: "visible",
+            color: "#999",
+            position: "relative",
+            // margin: "2em auto",
+            background: "linear-gradient(to right, transparent, #3E7925, transparent)",
+            }}>
+            </div>
+        </div>
+        <input className="form-control" aria-label="With textarea" id="name" value={company.name} onChange={onInputHandler} style={{margin:10, marginBottom:"30px"}}></input>
+
+
+        <div style={{
+          // margin:30, 
+          width: "200px", textAlign: "center", fontSize: "20px"}}>제목
+            <div style={{
+            height: "2px",
+            overflow: "visible",
+            color: "#999",
+            position: "relative",
+            // margin: "2em auto",
+            background: "linear-gradient(to right, transparent, #849635, transparent)",
+            }}>
+            </div>
+        </div>
+        <input className="form-control" aria-label="With textarea" id="title" value={company.title} onChange={onInputHandler} style={{margin:10, marginBottom:"30px"}}></input>
+
+        <div style={{
+          // margin:30, 
+          width: "200px", textAlign: "center", fontSize: "20px"}}>주요업무
+            <div style={{
+            height: "2px",
+            overflow: "visible",
+            color: "#999",
+            position: "relative",
+            // margin: "2em auto",
+            background: "linear-gradient(to right, transparent, #B4CB33, transparent)",
+            }}>
+            </div>
+        </div>
+        <input className="form-control" aria-label="With textarea" id="field" value={company.field} onChange={onInputHandler} style={{margin:10, marginBottom:"30px"}}></input>
       
-      <div className="input-group" type="text" style={{margin:30}}>
-        <span className="input-group-text w-25 text-center">회사명</span>
-        <textarea className="form-control" aria-label="With textarea" id="name" value={company.name} onChange={onInputHandler}></textarea>
-      </div>
+        <div style={{
+          // margin:30, 
+          width: "200px", textAlign: "center", fontSize: "20px"}}>모집인원
+            <div style={{
+            height: "2px",
+            overflow: "visible",
+            color: "#999",
+            position: "relative",
+            // margin: "2em auto",
+            background: "linear-gradient(to right, transparent, #F6C74B, transparent)",
+            }}>
+            </div>
+        </div>
+        <input className="form-control" aria-label="With textarea" id="recruit_number" value={company.recruit_number} onChange={onInputHandler} style={{margin:10, marginBottom:"30px"}}></input>
 
-      <div className="input-group" type="text" style={{margin:30}}>
+        <div style={{
+          // margin:30, 
+          width: "200px", textAlign: "center", fontSize: "20px"}}>태그
+            <div style={{
+            height: "2px",
+            overflow: "visible",
+            color: "#999",
+            position: "relative",
+            // margin: "2em auto",
+            background: "linear-gradient(to right, transparent, #F2E797, transparent)",
+            }}>
+            </div>
+        </div>
+        <input className="form-control" aria-label="With textarea" id="tag" value={company.tag} onChange={onInputHandler} style={{margin:10, marginBottom:"30px"}}></input>
+
+        <div style={{
+          // margin:30, 
+          width: "200px", textAlign: "center", fontSize: "20px"}}>마감일
+            <div style={{
+            height: "2px",
+            overflow: "visible",
+            color: "#999",
+            position: "relative",
+            // margin: "2em auto",
+            background: "linear-gradient(to right, transparent, #C7823D, transparent)",
+            }}>
+            </div>
+        </div>
+        <input className="form-control" aria-label="With textarea" id="period" value={company.period} onChange={onInputHandler} style={{margin:10, marginBottom:"30px"}}></input>
+
+        <div style={{
+          // margin:30, 
+          width: "200px", textAlign: "center", fontSize: "20px"}}>홈페이지
+            <div style={{
+            height: "2px",
+            overflow: "visible",
+            color: "#999",
+            position: "relative",
+            // margin: "2em auto",
+            background: "linear-gradient(to right, transparent, #E37D4E, transparent)",
+            }}>
+            </div>
+        </div>
+        <input className="form-control" aria-label="With textarea" id="site" value={company.site} onChange={onInputHandler} style={{margin:10, marginBottom:"30px"}}></input>
+
+        <div style={{
+          // margin:30, 
+          width: "200px", textAlign: "center", fontSize: "20px"}}>상세소개글
+            <div style={{
+            height: "2px",
+            overflow: "visible",
+            color: "#999",
+            position: "relative",
+            // margin: "2em auto",
+            background: "linear-gradient(to right, transparent, #900C3F, transparent)",
+            }}>
+            </div>
+        </div>
+
+
+
+
+      {/* <div className="input-group" type="text" style={{margin:30}}>
         <span className="input-group-text w-25 text-center">제목</span>
         <textarea className="form-control" aria-label="With textarea" id="title" value={company.title} onChange={onInputHandler}></textarea>
       </div>
@@ -115,9 +254,9 @@ const JobPosting = () => {
       <div className="input-group" type="text" style={{margin:30}}>
         <span className="input-group-text w-25 text-center">홈페이지</span>
         <textarea className="form-control" aria-label="With textarea" id="site" value={company.site} onChange={onInputHandler}></textarea>
-      </div>
-      <div style={{margin:30}}>
-        <h4>상세소개글</h4>
+      </div> */}
+      <div>
+        {/* <h4>상세소개글</h4> */}
                           <div>
                               <Editor
                                   style={{margin:30}}
