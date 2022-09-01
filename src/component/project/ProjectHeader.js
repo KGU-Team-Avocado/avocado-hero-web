@@ -16,7 +16,7 @@ export default (props) => {
             <div className="navbar-nav">
                 <div className="nav-item text-nowrap">
                     <Link to="/" className="nav-link active mx-2">
-                        <i>메인 홈페이지로 돌아가기</i>
+                        <b>메인 홈페이지로 돌아가기</b>
                     </Link>
                 </div>
             </div>
