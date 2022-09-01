@@ -25,6 +25,7 @@ import UserProfileContainer from "./container/sign/user_profile/UserProfileConta
 import ProfileUpdate from "./container/sign/profile/ProfileUpdate";
 import DatabaseContainer from "./container/example/DatabaseContainer";
 import MultiSelectExampleContainer from "./container/example/MultiSelectExampleContainer";
+import ProjectEvaluationContainer from "./container/group/workspace/ProjectEvaluationContainer";
 
 function App() {
   return (
@@ -76,6 +77,7 @@ function App() {
         <Route path="role/:id" element={<ProjectRoleContainer />} />
         <Route path="members/:id" element={<ProjectMembersContainer />} />
         <Route path="end/:id" element={<ProjectEndContainer />} />
+        <Route path="evaluation/:id" element={<ProjectEvaluationContainer />} />
       </Route>
     </Routes>
   );
