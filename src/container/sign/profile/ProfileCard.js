@@ -43,6 +43,7 @@ export default (props) => {
 
     return (
         <>
+            
             <Container>
                 <Row>
                     <div class="col-md-3">
@@ -115,12 +116,65 @@ export default (props) => {
                                         <div class="contentTitle">소개글</div>
                                         <div>{user && user.intro}</div>
                                     </div>
-                                    <Button href={"./ProfileUpdate/" + (user && user.user_id)}>프로필 수정</Button> 
                                 </Card.Text>
                             </Card.Body>
                         </Card>
-                    </div>
-                    <Button href={"./ProfileUpdate/" + (user && user.user_id)}>프로필 수정</Button>                   
+                    </div>                    
+                    <h1>그룹</h1>
+                        <Card style={{ margin: '10px 0' }}>
+                            <Card.Body>
+                                <Card.Title>소속된 그룹</Card.Title>
+                                <Card.Text>
+                                {
+                        groups.length > 0
+                            ?
+                            <>
+                                {
+                                    groups.map((group) => (
+                                        <GroupCard
+                                            key={group._id}
+                                            group={group}
+                                            setSelectedGroup={setSelectedGroup}
+                                        />
+                                    ))
+                                }
+                            </>
+                            :
+                            <div>프로젝트가 없습니다.</div>
+                    }
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+
+                        <Card style={{ margin: '10px 0' }}>
+                            <Card.Body>
+                                <Card.Title>과거 소속 그룹</Card.Title>
+                                <Card.Text>
+                                {
+                        groups.length > 0
+                            ?
+                            // end_project true일 경우에만 보여주기 ??
+                            <> 
+                                {
+                                    groups.map((group) => (
+                                        <GroupCard
+                                            key={group._id}
+                                            group={group}
+                                            setSelectedGroup={setSelectedGroup}
+                                        />
+                                    ))
+                                }
+                            </>
+                            :
+                            <div>프로젝트가 없습니다.</div>
+                    }
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+
+                        <h1>포트폴리오</h1>
+
+                                     
                 </Row>
             </Container>
         </>

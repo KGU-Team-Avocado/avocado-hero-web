@@ -35,8 +35,9 @@ export default (props) => {
     const [profile, setProfile] = useState();
 
     const [selectedFields, setSelectedFields] = useState([
-        
-    ]); // 여기에 현재 저장된 거를 넣어야 함 ? 
+        // Object.entries(profile.user_field)
+    ]); // 여기에 현재 저장된 거를 넣어야 함 ?
+
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [selectedPersonals, setSelectedPersonals] = useState([]);
 
@@ -58,21 +59,21 @@ export default (props) => {
         countArr.push(counter)	// index 사용 X
         // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
         setCountList(countArr)
-        axios
-        .post("usersRouter/profileUpdate", {
-            user_field: selectedFields.map((s) => s.value),
-            // user_keyword: selectedKeywords.map((s) => s.value),
-            // user_personality: selectedPersonals.map((s) => s.value)
-        })
-        .then((response) => {
-            console.log(response);
-            if (response.data.success === true) {
-                window.location.href = "/";
-            } // 여기 안 됨
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        // axios
+        // .post("usersRouter/profileUpdate", {
+        //     user_field: selectedFields.map((s) => s.value),
+        //     // user_keyword: selectedKeywords.map((s) => s.value),
+        //     // user_personality: selectedPersonals.map((s) => s.value)
+        // })
+        // .then((response) => {
+        //     console.log(response);
+        //     if (response.data.success === true) {
+        //         window.location.href = "/";
+        //     } // 여기 안 됨
+        // })
+        // .catch(function (error) {
+        //     console.log(error);
+        // });
     };
 
     const onAddLink = () => {
