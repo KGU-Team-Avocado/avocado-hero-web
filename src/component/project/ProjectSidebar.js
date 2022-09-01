@@ -29,22 +29,29 @@ export default (props) => {
                             역할
                         </Link>
                     </li>
-                    {props.group.manager === props.user.user_id ?
-                        <>
-                            <li className="nav-item">
-                                <Link className="nav-link text-dark" to={"/project/members/" + props.group._id}>
-                                    <i className="bi bi-people align-top me-1"></i>
-                                    멤버관리
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link text-dark" to={"/project/end/" + props.group._id}>
-                                    <i className="bi bi-power align-top me-1"></i>
-                                    프로젝트 종료
-                                </Link>
-                            </li>
-                        </>
-                        : null
+                    {props.group.end_project ?
+                        props.group.manager === props.user.user_id ?
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link text-dark" to={"/project/members/" + props.group._id}>
+                                        <i className="bi bi-people align-top me-1"></i>
+                                        멤버관리
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link text-dark" to={"/project/end/" + props.group._id}>
+                                        <i className="bi bi-power align-top me-1"></i>
+                                        프로젝트 종료
+                                    </Link>
+                                </li>
+                            </>
+                            : null
+                        : <li className="nav-item">
+                            <Link className="nav-link text-dark" to={"/project/evaluation/" + props.group._id}>
+                                <i className="bi bi-people align-top me-1"></i>
+                                팀원 평가
+                            </Link>
+                        </li>
                     }
                 </ul>
             </div>
