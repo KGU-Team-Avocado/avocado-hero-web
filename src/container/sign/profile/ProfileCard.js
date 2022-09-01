@@ -105,7 +105,7 @@ export default (props) => {
 
                                     <div class="item">
                                         <div class="contentTitle">키워드</div>
-                                        <div>{user && user.keyword}</div>
+                                        <div>{user && <TechStack tech_stack={user.keyword}/>}</div>
                                     </div>
                                     <div class="item">
                                         <div class="contentTitle">성향</div>
