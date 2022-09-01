@@ -6,6 +6,7 @@ import { MultiSelect } from "react-multi-select-component";
 import AddInput from "./AddInput";
 import './profile.css';
 import ProfileCard from "./ProfileCard";
+import Button from "react-bootstrap/esm/Button";
 
 const ProfileContainer = () => {
     const params = useParams(); //url로 넘어온 파라미터를 받는 역할 (App.js 의 :id 참고)
@@ -110,10 +111,11 @@ const ProfileContainer = () => {
 
     return (
         <>
+            <h1>프로필</h1>
             <ProfileCard
                 profile={profile}
             />
-
+            <Button href={"./ProfileUpdate/" + (user && user.user_id)}>프로필 수정</Button>                   
         </>
     )
 }

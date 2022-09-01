@@ -32,7 +32,6 @@ export default (props) => {
 
     return (
         <>
-            <h1>프로필</h1>
             <Container>
                 <Row>
                     <div class="col-md-3">
@@ -116,7 +115,6 @@ export default (props) => {
                             </Card.Body>
                         </Card>
                     </div>
-                    <Button href={"./ProfileUpdate/" + (user && user.user_id)}>프로필 수정</Button>                   
                 </Row>
             </Container>
         </>
