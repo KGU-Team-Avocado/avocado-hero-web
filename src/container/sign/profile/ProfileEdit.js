@@ -16,8 +16,8 @@ export default (props) => {
         { label: "프론트", value: "front-end" },
         { label: "백엔드", value: "back-end" },
         { label: "서버", value: "server" },
-        { label: "기획", value: "enterprise", disabled: true },
-        { label: "개발", value: "coding", disabled: true },
+        { label: "기획", value: "enterprise"},
+        { label: "개발", value: "coding"},
     ];
 
     const keywords = [
@@ -28,17 +28,62 @@ export default (props) => {
 
     const personals = [
         { label: "호기심많은", value: "curious" },
+        { label: "외향적인", value: "extroverted" },
+        { label: "신중한", value: "cautious" },
     ];
 
     const [profile, setProfile] = useState();
 
-    const [selectedFields, setSelectedFields] = useState([]);
+    const [selectedFields, setSelectedFields] = useState([
+        
+    ]); // 여기에 현재 저장된 거를 넣어야 함 ? 
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [selectedPersonals, setSelectedPersonals] = useState([]);
 
     useEffect(() => {
+
         setProfile(props.profile);
+        console.log('profileEdit 출력' + props.profile);
+        // setSelectedFields(props.profile.user_field)
     }, [props.profile]);
+
+    const [countList, setCountList] = useState([0]);
+
+    const [countLink, setCountLink] = useState([0]);
+
+    const onAddDetailDiv = () => {
+        let countArr = [...countList]
+        let counter = countArr.slice(-1)[0]
+        counter += 1
+        countArr.push(counter)	// index 사용 X
+        // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+        setCountList(countArr)
+        axios
+        .post("usersRouter/profileUpdate", {
+            user_field: selectedFields.map((s) => s.value),
+            // user_keyword: selectedKeywords.map((s) => s.value),
+            // user_personality: selectedPersonals.map((s) => s.value)
+        })
+        .then((response) => {
+            console.log(response);
+            if (response.data.success === true) {
+                window.location.href = "/";
+            } // 여기 안 됨
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    };
+
+    const onAddLink = () => {
+        let countArr = [...countLink]
+        let counter = countArr.slice(-1)[0]
+        counter += 1
+        countArr.push(counter)	// index 사용 X
+        // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+        setCountLink(countArr)
+    }
+
 
     // props.profile.user_field.map(())
 
@@ -79,15 +124,15 @@ export default (props) => {
                 user_email: profile.user_email,
                 user_phoneNum: profile.user_phoneNum,
                 user_intro: profile.user_intro,
-                user_field: selectedFields.map((s) => s.value),
-                user_keyword: selectedKeywords.map((s) => s.value),
-                user_personal: selectedPersonals.map((s) => s.value)
+                user_belong: profile.user_belong,
+                user_link: profile.user_link,
+                
             })
             .then((response) => {
                 console.log(response);
                 if (response.data.success === true) {
                     window.location.href = "/";
-                }
+                } // 여기 안 됨
             })
             .catch(function (error) {
                 console.log(error);
@@ -146,8 +191,12 @@ export default (props) => {
                             <Card.Title>기본 정보</Card.Title>
                             <Card.Text>
                                 <div class="item"><div class="contentTitle">소속</div>
-                                    {/* <AddInput countList={countList} />
-                                    <Button onClick={onAddDetailDiv}>+</Button> */}
+                                    <AddInput countList={countList} />
+                                    <Button onClick={onAddDetailDiv}>+</Button>
+                                    <Form.Control type="text" name="user_belong" placeholder=""
+                                                value={profile.user_belong}
+                                                onChange={handleInput}
+                                            />
                                 </div>
                                 <div class="item"><div class="contentTitle">분야</div>
                                     <MultiSelect
@@ -155,11 +204,16 @@ export default (props) => {
                                         value={selectedFields}
                                         onChange={setSelectedFields}
                                     />
+                                    <div>{profile.user_field}</div>
                                 </div>
 
                                 <div class="item"><div class="contentTitle">링크</div>
-                                    {/* <AddInput countList={countLink} />
-                                    <Button onClick={onAddLink}>+</Button> */}
+                                    <AddInput countList={countLink} />
+                                    <Button onClick={onAddLink}>+</Button>
+                                     <Form.Control type="text" name="user_link" placeholder=""
+                                                value={profile.user_link}
+                                                onChange={handleInput}
+                                            />
                                 </div>
 
                             </Card.Text>
@@ -176,6 +230,7 @@ export default (props) => {
                                         value={selectedKeywords}
                                         onChange={setSelectedKeywords}
                                     />
+                                    <div>{profile.user_keyword}</div>
                                 </div>
                                 <div class="item"><div class="contentTitle">성향</div>
                                     <MultiSelect
@@ -183,6 +238,7 @@ export default (props) => {
                                         value={selectedPersonals}
                                         onChange={setSelectedPersonals}
                                     />
+                                    <div>{profile.user_personality}</div>
                                 </div>
                                 <div class="item">
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">

@@ -26,7 +26,7 @@ export default () => {
                 const foundUser = response.data.user;
                 console.log(foundUser);
                 setUser(foundUser);
-            }
+            }  
             else {
                 return alert("조회된 아이디가 없습니다.")
             }
@@ -36,7 +36,6 @@ export default () => {
     }, []);
 
     return (
-    
     <>
     <ProfileEdit profile={user} />
     </>
