@@ -15,6 +15,8 @@ export default () => {
     const [postings, setPostings] = useState([]);
     const [bookmarks, setBookmarks] = useState([]);
 
+    const [bookmarkBtn, setBookmarkBtn] = useState(false);
+
     useEffect(() => {
         console.log('리스트')
         if (sessionStorage.getItem("user")) {
@@ -40,8 +42,7 @@ export default () => {
             }).catch(function (error) {
                 console.log(error);
             });
-        }
-       
+        }       
     }, [userInfo]);
 
 
@@ -54,12 +55,12 @@ export default () => {
                         <>
                             <Button onClick={() => setOnOff(false)}>전체보기</Button>
                             {/* {JSON.stringify(bookmarks)} */}
-                            <JobList postings={bookmarks} userInfo={userInfo} />
+                            <JobList postings={bookmarks} userInfo={userInfo} bookmark={bookmarks} bookmarkBtn={bookmarkBtn} setBookmarkBtn={setBookmarkBtn}/>
                         </>
                         :
                         <>
                             <Button onClick={() => setOnOff(true)}>북마크 보기</Button>
-                            <JobList postings={postings} userInfo={userInfo} />
+                            <JobList postings={postings} userInfo={userInfo} bookmark={bookmarks} bookmarkBtn={bookmarkBtn} setBookmarkBtn={setBookmarkBtn}/>
                         </>
                 }
             </div>
