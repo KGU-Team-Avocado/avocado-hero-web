@@ -29,7 +29,7 @@ export default (props) => {
                             역할
                         </Link>
                     </li>
-                    {props.group.end_project ?
+                    {!props.group.end_project ?
                         props.group.manager === props.user.user_id ?
                             <>
                                 <li className="nav-item">
