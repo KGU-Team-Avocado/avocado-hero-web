@@ -76,7 +76,7 @@ const Header = () => {
                           <Link className="nav-link" to={"/humanRes"}>인재찾기</Link>
                         </Dropdown.Item>
                         <Dropdown.Item>
-                        <Link className="nav-link" to="/jobPosting">채용공고하기</Link>
+                          <Link className="nav-link" to="/jobPosting">채용공고하기</Link>
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
@@ -98,19 +98,21 @@ const Header = () => {
                 >
                   개발모드
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu>
                   <Dropdown.Item href="/example">
-                    테스트
+                    테스트(레퍼런스)
+                  </Dropdown.Item>
+                  <Dropdown.Item href="/example/multiSelectExample">
+                    테스트(멀티셀렉트)
+                  </Dropdown.Item>
+                  <Dropdown.Item href="/example/fileUpload">
+                    테스트(파일 업로드)
                   </Dropdown.Item>
                   <Dropdown.Item href="/example/bestworker">
                     활동포인트
                   </Dropdown.Item>
                   <Dropdown.Item href="/example/database">
                     프로젝트 데이터베이스 조회
-                  </Dropdown.Item>
-                  <Dropdown.Item href="/example/multiSelectExample">
-                    테스트(멀티셀렉트)
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
