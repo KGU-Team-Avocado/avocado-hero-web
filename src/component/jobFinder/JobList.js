@@ -8,6 +8,7 @@ import DOMPurify from "dompurify";
 export default (props) => {
 
     const [selected, setSelected] = useState(null);
+    const [bookmarkBtn, setBookmarkBtn] = useState(false);
 
     const onClick = (e) => {
         window.location.href = "/jobFinder";
@@ -25,7 +26,7 @@ export default (props) => {
             .then((response) => {
                 console.log(response.data);
                 alert("북마크에 추가되었습니다.");  
-                props.setBookmarkBtn(true);
+                setBookmarkBtn(true);
                 window.location.href = "/jobFinder";
             })
             .catch(function (error) {
@@ -42,7 +43,7 @@ export default (props) => {
             .then((response) => {
                 console.log(response.data);
                 alert("북마크에서 삭제되었습니다.");
-                props.setBookmarkBtn(false);
+                setBookmarkBtn(false);
                 window.location.href = "/jobFinder";
             })
             .catch(function (error) {
@@ -58,6 +59,13 @@ export default (props) => {
 
 
     const checkBookmark = (bookMark) => {
+        const idx = props.bookmarks.findIndex((bookmarks) => bookmarks._id === bookMark._id);
+        if (idx == -1) {
+            setBookmarkBtn(false);
+        }
+        else {
+            setBookmarkBtn(true);
+        }
         setSelected(bookMark)
     }
 
@@ -115,7 +123,7 @@ export default (props) => {
                                         <p>{selected.site}</p>
 
                                         {
-                                            props.bookmarkBtn
+                                            bookmarkBtn
                                                 ?
                                                 <button type="button" className="btn btn-primary" onClick={() => { bookMarkDelete(selected._id) }}>
                                                     <BiBookmark />북마크oo
