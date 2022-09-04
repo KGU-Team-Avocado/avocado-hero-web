@@ -8,7 +8,7 @@ export default (props) => {
                     className="list-group-item list-group-item-action px-3 py-3 border-0 border-top border-bottom"
                     data-bs-toggle="modal"
                     data-bs-target="#job_modal"
-                    onClick={() => props.setSelected(props.posting)}
+                    onClick={() => props.checkBookmark(props.posting)}
                 >
                     <div className="row">
                         <div className="col">

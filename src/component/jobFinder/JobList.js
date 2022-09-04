@@ -56,8 +56,9 @@ export default (props) => {
         }
     };
 
-    const checkBookmark = () => {
-        
+
+    const checkBookmark = (bookMark) => {
+        setSelected(bookMark)
     }
 
     return (
@@ -70,8 +71,8 @@ export default (props) => {
                             <JobPostingCard
                                 key={posting._id}
                                 posting={posting}
-                                setSelected={setSelected}
-                                onClick={() => checkBookmark()}
+                                // setSelected={setSelected}
+                                checkBookmark={checkBookmark}
                             />
                         ))
                         :
