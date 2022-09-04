@@ -54,12 +54,12 @@ export default () => {
                         <>
                             <Button onClick={() => setOnOff(false)}>전체보기</Button>
                             {/* {JSON.stringify(bookmarks)} */}
-                            <JobList postings={bookmarks} userInfo={userInfo} bookmark={bookmarks}/>
+                            <JobList postings={bookmarks} userInfo={userInfo} bookmarks={bookmarks}/>
                         </>
                         :
                         <>
                             <Button onClick={() => setOnOff(true)}>북마크 보기</Button>
-                            <JobList postings={postings} userInfo={userInfo} bookmark={bookmarks}/>
+                            <JobList postings={postings} userInfo={userInfo} bookmarks={bookmarks}/>
                         </>
                 }
             </div>

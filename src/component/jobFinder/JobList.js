@@ -60,6 +60,7 @@ export default (props) => {
 
     const checkBookmark = (bookMark) => {
         const idx = props.bookmarks.findIndex((bookmarks) => bookmarks._id === bookMark._id);
+        
         if (idx == -1) {
             setBookmarkBtn(false);
         }
