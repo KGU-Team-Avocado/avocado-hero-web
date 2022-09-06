@@ -7,12 +7,12 @@ export default (props) => {
       e.preventDefault()
       let formData = new FormData()
       formData.append('file', image.data)
-      const response = await fetch('/testsRouter/uploadFile', {
+      const response = await fetch('/usersRouter/uploadImage', {
         method: 'POST',
         body: formData,
       })
   
-      if (response) setStatus(response.statusText)
+      if (response) window.location.reload()
     }
   
     const handleFileChange = (e) => {
