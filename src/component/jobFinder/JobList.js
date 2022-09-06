@@ -98,7 +98,21 @@ export default (props) => {
                                 <div className="modal-body p-5">
                                     <div className="modal-header">
                                         <h2 className="fw-bold mb-0">{selected.title}</h2>
-                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            {
+                                                bookmarkBtn
+                                                    ?
+                                                    <button type="button" className="btn btn-primary" onClick={() => { bookMarkDelete(selected._id) }}>
+                                                        <BiBookmark />
+                                                    </button>
+                                                    :
+                                                    <button type="button" className="btn btn-outline-primary" onClick={() => { bookMarkSave(selected._id) }}>
+                                                        <BiBookmark />
+                                                    </button>
+                                            }
+                                            <button type="button" className="btn-close pt-4" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        
                                     </div>
                                     <div>
 
@@ -123,19 +137,19 @@ export default (props) => {
                                         <h5><b>홈페이지</b></h5>
                                         <p>{selected.site}</p>
 
-                                        {
+                                        {/* {
                                             bookmarkBtn
                                                 ?
                                                 <button type="button" className="btn btn-primary" onClick={() => { bookMarkDelete(selected._id) }}>
-                                                    <BiBookmark />북마크oo
+                                                    <BiBookmark />북마크
                                                 </button>
                                                 :
                                                 <button type="button" className="btn btn-outline-primary" onClick={() => { bookMarkSave(selected._id) }}>
                                                     <BiBookmark />북마크
                                                 </button>
-                                        }
+                                        } */}
                                         
-                                        <button className="btn btn-primary" type="submit" onClick={onClick}>지원하기</button>
+                                        <button className="btn btn-primary mt-2 w-100" type="button" onClick={onClick}>지원하기</button>
 
                                     </div>
                                 </div>

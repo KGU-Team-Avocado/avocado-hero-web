@@ -52,14 +52,22 @@ export default () => {
                     onOff
                         ?
                         <>
-                            <Button onClick={() => setOnOff(false)}>전체보기</Button>
+                            <div className="btn-group me-2 my-3">
+                                <Button type="button" className="btn btn-light" onClick={() => setOnOff(false)}>전체보기</Button>
+                                <Button type="button" className="btn btn-secondary" onClick={() => setOnOff(true)}>북마크보기</Button>
+                            </div>
+                            {/* <Button onClick={() => setOnOff(false)}>전체보기</Button> */}
                             {/* {JSON.stringify(bookmarks)} */}
-                            <JobList postings={bookmarks} userInfo={userInfo} bookmarks={bookmarks}/>
+                            <JobList postings={bookmarks} userInfo={userInfo} bookmarks={bookmarks} />
                         </>
                         :
                         <>
-                            <Button onClick={() => setOnOff(true)}>북마크 보기</Button>
-                            <JobList postings={postings} userInfo={userInfo} bookmarks={bookmarks}/>
+                            <div className="btn-group me-2 my-3">
+                                <Button type="button" className="btn btn-secondary" onClick={() => setOnOff(false)}>전체보기</Button>
+                                <Button type="button" className="btn btn-light"onClick={() => setOnOff(true)}>북마크보기</Button>
+                            </div>
+                            {/* <Button onClick={() => setOnOff(true)}>북마크 보기</Button> */}
+                            <JobList postings={postings} userInfo={userInfo} bookmarks={bookmarks} />
                         </>
                 }
             </div>
