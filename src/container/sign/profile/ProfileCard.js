@@ -8,6 +8,7 @@ import { useResolvedPath } from "react-router-dom";
 import TechStack from "../../../component/common/TechStack";
 import { Link } from 'react-router-dom';
 import GroupCard from "../../../component/group/card/GroupCard";
+import Avatar from "./avatar/Avatar";
 
 export default (props) => {
     // const onClickEdit = (user) => {
@@ -28,7 +29,7 @@ export default (props) => {
 
     const user = props.profile;
     console.log(user);
-    
+
     // const belongs = user.belong;
     // const fields = user.field;
     // const links = user.link;
@@ -43,32 +44,29 @@ export default (props) => {
 
     return (
         <>
-            
+
             <Container>
                 <Row>
-                    <div class="col-md-3">
+                    <div class="col-xl-3">
                         <Card style={{ margin: '10px 0' }}>
                             <Card.Body>
+                                <Avatar user_id={user?.user_id}/>
                                 <div class="itemCenter">
-                                    <svg className="img-thumbnail rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                                    <h4>{user && user.nickname}</h4>
                                 </div>
-
-                                                <div class="itemCenter">
-                                                    <h4>{user && user.nickname}</h4>
-                                                </div>
-                                                <div class="itemCenter">
-                                                    <div>{user && user.name}</div>
-                                                </div>
-                                                <div class="itemCenter">
-                                                    <div>{user && user.email}</div>
-                                                </div>
-                                                <div class="itemCenter">
-                                                    <div>{user && user.phoneNum}</div>
-                                                </div>
+                                <div class="itemCenter">
+                                    <div>{user && user.name}</div>
+                                </div>
+                                <div class="itemCenter">
+                                    <div>{user && user.email}</div>
+                                </div>
+                                <div class="itemCenter">
+                                    <div>{user && user.phoneNum}</div>
+                                </div>
                             </Card.Body>
                         </Card>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-xl-9">
                         <Card style={{ margin: '10px 0' }}>
                             <Card.Body>
                                 <Card.Title>기본 정보</Card.Title>
@@ -80,14 +78,14 @@ export default (props) => {
                                                 belongs.map(belong => (<Map mapper={belong} />))
                                             } */}
                                             {user && user.belong}
-                                            </div>
+                                        </div>
                                     </div>
                                     <div class="item">
                                         <div class="contentTitle">분야</div>
                                         <div>
                                             {/* 테크스택으로 ? */}
-                                        {/* <TechStack tech_stack={user.field} /> */}
-                    {user && user.field}
+                                            {/* <TechStack tech_stack={user.field} /> */}
+                                            {user && user.field}
                                         </div>
                                     </div>
 
@@ -105,7 +103,7 @@ export default (props) => {
 
                                     <div class="item">
                                         <div class="contentTitle">키워드</div>
-                                        <div>{user && <TechStack tech_stack={user.keyword}/>}</div>
+                                        <div>{user && <TechStack tech_stack={user.keyword} />}</div>
                                     </div>
                                     <div class="item">
                                         <div class="contentTitle">성향</div>
@@ -119,62 +117,62 @@ export default (props) => {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
-                    </div>                    
+                    </div>
                     <h1>그룹</h1>
-                        <Card style={{ margin: '10px 0' }}>
-                            <Card.Body>
-                                <Card.Title>소속된 그룹</Card.Title>
-                                <Card.Text>
+                    <Card style={{ margin: '10px 0' }}>
+                        <Card.Body>
+                            <Card.Title>소속된 그룹</Card.Title>
+                            <Card.Text>
                                 {
-                        groups.length > 0
-                            ?
-                            <>
-                                {
-                                    groups.map((group) => (
-                                        <GroupCard
-                                            key={group._id}
-                                            group={group}
-                                            setSelectedGroup={setSelectedGroup}
-                                        />
-                                    ))
+                                    groups.length > 0
+                                        ?
+                                        <>
+                                            {
+                                                groups.map((group) => (
+                                                    <GroupCard
+                                                        key={group._id}
+                                                        group={group}
+                                                        setSelectedGroup={setSelectedGroup}
+                                                    />
+                                                ))
+                                            }
+                                        </>
+                                        :
+                                        <div>프로젝트가 없습니다.</div>
                                 }
-                            </>
-                            :
-                            <div>프로젝트가 없습니다.</div>
-                    }
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
 
-                        <Card style={{ margin: '10px 0' }}>
-                            <Card.Body>
-                                <Card.Title>과거 소속 그룹</Card.Title>
-                                <Card.Text>
+                    <Card style={{ margin: '10px 0' }}>
+                        <Card.Body>
+                            <Card.Title>과거 소속 그룹</Card.Title>
+                            <Card.Text>
                                 {
-                        groups.length > 0
-                            ?
-                            // end_project true일 경우에만 보여주기 ??
-                            <> 
-                                {
-                                    groups.map((group) => (
-                                        <GroupCard
-                                            key={group._id}
-                                            group={group}
-                                            setSelectedGroup={setSelectedGroup}
-                                        />
-                                    ))
+                                    groups.length > 0
+                                        ?
+                                        // end_project true일 경우에만 보여주기 ??
+                                        <>
+                                            {
+                                                groups.map((group) => (
+                                                    <GroupCard
+                                                        key={group._id}
+                                                        group={group}
+                                                        setSelectedGroup={setSelectedGroup}
+                                                    />
+                                                ))
+                                            }
+                                        </>
+                                        :
+                                        <div>프로젝트가 없습니다.</div>
                                 }
-                            </>
-                            :
-                            <div>프로젝트가 없습니다.</div>
-                    }
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
 
-                        <h1>포트폴리오</h1>
+                    <h1>포트폴리오</h1>
 
-                                     
+
                 </Row>
             </Container>
         </>
