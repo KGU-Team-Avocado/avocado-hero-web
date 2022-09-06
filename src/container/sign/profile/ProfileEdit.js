@@ -9,6 +9,8 @@ import Form from "react-bootstrap/Form";
 import { MultiSelect } from "react-multi-select-component";
 import AddInput from "./AddInput";
 import './profile.css';
+import Avatar from "./avatar/Avatar";
+import AvatarEditButton from "./avatar/AvatarEditButton";
 
 export default (props) => {
 
@@ -152,13 +154,15 @@ export default (props) => {
                     <h1>프로필 수정</h1>
                     <Container>
                         <Row>
-                            <div class="col-md-3" >
+                            <div class="col-xl-3" >
                                 <Card style={{ margin: '10px 0' }}>
                                     <Card.Body>
-                                        <div class="itemCenter">
+                                        {/* <div class="itemCenter">
                                             <svg className="img-thumbnail rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
                                             <div class="itemCenter"><Button >변경</Button></div>
-                                        </div>
+                                        </div> */}
+                                        <Avatar user_id={profile?.user_id} />
+                                        <AvatarEditButton user_id={profile?.user_id} />
 
                                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                             <Form.Label>닉네임</Form.Label>
@@ -186,7 +190,7 @@ export default (props) => {
                                     </Card.Body>
                                 </Card>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-xl-9">
                                 <Card style={{ margin: '10px 0' }}>
                                     <Card.Body>
                                         <Card.Title>기본 정보</Card.Title>

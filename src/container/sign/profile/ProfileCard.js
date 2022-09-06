@@ -47,7 +47,7 @@ export default (props) => {
 
             <Container>
                 <Row>
-                    <div class="col-md-3">
+                    <div class="col-xl-3">
                         <Card style={{ margin: '10px 0' }}>
                             <Card.Body>
                                 <Avatar user_id={user?.user_id}/>
@@ -66,7 +66,7 @@ export default (props) => {
                             </Card.Body>
                         </Card>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-xl-9">
                         <Card style={{ margin: '10px 0' }}>
                             <Card.Body>
                                 <Card.Title>기본 정보</Card.Title>

@@ -36,8 +36,6 @@ export default (props) => {
                             <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
                         </svg>
                 }
-
-
             </div>
         </>
     )
