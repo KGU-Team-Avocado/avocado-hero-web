@@ -1,6 +1,11 @@
 import { useState } from "react"
 
 export default (props) => {
+
+    /**
+     * 앞으로 파일 저장할 때, 사용자 이름으로 저장하는 기능을 추가해야함
+     * 
+     *  */
     const [image, setImage] = useState({ preview: '', data: '' })
     const [status, setStatus] = useState('')
     const handleSubmit = async (e) => {
