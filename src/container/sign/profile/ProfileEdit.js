@@ -16,8 +16,8 @@ export default (props) => {
         { label: "프론트", value: "front-end" },
         { label: "백엔드", value: "back-end" },
         { label: "서버", value: "server" },
-        { label: "기획", value: "enterprise"},
-        { label: "개발", value: "coding"},
+        { label: "기획", value: "enterprise" },
+        { label: "개발", value: "coding" },
     ];
 
     const keywords = [
@@ -103,7 +103,7 @@ export default (props) => {
     // (
 
     // )
-    
+
     // useEffect(() => {
     //     setSelectedFields(props.profile.user_field)
     // }, [props.profile.user_field]);
@@ -127,7 +127,7 @@ export default (props) => {
                 user_intro: profile.user_intro,
                 user_belong: profile.user_belong,
                 user_link: profile.user_link,
-                
+
             })
             .then((response) => {
                 console.log(response);
@@ -139,7 +139,7 @@ export default (props) => {
                 console.log(error);
             });
 
-            window.location.href="../../user/" + profile.user_id;
+        window.location.href = "../../user/" + profile.user_id;
     };
 
 
@@ -169,89 +169,89 @@ export default (props) => {
                                         </Form.Group>
 
                                         <Form.Group className="mb-3" contro lId="exampleForm.ControlInput1">
-                                <Form.Label>이름</Form.Label>
-                                <Form.Control type="text" name="user_name" placeholder="" onChange={handleInput}
-                                    value={profile.user_name} />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                <Form.Label>이메일</Form.Label>
-                                <Form.Control type="text" name="user_email" placeholder="" onChange={handleInput}
-                                    value={profile.user_email} />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                <Form.Label>전화번호</Form.Label>
-                                <Form.Control type="text" name="user_phoneNum" placeholder="" onChange={handleInput}
-                                    value={profile.user_phoneNum} />
-                            </Form.Group>
+                                            <Form.Label>이름</Form.Label>
+                                            <Form.Control type="text" name="user_name" placeholder="" onChange={handleInput}
+                                                value={profile.user_name} />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                            <Form.Label>이메일</Form.Label>
+                                            <Form.Control type="text" name="user_email" placeholder="" onChange={handleInput}
+                                                value={profile.user_email} />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                            <Form.Label>전화번호</Form.Label>
+                                            <Form.Control type="text" name="user_phoneNum" placeholder="" onChange={handleInput}
+                                                value={profile.user_phoneNum} />
+                                        </Form.Group>
                                     </Card.Body>
                                 </Card>
                             </div>
                             <div class="col-md-9">
-                    <Card style={{ margin: '10px 0' }}>
-                        <Card.Body>
-                            <Card.Title>기본 정보</Card.Title>
-                            <Card.Text>
-                                <div class="item"><div class="contentTitle">소속</div>
-                                    <AddInput countList={countList} />
-                                    <Button onClick={onAddDetailDiv}>+</Button>
-                                    <Form.Control type="text" name="user_belong" placeholder=""
-                                                value={profile.user_belong}
-                                                onChange={handleInput}
-                                            />
-                                </div>
-                                <div class="item"><div class="contentTitle">분야</div>
-                                    <MultiSelect
-                                        options={fields}
-                                        value={selectedFields}
-                                        onChange={setSelectedFields}
-                                    />
-                                    <div>{profile.user_field}</div>
-                                </div>
+                                <Card style={{ margin: '10px 0' }}>
+                                    <Card.Body>
+                                        <Card.Title>기본 정보</Card.Title>
+                                        <Card.Text>
+                                            <div class="item"><div class="contentTitle">소속</div>
+                                                <AddInput countList={countList} />
+                                                <Button onClick={onAddDetailDiv}>+</Button>
+                                                <Form.Control type="text" name="user_belong" placeholder=""
+                                                    value={profile.user_belong}
+                                                    onChange={handleInput}
+                                                />
+                                            </div>
+                                            <div class="item"><div class="contentTitle">분야</div>
+                                                <MultiSelect
+                                                    options={fields}
+                                                    value={selectedFields}
+                                                    onChange={setSelectedFields}
+                                                />
+                                                <div>{profile.user_field}</div>
+                                            </div>
 
-                                <div class="item"><div class="contentTitle">링크</div>
-                                    <AddInput countList={countLink} />
-                                    <Button onClick={onAddLink}>+</Button>
-                                     <Form.Control type="text" name="user_link" placeholder=""
-                                                value={profile.user_link}
-                                                onChange={handleInput}
-                                            />
-                                </div>
+                                            <div class="item"><div class="contentTitle">링크</div>
+                                                <AddInput countList={countLink} />
+                                                <Button onClick={onAddLink}>+</Button>
+                                                <Form.Control type="text" name="user_link" placeholder=""
+                                                    value={profile.user_link}
+                                                    onChange={handleInput}
+                                                />
+                                            </div>
 
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
 
-                    <Card style={{ margin: '10px 0' }}>
-                        <Card.Body>
-                            <Card.Title>세부 정보</Card.Title>
-                            <Card.Text>
-                                <div class="item"><div class="contentTitle">키워드</div>
-                                    <MultiSelect
-                                        options={keywords}
-                                        value={selectedKeywords}
-                                        onChange={setSelectedKeywords}
-                                    />
-                                    <div>{profile.user_keyword}</div>
-                                </div>
-                                <div class="item"><div class="contentTitle">성향</div>
-                                    <MultiSelect
-                                        options={personals}
-                                        value={selectedPersonals}
-                                        onChange={setSelectedPersonals}
-                                    />
-                                    <div>{profile.user_personality}</div>
-                                </div>
-                                <div class="item">
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label>소개글</Form.Label>
-                                        <Form.Control as="textarea" name="user_intro" placeholder="" rows={3} onChange={handleInput}
-                                            value={profile.user_intro} />
-                                    </Form.Group>
-                                </div>
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </div>
+                                <Card style={{ margin: '10px 0' }}>
+                                    <Card.Body>
+                                        <Card.Title>세부 정보</Card.Title>
+                                        <Card.Text>
+                                            <div class="item"><div class="contentTitle">키워드</div>
+                                                <MultiSelect
+                                                    options={keywords}
+                                                    value={selectedKeywords}
+                                                    onChange={setSelectedKeywords}
+                                                />
+                                                <div>{profile.user_keyword}</div>
+                                            </div>
+                                            <div class="item"><div class="contentTitle">성향</div>
+                                                <MultiSelect
+                                                    options={personals}
+                                                    value={selectedPersonals}
+                                                    onChange={setSelectedPersonals}
+                                                />
+                                                <div>{profile.user_personality}</div>
+                                            </div>
+                                            <div class="item">
+                                                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                                    <Form.Label>소개글</Form.Label>
+                                                    <Form.Control as="textarea" name="user_intro" placeholder="" rows={3} onChange={handleInput}
+                                                        value={profile.user_intro} />
+                                                </Form.Group>
+                                            </div>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </div>
                             <Button onClick={onClickSubmit}>수정 완료</Button>
                         </Row>
                     </Container>
