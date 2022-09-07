@@ -27,6 +27,8 @@ import DatabaseContainer from "./container/example/DatabaseContainer";
 import MultiSelectExampleContainer from "./container/example/MultiSelectExampleContainer";
 import ProjectEvaluationContainer from "./container/group/workspace/ProjectEvaluationContainer";
 import FileUploadExample from "./container/example/FileUploadExample";
+import ProfileGroup from "./container/sign/profile/ProfileGroup";
+import ProfilePortpolio from "./container/sign/profile/ProfilePortpolio";
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
         <Route path="user/:id" element={<ProfileContainer />} />
         <Route path="userProfile/:id" element={<UserProfileContainer />} />
         <Route path="user/ProfileUpdate/:id" element={<ProfileUpdate />} />
+        <Route path="user/ProfileGroup" element={<ProfileGroup />} />
+        <Route path="user/ProfilePortpolio" element={<ProfilePortpolio />} />
         {/* 워크스페이스 */}
         <Route path="myWorkspace" element={<GroupListContainer />} />
 
