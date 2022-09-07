@@ -68,7 +68,7 @@ export default (props) => {
                     </div>
                     <div class="col-xl-9">
                         <Card style={{ margin: '10px 0' }}>
-                            <Card.Body>
+                        <Card.Body>
                                 <Card.Title>기본 정보</Card.Title>
                                 <Card.Text>
                                     <div class="item">
@@ -78,15 +78,11 @@ export default (props) => {
                                                 belongs.map(belong => (<Map mapper={belong} />))
                                             } */}
                                             {user && user.belong}
-                                        </div>
+                                            </div>
                                     </div>
                                     <div class="item">
                                         <div class="contentTitle">분야</div>
-                                        <div>
-                                            {/* 테크스택으로 ? */}
-                                            {/* <TechStack tech_stack={user.field} /> */}
-                                            {user && user.field}
-                                        </div>
+                                        <div>{user && <TechStack tech_stack={user.field}/>}</div>
                                     </div>
 
                                     <div class="item">
@@ -103,76 +99,28 @@ export default (props) => {
 
                                     <div class="item">
                                         <div class="contentTitle">키워드</div>
-                                        <div>{user && <TechStack tech_stack={user.keyword} />}</div>
+                                        <div>{user && <TechStack tech_stack={user.keyword}/>}</div>
                                     </div>
                                     <div class="item">
-                                        <div class="contentTitle">성향</div>
-                                        <div>{user && user.personality}</div>
-                                        {/* 성향만 안 나오는 ? */}
+                                        <div class="contentTitle">성향
+                                        <br />
+                                        (성향만 보기가 안 뜸 .. 수정은 가능)</div>
+                                        {/* <div>{user && <TechStack tech_stack={user.personality
+}/>}</div> */}
+<div>{user && user.personality}</div>
                                     </div>
                                     <div class="item">
                                         <div class="contentTitle">소개글</div>
-                                        <div>{user && user.intro}</div>
+                <Card>
+                    <Card.Body>
+                    <div>{user && user.intro}</div>
+                    </Card.Body>
+                    </Card>                        
                                     </div>
                                 </Card.Text>
                             </Card.Body>
                         </Card>
                     </div>
-                    <h1>그룹</h1>
-                    <Card style={{ margin: '10px 0' }}>
-                        <Card.Body>
-                            <Card.Title>소속된 그룹</Card.Title>
-                            <Card.Text>
-                                {
-                                    groups.length > 0
-                                        ?
-                                        <>
-                                            {
-                                                groups.map((group) => (
-                                                    <GroupCard
-                                                        key={group._id}
-                                                        group={group}
-                                                        setSelectedGroup={setSelectedGroup}
-                                                    />
-                                                ))
-                                            }
-                                        </>
-                                        :
-                                        <div>프로젝트가 없습니다.</div>
-                                }
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-
-                    <Card style={{ margin: '10px 0' }}>
-                        <Card.Body>
-                            <Card.Title>과거 소속 그룹</Card.Title>
-                            <Card.Text>
-                                {
-                                    groups.length > 0
-                                        ?
-                                        // end_project true일 경우에만 보여주기 ??
-                                        <>
-                                            {
-                                                groups.map((group) => (
-                                                    <GroupCard
-                                                        key={group._id}
-                                                        group={group}
-                                                        setSelectedGroup={setSelectedGroup}
-                                                    />
-                                                ))
-                                            }
-                                        </>
-                                        :
-                                        <div>프로젝트가 없습니다.</div>
-                                }
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-
-                    <h1>포트폴리오</h1>
-
-
                 </Row>
             </Container>
         </>
