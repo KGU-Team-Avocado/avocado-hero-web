@@ -11,7 +11,7 @@ const JobFinderContainer = () =>  {
             </div>
             <div className="card m-3" >
                 <div className="card-body">
-                    <h2>채용공고 리스트</h2>
+                    {/* <h2>채용공고 리스트</h2> */}
                     <JobFinderList />
                 </div>
             </div>

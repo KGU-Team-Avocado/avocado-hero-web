@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import TodoList from "./TodoList";
 import TodoCreate from "./TodoCreate";
+import axios from "axios";
 
 const ProjectTodoContainer = () => {
   const [todos, setTodos] = useState([
@@ -30,6 +31,16 @@ const ProjectTodoContainer = () => {
       checked: false,
     };
     dataId.current += 1;
+
+    axios
+    .post("/todosRouter/todoCreate", {
+      todo_id : newItem.id,
+      todo_text : newItem.text,
+      todo_isChecked : newItem.checked,
+    })
+    .then((response) => {
+      console.log(response);
+    })
 
     setTodos([...todos, newItem]);
     console.log(newItem);

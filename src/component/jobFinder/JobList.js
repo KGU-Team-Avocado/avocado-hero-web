@@ -8,13 +8,14 @@ import DOMPurify from "dompurify";
 export default (props) => {
 
     const [selected, setSelected] = useState(null);
+    const [bookmarkBtn, setBookmarkBtn] = useState(false);
 
     const onClick = (e) => {
         window.location.href = "/jobFinder";
         alert("지원이 완료되었습니다.");
     }
 
-    const bookMark = (company_id) => {
+    const bookMarkSave = (company_id) => {
         // window.location.href = "/jobFinder";
 
         axios
@@ -24,7 +25,25 @@ export default (props) => {
             })
             .then((response) => {
                 console.log(response.data);
-                alert("북마크에 추가되었습니다.");
+                alert("북마크에 추가되었습니다.");  
+                setBookmarkBtn(true);
+                window.location.href = "/jobFinder";
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    const bookMarkDelete = (company_id) => {
+        axios
+            .post("/bookmarksRouter/bookmarkDelete", {
+                user_id: props.userInfo.user_id,
+                company_id: company_id,
+            })
+            .then((response) => {
+                console.log(response.data);
+                alert("북마크에서 삭제되었습니다.");
+                setBookmarkBtn(false);
                 window.location.href = "/jobFinder";
             })
             .catch(function (error) {
@@ -38,6 +57,19 @@ export default (props) => {
         }
     };
 
+
+    const checkBookmark = (bookMark) => {
+        const idx = props.bookmarks.findIndex((bookmarks) => bookmarks._id === bookMark._id);
+        
+        if (idx == -1) {
+            setBookmarkBtn(false);
+        }
+        else {
+            setBookmarkBtn(true);
+        }
+        setSelected(bookMark)
+    }
+
     return (
         <>
             <div>
@@ -48,7 +80,8 @@ export default (props) => {
                             <JobPostingCard
                                 key={posting._id}
                                 posting={posting}
-                                setSelected={setSelected}
+                                // setSelected={setSelected}
+                                checkBookmark={checkBookmark}
                             />
                         ))
                         :
@@ -65,7 +98,21 @@ export default (props) => {
                                 <div className="modal-body p-5">
                                     <div className="modal-header">
                                         <h2 className="fw-bold mb-0">{selected.title}</h2>
-                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            {
+                                                bookmarkBtn
+                                                    ?
+                                                    <button type="button" className="btn btn-primary" onClick={() => { bookMarkDelete(selected._id) }}>
+                                                        <BiBookmark />
+                                                    </button>
+                                                    :
+                                                    <button type="button" className="btn btn-outline-primary" onClick={() => { bookMarkSave(selected._id) }}>
+                                                        <BiBookmark />
+                                                    </button>
+                                            }
+                                            <button type="button" className="btn-close pt-4" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        
                                     </div>
                                     <div>
 
@@ -89,10 +136,20 @@ export default (props) => {
                                         <hr />
                                         <h5><b>홈페이지</b></h5>
                                         <p>{selected.site}</p>
-                                        <button type="button" className="btn btn-outline-primary" onClick={() => bookMark(selected._id)}>
-                                            <BiBookmark />북마크
-                                        </button>
-                                        <button className="btn btn-primary" type="submit" onClick={onClick}>지원하기</button>
+
+                                        {/* {
+                                            bookmarkBtn
+                                                ?
+                                                <button type="button" className="btn btn-primary" onClick={() => { bookMarkDelete(selected._id) }}>
+                                                    <BiBookmark />북마크
+                                                </button>
+                                                :
+                                                <button type="button" className="btn btn-outline-primary" onClick={() => { bookMarkSave(selected._id) }}>
+                                                    <BiBookmark />북마크
+                                                </button>
+                                        } */}
+                                        
+                                        <button className="btn btn-primary mt-2 w-100" type="button" onClick={onClick}>지원하기</button>
 
                                     </div>
                                 </div>

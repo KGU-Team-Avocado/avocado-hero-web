@@ -10,13 +10,13 @@ export default () => {
     const [user, setUser] = useState([]);
     const realUser = ["gabrielyoon7", "wlstn", "123", "201912069", "hido", "seeun", "yeonsu"]
     const attendances = {
-        "gabrielyoon7": 7,
-        "wlstn": 6,
+        "gabrielyoon7": 8,
+        "wlstn": 7,
         "123": 2,
         "201912069": 6,
-        "hido": 6,
-        "seeun": 5,
-        "yeonsu": 6
+        "hido": 7,
+        "seeun": 6,
+        "yeonsu": 7
     }  //6월 30일 이후 출석 기록 (백엔드로 만들기 귀찮아서 일단 이렇게 해둠)
     const [sum, setSum] = useState(0);
 
@@ -135,7 +135,7 @@ export default () => {
                             </button>
                         </h2>
                     </div>
-                    <p>대면 회의 출석 횟수 기준일 : 2022-08-25</p>
+                    <p>대면 회의 출석 횟수 기준일 : 2022-09-02</p>
                     <div>
                         {user.length > 0 ? (
                             user.map((user) => (
