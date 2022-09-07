@@ -20,6 +20,18 @@ export const options = [
     { type: "etc", label: "Ubuntu", value: "ubuntu", bgColor: "#000000", txtColor: '#FFFFFF' },
     { label: "??", value: "??", bgColor: "", txtColor: '#FFFFFF', disabled: true },
     { label: "??", value: "??", bgColor: "", txtColor: '#FFFFFF', disabled: true },
+
+    // 분야
+    { type: "fe", label: "front", value: "front-end", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "back", value: "back-end", bgColor: '#FF0000', txtColor: '#FFFFFF' },
+    { type: "fe", label: "server", value: "server", bgColor: "#8000ff", txtColor: '#FFFFFF' },
+    { type: "fe", label: "기획", value: "enterprise", bgColor: '#FFBB00', txtColor: '#FFFFFF' },
+    { type: "fe", label: "개발", value: "coding", bgColor: '#F6F6F6', txtColor: '#FFFFFF' },
+
+    // 성향
+    { type: "fe", label: "호기심많은", value: "curious", bgColor: "#000000", txtColor: '#FFFFFF' },
+    { type: "fe", label: "외향적인", value: "extroverted", bgColor: "#000000", txtColor: '#FFFFFF' },
+    { type: "fe", label: "신중한", value: "cautious", bgColor: "#000000", txtColor: '#FFFFFF' },
 ];
 
 
