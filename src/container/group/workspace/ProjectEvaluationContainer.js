@@ -87,6 +87,9 @@ const ProjectEvaluationContainer = () => {
                     )}
                 </div>
             )}
+            <div class="d-grid gap-2 col-4 mx-auto mb-4">
+                <button class="btn btn-primary" type="button">저장</button>
+            </div>
         </div> 
     )
 }

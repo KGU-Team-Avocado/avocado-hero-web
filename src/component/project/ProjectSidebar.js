@@ -26,7 +26,7 @@ export default (props) => {
                     <li className="nav-item">
                         <Link className="nav-link text-dark" to={"/project/role/" + props.group._id}>
                             <i className="bi bi-person-lines-fill align-top me-1"></i>
-                            역할
+                            {!props.group.end_project ? '역할' : '역할 (팀원 평가하기)'}
                         </Link>
                     </li>
                     {!props.group.end_project ?

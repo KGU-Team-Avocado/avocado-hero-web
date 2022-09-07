@@ -83,7 +83,7 @@ function App() {
         <Route path="role/:id" element={<ProjectRoleContainer />} />
         <Route path="members/:id" element={<ProjectMembersContainer />} />
         <Route path="end/:id" element={<ProjectEndContainer />} />
-        <Route path="evaluation/:id" element={<ProjectEvaluationContainer />} />
+        <Route path="evaluation/:id/:user_id" element={<ProjectEvaluationContainer />} />
       </Route>
     </Routes>
   );

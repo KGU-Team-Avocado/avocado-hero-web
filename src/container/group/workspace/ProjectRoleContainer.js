@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { role } from "../../../assets/tag/Role";
 import ModifyRole from "../../../component/project/role/ModifyRole";
 import RoleBadge from "../../../component/project/role/RoleBadge";
@@ -15,6 +15,7 @@ const ProjectRoleContainer = () => {
     const inputRef = useRef();
     const [members, setMembers] = useState([]); //멤버 배열
     const [manager, setManager] = useState(''); //팀장
+    const [group, setGroup] = useState({})
 
     useEffect(()=>{
         getGroup();
@@ -23,6 +24,7 @@ const ProjectRoleContainer = () => {
     const getGroup = async () => {
         const group = await API.getGroupById({ _id: project_id })
 
+        setGroup(group);
         setMembers(group.members)
         setManager(group.manager)
     }
@@ -71,10 +73,10 @@ const ProjectRoleContainer = () => {
                                 </div>
                                 <div className="col-xxl-8">
                                     <div className="card-body">
-                                        {member.user_id === manager ? 
-                                        <h4 className="card-title">팀장</h4>
-                                        :
-                                        <h4 className="card-title">팀원</h4>
+                                        {member.user_id === manager ?
+                                            <h4 className="card-title">팀장</h4>
+                                            :
+                                            <h4 className="card-title">팀원</h4>
                                         }
                                         <h6 className="card-subtitle mb-2 text-muted">{member.user_name}</h6>
                                         {edit === member.user_id ?
@@ -86,13 +88,22 @@ const ProjectRoleContainer = () => {
                                                 modifyRole={modifyRole}
                                                 cancleEdit={editWho}
                                             />
-                                            : 
-                                            <RoleBadge
-                                                findRole={findRole}
-                                                member={member}
-                                                selected={selected}
-                                                editWho={editWho}
-                                            />
+                                            :
+                                            <>
+                                                <RoleBadge
+                                                    findRole={findRole}
+                                                    member={member}
+                                                    selected={selected}
+                                                    editWho={editWho}
+                                                />
+                                                <div className="mt-2 d-flex justify-content-end">
+                                                {group.end_project ?
+                                                    <Link type="button" className="btn btn-secondary me-2" to={"/project/evaluation/" +project_id + '/' + member.user_id} >평가하기</Link>
+                                                :
+                                                    <button type="button" className="btn btn-secondary me-2" onClick={() => editWho(member.user_id)} >수정</button>
+                                                }
+                                                </div>
+                                            </>
                                         }
                                     </div>
                                 </div>
