@@ -2,8 +2,15 @@ import { useState, useRef } from "react";
 import TodoList from "./TodoList";
 import TodoCreate from "./TodoCreate";
 import axios from "axios";
+import * as API from "../../../api/API";
+import { useParams } from "react-router-dom";
 
 const ProjectTodoContainer = () => {
+  
+  //URL에서 프로젝트 id를 가져옴
+  const params = useParams();
+  const project_id = params.id;
+
   const [todos, setTodos] = useState([
     // {
     //   id: 1,
@@ -22,25 +29,38 @@ const ProjectTodoContainer = () => {
     // },
   ]);
 
-  const dataId = useRef(0);
+  // const dataId = useRef(0);
 
   const onCreate = (todo) => {
+    console.log(project_id);
     const newItem = {
       text: todo,
-      id: dataId.current,
+      // id: dataId.current,
       checked: false,
+      project_id: project_id,
     };
-    dataId.current += 1;
+    // dataId.current += 1;
 
+    //데이터 저장
     axios
     .post("/todosRouter/todoCreate", {
-      todo_id : newItem.id,
+      // todo_id : newItem.id,
       todo_text : newItem.text,
       todo_isChecked : newItem.checked,
+      project_id : newItem.project_id,
     })
     .then((response) => {
       console.log(response);
     })
+    
+    // axios
+    //   .post("/todosRouter/postFindOne", {
+    //     project_id: project_id,
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     setTodos(response.data);
+    //   })
 
     setTodos([...todos, newItem]);
     console.log(newItem);
