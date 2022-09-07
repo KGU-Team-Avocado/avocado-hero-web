@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -9,6 +10,7 @@ import Form from "react-bootstrap/Form";
 import { MultiSelect } from "react-multi-select-component";
 import AddInput from "./AddInput";
 import './profile.css';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 export default (props) => {
 
@@ -49,42 +51,6 @@ export default (props) => {
     }, [props.profile]);
 
     const [countList, setCountList] = useState([0]);
-
-    const [countLink, setCountLink] = useState([0]);
-
-    const onAddDetailDiv = () => {
-        let countArr = [...countList]
-        let counter = countArr.slice(-1)[0]
-        counter += 1
-        countArr.push(counter)	// index 사용 X
-        // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
-        setCountList(countArr)
-        // axios
-        // .post("usersRouter/profileUpdate", {
-        //     user_field: selectedFields.map((s) => s.value),
-        //     // user_keyword: selectedKeywords.map((s) => s.value),
-        //     // user_personality: selectedPersonals.map((s) => s.value)
-        // })
-        // .then((response) => {
-        //     console.log(response);
-        //     if (response.data.success === true) {
-        //         window.location.href = "/";
-        //     } // 여기 안 됨
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
-    };
-
-    const onAddLink = () => {
-        let countArr = [...countLink]
-        let counter = countArr.slice(-1)[0]
-        counter += 1
-        countArr.push(counter)	// index 사용 X
-        // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
-        setCountLink(countArr)
-    }
-
 
     // props.profile.user_field.map(())
 
@@ -127,7 +93,9 @@ export default (props) => {
                 user_intro: profile.user_intro,
                 user_belong: profile.user_belong,
                 user_link: profile.user_link,
-                
+                user_field: selectedFields.map((s) => s.value),
+                user_keyword: selectedKeywords.map((s) => s.value),
+                user_personality: selectedPersonals.map((s) => s.value)
             })
             .then((response) => {
                 console.log(response);
@@ -142,6 +110,16 @@ export default (props) => {
             window.location.href="../../user/" + profile.user_id;
     };
 
+    const onClickBelong = () => {
+        // 현재 input의 내용을 배열에 저장하고 input을 하나 더 만드는 함수
+
+        let countArr = [...countList]
+        let counter = countArr.slice(-1)[0]
+        counter += 1
+        countArr.push(counter)	// index 사용 X
+        // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+        setCountList(countArr)
+    }
 
 
     return (
@@ -149,7 +127,7 @@ export default (props) => {
             {
                 profile &&
                 <>
-                    <h1>프로필 수정</h1>
+                    <h2>프로필 수정</h2>
                     <Container>
                         <Row>
                             <div class="col-md-3" >
@@ -193,11 +171,20 @@ export default (props) => {
                             <Card.Text>
                                 <div class="item"><div class="contentTitle">소속</div>
                                     <AddInput countList={countList} />
-                                    <Button onClick={onAddDetailDiv}>+</Button>
-                                    <Form.Control type="text" name="user_belong" placeholder=""
+
+                                    
+                                <InputGroup className="mb-3">
+        <Form.Control
+          aria-label="Recipient's username"
+          aria-describedby="basic-addon2"
+          type="text" name="user_belong" placeholder=""
                                                 value={profile.user_belong}
                                                 onChange={handleInput}
-                                            />
+        />
+        <Button onClick={onClickBelong} variant="outline-secondary" id="button-addon2">
+          Button
+        </Button>
+      </InputGroup>            
                                 </div>
                                 <div class="item"><div class="contentTitle">분야</div>
                                     <MultiSelect
@@ -205,16 +192,30 @@ export default (props) => {
                                         value={selectedFields}
                                         onChange={setSelectedFields}
                                     />
-                                    <div>{profile.user_field}</div>
+                                    <div>
+                                       (멀티셀렉트 체크 상태로 띄우는거 아직 못해서 
+                                       일단 밑에 현재 select된 옵션들 글로 뜨게 함) 
+                                       <br />
+                                        선택: {profile.user_field}</div>
                                 </div>
 
-                                <div class="item"><div class="contentTitle">링크</div>
-                                    <AddInput countList={countLink} />
+                                <div class="item">
+                                    {/* <AddInput countList={countLink} />
                                     <Button onClick={onAddLink}>+</Button>
                                      <Form.Control type="text" name="user_link" placeholder=""
                                                 value={profile.user_link}
                                                 onChange={handleInput}
-                                            />
+                                            /> */}
+                                            <Form.Label htmlFor="basic-url">링크</Form.Label>
+      <InputGroup className="mb-3">
+        <InputGroup.Text id="basic-addon3">
+          https://example.com/users/
+        </InputGroup.Text>
+        <Form.Control id="basic-url" aria-describedby="basic-addon3"
+        type="text" name="user_link" placeholder=""
+        value={profile.user_link}
+        onChange={handleInput} />
+      </InputGroup>
                                 </div>
 
                             </Card.Text>
@@ -231,7 +232,7 @@ export default (props) => {
                                         value={selectedKeywords}
                                         onChange={setSelectedKeywords}
                                     />
-                                    <div>{profile.user_keyword}</div>
+                                    <div>선택: {profile.user_keyword}</div>
                                 </div>
                                 <div class="item"><div class="contentTitle">성향</div>
                                     <MultiSelect
@@ -239,7 +240,7 @@ export default (props) => {
                                         value={selectedPersonals}
                                         onChange={setSelectedPersonals}
                                     />
-                                    <div>{profile.user_personality}</div>
+                                    <div>선택: {profile.user_personality}</div>
                                 </div>
                                 <div class="item">
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">

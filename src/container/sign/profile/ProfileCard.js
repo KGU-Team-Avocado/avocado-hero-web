@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import GroupCard from "../../../component/group/card/GroupCard";
 
 export default (props) => {
-    // const onClickEdit = (user) => {
+    // const onClickEdit = (user) => {ㅇㅇ
     //     window.location.href="./ProfileUpdate"
     //     return (
     //         <ProfileUpdate />
