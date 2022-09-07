@@ -10,12 +10,9 @@ import Form from "react-bootstrap/Form";
 import { MultiSelect } from "react-multi-select-component";
 import AddInput from "./AddInput";
 import './profile.css';
-<<<<<<< HEAD
 import InputGroup from 'react-bootstrap/InputGroup';
-=======
 import Avatar from "./avatar/Avatar";
 import AvatarEditButton from "./avatar/AvatarEditButton";
->>>>>>> 4da0d19b460246b2114e98f4d16ec74660041ed5
 
 export default (props) => {
 
@@ -23,8 +20,8 @@ export default (props) => {
         { label: "프론트", value: "front-end" },
         { label: "백엔드", value: "back-end" },
         { label: "서버", value: "server" },
-        { label: "기획", value: "enterprise" },
-        { label: "개발", value: "coding" },
+        { label: "기획", value: "enterprise"},
+        { label: "개발", value: "coding"},
     ];
 
     const keywords = [
@@ -74,7 +71,7 @@ export default (props) => {
     // (
 
     // )
-
+    
     // useEffect(() => {
     //     setSelectedFields(props.profile.user_field)
     // }, [props.profile.user_field]);
@@ -98,13 +95,9 @@ export default (props) => {
                 user_intro: profile.user_intro,
                 user_belong: profile.user_belong,
                 user_link: profile.user_link,
-<<<<<<< HEAD
                 user_field: selectedFields.map((s) => s.value),
                 user_keyword: selectedKeywords.map((s) => s.value),
                 user_personality: selectedPersonals.map((s) => s.value)
-=======
-
->>>>>>> 4da0d19b460246b2114e98f4d16ec74660041ed5
             })
             .then((response) => {
                 console.log(response);
@@ -116,7 +109,7 @@ export default (props) => {
                 console.log(error);
             });
 
-        window.location.href = "../../user/" + profile.user_id;
+            window.location.href="../../user/" + profile.user_id;
     };
 
     const onClickBelong = () => {
@@ -136,7 +129,7 @@ export default (props) => {
             {
                 profile &&
                 <>
-                    <h2>프로필 수정</h2>
+                    <h3>프로필 수정</h3>
                     <Container>
                         <Row>
                             <div class="col-xl-3" >
@@ -158,31 +151,30 @@ export default (props) => {
                                         </Form.Group>
 
                                         <Form.Group className="mb-3" contro lId="exampleForm.ControlInput1">
-                                            <Form.Label>이름</Form.Label>
-                                            <Form.Control type="text" name="user_name" placeholder="" onChange={handleInput}
-                                                value={profile.user_name} />
-                                        </Form.Group>
-                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                            <Form.Label>이메일</Form.Label>
-                                            <Form.Control type="text" name="user_email" placeholder="" onChange={handleInput}
-                                                value={profile.user_email} />
-                                        </Form.Group>
-                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                            <Form.Label>전화번호</Form.Label>
-                                            <Form.Control type="text" name="user_phoneNum" placeholder="" onChange={handleInput}
-                                                value={profile.user_phoneNum} />
-                                        </Form.Group>
+                                <Form.Label>이름</Form.Label>
+                                <Form.Control type="text" name="user_name" placeholder="" onChange={handleInput}
+                                    value={profile.user_name} />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>이메일</Form.Label>
+                                <Form.Control type="text" name="user_email" placeholder="" onChange={handleInput}
+                                    value={profile.user_email} />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>전화번호</Form.Label>
+                                <Form.Control type="text" name="user_phoneNum" placeholder="" onChange={handleInput}
+                                    value={profile.user_phoneNum} />
+                            </Form.Group>
                                     </Card.Body>
                                 </Card>
                             </div>
-<<<<<<< HEAD
-                            <div class="col-md-9">
+                            <div class="col-xl-9">
                     <Card style={{ margin: '10px 0' }}>
                         <Card.Body>
                             <Card.Title>기본 정보</Card.Title>
                             <Card.Text>
                                 <div class="item"><div class="contentTitle">소속</div>
-                                    <AddInput countList={countList} />
+                                    {/* <AddInput countList={countList} /> */}
 
                                     
                                 <InputGroup className="mb-3">
@@ -194,7 +186,7 @@ export default (props) => {
                                                 onChange={handleInput}
         />
         <Button onClick={onClickBelong} variant="outline-secondary" id="button-addon2">
-          Button
+          추가
         </Button>
       </InputGroup>            
                                 </div>
@@ -208,7 +200,7 @@ export default (props) => {
                                        (멀티셀렉트 체크 상태로 띄우는거 아직 못해서 
                                        일단 밑에 현재 select된 옵션들 글로 뜨게 함) 
                                        <br />
-                                        선택: {profile.user_field}</div>
+                                        선택됨: {profile.user_field}</div>
                                 </div>
 
                                 <div class="item">
@@ -229,44 +221,11 @@ export default (props) => {
         onChange={handleInput} />
       </InputGroup>
                                 </div>
-=======
-                            <div class="col-xl-9">
-                                <Card style={{ margin: '10px 0' }}>
-                                    <Card.Body>
-                                        <Card.Title>기본 정보</Card.Title>
-                                        <Card.Text>
-                                            <div class="item"><div class="contentTitle">소속</div>
-                                                <AddInput countList={countList} />
-                                                <Button onClick={onAddDetailDiv}>+</Button>
-                                                <Form.Control type="text" name="user_belong" placeholder=""
-                                                    value={profile.user_belong}
-                                                    onChange={handleInput}
-                                                />
-                                            </div>
-                                            <div class="item"><div class="contentTitle">분야</div>
-                                                <MultiSelect
-                                                    options={fields}
-                                                    value={selectedFields}
-                                                    onChange={setSelectedFields}
-                                                />
-                                                <div>{profile.user_field}</div>
-                                            </div>
 
-                                            <div class="item"><div class="contentTitle">링크</div>
-                                                <AddInput countList={countLink} />
-                                                <Button onClick={onAddLink}>+</Button>
-                                                <Form.Control type="text" name="user_link" placeholder=""
-                                                    value={profile.user_link}
-                                                    onChange={handleInput}
-                                                />
-                                            </div>
->>>>>>> 4da0d19b460246b2114e98f4d16ec74660041ed5
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
 
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-
-<<<<<<< HEAD
                     <Card style={{ margin: '10px 0' }}>
                         <Card.Body>
                             <Card.Title>세부 정보</Card.Title>
@@ -277,7 +236,7 @@ export default (props) => {
                                         value={selectedKeywords}
                                         onChange={setSelectedKeywords}
                                     />
-                                    <div>선택: {profile.user_keyword}</div>
+                                    <div>선택됨: {profile.user_keyword}</div>
                                 </div>
                                 <div class="item"><div class="contentTitle">성향</div>
                                     <MultiSelect
@@ -285,7 +244,7 @@ export default (props) => {
                                         value={selectedPersonals}
                                         onChange={setSelectedPersonals}
                                     />
-                                    <div>선택: {profile.user_personality}</div>
+                                    <div>선택됨: {profile.user_personality}</div>
                                 </div>
                                 <div class="item">
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -298,39 +257,6 @@ export default (props) => {
                         </Card.Body>
                     </Card>
                 </div>
-=======
-                                <Card style={{ margin: '10px 0' }}>
-                                    <Card.Body>
-                                        <Card.Title>세부 정보</Card.Title>
-                                        <Card.Text>
-                                            <div class="item"><div class="contentTitle">키워드</div>
-                                                <MultiSelect
-                                                    options={keywords}
-                                                    value={selectedKeywords}
-                                                    onChange={setSelectedKeywords}
-                                                />
-                                                <div>{profile.user_keyword}</div>
-                                            </div>
-                                            <div class="item"><div class="contentTitle">성향</div>
-                                                <MultiSelect
-                                                    options={personals}
-                                                    value={selectedPersonals}
-                                                    onChange={setSelectedPersonals}
-                                                />
-                                                <div>{profile.user_personality}</div>
-                                            </div>
-                                            <div class="item">
-                                                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                                    <Form.Label>소개글</Form.Label>
-                                                    <Form.Control as="textarea" name="user_intro" placeholder="" rows={3} onChange={handleInput}
-                                                        value={profile.user_intro} />
-                                                </Form.Group>
-                                            </div>
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                            </div>
->>>>>>> 4da0d19b460246b2114e98f4d16ec74660041ed5
                             <Button onClick={onClickSubmit}>수정 완료</Button>
                         </Row>
                     </Container>
