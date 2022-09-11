@@ -22,11 +22,11 @@ import PropTypes from "prop-types";
 import Fade from "@mui/material/Fade";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
+import MKBox from "mui/components/MKBox";
 
 // Custom styles for the MKAlert
-import MKAlertRoot from "components/MKAlert/MKAlertRoot";
-import MKAlertCloseIcon from "components/MKAlert/MKAlertCloseIcon";
+import MKAlertRoot from "mui/components/MKAlert/MKAlertRoot";
+import MKAlertCloseIcon from "mui/components/MKAlert/MKAlertCloseIcon";
 
 function MKAlert({ color, dismissible, children, ...rest }) {
   const [alertStatus, setAlertStatus] = useState("mount");

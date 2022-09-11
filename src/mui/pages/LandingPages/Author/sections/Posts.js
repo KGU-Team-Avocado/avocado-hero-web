@@ -18,12 +18,12 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "mui/components/MKBox";
+import MKTypography from "mui/components/MKTypography";
 
 // Material Kit 2 React components
-import TransparentBlogCard from "examples/Cards/BlogCards/TransparentBlogCard";
-import BackgroundBlogCard from "examples/Cards/BlogCards/BackgroundBlogCard";
+import TransparentBlogCard from "mui/examples/Cards/BlogCards/TransparentBlogCard";
+import BackgroundBlogCard from "mui/examples/Cards/BlogCards/BackgroundBlogCard";
 
 // Images
 import post1 from "assets/images/examples/testimonial-6-2.jpg";

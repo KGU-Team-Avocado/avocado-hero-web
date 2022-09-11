@@ -21,15 +21,15 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKBadge from "components/MKBadge";
-import MKTypography from "components/MKTypography";
+import MKBox from "mui/components/MKBox";
+import MKBadge from "mui/components/MKBadge";
+import MKTypography from "mui/components/MKTypography";
 
 // Presentation page components
-import ExampleCard from "pages/Presentation/components/ExampleCard";
+import ExampleCard from "mui/pages/Presentation/components/ExampleCard";
 
 // Data
-import data from "pages/Presentation/sections/data/pagesData";
+import data from "mui/pages/Presentation/sections/data/pagesData";
 
 function Pages() {
   const renderData = data.map(({ image, name, route }) => (

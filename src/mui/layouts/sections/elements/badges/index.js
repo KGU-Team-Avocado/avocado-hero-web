@@ -14,18 +14,18 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "mui/layouts/sections/components/BaseLayout";
+import View from "mui/layouts/sections/components/View";
 
 // Badges page components
-import BadgesGradient from "layouts/sections/elements/badges/components/BadgesGradient";
-import BadgesSimple from "layouts/sections/elements/badges/components/BadgesSimple";
-import BadgesSimpleRounded from "layouts/sections/elements/badges/components/BadgesSimpleRounded";
+import BadgesGradient from "mui/layouts/sections/elements/badges/components/BadgesGradient";
+import BadgesSimple from "mui/layouts/sections/elements/badges/components/BadgesSimple";
+import BadgesSimpleRounded from "mui/layouts/sections/elements/badges/components/BadgesSimpleRounded";
 
 // Badges page components code
-import badgesGradientCode from "layouts/sections/elements/badges/components/BadgesGradient/code";
-import badgesSimpleCode from "layouts/sections/elements/badges/components/BadgesSimple/code";
-import badgesSimpleRoundedCode from "layouts/sections/elements/badges/components/BadgesSimpleRounded/code";
+import badgesGradientCode from "mui/layouts/sections/elements/badges/components/BadgesGradient/code";
+import badgesSimpleCode from "mui/layouts/sections/elements/badges/components/BadgesSimple/code";
+import badgesSimpleRoundedCode from "mui/layouts/sections/elements/badges/components/BadgesSimpleRounded/code";
 
 function Badges() {
   return (

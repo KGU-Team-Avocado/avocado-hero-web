@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "mui/layouts/sections/components/BaseLayout";
+import View from "mui/layouts/sections/components/View";
 
 // ProgressBars page components
-import ProgressSimple from "layouts/sections/elements/progress-bars/components/ProgressSimple";
+import ProgressSimple from "mui/layouts/sections/elements/progress-bars/components/ProgressSimple";
 
 // ProgressBars page components code
-import progressSimpleCode from "layouts/sections/elements/progress-bars/components/ProgressSimple/code";
+import progressSimpleCode from "mui/layouts/sections/elements/progress-bars/components/ProgressSimple/code";
 
 function ProgressBars() {
   return (

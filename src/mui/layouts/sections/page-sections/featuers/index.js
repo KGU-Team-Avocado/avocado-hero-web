@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "mui/layouts/sections/components/BaseLayout";
+import View from "mui/layouts/sections/components/View";
 
 // Features page components
-import FeaturesOne from "layouts/sections/page-sections/featuers/components/FeaturesOne";
+import FeaturesOne from "mui/layouts/sections/page-sections/featuers/components/FeaturesOne";
 
 // Features page components code
-import featuresOneCode from "layouts/sections/page-sections/featuers/components/FeaturesOne/code";
+import featuresOneCode from "mui/layouts/sections/page-sections/featuers/components/FeaturesOne/code";
 
 function Features() {
   return (

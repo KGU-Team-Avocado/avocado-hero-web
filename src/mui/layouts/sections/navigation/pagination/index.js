@@ -14,17 +14,17 @@ Coded by www.creative-tim.com
 */
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
+import MKBox from "mui/components/MKBox";
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "mui/layouts/sections/components/BaseLayout";
+import View from "mui/layouts/sections/components/View";
 
 // Stats page components
-import PaginationSimple from "layouts/sections/navigation/pagination/components/PaginationSimple";
+import PaginationSimple from "mui/layouts/sections/navigation/pagination/components/PaginationSimple";
 
 // Stats page components code
-import paginationSimpleCode from "layouts/sections/navigation/pagination/components/PaginationSimple/code";
+import paginationSimpleCode from "mui/layouts/sections/navigation/pagination/components/PaginationSimple/code";
 
 function Pagination() {
   return (

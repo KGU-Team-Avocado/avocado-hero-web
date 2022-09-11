@@ -99,6 +99,9 @@ const Header = () => {
                   개발모드
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
+                  <Dropdown.Item href="/presentation">
+                    New Theme!
+                  </Dropdown.Item>
                   <Dropdown.Item href="/example">
                     테스트(레퍼런스)
                   </Dropdown.Item>

@@ -19,29 +19,29 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKSocialButton from "components/MKSocialButton";
+import MKBox from "mui/components/MKBox";
+import MKTypography from "mui/components/MKTypography";
+import MKSocialButton from "mui/components/MKSocialButton";
 
 // Material Kit 2 React examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
-import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
+import DefaultNavbar from "mui/examples/Navbars/DefaultNavbar";
+import DefaultFooter from "mui/examples/Footers/DefaultFooter";
+import FilledInfoCard from "mui/examples/Cards/InfoCards/FilledInfoCard";
 
 // Presentation page sections
-import Counters from "pages/Presentation/sections/Counters";
-import Information from "pages/Presentation/sections/Information";
-import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
-import Pages from "pages/Presentation/sections/Pages";
-import Testimonials from "pages/Presentation/sections/Testimonials";
-import Download from "pages/Presentation/sections/Download";
+import Counters from "mui/pages/Presentation/sections/Counters";
+import Information from "mui/pages/Presentation/sections/Information";
+import DesignBlocks from "mui/pages/Presentation/sections/DesignBlocks";
+import Pages from "mui/pages/Presentation/sections/Pages";
+import Testimonials from "mui/pages/Presentation/sections/Testimonials";
+import Download from "mui/pages/Presentation/sections/Download";
 
 // Presentation page components
-import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
+import BuiltByDevelopers from "mui/pages/Presentation/components/BuiltByDevelopers";
 
 // Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
+import routes from "mui/routes";
+import footerRoutes from "mui/footer.routes";
 
 // Images
 import bgImage from "assets/images/bg-presentation.jpg";

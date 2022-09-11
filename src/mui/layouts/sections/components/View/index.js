@@ -33,10 +33,10 @@ import Tab from "@mui/material/Tab";
 import Slide from "@mui/material/Slide";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKAlert from "components/MKAlert";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "mui/components/MKBox";
+import MKAlert from "mui/components/MKAlert";
+import MKButton from "mui/components/MKButton";
+import MKTypography from "mui/components/MKTypography";
 
 // Material Kit 2 React base styles
 import colors from "assets/theme/base/colors";

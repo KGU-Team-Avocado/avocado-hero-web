@@ -1,11 +1,11 @@
 const navbarDarkCode = `// Material Kit 2 React components
-import MKBox from "components/MKBox";
+import MKBox from "mui/components/MKBox";
 
 // Material Kit 2 React examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import DefaultNavbar from "mui/examples/Navbars/DefaultNavbar";
 
 // Routes
-import routes from "routes";
+import routes from "mui/routes";
 
 function NavbarDark() {
   return (

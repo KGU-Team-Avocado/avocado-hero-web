@@ -19,9 +19,9 @@ import Grid from "@mui/material/Grid";
 import Tooltip from "@mui/material/Tooltip";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "mui/components/MKBox";
+import MKButton from "mui/components/MKButton";
+import MKTypography from "mui/components/MKTypography";
 
 // Images
 import bgImage from "assets/images/shapes/waves-white.svg";

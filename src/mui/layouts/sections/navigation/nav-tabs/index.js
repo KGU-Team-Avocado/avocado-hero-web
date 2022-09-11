@@ -14,17 +14,17 @@ Coded by www.creative-tim.com
 */
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
+import MKBox from "mui/components/MKBox";
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "mui/layouts/sections/components/BaseLayout";
+import View from "mui/layouts/sections/components/View";
 
 // Stats page components
-import TabsSimple from "layouts/sections/navigation/nav-tabs/components/TabsSimple";
+import TabsSimple from "mui/layouts/sections/navigation/nav-tabs/components/TabsSimple";
 
 // Stats page components code
-import tabsSimpleCode from "layouts/sections/navigation/nav-tabs/components/TabsSimple/code";
+import tabsSimpleCode from "mui/layouts/sections/navigation/nav-tabs/components/TabsSimple/code";
 
 function NavTabs() {
   return (

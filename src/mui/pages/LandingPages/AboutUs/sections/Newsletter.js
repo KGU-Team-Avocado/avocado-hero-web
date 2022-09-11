@@ -19,10 +19,10 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
+import MKBox from "mui/components/MKBox";
+import MKTypography from "mui/components/MKTypography";
+import MKInput from "mui/components/MKInput";
+import MKButton from "mui/components/MKButton";
 
 // Images
 import macbook from "assets/images/macbook.png";

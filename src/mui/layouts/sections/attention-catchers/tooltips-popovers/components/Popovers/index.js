@@ -22,9 +22,9 @@ import Stack from "@mui/material/Stack";
 import Popover from "@mui/material/Popover";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "mui/components/MKBox";
+import MKButton from "mui/components/MKButton";
+import MKTypography from "mui/components/MKTypography";
 
 function Popovers() {
   const [popover, setPopover] = useState(null);

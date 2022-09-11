@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "mui/layouts/sections/components/BaseLayout";
+import View from "mui/layouts/sections/components/View";
 
 // Avatars page components
-import AvatarGroup from "layouts/sections/elements/avatars/components/AvatarGroup";
-import AvatarSize from "layouts/sections/elements/avatars/components/AvatarSize";
+import AvatarGroup from "mui/layouts/sections/elements/avatars/components/AvatarGroup";
+import AvatarSize from "mui/layouts/sections/elements/avatars/components/AvatarSize";
 
 // Avatars page components code
-import avatarGroupCode from "layouts/sections/elements/avatars/components/AvatarGroup/code";
-import avatarSizeCode from "layouts/sections/elements/avatars/components/AvatarSize/code";
+import avatarGroupCode from "mui/layouts/sections/elements/avatars/components/AvatarGroup/code";
+import avatarSizeCode from "mui/layouts/sections/elements/avatars/components/AvatarSize/code";
 
 function Avatars() {
   return (

@@ -21,16 +21,16 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
+import MKBox from "mui/components/MKBox";
+import MKTypography from "mui/components/MKTypography";
 
 // Material Kit 2 React examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import CenteredFooter from "examples/Footers/CenteredFooter";
-import Breadcrumbs from "examples/Breadcrumbs";
+import DefaultNavbar from "mui/examples/Navbars/DefaultNavbar";
+import CenteredFooter from "mui/examples/Footers/CenteredFooter";
+import Breadcrumbs from "mui/examples/Breadcrumbs";
 
 // Routes
-import routes from "routes";
+import routes from "mui/routes";
 
 function BaseLayout({ breadcrumb, title, children }) {
   return (

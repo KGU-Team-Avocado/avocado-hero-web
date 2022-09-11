@@ -4,8 +4,8 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
+import MKBox from "mui/components/MKBox";
+import MKButton from "mui/components/MKButton";
 
 function ButtonsOutlined() {
   return (

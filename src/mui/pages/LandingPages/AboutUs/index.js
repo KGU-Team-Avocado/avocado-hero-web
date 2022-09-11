@@ -19,23 +19,23 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKButton from "components/MKButton";
+import MKBox from "mui/components/MKBox";
+import MKTypography from "mui/components/MKTypography";
+import MKButton from "mui/components/MKButton";
 
 // Material Kit 2 React examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
+import DefaultNavbar from "mui/examples/Navbars/DefaultNavbar";
+import DefaultFooter from "mui/examples/Footers/DefaultFooter";
 
 // About Us page sections
-import Information from "pages/LandingPages/AboutUs/sections/Information";
-import Team from "pages/LandingPages/AboutUs/sections/Team";
-import Featuring from "pages/LandingPages/AboutUs/sections/Featuring";
-import Newsletter from "pages/LandingPages/AboutUs/sections/Newsletter";
+import Information from "mui/pages/LandingPages/AboutUs/sections/Information";
+import Team from "mui/pages/LandingPages/AboutUs/sections/Team";
+import Featuring from "mui/pages/LandingPages/AboutUs/sections/Featuring";
+import Newsletter from "mui/pages/LandingPages/AboutUs/sections/Newsletter";
 
 // Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
+import routes from "mui/routes";
+import footerRoutes from "mui/footer.routes";
 
 // Images
 import bgImage from "assets/images/bg-about-us.jpg";

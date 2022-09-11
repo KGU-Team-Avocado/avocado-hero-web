@@ -18,13 +18,13 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
+import MKBox from "mui/components/MKBox";
 
 // Material Kit 2 React examples
-import RotatingCard from "examples/Cards/RotatingCard";
-import RotatingCardFront from "examples/Cards/RotatingCard/RotatingCardFront";
-import RotatingCardBack from "examples/Cards/RotatingCard/RotatingCardBack";
-import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
+import RotatingCard from "mui/examples/Cards/RotatingCard";
+import RotatingCardFront from "mui/examples/Cards/RotatingCard/RotatingCardFront";
+import RotatingCardBack from "mui/examples/Cards/RotatingCard/RotatingCardBack";
+import DefaultInfoCard from "mui/examples/Cards/InfoCards/DefaultInfoCard";
 
 // Images
 import bgFront from "assets/images/rotating-card-bg-front.jpeg";

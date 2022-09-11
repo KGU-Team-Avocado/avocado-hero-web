@@ -55,9 +55,11 @@ export default function MuiApp() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes>
-        {getRoutes(routes)}
-        <Route path="/presentation" element={<Presentation />} />
-        <Route path="*" element={<Navigate to="/presentation" />} />
+        {/* <Route path="mui"> */}
+          {getRoutes(routes)}
+          <Route path="/presentation" element={<Presentation />} />
+          {/* <Route path="*" element={<Navigate to="/presentation" />} /> */}
+        {/* </Route> */}
       </Routes>
     </ThemeProvider>
   );

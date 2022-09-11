@@ -19,17 +19,19 @@ import { forwardRef, createContext, useContext } from "react";
 import PropTypes from "prop-types";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
+import MKBox from "mui/components/MKBox";
 
 // Custom styles for MKPagination
-import MKPaginationItemRoot from "components/MKPagination/MKPaginationItemRoot";
+import MKPaginationItemRoot from "mui/components/MKPagination/MKPaginationItemRoot";
 
 // The Pagination main context
 const Context = createContext();
 
 const MKPagination = forwardRef(
   ({ item, variant, color, size, active, children, placement, ...rest }, ref) => {
-    const context = item ? useContext(Context) : null;
+    // const context = item ? useContext(Context) : null;
+    // 오류 방지용으로 임시로 작성함
+    const context = null;
     const paginationSize = context ? context.size : null;
     let placementValue = "flex-end";
 

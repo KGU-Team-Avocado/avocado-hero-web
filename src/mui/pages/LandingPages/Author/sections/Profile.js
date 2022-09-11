@@ -19,10 +19,10 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKAvatar from "components/MKAvatar";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "mui/components/MKBox";
+import MKAvatar from "mui/components/MKAvatar";
+import MKButton from "mui/components/MKButton";
+import MKTypography from "mui/components/MKTypography";
 
 // Images
 import profilePicture from "assets/images/bruce-mars.jpg";

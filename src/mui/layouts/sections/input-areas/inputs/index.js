@@ -14,26 +14,26 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "mui/layouts/sections/components/BaseLayout";
+import View from "mui/layouts/sections/components/View";
 
 // Inputs page components
-import InputDynamic from "layouts/sections/input-areas/inputs/components/InputDynamic";
-import InputStatic from "layouts/sections/input-areas/inputs/components/InputStatic";
-import InputOutlined from "layouts/sections/input-areas/inputs/components/InputOutlined";
-import InputIcon from "layouts/sections/input-areas/inputs/components/InputIcon";
-import InputSuccess from "layouts/sections/input-areas/inputs/components/InputSuccess";
-import InputError from "layouts/sections/input-areas/inputs/components/InputError";
-import InputDisabled from "layouts/sections/input-areas/inputs/components/InputDisabled";
+import InputDynamic from "mui/layouts/sections/input-areas/inputs/components/InputDynamic";
+import InputStatic from "mui/layouts/sections/input-areas/inputs/components/InputStatic";
+import InputOutlined from "mui/layouts/sections/input-areas/inputs/components/InputOutlined";
+import InputIcon from "mui/layouts/sections/input-areas/inputs/components/InputIcon";
+import InputSuccess from "mui/layouts/sections/input-areas/inputs/components/InputSuccess";
+import InputError from "mui/layouts/sections/input-areas/inputs/components/InputError";
+import InputDisabled from "mui/layouts/sections/input-areas/inputs/components/InputDisabled";
 
 // Inputs page components code
-import inputDynamicCode from "layouts/sections/input-areas/inputs/components/InputDynamic/code";
-import inputStaticCode from "layouts/sections/input-areas/inputs/components/InputStatic/code";
-import inputOutlinedCode from "layouts/sections/input-areas/inputs/components/InputOutlined/code";
-import inputIconCode from "layouts/sections/input-areas/inputs/components/InputIcon/code";
-import inputSuccessCode from "layouts/sections/input-areas/inputs/components/InputSuccess/code";
-import inputErrorCode from "layouts/sections/input-areas/inputs/components/InputError/code";
-import inputDisabledCode from "layouts/sections/input-areas/inputs/components/InputDisabled/code";
+import inputDynamicCode from "mui/layouts/sections/input-areas/inputs/components/InputDynamic/code";
+import inputStaticCode from "mui/layouts/sections/input-areas/inputs/components/InputStatic/code";
+import inputOutlinedCode from "mui/layouts/sections/input-areas/inputs/components/InputOutlined/code";
+import inputIconCode from "mui/layouts/sections/input-areas/inputs/components/InputIcon/code";
+import inputSuccessCode from "mui/layouts/sections/input-areas/inputs/components/InputSuccess/code";
+import inputErrorCode from "mui/layouts/sections/input-areas/inputs/components/InputError/code";
+import inputDisabledCode from "mui/layouts/sections/input-areas/inputs/components/InputDisabled/code";
 
 function Inputs() {
   return (

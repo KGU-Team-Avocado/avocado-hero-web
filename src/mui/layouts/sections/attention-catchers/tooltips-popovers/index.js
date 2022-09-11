@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "mui/layouts/sections/components/BaseLayout";
+import View from "mui/layouts/sections/components/View";
 
 // Tooltips and popovers page components
-import Popovers from "layouts/sections/attention-catchers/tooltips-popovers/components/Popovers";
-import Tooltips from "layouts/sections/attention-catchers/tooltips-popovers/components/Tooltips";
+import Popovers from "mui/layouts/sections/attention-catchers/tooltips-popovers/components/Popovers";
+import Tooltips from "mui/layouts/sections/attention-catchers/tooltips-popovers/components/Tooltips";
 
 // Tooltips and popovers page components code
-import popoversCode from "layouts/sections/attention-catchers/tooltips-popovers/components/Popovers/code";
-import tooltipsCode from "layouts/sections/attention-catchers/tooltips-popovers/components/Tooltips/code";
+import popoversCode from "mui/layouts/sections/attention-catchers/tooltips-popovers/components/Popovers/code";
+import tooltipsCode from "mui/layouts/sections/attention-catchers/tooltips-popovers/components/Tooltips/code";
 
 function TooltipsPopovers() {
   return (

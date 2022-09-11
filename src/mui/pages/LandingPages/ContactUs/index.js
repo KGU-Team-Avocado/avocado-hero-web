@@ -17,18 +17,18 @@ Coded by www.creative-tim.com
 import Grid from "@mui/material/Grid";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
+import MKBox from "mui/components/MKBox";
+import MKInput from "mui/components/MKInput";
+import MKButton from "mui/components/MKButton";
+import MKTypography from "mui/components/MKTypography";
 
 // Material Kit 2 React examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
+import DefaultNavbar from "mui/examples/Navbars/DefaultNavbar";
+import DefaultFooter from "mui/examples/Footers/DefaultFooter";
 
 // Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
+import routes from "mui/routes";
+import footerRoutes from "mui/footer.routes";
 
 // Image
 import bgImage from "assets/images/illustrations/illustration-reset.jpg";

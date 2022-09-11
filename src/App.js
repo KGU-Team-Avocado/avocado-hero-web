@@ -29,67 +29,70 @@ import ProjectEvaluationContainer from "./container/group/workspace/ProjectEvalu
 import FileUploadExample from "./container/example/FileUploadExample";
 import ProfileGroup from "./container/sign/profile/ProfileGroup";
 import ProfilePortpolio from "./container/sign/profile/ProfilePortpolio";
-// import MuiApp from "./mui/MuiApp";
+import MuiApp from "./mui/MuiApp";
 
 function App() {
   return (
-    <Routes>
-      {/* 이 Layout 안에 갇히게 됨... nested된 Container들은 Layout의 Outlet으로 연결된다 */}
-      <Route path="/" element={<HomeLayout />}>
-        <Route path="/" element={<HomeContainer />} />
-      </Route>
-      <Route path="/" element={<DefaultLayout />}>
-        {/* DefaultLayout의 Outlet으로 연결되는 부분 시작 */}
+    <>
+      <Routes>
+        {/* 이 Layout 안에 갇히게 됨... nested된 Container들은 Layout의 Outlet으로 연결된다 */}
+        <Route path="/" element={<HomeLayout />}>
+          <Route path="/" element={<HomeContainer />} />
+        </Route>
+        <Route path="/" element={<DefaultLayout />}>
+          {/* DefaultLayout의 Outlet으로 연결되는 부분 시작 */}
 
-        <Route path="groupFinder" element={<GroupFinderContainer />} />
-        <Route path="jobFinder" element={<JobFinderContainer />} />
+          <Route path="groupFinder" element={<GroupFinderContainer />} />
+          <Route path="jobFinder" element={<JobFinderContainer />} />
 
-        <Route path="signin" element={<SignInContainer />} />
-        <Route path="signup" element={<SignUpContainer />} />
-        {/* 프로필 보기 */}
-        <Route path="user/:id" element={<ProfileContainer />} />
-        <Route path="userProfile/:id" element={<UserProfileContainer />} />
-        <Route path="user/ProfileUpdate/:id" element={<ProfileUpdate />} />
-        <Route path="user/ProfileGroup" element={<ProfileGroup />} />
-        <Route path="user/ProfilePortpolio" element={<ProfilePortpolio />} />
-        {/* 워크스페이스 */}
-        <Route path="myWorkspace" element={<GroupListContainer />} />
+          <Route path="signin" element={<SignInContainer />} />
+          <Route path="signup" element={<SignUpContainer />} />
+          {/* 프로필 보기 */}
+          <Route path="user/:id" element={<ProfileContainer />} />
+          <Route path="userProfile/:id" element={<UserProfileContainer />} />
+          <Route path="user/ProfileUpdate/:id" element={<ProfileUpdate />} />
+          <Route path="user/ProfileGroup" element={<ProfileGroup />} />
+          <Route path="user/ProfilePortpolio" element={<ProfilePortpolio />} />
+          {/* 워크스페이스 */}
+          <Route path="myWorkspace" element={<GroupListContainer />} />
 
-        <Route path="example" element={<ExampleContainer />} />
-        <Route path="example/bestworker" element={<RankContainer />} />
-        <Route path="example/database" element={<DatabaseContainer />} />
-        <Route path="example/multiSelectExample" element={<MultiSelectExampleContainer />} />
-        <Route path="example/fileUpload" element={<FileUploadExample />} />
+          <Route path="example" element={<ExampleContainer />} />
+          <Route path="example/bestworker" element={<RankContainer />} />
+          <Route path="example/database" element={<DatabaseContainer />} />
+          <Route path="example/multiSelectExample" element={<MultiSelectExampleContainer />} />
+          <Route path="example/fileUpload" element={<FileUploadExample />} />
 
-        {/* 기업용 버튼 */}
-        <Route path="humanRes" element={<HumanResources />} />
-        <Route path="jobPosting" element={<JobPosting />} />
+          {/* 기업용 버튼 */}
+          <Route path="humanRes" element={<HumanResources />} />
+          <Route path="jobPosting" element={<JobPosting />} />
 
-        <Route
-          path="*"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <p>잘못된 요청입니다!</p>
-            </main>
-          }
-        />
-        {/* DefaultLayout의 Outlet으로 연결되는 부분 끝 */}
-      </Route>
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>잘못된 요청입니다!</p>
+              </main>
+            }
+          />
+          {/* DefaultLayout의 Outlet으로 연결되는 부분 끝 */}
+        </Route>
 
-      <Route path="project/" element={<ProjectDefaultLayout />}>
-        {/* 프로젝트 대쉬보드 */}
-        <Route path=":id" element={<ProjectContainer />} />
-        <Route path="calendar/:id" element={<ProjectCalendarContainer />} />
-        <Route path="todo/:id" element={<ProjectTodoContainer />} />
-        <Route path="role/:id" element={<ProjectRoleContainer />} />
-        <Route path="members/:id" element={<ProjectMembersContainer />} />
-        <Route path="end/:id" element={<ProjectEndContainer />} />
-        <Route path="evaluation/:id/:user_id" element={<ProjectEvaluationContainer />} />
-      </Route>
+        <Route path="project/" element={<ProjectDefaultLayout />}>
+          {/* 프로젝트 대쉬보드 */}
+          <Route path=":id" element={<ProjectContainer />} />
+          <Route path="calendar/:id" element={<ProjectCalendarContainer />} />
+          <Route path="todo/:id" element={<ProjectTodoContainer />} />
+          <Route path="role/:id" element={<ProjectRoleContainer />} />
+          <Route path="members/:id" element={<ProjectMembersContainer />} />
+          <Route path="end/:id" element={<ProjectEndContainer />} />
+          <Route path="evaluation/:id/:user_id" element={<ProjectEvaluationContainer />} />
+        </Route>
 
-      {/* <MuiApp/> */}
+      </Routes>
+      <MuiApp />
 
-    </Routes>
+    </>
+
   );
 }
 

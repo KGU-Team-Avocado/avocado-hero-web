@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "mui/layouts/sections/components/BaseLayout";
+import View from "mui/layouts/sections/components/View";
 
 // ALerts page components
-import SimpleAlerts from "layouts/sections/attention-catchers/alerts/components/SimpleAlerts";
+import SimpleAlerts from "mui/layouts/sections/attention-catchers/alerts/components/SimpleAlerts";
 
 // ALerts page components code
-import simpleAlertsCode from "layouts/sections/attention-catchers/alerts/components/SimpleAlerts/code";
+import simpleAlertsCode from "mui/layouts/sections/attention-catchers/alerts/components/SimpleAlerts/code";
 
 function Alerts() {
   return (

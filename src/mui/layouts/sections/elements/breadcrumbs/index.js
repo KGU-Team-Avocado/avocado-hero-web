@@ -18,17 +18,17 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
+import MKBox from "mui/components/MKBox";
 
 // Material Kit 2 React examples
-import Breadcrumbs from "examples/Breadcrumbs";
+import Breadcrumbs from "mui/examples/Breadcrumbs";
 
 // Sections components
-import BaseLayout from "layouts/sections/components/BaseLayout";
-import View from "layouts/sections/components/View";
+import BaseLayout from "mui/layouts/sections/components/BaseLayout";
+import View from "mui/layouts/sections/components/View";
 
 // Breadcrumbs page components code
-import breadcrumbsCode from "layouts/sections/elements/breadcrumbs/code";
+import breadcrumbsCode from "mui/layouts/sections/elements/breadcrumbs/code";
 
 function BreadcrumbsEl() {
   return (

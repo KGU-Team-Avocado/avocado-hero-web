@@ -20,9 +20,9 @@ import PropTypes from "prop-types";
 import Icon from "@mui/material/Icon";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKAvatar from "components/MKAvatar";
-import MKTypography from "components/MKTypography";
+import MKBox from "mui/components/MKBox";
+import MKAvatar from "mui/components/MKAvatar";
+import MKTypography from "mui/components/MKTypography";
 
 function DefaultReviewCard({ color, image, name, date, review, rating }) {
   const ratings = {

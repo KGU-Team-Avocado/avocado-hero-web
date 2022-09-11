@@ -8,8 +8,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 // Material Kit 2 React components
-import MKBox from "components/MKBox";
-import MKButton from "components/MKButton";
+import MKBox from "mui/components/MKBox";
+import MKButton from "mui/components/MKButton";
 
 function DropdownAndDropup() {
   const [dropdown, setDropdown] = useState(null);
