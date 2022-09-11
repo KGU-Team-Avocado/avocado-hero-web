@@ -29,19 +29,20 @@ import ProjectEvaluationContainer from "./container/group/workspace/ProjectEvalu
 import FileUploadExample from "./container/example/FileUploadExample";
 import ProfileGroup from "./container/sign/profile/ProfileGroup";
 import ProfilePortpolio from "./container/sign/profile/ProfilePortpolio";
+import MuiLayout from "./component/mui/MuiLayout";
 
 function App() {
   return (
     <Routes>
       {/* 이 Layout 안에 갇히게 됨... nested된 Container들은 Layout의 Outlet으로 연결된다 */}
-      <Route path="/" element={<HomeLayout/>}>
+      <Route path="/" element={<HomeLayout />}>
         <Route path="/" element={<HomeContainer />} />
       </Route>
       <Route path="/" element={<DefaultLayout />}>
         {/* DefaultLayout의 Outlet으로 연결되는 부분 시작 */}
 
-        <Route path="groupFinder" element={<GroupFinderContainer/>}/>
-        <Route path="jobFinder" element={<JobFinderContainer/>}/>
+        <Route path="groupFinder" element={<GroupFinderContainer />} />
+        <Route path="jobFinder" element={<JobFinderContainer />} />
 
         <Route path="signin" element={<SignInContainer />} />
         <Route path="signup" element={<SignUpContainer />} />
@@ -55,10 +56,10 @@ function App() {
         <Route path="myWorkspace" element={<GroupListContainer />} />
 
         <Route path="example" element={<ExampleContainer />} />
-        <Route path="example/bestworker" element={<RankContainer/>}/>
-        <Route path="example/database" element={<DatabaseContainer/>}/>
-        <Route path="example/multiSelectExample" element={<MultiSelectExampleContainer/>}/>
-        <Route path="example/fileUpload" element={<FileUploadExample/>}/>
+        <Route path="example/bestworker" element={<RankContainer />} />
+        <Route path="example/database" element={<DatabaseContainer />} />
+        <Route path="example/multiSelectExample" element={<MultiSelectExampleContainer />} />
+        <Route path="example/fileUpload" element={<FileUploadExample />} />
 
         {/* 기업용 버튼 */}
         <Route path="humanRes" element={<HumanResources />} />
@@ -74,7 +75,7 @@ function App() {
         />
         {/* DefaultLayout의 Outlet으로 연결되는 부분 끝 */}
       </Route>
-      
+
       <Route path="project/" element={<ProjectDefaultLayout />}>
         {/* 프로젝트 대쉬보드 */}
         <Route path=":id" element={<ProjectContainer />} />
@@ -85,6 +86,11 @@ function App() {
         <Route path="end/:id" element={<ProjectEndContainer />} />
         <Route path="evaluation/:id/:user_id" element={<ProjectEvaluationContainer />} />
       </Route>
+
+      <Route path="mui/" element={<MuiLayout />}>
+        <Route path="" element={<></>} />
+      </Route>
+
     </Routes>
   );
 }
