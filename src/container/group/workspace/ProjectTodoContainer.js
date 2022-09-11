@@ -11,23 +11,7 @@ const ProjectTodoContainer = () => {
   const params = useParams();
   const project_id = params.id;
 
-  const [todos, setTodos] = useState([
-    // {
-    //   id: 1,
-    //   text: "할일 1",
-    //   checked: true,
-    // },
-    // {
-    //   id: 2,
-    //   text: "할일 2",
-    //   checked: false,
-    // },
-    // {
-    //   id: 3,
-    //   text: "할일 3",
-    //   checked: true,
-    // },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   // const dataId = useRef(0);
 
@@ -53,17 +37,17 @@ const ProjectTodoContainer = () => {
       console.log(response);
     })
     
-    // axios
-    //   .post("/todosRouter/postFindOne", {
-    //     project_id: project_id,
-    //   })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     setTodos(response.data);
-    //   })
+    axios
+      .post("/todosRouter/postFind", {
+        project_id: project_id,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setTodos(response.data);
+      })
 
-    setTodos([...todos, newItem]);
-    console.log(newItem);
+    // setTodos([...todos, newItem]);
+    // console.log(newItem);
   };
 
   const onDelete = (targetId) => {

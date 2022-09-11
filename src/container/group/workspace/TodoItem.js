@@ -3,7 +3,7 @@ import { BsCheckCircleFill, BsCheckCircle } from "react-icons/bs";
 import "../workspace/Todo.css";
 
 const TodoItem = ({ todo, onDelete }) => {
-  const { id, text, checked } = todo;
+  const { id, todo_text, checked } = todo;
 
   //handleCheck에서 todo의 checked를 변경 후 재렌더링해주기 위해 사용
   const [, updateState] = useState();
@@ -24,7 +24,7 @@ const TodoItem = ({ todo, onDelete }) => {
       <div onClick={handleCheck}>
         <div className={`content ${checked ? "checked" : " "}`}>
           {checked ? <BsCheckCircleFill /> : <BsCheckCircle />}
-          <div className="text">{text}</div>
+          <div className="text">{todo_text}</div>
         </div>
       </div>
       <div className="TodoItemButton">
