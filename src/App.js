@@ -29,7 +29,7 @@ import ProjectEvaluationContainer from "./container/group/workspace/ProjectEvalu
 import FileUploadExample from "./container/example/FileUploadExample";
 import ProfileGroup from "./container/sign/profile/ProfileGroup";
 import ProfilePortpolio from "./container/sign/profile/ProfilePortpolio";
-import MuiLayout from "./component/mui/MuiLayout";
+// import MuiApp from "./mui/MuiApp";
 
 function App() {
   return (
@@ -87,9 +87,7 @@ function App() {
         <Route path="evaluation/:id/:user_id" element={<ProjectEvaluationContainer />} />
       </Route>
 
-      <Route path="mui/" element={<MuiLayout />}>
-        <Route path="" element={<></>} />
-      </Route>
+      {/* <MuiApp/> */}
 
     </Routes>
   );
