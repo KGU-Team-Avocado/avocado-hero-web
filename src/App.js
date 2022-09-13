@@ -30,6 +30,24 @@ import FileUploadExample from "./container/example/FileUploadExample";
 import ProfileGroup from "./container/sign/profile/ProfileGroup";
 import ProfilePortpolio from "./container/sign/profile/ProfilePortpolio";
 import MuiApp from "./mui/MuiApp";
+import WorkspaceLayout from "component/workspace/layout/WorkspaceLayout";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { theme } from "component/workspace/theme";
+
+const WorkspaceRoute = () => {
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Routes>
+          <Route path="workspace" element={<WorkspaceLayout />}>
+            <Route path=":id" element={<ProjectContainer />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
+    </>
+  )
+}
 
 function App() {
   return (
@@ -90,7 +108,7 @@ function App() {
 
       </Routes>
       <MuiApp />
-
+      <WorkspaceRoute/>
     </>
 
   );
