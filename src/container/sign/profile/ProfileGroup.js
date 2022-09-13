@@ -1,9 +1,22 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import GroupCard from "../../../component/group/card/GroupCard";
+import * as API from "../../../api/API";
 
 export default (props) => {
     const [groups, setGroups] = useState([]);
+    const [group, setGroup] = useState({});
+
+    // useEffect(()=>{
+    //     getGroup();
+    // }, []);
+
+    // const getGroup = async () => {
+    //     const group = await API.getGroupById({ _id: project_id })
+
+    //     setGroup(group);
+    // }
+
     // const [selectedGroup, setSelectedGroup] = useState(null);
     const setSelectedGroup = (group) => {
         // alert(JSON.stringify(group))
@@ -38,34 +51,9 @@ export default (props) => {
     return (
         <>
 
-                    <div className="my-3">
-                    <br />
-                    <h4>소속된 그룹</h4>
-                    <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
-                                {
-                        groups.length > 0
-                            ?
-                            <>
-                                {
-                                    groups.map((group) => (
-                                        <GroupCard
-                                            key={group._id}
-                                            group={group}
-                                            setSelectedGroup={setSelectedGroup}
-                                        />
-                                    ))
-                                }
-                            </>
-                            :
-                            <div>프로젝트가 없습니다.</div>
-                    }
-                    </div>
-                    </div>
-
-                    <div className="my-3">
-                    <br />
-                <h4>과거 소속 그룹
-                    <br />(아직 못해서 소속된 그룹이랑 똑같음)</h4> 
+            <div className="my-3">
+                <br />
+                <h4>소속된 그룹</h4>
                 <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
                         groups.length > 0
@@ -83,6 +71,35 @@ export default (props) => {
                             </>
                             :
                             <div>프로젝트가 없습니다.</div>
+                    }
+                </div>
+            </div>
+
+            <div className="my-3">
+                <br />
+                <h4>종료된 소속 그룹?</h4>
+                <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
+                    {
+                        groups.length > 0
+                            ?
+                            <>
+                                {
+                                    groups.map((group) => {
+                                        if (group.end_project == true) {
+                                           return <GroupCard
+                                                key={group._id}
+                                                group={group}
+                                                setSelectedGroup={setSelectedGroup}
+                                            />
+                                        }
+                                        else
+                                        {<div>종료된 프로젝트가 없습니다.</div>}   
+                                    }
+                                    )
+                                }
+                            </>
+                            :
+                            <div>종료된 프로젝트가 없습니다.</div>
                     }
                 </div>
             </div>
