@@ -65,7 +65,7 @@ export default (props) => {
                     <div className="my-3">
                     <br />
                 <h4>과거 소속 그룹
-                    <br />(아직 못해서 소속된 그룹이랑 똑같음)</h4> 
+                    <br />(아직 못해서 소속된 그룹이랑 똑같음.. end project 종료된 것들만 보여주기)</h4> 
                 <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
                         groups.length > 0

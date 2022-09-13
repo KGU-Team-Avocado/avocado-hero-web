@@ -13,8 +13,55 @@ import './profile.css';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Avatar from "./avatar/Avatar";
 import AvatarEditButton from "./avatar/AvatarEditButton";
+import ModifyOption from "./ModifyOption";
 
-export default (props) => {
+const ProfileEdit = (props) => {
+    const [edit, setEdit] = useState(false);
+    const [selected, setSelected] = useState([]);
+
+    const [profile, setProfile] = useState();
+
+    // const [selectedFields, setSelectedFields] = useState([
+    //     // Object.entries(profile.user_field)
+    // ]); // 여기에 현재 저장된 거를 넣어야 함 ?
+
+    const [selectedKeywords, setSelectedKeywords] = useState([]);
+    const [selectedPersonals, setSelectedPersonals] = useState([]);
+
+    useEffect(() => {
+        setProfile(props.profile);
+        console.log('profileEdit 출력' + props.profile);
+        // setSelectedFields(props.profile.user_field)
+    }, [props.profile]);
+
+    const modifyOption = () => {
+        setSelected([]);
+        const selectedFields = selected.map((s) => {return s.value})
+        
+        axios.post("/usersRouter/profileUpdate", {
+            user_id: profile.user_id,
+            user_field: selectedFields,
+                // user_keyword: selectedKeywords.map((s) => s.value),
+                // user_personality: selectedPersonals.map((s) => s.value)
+        }).then((response) => {
+            console.log(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
+        setEdit(false);
+    }
+
+    const editWho = (edit) => {
+        setEdit(true);
+        const select = profile.user_fields.map((field) => {return findProfile(field)});
+        setEdit(edit);
+        setSelected(select)
+    }
+
+    const findProfile = (r) => {
+        const idx = fields.findIndex((field)=>field.value===r)
+        return fields[idx]
+    }
 
     const fields = [
         { label: "프론트", value: "front-end" },
@@ -35,22 +82,6 @@ export default (props) => {
         { label: "외향적인", value: "extroverted" },
         { label: "신중한", value: "cautious" },
     ];
-
-    const [profile, setProfile] = useState();
-
-    const [selectedFields, setSelectedFields] = useState([
-        // Object.entries(profile.user_field)
-    ]); // 여기에 현재 저장된 거를 넣어야 함 ?
-
-    const [selectedKeywords, setSelectedKeywords] = useState([]);
-    const [selectedPersonals, setSelectedPersonals] = useState([]);
-
-    useEffect(() => {
-
-        setProfile(props.profile);
-        console.log('profileEdit 출력' + props.profile);
-        // setSelectedFields(props.profile.user_field)
-    }, [props.profile]);
 
     const [countList, setCountList] = useState([0]);
 
@@ -95,7 +126,7 @@ export default (props) => {
                 user_intro: profile.user_intro,
                 user_belong: profile.user_belong,
                 user_link: profile.user_link,
-                user_field: selectedFields.map((s) => s.value),
+                // user_field: selectedFields.map((s) => s.value),
                 user_keyword: selectedKeywords.map((s) => s.value),
                 user_personality: selectedPersonals.map((s) => s.value)
             })
@@ -191,11 +222,26 @@ export default (props) => {
       </InputGroup>            
                                 </div>
                                 <div class="item"><div class="contentTitle">분야</div>
-                                    <MultiSelect
+                                {edit == true ? 
+                                <>
+                                 <ModifyOption
+                                 option={fields}
+                                 selected={selected}
+                                 setSelected={setSelected}
+                                 modifyOption={modifyOption}
+                             />
+                                   </>
+                                :
+                                <>
+                                </>
+                                }
+                                     <button type="button" className="btn btn-secondary me-2" onClick={() => editWho()} >수정</button>       
+                                            
+                                    {/* <MultiSelect
                                         options={fields}
                                         value={selectedFields}
                                         onChange={setSelectedFields}
-                                    />
+                                    /> */}
                                     <div>
                                        (멀티셀렉트 체크 상태로 띄우는거 아직 못해서 
                                        일단 밑에 현재 select된 옵션들 글로 뜨게 함) 
@@ -265,3 +311,5 @@ export default (props) => {
         </>
     )
 }
+
+export default ProfileEdit;
