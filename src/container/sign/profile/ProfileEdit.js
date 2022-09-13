@@ -37,6 +37,8 @@ const ProfileEdit = (props) => {
         // setSelectedFields(props.profile.user_field)
 
         setSelected(props.profile.user_field.map((field) => { return findProfile(field) }))
+        setSelectedKeywords(props.profile.user_keyword && props.profile.user_keyword.map((keyword) => { return findKeyword(keyword) }))
+        // setSelectedPersonals(props.profile.user_personal && props.profile.user_personal.map((personal) => { return findPersonal(personal) }))
     }, [props.profile]);
 
     const modifyOption = () => {
@@ -64,11 +66,23 @@ const ProfileEdit = (props) => {
         // setSelected(select)
 
         setSelected(profile.user_field.map((field) => { return findProfile(field) }))
+        setSelectedKeywords(profile.user_keyword.map((keyword) => { return findKeyword(keyword) }))
+        // setSelectedPersonals(profile.user_personal.map((personal) => { return findPersonal(personal) }))
     }
 
     const findProfile = (r) => {
         const idx = fields.findIndex((field) => field.value === r)
         return fields[idx]
+    }
+
+    const findKeyword = (p) => {
+        const idx = keywords.findIndex((keyword) => keyword.value === p)
+        return keywords[idx]
+    }
+
+    const findPersonal = (q) => {
+        const idx = personals.findIndex((personal) => personal.value === q)
+        return personals[idx]
     }
 
     const fields = [
@@ -244,7 +258,7 @@ const ProfileEdit = (props) => {
                                                     <>
                                                     </>
                                                 }
-                                                <button type="button" className="btn btn-secondary me-2" onClick={() => editWho()} >수정</button>
+                                                {/* <button type="button" className="btn btn-secondary me-2" onClick={() => editWho()} >수정</button> */}
 
                                                 <ModifyOption
                                                     option={fields}
@@ -259,9 +273,6 @@ const ProfileEdit = (props) => {
                                         onChange={setSelectedFields}
                                     /> */}
                                                 <div>
-                                                    (멀티셀렉트 체크 상태로 띄우는거 아직 못해서
-                                                    일단 밑에 현재 select된 옵션들 글로 뜨게 함)
-                                                    <br />
                                                     선택됨: {profile.user_field}</div>
                                             </div>
 
