@@ -29,20 +29,25 @@ const ProfileEdit = (props) => {
     const [selectedPersonals, setSelectedPersonals] = useState([]);
 
     useEffect(() => {
+        if (props.profile === null) {
+            return;
+        }
         setProfile(props.profile);
         console.log('profileEdit 출력' + props.profile);
         // setSelectedFields(props.profile.user_field)
+
+        setSelected(props.profile.user_field.map((field) => { return findProfile(field) }))
     }, [props.profile]);
 
     const modifyOption = () => {
         setSelected([]);
-        const selectedFields = selected.map((s) => {return s.value})
-        
+        const selectedFields = selected.map((s) => { return s.value })
+
         axios.post("/usersRouter/profileUpdate", {
             user_id: profile.user_id,
             user_field: selectedFields,
-                // user_keyword: selectedKeywords.map((s) => s.value),
-                // user_personality: selectedPersonals.map((s) => s.value)
+            // user_keyword: selectedKeywords.map((s) => s.value),
+            // user_personality: selectedPersonals.map((s) => s.value)
         }).then((response) => {
             console.log(response.data);
         }).catch(function (error) {
@@ -51,15 +56,18 @@ const ProfileEdit = (props) => {
         setEdit(false);
     }
 
-    const editWho = (edit) => {
+    const editWho = () => {
         setEdit(true);
-        const select = profile.user_fields.map((field) => {return findProfile(field)});
-        setEdit(edit);
-        setSelected(select)
+        console.log(profile)
+
+        // const select = profile.user_field.map((field) => {return findProfile(field)});
+        // setSelected(select)
+
+        setSelected(profile.user_field.map((field) => { return findProfile(field) }))
     }
 
     const findProfile = (r) => {
-        const idx = fields.findIndex((field)=>field.value===r)
+        const idx = fields.findIndex((field) => field.value === r)
         return fields[idx]
     }
 
@@ -67,8 +75,8 @@ const ProfileEdit = (props) => {
         { label: "프론트", value: "front-end" },
         { label: "백엔드", value: "back-end" },
         { label: "서버", value: "server" },
-        { label: "기획", value: "enterprise"},
-        { label: "개발", value: "coding"},
+        { label: "기획", value: "enterprise" },
+        { label: "개발", value: "coding" },
     ];
 
     const keywords = [
@@ -102,7 +110,7 @@ const ProfileEdit = (props) => {
     // (
 
     // )
-    
+
     // useEffect(() => {
     //     setSelectedFields(props.profile.user_field)
     // }, [props.profile.user_field]);
@@ -140,7 +148,7 @@ const ProfileEdit = (props) => {
                 console.log(error);
             });
 
-            window.location.href="../../user/" + profile.user_id;
+        window.location.href = "../../user/" + profile.user_id;
     };
 
     const onClickBelong = () => {
@@ -182,127 +190,135 @@ const ProfileEdit = (props) => {
                                         </Form.Group>
 
                                         <Form.Group className="mb-3" contro lId="exampleForm.ControlInput1">
-                                <Form.Label>이름</Form.Label>
-                                <Form.Control type="text" name="user_name" placeholder="" onChange={handleInput}
-                                    value={profile.user_name} />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                <Form.Label>이메일</Form.Label>
-                                <Form.Control type="text" name="user_email" placeholder="" onChange={handleInput}
-                                    value={profile.user_email} />
-                            </Form.Group>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                <Form.Label>전화번호</Form.Label>
-                                <Form.Control type="text" name="user_phoneNum" placeholder="" onChange={handleInput}
-                                    value={profile.user_phoneNum} />
-                            </Form.Group>
+                                            <Form.Label>이름</Form.Label>
+                                            <Form.Control type="text" name="user_name" placeholder="" onChange={handleInput}
+                                                value={profile.user_name} />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                            <Form.Label>이메일</Form.Label>
+                                            <Form.Control type="text" name="user_email" placeholder="" onChange={handleInput}
+                                                value={profile.user_email} />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                            <Form.Label>전화번호</Form.Label>
+                                            <Form.Control type="text" name="user_phoneNum" placeholder="" onChange={handleInput}
+                                                value={profile.user_phoneNum} />
+                                        </Form.Group>
                                     </Card.Body>
                                 </Card>
                             </div>
                             <div class="col-xl-9">
-                    <Card style={{ margin: '10px 0' }}>
-                        <Card.Body>
-                            <Card.Title>기본 정보</Card.Title>
-                            <Card.Text>
-                                <div class="item"><div class="contentTitle">소속</div>
-                                    {/* <AddInput countList={countList} /> */}
+                                <Card style={{ margin: '10px 0' }}>
+                                    <Card.Body>
+                                        <Card.Title>기본 정보</Card.Title>
+                                        <Card.Text>
+                                            <div class="item"><div class="contentTitle">소속</div>
+                                                {/* <AddInput countList={countList} /> */}
 
-                                    
-                                <InputGroup className="mb-3">
-        <Form.Control
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-          type="text" name="user_belong" placeholder=""
-                                                value={profile.user_belong}
-                                                onChange={handleInput}
-        />
-        <Button onClick={onClickBelong} variant="outline-secondary" id="button-addon2">
-          추가
-        </Button>
-      </InputGroup>            
-                                </div>
-                                <div class="item"><div class="contentTitle">분야</div>
-                                {edit == true ? 
-                                <>
-                                 <ModifyOption
-                                 option={fields}
-                                 selected={selected}
-                                 setSelected={setSelected}
-                                 modifyOption={modifyOption}
-                             />
-                                   </>
-                                :
-                                <>
-                                </>
-                                }
-                                     <button type="button" className="btn btn-secondary me-2" onClick={() => editWho()} >수정</button>       
-                                            
-                                    {/* <MultiSelect
+
+                                                <InputGroup className="mb-3">
+                                                    <Form.Control
+                                                        aria-label="Recipient's username"
+                                                        aria-describedby="basic-addon2"
+                                                        type="text" name="user_belong" placeholder=""
+                                                        value={profile.user_belong}
+                                                        onChange={handleInput}
+                                                    />
+                                                    <Button onClick={onClickBelong} variant="outline-secondary" id="button-addon2">
+                                                        추가
+                                                    </Button>
+                                                </InputGroup>
+                                            </div>
+                                            <div class="item"><div class="contentTitle">분야</div>
+                                                {/* 여기부터 수정 버튼까 삭제해도됨 */}
+                                                {edit == true ?
+                                                    <>
+                                                        <ModifyOption
+                                                            option={fields}
+                                                            selected={selected}
+                                                            setSelected={setSelected}
+                                                            modifyOption={modifyOption}
+                                                        />
+                                                    </>
+                                                    :
+                                                    <>
+                                                    </>
+                                                }
+                                                <button type="button" className="btn btn-secondary me-2" onClick={() => editWho()} >수정</button>
+
+                                                <ModifyOption
+                                                    option={fields}
+                                                    selected={selected}
+                                                    setSelected={setSelected}
+                                                    modifyOption={modifyOption}
+                                                />
+
+                                                {/* <MultiSelect
                                         options={fields}
                                         value={selectedFields}
                                         onChange={setSelectedFields}
                                     /> */}
-                                    <div>
-                                       (멀티셀렉트 체크 상태로 띄우는거 아직 못해서 
-                                       일단 밑에 현재 select된 옵션들 글로 뜨게 함) 
-                                       <br />
-                                        선택됨: {profile.user_field}</div>
-                                </div>
+                                                <div>
+                                                    (멀티셀렉트 체크 상태로 띄우는거 아직 못해서
+                                                    일단 밑에 현재 select된 옵션들 글로 뜨게 함)
+                                                    <br />
+                                                    선택됨: {profile.user_field}</div>
+                                            </div>
 
-                                <div class="item">
-                                    {/* <AddInput countList={countLink} />
+                                            <div class="item">
+                                                {/* <AddInput countList={countLink} />
                                     <Button onClick={onAddLink}>+</Button>
                                      <Form.Control type="text" name="user_link" placeholder=""
                                                 value={profile.user_link}
                                                 onChange={handleInput}
                                             /> */}
-                                            <Form.Label htmlFor="basic-url">링크</Form.Label>
-      <InputGroup className="mb-3">
-        <InputGroup.Text id="basic-addon3">
-          https://example.com/users/
-        </InputGroup.Text>
-        <Form.Control id="basic-url" aria-describedby="basic-addon3"
-        type="text" name="user_link" placeholder=""
-        value={profile.user_link}
-        onChange={handleInput} />
-      </InputGroup>
-                                </div>
+                                                <Form.Label htmlFor="basic-url">링크</Form.Label>
+                                                <InputGroup className="mb-3">
+                                                    <InputGroup.Text id="basic-addon3">
+                                                        https://example.com/users/
+                                                    </InputGroup.Text>
+                                                    <Form.Control id="basic-url" aria-describedby="basic-addon3"
+                                                        type="text" name="user_link" placeholder=""
+                                                        value={profile.user_link}
+                                                        onChange={handleInput} />
+                                                </InputGroup>
+                                            </div>
 
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
 
-                    <Card style={{ margin: '10px 0' }}>
-                        <Card.Body>
-                            <Card.Title>세부 정보</Card.Title>
-                            <Card.Text>
-                                <div class="item"><div class="contentTitle">키워드</div>
-                                    <MultiSelect
-                                        options={keywords}
-                                        value={selectedKeywords}
-                                        onChange={setSelectedKeywords}
-                                    />
-                                    <div>선택됨: {profile.user_keyword}</div>
-                                </div>
-                                <div class="item"><div class="contentTitle">성향</div>
-                                    <MultiSelect
-                                        options={personals}
-                                        value={selectedPersonals}
-                                        onChange={setSelectedPersonals}
-                                    />
-                                    <div>선택됨: {profile.user_personality}</div>
-                                </div>
-                                <div class="item">
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label>소개글</Form.Label>
-                                        <Form.Control as="textarea" name="user_intro" placeholder="" rows={3} onChange={handleInput}
-                                            value={profile.user_intro} />
-                                    </Form.Group>
-                                </div>
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </div>
+                                <Card style={{ margin: '10px 0' }}>
+                                    <Card.Body>
+                                        <Card.Title>세부 정보</Card.Title>
+                                        <Card.Text>
+                                            <div class="item"><div class="contentTitle">키워드</div>
+                                                <MultiSelect
+                                                    options={keywords}
+                                                    value={selectedKeywords}
+                                                    onChange={setSelectedKeywords}
+                                                />
+                                                <div>선택됨: {profile.user_keyword}</div>
+                                            </div>
+                                            <div class="item"><div class="contentTitle">성향</div>
+                                                <MultiSelect
+                                                    options={personals}
+                                                    value={selectedPersonals}
+                                                    onChange={setSelectedPersonals}
+                                                />
+                                                <div>선택됨: {profile.user_personality}</div>
+                                            </div>
+                                            <div class="item">
+                                                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                                    <Form.Label>소개글</Form.Label>
+                                                    <Form.Control as="textarea" name="user_intro" placeholder="" rows={3} onChange={handleInput}
+                                                        value={profile.user_intro} />
+                                                </Form.Group>
+                                            </div>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </div>
                             <Button onClick={onClickSubmit}>수정 완료</Button>
                         </Row>
                     </Container>
