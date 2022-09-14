@@ -1,8 +1,10 @@
+import { useRef } from "react";
 import { useParams } from "react-router-dom";
 
 const ProjectEvaluationContainer = () => {
     const params = useParams();
     const project_id = params.id;
+    const commentInput = useRef();
     const evaluation_index = [
         {
             label: '질적 공헌도',
@@ -119,7 +121,15 @@ const ProjectEvaluationContainer = () => {
             return sum + currValue.score;
           }, 0);
         evaluation_index[idx].avg_score = total_score / evaluation_index[idx].questions.length;
-        console.log(evaluation_index[idx]);
+        // console.log(evaluation_index[idx]);
+    }
+
+    const saveEvaluation = () => {
+        const newEvaluation = {
+            score_eval: evaluation_index,
+            comment_eval: commentInput.current.value
+        }
+        console.log(newEvaluation);
     }
 
     return (
@@ -134,15 +144,28 @@ const ProjectEvaluationContainer = () => {
                             {score.map((s, index) =>
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input" type="radio" name={question.id} id={"inlineRadio"+index} value={s.value} onClick={() => selectScore(idx, question, s.value)} />
-                                    <label className="form-check-label" for={"inlineRadio"+index}>{s.label}</label>
+                                    <label className="form-check-label" for={"inlineRadio" + index}>{s.label}</label>
                                 </div>
                             )}
                         </div>
                     )}
                 </div>
             )}
+
+            <div className="mb-5">
+                <h1>기타</h1>
+                <hr />
+                <div className="mb-3">
+                    <h3>팀원에 대한 평가를 써주세요.</h3>
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" ref={commentInput} id="floatingTextarea2" style={{height: "100px"}}></textarea>
+                        <label for="floatingTextarea2">Comments</label>
+                    </div>
+                </div>
+            </div>
+
             <div class="d-grid gap-2 col-4 mx-auto mb-4">
-                <button class="btn btn-primary" type="button">저장</button>
+                <button class="btn btn-primary" type="button" onClick={() => saveEvaluation()}>저장</button>
             </div>
         </div> 
     )
