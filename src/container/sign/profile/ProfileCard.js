@@ -65,9 +65,25 @@ export default (props) => {
                                 </div>
                             </Card.Body>
                         </Card>
+                        <Card style={{ margin: '10px 0' }}>
+                            <Card.Body>
+                            <Card.Title>한줄 소개</Card.Title>
+                                <Card.Text>
+                                    
+                                    </Card.Text>
+                            </Card.Body>
+                        </Card>
                     </div>
                     <div class="col-xl-9">
-                        <Card style={{ margin: '10px 0' }}>
+                    <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                                {/* <div><strong>알림!</strong></div> */}
+                                <div>멋진 프로필을 작성하면 기업이 당신을 스카우트할 수 있습니다.
+                                    {/* <a href={url}>{url}</a> 으로 접속하세요. </div> */}
+                                {/* <button className="btn btn-outline-success" onClick={() => copyURL()}>주소를 클립보드로 복사하기</button> */}
+                                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            </div>
+                            <Card style={{ margin: '10px 0' }}>
                         <Card.Body>
                                 <Card.Title>기본 정보</Card.Title>
                                 <Card.Text>
@@ -120,6 +136,21 @@ export default (props) => {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
+
+
+
+
+
+
+
+
+
+
+
+
+                            </div>
+                    <div class="col-xl-9">
+                       
                     </div>
                 </Row>
             </Container>
