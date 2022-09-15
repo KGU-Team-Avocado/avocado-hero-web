@@ -38,7 +38,7 @@ const ProfileEdit = (props) => {
 
         setSelected(props.profile.user_field.map((field) => { return findProfile(field) }))
         setSelectedKeywords(props.profile.user_keyword && props.profile.user_keyword.map((keyword) => { return findKeyword(keyword) }))
-        // setSelectedPersonals(props.profile.user_personal && props.profile.user_personal.map((personal) => { return findPersonal(personal) }))
+        setSelectedPersonals(props.profile.user_personality && props.profile.user_personality.map((personal) => { return findPersonal(personal) }))
     }, [props.profile]);
 
     const modifyOption = () => {
@@ -67,7 +67,7 @@ const ProfileEdit = (props) => {
 
         setSelected(profile.user_field.map((field) => { return findProfile(field) }))
         setSelectedKeywords(profile.user_keyword.map((keyword) => { return findKeyword(keyword) }))
-        // setSelectedPersonals(profile.user_personal.map((personal) => { return findPersonal(personal) }))
+        setSelectedPersonals(profile.user_personality.map((personal) => { return findPersonal(personal) }))
     }
 
     const findProfile = (r) => {

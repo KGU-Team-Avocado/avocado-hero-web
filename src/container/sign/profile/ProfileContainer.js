@@ -37,7 +37,7 @@ const ProfileContainer = () => {
                     field: foundUser.user_field,
                     link: foundUser.user_link,
                     keyword: foundUser.user_keyword,
-                    personal: foundUser.user_personal,
+                    personality: foundUser.user_personality,
                     intro: foundUser.user_intro,
                 })
             }

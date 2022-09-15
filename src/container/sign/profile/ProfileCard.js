@@ -47,7 +47,22 @@ export default (props) => {
 
             <Container>
                 <Row>
-                    <div class="col-xl-3">
+
+                    
+
+
+
+                    {/* <div class="col-xl-9"> */}
+                    <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                                {/* <div><strong>알림!</strong></div> */}
+                                <div>멋진 프로필을 작성하면 기업이 당신을 스카우트할 수 있습니다.
+                                    {/* <a href={url}>{url}</a> 으로 접속하세요. </div> */}
+                                {/* <button className="btn btn-outline-success" onClick={() => copyURL()}>주소를 클립보드로 복사하기</button> */}
+                                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            </div>
+
+                            <div class="col-xl-3">
                         <Card style={{ margin: '10px 0' }}>
                             <Card.Body>
                                 <Avatar user_id={user?.user_id}/>
@@ -69,20 +84,13 @@ export default (props) => {
                             <Card.Body>
                             <Card.Title>한줄 소개</Card.Title>
                                 <Card.Text>
-                                    
+                                    (하드코딩)
                                     </Card.Text>
                             </Card.Body>
                         </Card>
                     </div>
-                    <div class="col-xl-9">
-                    <div className="alert alert-warning alert-dismissible fade show" role="alert">
-                                {/* <div><strong>알림!</strong></div> */}
-                                <div>멋진 프로필을 작성하면 기업이 당신을 스카우트할 수 있습니다.
-                                    {/* <a href={url}>{url}</a> 으로 접속하세요. </div> */}
-                                {/* <button className="btn btn-outline-success" onClick={() => copyURL()}>주소를 클립보드로 복사하기</button> */}
-                                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                            </div>
+
+                            <div class="col-xl-9">
                             <Card style={{ margin: '10px 0' }}>
                         <Card.Body>
                                 <Card.Title>기본 정보</Card.Title>
@@ -121,8 +129,8 @@ export default (props) => {
                                         <div class="contentTitle">성향
                                         <br />
                                         (성향만 보기가 안 뜸 .. 수정은 가능)</div>
-                                        {/* <div>{user && <TechStack tech_stack={user.personality
-}/>}</div> */}
+                                        <div>{user && <TechStack tech_stack={user.personality
+}/>}</div>
 <div>{user && user.personality}</div>
                                     </div>
                                     <div class="item">
@@ -136,6 +144,7 @@ export default (props) => {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
+                        </div>
 
 
 
@@ -148,7 +157,7 @@ export default (props) => {
 
 
 
-                            </div>
+                            {/* </div> */}
                     <div class="col-xl-9">
                        
                     </div>
