@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import TodoList from "./TodoList";
 import TodoCreate from "./TodoCreate";
 import axios from "axios";
-import * as API from "../../../api/API";
 import { useParams } from "react-router-dom";
 
 const ProjectTodoContainer = () => {
@@ -37,6 +36,7 @@ const ProjectTodoContainer = () => {
       console.log(response);
     })
     
+    //데이터 불러오기
     axios
       .post("/todosRouter/postFind", {
         project_id: project_id,
@@ -51,9 +51,26 @@ const ProjectTodoContainer = () => {
   };
 
   const onDelete = (targetId) => {
-    const newTodoList = todos.filter((it) => it.id !== targetId);
-    setTodos(newTodoList);
-    alert("삭제되었습니다");
+    // const newTodoList = todos.filter((it) => it.id !== targetId);
+    // setTodos(newTodoList);
+    // alert("삭제되었습니다");
+    
+    //데이터 삭제
+    axios
+    .post("/todosRouter/Delete", {
+      _id : targetId,
+    })
+
+    //데이터 불러오기
+    axios
+      .post("/todosRouter/postFind", {
+        project_id: project_id,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setTodos(response.data);
+      })
+    
   };
 
   return (
