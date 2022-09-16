@@ -29,15 +29,17 @@ import ProjectEvaluationContainer from "./container/group/workspace/ProjectEvalu
 import FileUploadExample from "./container/example/FileUploadExample";
 import ProfileGroup from "./container/sign/profile/ProfileGroup";
 import ProfilePortpolio from "./container/sign/profile/ProfilePortpolio";
-import MuiApp from "./mui/MuiApp";
+import MuiAppRoute from "./mui/MuiAppRoute";
 import WorkspaceLayout from "component/workspace/layout/WorkspaceLayout";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { theme } from "component/workspace/theme";
+import { theme as workspaceTheme } from "component/workspace/theme";
+// Material Kit 2 React themes
+import theme from "assets/theme";
 
 const WorkspaceRoute = () => {
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={workspaceTheme}>
         <CssBaseline />
         <Routes>
           <Route path="workspace" element={<WorkspaceLayout />}>
@@ -49,14 +51,26 @@ const WorkspaceRoute = () => {
   )
 }
 
-function App() {
+const HomeRoute = () => {
   return (
-    <>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Routes>
-        {/* 이 Layout 안에 갇히게 됨... nested된 Container들은 Layout의 Outlet으로 연결된다 */}
         <Route path="/" element={<HomeLayout />}>
           <Route path="/" element={<HomeContainer />} />
         </Route>
+      </Routes>
+    </ThemeProvider>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <HomeRoute />
+      <Routes>
+        {/* 이 Layout 안에 갇히게 됨... nested된 Container들은 Layout의 Outlet으로 연결된다 */}
+
         <Route path="/" element={<DefaultLayout />}>
           {/* DefaultLayout의 Outlet으로 연결되는 부분 시작 */}
 
@@ -107,8 +121,8 @@ function App() {
         </Route>
 
       </Routes>
-      <MuiApp />
-      <WorkspaceRoute/>
+      <MuiAppRoute />
+      <WorkspaceRoute />
     </>
 
   );
