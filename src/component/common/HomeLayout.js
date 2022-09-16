@@ -2,8 +2,9 @@
 import { Outlet, Link } from "react-router-dom";
 import Header from "./Header";
 // Routes
-import routes from "mui/routes";
+
 import DefaultNavbar from "./Navbars/DefaultNavbar";
+import routes from "./Navbars/routes";
 
 export default function DefaultLayout() {
   return (

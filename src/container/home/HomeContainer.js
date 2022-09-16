@@ -38,7 +38,7 @@ import Download from "mui/pages/Presentation/sections/Download";
 // Presentation page components
 import BuiltByDevelopers from "mui/pages/Presentation/components/BuiltByDevelopers";
 // Routes
-import routes from "mui/routes";
+
 import footerRoutes from "mui/footer.routes";
 
 // Images
