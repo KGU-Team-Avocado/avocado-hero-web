@@ -31,7 +31,7 @@ import BuiltByDevelopers from "mui/pages/Presentation/components/BuiltByDevelope
 import footerRoutes from "mui/footer.routes";
 
 // Images
-import bgImage from "assets/images/bg-presentation.jpg";
+import bgImage from "assets/images/bg2.jpg";
 
 export default function DefaultLayout() {
   return (
