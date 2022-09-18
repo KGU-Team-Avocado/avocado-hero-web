@@ -35,6 +35,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme as workspaceTheme } from "component/workspace/theme";
 // Material Kit 2 React themes
 import theme from "assets/theme";
+import ReduxExample from "container/example/ReduxExample";
 
 const WorkspaceRoute = () => {
   return (
@@ -93,6 +94,7 @@ function App() {
           <Route path="example/database" element={<DatabaseContainer />} />
           <Route path="example/multiSelectExample" element={<MultiSelectExampleContainer />} />
           <Route path="example/fileUpload" element={<FileUploadExample />} />
+          <Route path="example/redux" element={<ReduxExample/>}/>
 
           {/* 기업용 버튼 */}
           <Route path="humanRes" element={<HumanResources />} />

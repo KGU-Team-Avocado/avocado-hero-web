@@ -134,6 +134,11 @@ const routes = [
             route: "/example/fileUpload",
             component: <SignIn />,
           },
+          {
+            name: "리덕스",
+            route: "/example/redux",
+            component: <SignIn />,
+          },
         ],
       },
       {
