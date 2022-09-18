@@ -1,10 +1,12 @@
-import { useRef } from "react";
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const ProjectEvaluationContainer = () => {
     const params = useParams();
-    const project_id = params.id;
+    const {id, user_id} = params;
     const commentInput = useRef();
+    const [userInfo, setUserInfo] = useState({user_id: ''});
     const evaluation_index = [
         {
             label: '질적 공헌도',
@@ -115,6 +117,12 @@ const ProjectEvaluationContainer = () => {
         },
     ]
 
+    useEffect(() => {
+        if (sessionStorage.getItem("user")) {
+            setUserInfo(JSON.parse(sessionStorage.getItem("user")));
+        }
+    }, []);
+
     const selectScore = (idx, question, score) => {
         question.score = parseInt(score);
         const total_score = evaluation_index[idx].questions.reduce(function add(sum, currValue) {
@@ -125,11 +133,28 @@ const ProjectEvaluationContainer = () => {
     }
 
     const saveEvaluation = () => {
-        const newEvaluation = {
+        evaluation_index.map((element) => {
+            delete element.label;
+            delete element.value;
+            element.questions.map((q) => {
+                delete q.question;
+            })
+        })
+        const newData = {
+            project_id: id,
+            from: userInfo.user_id,
+            to: user_id,
             score_eval: evaluation_index,
             comment_eval: commentInput.current.value
         }
-        console.log(newEvaluation);
+
+        axios.post("/evaluationsRouter/saveEvaluation", newData).then((response) => {
+            if(response.data.success) {
+                window.history.back();
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (
