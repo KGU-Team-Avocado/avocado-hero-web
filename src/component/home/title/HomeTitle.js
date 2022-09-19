@@ -5,12 +5,12 @@ import { useLocation } from "react-router-dom";
 
 // Images
 import bgImage from "assets/images/bg2.jpg";
+import mainRoutes from "api/route/homeRoutes";
 
 
 export default () => {
     const router = useLocation();
-    console.log('pathname' + router.pathname)
-
+    const routeInfo = mainRoutes.find((item) => item.path === router.pathname);
     return (
         <>
             <MKBox
@@ -37,7 +37,7 @@ export default () => {
                                 },
                             })}
                         >
-                            아보카도 히어로는...{" "}
+                            {routeInfo.name}
                         </MKTypography>
                         <MKTypography
                             variant="body1"
@@ -46,8 +46,7 @@ export default () => {
                             px={{ xs: 6, lg: 12 }}
                             mt={1}
                         >
-                            팀 프로젝트의 처음부터 끝까지<br></br>
-                            함께하는 국내 유일의 서비스입니다.
+                            {routeInfo.description}
                         </MKTypography>
                     </Grid>
                 </Container>

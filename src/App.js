@@ -36,6 +36,7 @@ import { theme as workspaceTheme } from "component/workspace/theme";
 // Material Kit 2 React themes
 import theme from "assets/theme";
 import ReduxExample from "container/example/ReduxExample";
+import mainRoutes from "api/route/homeRoutes";
 
 const WorkspaceRoute = () => {
   return (
@@ -52,11 +53,15 @@ const WorkspaceRoute = () => {
   )
 }
 
+const getHomeRoutes = () =>{
+  return mainRoutes.map((route) => <Route path={route.path} element={route.element} key={route.key}/>)
+}
+
 const HomeRoute = () => {
   return (
       <Routes>
         <Route path="/" element={<HomeLayout />}>
-          <Route path="/" element={<HomeContainer />} />
+          {getHomeRoutes()}
         </Route>
       </Routes>
   )
