@@ -28,9 +28,7 @@ import MuiLink from "@mui/material/Link";
 // Material Kit 2 React components
 import MKBox from "mui/components/MKBox";
 import MKTypography from "mui/components/MKTypography";
-
-// Material Kit 2 React example components
-import DefaultNavbarDropdown from "mui/examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
+import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
 
 function DefaultNavbarMobile({ routes, open }) {
   const [collapse, setCollapse] = useState("");

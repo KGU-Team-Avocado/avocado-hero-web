@@ -36,14 +36,12 @@ import MKBox from "mui/components/MKBox";
 import MKTypography from "mui/components/MKTypography";
 import MKButton from "mui/components/MKButton";
 
-// Material Kit 2 React example components
-import DefaultNavbarDropdown from "mui/examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
-import DefaultNavbarMobile from "mui/examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
-
 // Material Kit 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 
 import { Dropdown } from "react-bootstrap";
+import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
+import DefaultNavbarMobile from "./DefaultNavbarMobile";
 
 function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
 
