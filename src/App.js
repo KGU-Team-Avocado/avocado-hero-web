@@ -24,7 +24,6 @@ import ProfileUpdate from "./container/sign/profile/ProfileUpdate";
 import ProjectEvaluationContainer from "./container/group/workspace/ProjectEvaluationContainer";
 import ProfileGroup from "./container/sign/profile/ProfileGroup";
 import ProfilePortpolio from "./container/sign/profile/ProfilePortpolio";
-import MuiAppRoute from "./mui/MuiAppRoute";
 import WorkspaceLayout from "component/workspace/layout/WorkspaceLayout";
 
 // Material Kit 2 React themes
@@ -117,7 +116,6 @@ function App() {
         </Route>
 
       </Routes>
-      <MuiAppRoute />
       <WorkspaceRoute />
     </>
 
