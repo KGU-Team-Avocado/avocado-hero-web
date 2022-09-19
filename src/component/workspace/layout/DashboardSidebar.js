@@ -12,56 +12,11 @@ import { UserAdd as UserAddIcon } from '../icons/user-add';
 import { Users as UsersIcon } from '../icons/users';
 import { XCircle as XCircleIcon } from '../icons/x-circle';
 import { Menu as MenuIcon } from '../icons/menu';
-import { Link } from 'react-router-dom';
+import { Bell as BellIcon } from '../icons/bell';
+import { Link, useParams } from 'react-router-dom';
 import { NavItem } from './NavItem';
 
-const items = [
-  {
-    href: '',
-    icon: (<MenuIcon fontSize="small" />),
-    title: 'Main'
-  },
-  {
-    href: 'dashboard',
-    icon: (<ChartBarIcon fontSize="small" />),
-    title: 'Dashboard'
-  },
-  // {
-  //   href: '/customers',
-  //   icon: (<UsersIcon fontSize="small" />),
-  //   title: 'Customers'
-  // },
-  // {
-  //   href: '/products',
-  //   icon: (<ShoppingBagIcon fontSize="small" />),
-  //   title: 'Products'
-  // },
-  // {
-  //   href: '/account',
-  //   icon: (<UserIcon fontSize="small" />),
-  //   title: 'Account'
-  // },
-  // {
-  //   href: '/settings',
-  //   icon: (<CogIcon fontSize="small" />),
-  //   title: 'Settings'
-  // },
-  // {
-  //   href: '/login',
-  //   icon: (<LockIcon fontSize="small" />),
-  //   title: 'Login'
-  // },
-  // {
-  //   href: '/register',
-  //   icon: (<UserAddIcon fontSize="small" />),
-  //   title: 'Register'
-  // },
-  // {
-  //   href: '/404',
-  //   icon: (<XCircleIcon fontSize="small" />),
-  //   title: 'Error'
-  // }
-];
+
 
 export const DashboardSidebar = (props) => {
   const { open, onClose } = props;
@@ -70,6 +25,46 @@ export const DashboardSidebar = (props) => {
     defaultMatches: true,
     noSsr: false
   });
+  const params = useParams();
+  const project_id = params.id;
+
+  const items = [
+    {
+      href: '',
+      icon: (<MenuIcon fontSize="small" />),
+      title: 'Main'
+    },
+    {
+      href: '/workspace/' + project_id,
+      icon: (<BellIcon fontSize="small" />),
+      title: '공지사항'
+    },
+    {
+      href: '/workspace/calendar/' + project_id,
+      icon: (<SelectorIcon fontSize="small" />),
+      title: '일정(아이콘 미정)'
+    },
+    {
+      href: '/workspace/todo/' + project_id,
+      icon: (<SelectorIcon fontSize="small" />),
+      title: 'Todo(아이콘 미정)'
+    },
+    {
+      href: '/workspace/role/' + project_id,
+      icon: (<UserIcon fontSize="small" />),
+      title: '역할'
+    },
+    {
+      href: '/workspace/members/' + project_id,
+      icon: (<UsersIcon fontSize="small" />),
+      title: '멤버관리'
+    },
+    {
+      href: '/workspace/end/' + project_id,
+      icon: (<XCircleIcon fontSize="small" />),
+      title: '프로젝트 종료'
+    }
+  ];
 
   useEffect(
     () => {

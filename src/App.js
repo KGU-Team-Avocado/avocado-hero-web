@@ -44,6 +44,12 @@ const WorkspaceRoute = () => {
         <Routes>
           <Route path="workspace" element={<WorkspaceLayout />}>
             <Route path=":id" element={<ProjectContainer />} />
+            <Route path="calendar/:id" element={<ProjectCalendarContainer />} />
+            <Route path="todo/:id" element={<ProjectTodoContainer />} />
+            <Route path="role/:id" element={<ProjectRoleContainer />} />
+            <Route path="members/:id" element={<ProjectMembersContainer />} />
+            <Route path="end/:id" element={<ProjectEndContainer />} />
+            <Route path="evaluation/:id/:user_id" element={<ProjectEvaluationContainer />} />
           </Route>
         </Routes>
       </ThemeProvider>
