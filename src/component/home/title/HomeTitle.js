@@ -1,11 +1,11 @@
 import { Container, Grid } from "@mui/material"
-import MKBox from "mui/components/MKBox";
-import MKTypography from "mui/components/MKTypography"
 import { useLocation } from "react-router-dom";
 
 // Images
 import bgImage from "assets/images/bg2.jpg";
 import mainRoutes from "api/route/homeRoutes";
+import MKBox from "component/common/mui-components/MKBox";
+import MKTypography from "component/common/mui-components/MKTypography";
 
 
 export default () => {

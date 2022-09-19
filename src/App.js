@@ -2,11 +2,9 @@ import logo from "./logo.svg";
 import "./App.css";
 import HomeContainer from "./container/home/HomeContainer";
 import { Link, Route, Routes } from "react-router-dom";
-import DefaultLayout from "./component/common/DefaultLayout";
 import SignInContainer from "./container/sign/sign_in/SignInContainer";
 import SignUpContainer from "./container/sign/sign_up/SignUpContainer";
 import ProfileContainer from "./container/sign/profile/ProfileContainer";
-import HomeLayout from "./component/common/HomeLayout";
 import HumanResources from "./container/company/HumanResources";
 import JobPosting from "./container/company/JobPosting";
 import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
@@ -30,6 +28,8 @@ import WorkspaceLayout from "component/workspace/layout/WorkspaceLayout";
 import theme from "assets/theme";
 import ReduxExample from "container/example/ReduxExample";
 import mainRoutes from "api/route/homeRoutes";
+import HomeLayout from "component/common/layouts/HomeLayout";
+import DefaultLayout from "component/common/layout-old/DefaultLayout";
 
 const WorkspaceRoute = () => {
   return (
