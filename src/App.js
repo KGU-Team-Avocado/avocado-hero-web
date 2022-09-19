@@ -54,14 +54,11 @@ const WorkspaceRoute = () => {
 
 const HomeRoute = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           <Route path="/" element={<HomeContainer />} />
         </Route>
       </Routes>
-    </ThemeProvider>
   )
 }
 
