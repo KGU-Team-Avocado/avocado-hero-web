@@ -8,7 +8,6 @@ import Card from "@mui/material/Card";
 import MKBox from "mui/components/MKBox";
 
 // Material Kit 2 React examples
-import DefaultNavbar from "mui/examples/Navbars/DefaultNavbar";
 import DefaultFooter from "mui/examples/Footers/DefaultFooter";
 
 // Routes
@@ -17,6 +16,7 @@ import footerRoutes from "mui/footer.routes";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "assets/theme";
 import HomeTitle from "component/home/title/HomeTitle";
+import DefaultNavbar from "./Navbars/DefaultNavbar";
 
 export default function () {
 

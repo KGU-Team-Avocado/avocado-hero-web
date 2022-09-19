@@ -5,14 +5,12 @@ import { Link, Route, Routes } from "react-router-dom";
 import DefaultLayout from "./component/common/DefaultLayout";
 import SignInContainer from "./container/sign/sign_in/SignInContainer";
 import SignUpContainer from "./container/sign/sign_up/SignUpContainer";
-import ExampleContainer from "./container/example/ExampleContainer";
 import ProfileContainer from "./container/sign/profile/ProfileContainer";
 import HomeLayout from "./component/common/HomeLayout";
 import HumanResources from "./container/company/HumanResources";
 import JobPosting from "./container/company/JobPosting";
 import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
 import JobFinderContainer from "./container/jobFinder/JobFinderContainer";
-import RankContainer from "./container/example/RankContainer";
 import GroupListContainer from "./container/group/workspace/GroupListContainer";
 import ProjectContainer from "./container/group/workspace/ProjectNoticeContainer";
 import ProjectDefaultLayout from "./container/group/workspace/ProjectDefaultLayout";
@@ -23,16 +21,12 @@ import ProjectMembersContainer from "./container/group/workspace/ProjectMembersC
 import ProjectEndContainer from "./container/group/workspace/ProjectEndContainer";
 import UserProfileContainer from "./container/sign/user_profile/UserProfileContainer";
 import ProfileUpdate from "./container/sign/profile/ProfileUpdate";
-import DatabaseContainer from "./container/example/DatabaseContainer";
-import MultiSelectExampleContainer from "./container/example/MultiSelectExampleContainer";
 import ProjectEvaluationContainer from "./container/group/workspace/ProjectEvaluationContainer";
-import FileUploadExample from "./container/example/FileUploadExample";
 import ProfileGroup from "./container/sign/profile/ProfileGroup";
 import ProfilePortpolio from "./container/sign/profile/ProfilePortpolio";
 import MuiAppRoute from "./mui/MuiAppRoute";
 import WorkspaceLayout from "component/workspace/layout/WorkspaceLayout";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { theme as workspaceTheme } from "component/workspace/theme";
+
 // Material Kit 2 React themes
 import theme from "assets/theme";
 import ReduxExample from "container/example/ReduxExample";
@@ -41,8 +35,7 @@ import mainRoutes from "api/route/homeRoutes";
 const WorkspaceRoute = () => {
   return (
     <>
-      <ThemeProvider theme={workspaceTheme}>
-        <CssBaseline />
+
         <Routes>
           <Route path="workspace" element={<WorkspaceLayout />}>
             <Route path=":id" element={<ProjectContainer />} />
@@ -54,7 +47,7 @@ const WorkspaceRoute = () => {
             <Route path="evaluation/:id/:user_id" element={<ProjectEvaluationContainer />} />
           </Route>
         </Routes>
-      </ThemeProvider>
+
     </>
   )
 }
@@ -96,13 +89,6 @@ function App() {
           <Route path="user/ProfilePortpolio" element={<ProfilePortpolio />} />
           {/* 워크스페이스 */}
           <Route path="myWorkspace" element={<GroupListContainer />} />
-
-          <Route path="example" element={<ExampleContainer />} />
-          <Route path="example/bestworker" element={<RankContainer />} />
-          <Route path="example/database" element={<DatabaseContainer />} />
-          <Route path="example/multiSelectExample" element={<MultiSelectExampleContainer />} />
-          <Route path="example/fileUpload" element={<FileUploadExample />} />
-          <Route path="example/redux" element={<ReduxExample/>}/>
 
           {/* 기업용 버튼 */}
           <Route path="humanRes" element={<HumanResources />} />

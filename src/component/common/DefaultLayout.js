@@ -1,6 +1,9 @@
 import { Outlet, Link } from "react-router-dom";
 import Header from "./Header";
 
+/**
+ * deprecated
+ */
 export default function DefaultLayout() {
   return (
     <div>
