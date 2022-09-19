@@ -42,31 +42,6 @@ import Icon from "@mui/material/Icon";
 // @mui icons
 import GitHubIcon from "@mui/icons-material/GitHub";
 
-// Pages
-import AboutUs from "mui/layouts/pages/landing-pages/about-us";
-import ContactUs from "mui/layouts/pages/landing-pages/contact-us";
-import Author from "mui/layouts/pages/landing-pages/author";
-import SignIn from "mui/layouts/pages/authentication/sign-in";
-
-// Sections
-import PageHeaders from "mui/layouts/sections/page-sections/page-headers";
-import Features from "mui/layouts/sections/page-sections/featuers";
-import Navbars from "mui/layouts/sections/navigation/navbars";
-import NavTabs from "mui/layouts/sections/navigation/nav-tabs";
-import Pagination from "mui/layouts/sections/navigation/pagination";
-import Inputs from "mui/layouts/sections/input-areas/inputs";
-import Forms from "mui/layouts/sections/input-areas/forms";
-import Alerts from "mui/layouts/sections/attention-catchers/alerts";
-import Modals from "mui/layouts/sections/attention-catchers/modals";
-import TooltipsPopovers from "mui/layouts/sections/attention-catchers/tooltips-popovers";
-import Avatars from "mui/layouts/sections/elements/avatars";
-import Badges from "mui/layouts/sections/elements/badges";
-import BreadcrumbsEl from "mui/layouts/sections/elements/breadcrumbs";
-import Buttons from "mui/layouts/sections/elements/buttons";
-import Dropdowns from "mui/layouts/sections/elements/dropdowns";
-import ProgressBars from "mui/layouts/sections/elements/progress-bars";
-import Toggles from "mui/layouts/sections/elements/toggles";
-import Typography from "mui/layouts/sections/elements/typography";
 
 const routes = [
   {
@@ -107,12 +82,10 @@ const routes = [
           {
             name: "main theme",
             route: "/presentation",
-            component: <AboutUs />,
           },
           {
             name: "workspace theme",
             route: "/workspace/630b7190409e908dbc8a1633",
-            component: <AboutUs />,
           },
         ],
       },
@@ -122,22 +95,18 @@ const routes = [
           {
             name: "레퍼런스",
             route: "/example",
-            component: <SignIn />,
           },
           {
             name: "멀티 셀렉트",
             route: "/example/multiSelectExample",
-            component: <SignIn />,
           },
           {
             name: "파일 업로드",
             route: "/example/fileUpload",
-            component: <SignIn />,
           },
           {
             name: "리덕스",
             route: "/example/redux",
-            component: <SignIn />,
           },
         ],
       },
@@ -147,12 +116,10 @@ const routes = [
           {
             name: "활동포인트",
             route: "/example/bestworker",
-            component: <SignIn />,
           },
           {
             name: "데이터베이스 조회",
             route: "/example/database",
-            component: <SignIn />,
           },
         ],
       },
