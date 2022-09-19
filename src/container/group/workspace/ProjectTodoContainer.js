@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import TodoList from "./TodoList";
 import TodoCreate from "./TodoCreate";
+import TodoDeleteAll from "./TodoDeleteAll";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -73,6 +74,23 @@ const ProjectTodoContainer = () => {
     
   };
 
+  const onDeleteAll = () => {
+    //데이터 삭제
+    axios
+    .post("/todosRouter/DeleteAll", {
+      project_id: project_id,
+    })
+
+    //데이터 불러오기
+    axios
+      .post("/todosRouter/postFind", {
+        project_id: project_id,
+      })
+      .then((response) => {
+        setTodos(response.data);
+      })
+  }
+
   return (
     <div>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -113,6 +131,7 @@ const ProjectTodoContainer = () => {
         </div>
       </div>
       <TodoCreate onCreate={onCreate} />
+      <TodoDeleteAll  onDeleteAll={onDeleteAll} />
       <TodoList todos={todos} onDelete={onDelete} />
     </div>
   );

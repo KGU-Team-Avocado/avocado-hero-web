@@ -41,9 +41,6 @@ const TodoItem = ({ todo, onDelete }) => {
         </div>
       </div>
       <div className="TodoItemButton">
-        <button type="button" class="btn btn-secondary me-2">
-          수정
-        </button>
         <button
           type="button"
           class="btn btn-secondary me-2"

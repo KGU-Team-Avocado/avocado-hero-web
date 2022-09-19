@@ -18,14 +18,14 @@ const TodoCreate = ({ onCreate }) => {
   };
 
   return (
-    <div className="TodoCreate">
-      <Form.Control
-        ref={todoInput}
-        type="text"
-        placeholder="할 일 추가"
-        onKeyPress={onCheckEnter}
-      />
-    </div>
+      <div className="TodoCreate">
+        <Form.Control
+          ref={todoInput}
+          type="text"
+          placeholder="할 일 추가"
+          onKeyPress={onCheckEnter}
+        />
+      </div>
   );
 };
 
