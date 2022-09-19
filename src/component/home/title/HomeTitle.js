@@ -37,7 +37,7 @@ export default () => {
                                 },
                             })}
                         >
-                            {routeInfo.name}
+                            {routeInfo?.name}
                         </MKTypography>
                         <MKTypography
                             variant="body1"
@@ -46,7 +46,7 @@ export default () => {
                             px={{ xs: 6, lg: 12 }}
                             mt={1}
                         >
-                            {routeInfo.description}
+                            {routeInfo?.description}
                         </MKTypography>
                     </Grid>
                 </Container>

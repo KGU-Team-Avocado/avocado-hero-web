@@ -77,7 +77,7 @@ function App() {
         <Route path="/" element={<DefaultLayout />}>
           {/* DefaultLayout의 Outlet으로 연결되는 부분 시작 */}
 
-          <Route path="groupFinder" element={<GroupFinderContainer />} />
+          <Route path="old/groupFinder" element={<GroupFinderContainer />} />
           <Route path="jobFinder" element={<JobFinderContainer />} />
 
           <Route path="signin" element={<SignInContainer />} />
