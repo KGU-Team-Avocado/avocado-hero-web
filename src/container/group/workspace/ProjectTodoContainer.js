@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import TodoList from "./TodoList";
 import TodoCreate from "./TodoCreate";
 import TodoDeleteAll from "./TodoDeleteAll";
@@ -12,6 +12,18 @@ const ProjectTodoContainer = () => {
   const project_id = params.id;
 
   const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+  //데이터 불러오기
+  axios
+  .post("/todosRouter/postFind", {
+    project_id: project_id,
+  })
+  .then((response) => {
+    console.log(response.data);
+    setTodos(response.data);
+  })
+  }, [])
 
   // const dataId = useRef(0);
 
