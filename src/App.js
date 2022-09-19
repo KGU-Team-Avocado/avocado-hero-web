@@ -35,6 +35,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme as workspaceTheme } from "component/workspace/theme";
 // Material Kit 2 React themes
 import theme from "assets/theme";
+import ReduxExample from "container/example/ReduxExample";
+import mainRoutes from "api/route/homeRoutes";
 
 const WorkspaceRoute = () => {
   return (
@@ -57,16 +59,17 @@ const WorkspaceRoute = () => {
   )
 }
 
+const getHomeRoutes = () =>{
+  return mainRoutes.map((route) => <Route path={route.path} element={route.element} key={route.key}/>)
+}
+
 const HomeRoute = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
       <Routes>
         <Route path="/" element={<HomeLayout />}>
-          <Route path="/" element={<HomeContainer />} />
+          {getHomeRoutes()}
         </Route>
       </Routes>
-    </ThemeProvider>
   )
 }
 
@@ -80,7 +83,7 @@ function App() {
         <Route path="/" element={<DefaultLayout />}>
           {/* DefaultLayout의 Outlet으로 연결되는 부분 시작 */}
 
-          <Route path="groupFinder" element={<GroupFinderContainer />} />
+          <Route path="old/groupFinder" element={<GroupFinderContainer />} />
           <Route path="jobFinder" element={<JobFinderContainer />} />
 
           <Route path="signin" element={<SignInContainer />} />
@@ -99,6 +102,7 @@ function App() {
           <Route path="example/database" element={<DatabaseContainer />} />
           <Route path="example/multiSelectExample" element={<MultiSelectExampleContainer />} />
           <Route path="example/fileUpload" element={<FileUploadExample />} />
+          <Route path="example/redux" element={<ReduxExample/>}/>
 
           {/* 기업용 버튼 */}
           <Route path="humanRes" element={<HumanResources />} />
