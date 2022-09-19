@@ -91,6 +91,23 @@ const ProjectTodoContainer = () => {
       })
   }
 
+  const onDeleteComplete = () => {
+    //데이터 삭제
+    axios
+    .post("/todosRouter/DeleteComplete", {
+      project_id : project_id,
+    })
+
+    //데이터 불러오기
+    axios
+      .post("/todosRouter/postFind", {
+        project_id: project_id,
+      })
+      .then((response) => {
+        setTodos(response.data);
+      })
+  }
+
   return (
     <div>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -131,7 +148,7 @@ const ProjectTodoContainer = () => {
         </div>
       </div>
       <TodoCreate onCreate={onCreate} />
-      <TodoDeleteAll  onDeleteAll={onDeleteAll} />
+      <TodoDeleteAll  onDeleteAll={onDeleteAll} onDeleteComplete = {onDeleteComplete}/>
       <TodoList todos={todos} onDelete={onDelete} />
     </div>
   );

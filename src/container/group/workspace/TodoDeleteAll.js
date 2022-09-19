@@ -1,6 +1,6 @@
 import "../workspace/Todo.css";
 
-const TodoDeleteAll = ({onDeleteAll}) => {
+const TodoDeleteAll = ({onDeleteAll, onDeleteComplete}) => {
 
     return (
         <div>
@@ -9,7 +9,10 @@ const TodoDeleteAll = ({onDeleteAll}) => {
             onClick={() => {
                 onDeleteAll();
              }}>모두삭제</button>
-            <button class="btn btn-outline-secondary" type="button">완료된 일 삭제</button>
+            <button class="btn btn-outline-secondary" type="button"
+            onClick={() => {
+                onDeleteComplete();
+             }}>완료된 일 삭제</button>
       </div>
         </div>
     )
