@@ -2,8 +2,8 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { role } from "../../../assets/tag/Role";
-import ModifyRole from "../../../component/project/role/ModifyRole";
-import RoleBadge from "../../../component/project/role/RoleBadge";
+import ModifyRole from "../../../component/workspace/role/ModifyRole";
+import RoleBadge from "../../../component/workspace/role/RoleBadge";
 import * as API from "../../../api/API";
 
 const ProjectRoleContainer = () => {

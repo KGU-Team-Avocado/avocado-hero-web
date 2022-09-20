@@ -2,8 +2,6 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { role } from "../../../assets/tag/Role";
-import ModifyRole from "../../../component/project/role/ModifyRole";
-import RoleBadge from "../../../component/project/role/RoleBadge";
 import * as API from "../../../api/API";
 import { CardMembership, Groups } from "@mui/icons-material";
 import GroupCard from "../../../component/group/card/GroupCard";
