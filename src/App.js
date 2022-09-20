@@ -30,38 +30,34 @@ import ReduxExample from "container/example/ReduxExample";
 import mainRoutes from "api/route/homeRoutes";
 import HomeLayout from "component/common/layouts/HomeLayout";
 import DefaultLayout from "component/common/layout-old/DefaultLayout";
+import workspaceRoutes from "api/route/workspaceRoutes";
 
 const WorkspaceRoute = () => {
   return (
     <>
-
-        <Routes>
-          <Route path="workspace" element={<WorkspaceLayout />}>
-            <Route path=":id" element={<ProjectContainer />} />
+      <Routes>
+        <Route path="/workspace" element={<WorkspaceLayout />}>
+          <Route path=":id" element={<ProjectContainer />} />
             <Route path="calendar/:id" element={<ProjectCalendarContainer />} />
             <Route path="todo/:id" element={<ProjectTodoContainer />} />
             <Route path="role/:id" element={<ProjectRoleContainer />} />
             <Route path="members/:id" element={<ProjectMembersContainer />} />
             <Route path="end/:id" element={<ProjectEndContainer />} />
             <Route path="evaluation/:id/:user_id" element={<ProjectEvaluationContainer />} />
-          </Route>
-        </Routes>
-
+          {/* {workspaceRoutes.map((route) => <Route path={route.path} element={route.element} key={route.path} />)} */}
+        </Route>
+      </Routes>
     </>
   )
 }
 
-const getHomeRoutes = () =>{
-  return mainRoutes.map((route) => <Route path={route.path} element={route.element} key={route.key}/>)
-}
-
 const HomeRoute = () => {
   return (
-      <Routes>
-        <Route path="/" element={<HomeLayout />}>
-          {getHomeRoutes()}
-        </Route>
-      </Routes>
+    <Routes>
+      <Route path="/" element={<HomeLayout />}>
+        {mainRoutes.map((route) => <Route path={route.path} element={route.element} key={route.path} />)}
+      </Route>
+    </Routes>
   )
 }
 
