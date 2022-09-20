@@ -8,15 +8,14 @@ import Chart from "chart.js/auto";
 export default () => {
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
-    const realUser = ["gabrielyoon7", "wlstn", "123", "201912069", "hido", "seeun", "yeonsu"]
+    const realUser = ["gabrielyoon7", "wlstn", "201912069", "hido", "seeun", "yeonsu"]
     const attendances = {
-        "gabrielyoon7": 8,
-        "wlstn": 7,
-        "123": 2,
-        "201912069": 6,
-        "hido": 7,
-        "seeun": 6,
-        "yeonsu": 7
+        "gabrielyoon7": 10,
+        "wlstn": 9,
+        "201912069": 8,
+        "hido": 9,
+        "seeun": 8,
+        "yeonsu": 9
     }  //6월 30일 이후 출석 기록 (백엔드로 만들기 귀찮아서 일단 이렇게 해둠)
     const [sum, setSum] = useState(0);
 
@@ -135,7 +134,7 @@ export default () => {
                             </button>
                         </h2>
                     </div>
-                    <p>대면 회의 출석 횟수 기준일 : 2022-09-02</p>
+                    <p>대면 회의 출석 횟수 기준일 : 2022-09-20</p>
                     <div>
                         {user.length > 0 ? (
                             user.map((user) => (
@@ -183,7 +182,7 @@ export default () => {
                         user.length > 0
                             ?
                             (
-                                user.map((user) => <div>{user.user_id +" : "+ parseInt((user.attendances_times * 5 + user.visited_date.size * 2)/sum*(400000+(8*100000)+300000))+"원"}</div>)
+                                user.map((user) => <div>{user.user_id +" : "+ parseInt((user.attendances_times * 5 + user.visited_date.size * 2)/sum*(400000+(6*100000)+300000))+"원"}</div>)
                             )
                             :
                             (
