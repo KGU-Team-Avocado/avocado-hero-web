@@ -9,7 +9,7 @@ import HumanResources from "./container/company/HumanResources";
 import JobPosting from "./container/company/JobPosting";
 import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
 import JobFinderContainer from "./container/jobFinder/JobFinderContainer";
-import GroupListContainer from "./container/group/workspace/GroupListContainer";
+import WorkspaceListContainer from "./container/group/workspace/WorkspaceListContainer";
 import ProjectContainer from "./container/group/workspace/ProjectNoticeContainer";
 import ProjectDefaultLayout from "./container/group/workspace/ProjectDefaultLayout";
 import ProjectCalendarContainer from "./container/group/workspace/ProjectCalendarContainer";
@@ -37,14 +37,7 @@ const WorkspaceRoute = () => {
     <>
       <Routes>
         <Route path="/workspace" element={<WorkspaceLayout />}>
-          <Route path=":id" element={<ProjectContainer />} />
-            <Route path="calendar/:id" element={<ProjectCalendarContainer />} />
-            <Route path="todo/:id" element={<ProjectTodoContainer />} />
-            <Route path="role/:id" element={<ProjectRoleContainer />} />
-            <Route path="members/:id" element={<ProjectMembersContainer />} />
-            <Route path="end/:id" element={<ProjectEndContainer />} />
-            <Route path="evaluation/:id/:user_id" element={<ProjectEvaluationContainer />} />
-          {/* {workspaceRoutes.map((route) => <Route path={route.path} element={route.element} key={route.path} />)} */}
+          {workspaceRoutes.map((route) => <Route path={route.path} element={route.element} key={route.path} />)}
         </Route>
       </Routes>
     </>
@@ -83,7 +76,7 @@ function App() {
           <Route path="user/ProfileGroup" element={<ProfileGroup />} />
           <Route path="user/ProfilePortpolio" element={<ProfilePortpolio />} />
           {/* 워크스페이스 */}
-          <Route path="myWorkspace" element={<GroupListContainer />} />
+          <Route path="myWorkspace" element={<WorkspaceListContainer />} />
 
           {/* 기업용 버튼 */}
           <Route path="humanRes" element={<HumanResources />} />

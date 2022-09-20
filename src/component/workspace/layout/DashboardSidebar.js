@@ -35,32 +35,32 @@ export const DashboardSidebar = (props) => {
       title: 'Main'
     },
     {
-      href: '/workspace/' + project_id,
+      href: `/workspace/${project_id}`,
       icon: (<BellIcon fontSize="small" />),
       title: '공지사항'
     },
     {
-      href: '/workspace/calendar/' + project_id,
+      href: `/workspace/${project_id}/calendar/`,
       icon: (<SelectorIcon fontSize="small" />),
       title: '일정(아이콘 미정)'
     },
     {
-      href: '/workspace/todo/' + project_id,
+      href: `/workspace/${project_id}/todo/`,
       icon: (<SelectorIcon fontSize="small" />),
       title: 'Todo(아이콘 미정)'
     },
     {
-      href: '/workspace/role/' + project_id,
+      href: `/workspace/${project_id}/role/`,
       icon: (<UserIcon fontSize="small" />),
       title: '역할'
     },
     {
-      href: '/workspace/members/' + project_id,
+      href: `/workspace/${project_id}/members/`,
       icon: (<UsersIcon fontSize="small" />),
       title: '멤버관리'
     },
     {
-      href: '/workspace/end/' + project_id,
+      href: `/workspace/${project_id}/end/`,
       icon: (<XCircleIcon fontSize="small" />),
       title: '프로젝트 종료'
     }

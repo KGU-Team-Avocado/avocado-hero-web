@@ -1,16 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GroupCard from "../../../component/group/card/GroupCard";
 import Table from "../../../component/common/Table";
 
 export default () => {
     const [groups, setGroups] = useState([]);
-    // const [selectedGroup, setSelectedGroup] = useState(null);
+    const navigate = useNavigate();
     const setSelectedGroup = (group) => {
-        // alert(JSON.stringify(group))
         if (window.confirm(group.project_name + '으로 이동하시겠습니까?')) {
-            window.location.href = "/project/" + group._id;
+            // window.location.href = "/project/" + group._id;
+            navigate(`/workspace/${group._id}`)
         }
     }
 

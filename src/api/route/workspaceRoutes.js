@@ -8,36 +8,32 @@ import ProjectCalendarContainer from "container/group/workspace/ProjectCalendarC
 
 
 const workspaceRoutes = [
-    // {
-    //     path: '/',
-    //     element: <></>,
-    // },
     {
-        path: '/:id',
+        path: '/workspace/:id',
         element: <ProjectContainer/>,
     },
     {
-        path: '/calendar/:id',
+        path: '/workspace/:id/calendar',
         element: <ProjectCalendarContainer/>,
     },
     {
-        path: '/todo/:id',
+        path: '/workspace/:id/todo',
         element: <ProjectTodoContainer/>,
     },
     {
-        path: '/role/:id',
+        path: '/workspace/:id/role',
         element: <ProjectRoleContainer/>,
     },
     {
-        path: '/members/:id',
+        path: '/workspace/:id/members',
         element: <ProjectMembersContainer/>,
     },
     {
-        path: '/end/:id',
+        path: '/workspace/:id/end',
         element: <ProjectEndContainer/>,
     },
     {
-        path: '/evaluation/:id/:user_id',
+        path: '/workspace/:id/evaluation/:user_id',
         element: <ProjectEvaluationContainer/>,
     },
 ];
