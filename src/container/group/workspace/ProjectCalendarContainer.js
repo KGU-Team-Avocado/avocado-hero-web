@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import ProjectEventCalendar from "../../../component/project/calendar/ProjectEventCalenda";
-import CalendarModal from "../../../component/project/calendar/CalendarModal";
+import ProjectEventCalendar from "../../../component/workspace/calendar/ProjectEventCalenda";
+import CalendarModal from "../../../component/workspace/calendar/CalendarModal";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import * as API from "../../../api/API";

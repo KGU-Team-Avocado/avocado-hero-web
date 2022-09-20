@@ -10,13 +10,6 @@ import JobPosting from "./container/company/JobPosting";
 import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
 import JobFinderContainer from "./container/jobFinder/JobFinderContainer";
 import WorkspaceListContainer from "./container/group/workspace/WorkspaceListContainer";
-import ProjectContainer from "./container/group/workspace/ProjectNoticeContainer";
-import ProjectDefaultLayout from "./container/group/workspace/ProjectDefaultLayout";
-import ProjectCalendarContainer from "./container/group/workspace/ProjectCalendarContainer";
-import ProjectTodoContainer from "./container/group/workspace/ProjectTodoContainer";
-import ProjectRoleContainer from "./container/group/workspace/ProjectRoleContainer";
-import ProjectMembersContainer from "./container/group/workspace/ProjectMembersContainer";
-import ProjectEndContainer from "./container/group/workspace/ProjectEndContainer";
 import UserProfileContainer from "./container/sign/user_profile/UserProfileContainer";
 import ProfileUpdate from "./container/sign/profile/ProfileUpdate";
 import ProjectEvaluationContainer from "./container/group/workspace/ProjectEvaluationContainer";
@@ -91,17 +84,6 @@ function App() {
             }
           />
           {/* DefaultLayout의 Outlet으로 연결되는 부분 끝 */}
-        </Route>
-
-        <Route path="project/" element={<ProjectDefaultLayout />}>
-          {/* 프로젝트 대쉬보드 */}
-          <Route path=":id" element={<ProjectContainer />} />
-          <Route path="calendar/:id" element={<ProjectCalendarContainer />} />
-          <Route path="todo/:id" element={<ProjectTodoContainer />} />
-          <Route path="role/:id" element={<ProjectRoleContainer />} />
-          <Route path="members/:id" element={<ProjectMembersContainer />} />
-          <Route path="end/:id" element={<ProjectEndContainer />} />
-          <Route path="evaluation/:id/:user_id" element={<ProjectEvaluationContainer />} />
         </Route>
 
       </Routes>
