@@ -98,7 +98,7 @@ const ProjectRoleContainer = () => {
                                                 />
                                                 <div className="mt-2 d-flex justify-content-end">
                                                 {group.end_project ?
-                                                    <Link type="button" className="btn btn-secondary me-2" to={"/project/evaluation/" +project_id + '/' + member.user_id} >평가하기</Link>
+                                                    <Link type="button" className="btn btn-secondary me-2" to={"/workspace/" +project_id + '/evaluation/' + member.user_id} >평가하기</Link>
                                                 :
                                                     <button type="button" className="btn btn-secondary me-2" onClick={() => editWho(member.user_id)} >수정</button>
                                                 }
