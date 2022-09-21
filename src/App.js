@@ -51,6 +51,7 @@ function App() {
   return (
     <>
       <HomeRoute />
+      <WorkspaceRoute />
       <Routes>
         {/* 이 Layout 안에 갇히게 됨... nested된 Container들은 Layout의 Outlet으로 연결된다 */}
 
@@ -87,7 +88,6 @@ function App() {
         </Route>
 
       </Routes>
-      <WorkspaceRoute />
     </>
 
   );

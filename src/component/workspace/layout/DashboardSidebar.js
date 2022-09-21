@@ -32,37 +32,58 @@ export const DashboardSidebar = (props) => {
     {
       href: '',
       icon: (<MenuIcon fontSize="small" />),
-      title: 'Main'
+      title: 'Main',
+      onlyForMgr: false,
+      showAfterEnd: true
     },
     {
       href: `/workspace/${project_id}`,
       icon: (<BellIcon fontSize="small" />),
-      title: '공지사항'
+      title: '공지사항',
+      onlyForMgr: false,
+      showAfterEnd: true
     },
     {
-      href: `/workspace/${project_id}/calendar/`,
+      href: `/workspace/${project_id}/calendar`,
       icon: (<SelectorIcon fontSize="small" />),
-      title: '일정(아이콘 미정)'
+      title: '일정(아이콘 미정)',
+      onlyForMgr: false,
+      showAfterEnd: true
     },
     {
-      href: `/workspace/${project_id}/todo/`,
+      href: `/workspace/${project_id}/todo`,
       icon: (<SelectorIcon fontSize="small" />),
-      title: 'Todo(아이콘 미정)'
+      title: 'Todo(아이콘 미정)',
+      onlyForMgr: false,
+      showAfterEnd: true
     },
     {
-      href: `/workspace/${project_id}/role/`,
+      href: `/workspace/${project_id}/role`,
       icon: (<UserIcon fontSize="small" />),
-      title: '역할'
+      title: '상호평가',
+      onlyForMgr: false,
+      showAfterEnd: true
     },
     {
-      href: `/workspace/${project_id}/members/`,
+      href: `/workspace/${project_id}/role`,
+      icon: (<UserIcon fontSize="small" />),
+      title: '역할',
+      onlyForMgr: false,
+      showAfterEnd: false
+    },
+    {
+      href: `/workspace/${project_id}/members`,
       icon: (<UsersIcon fontSize="small" />),
-      title: '멤버관리'
+      title: '멤버관리',
+      onlyForMgr: true,
+      showAfterEnd: false
     },
     {
-      href: `/workspace/${project_id}/end/`,
+      href: `/workspace/${project_id}/end`,
       icon: (<XCircleIcon fontSize="small" />),
-      title: '프로젝트 종료'
+      title: '프로젝트 종료',
+      onlyForMgr: true,
+      showAfterEnd: false
     }
   ];
 
@@ -150,6 +171,8 @@ export const DashboardSidebar = (props) => {
               icon={item.icon}
               href={item.href}
               title={item.title}
+              onlyForMgr={item.onlyForMgr}
+              showAfterEnd={item.showAfterEnd}
             />
           ))}
         </Box>
@@ -164,7 +187,7 @@ export const DashboardSidebar = (props) => {
             color="neutral.100"
             variant="subtitle2"
           >
-            Need more features?
+            Need more featrues?
           </Typography>
           <Typography
             color="neutral.500"

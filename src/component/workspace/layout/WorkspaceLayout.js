@@ -29,7 +29,8 @@ export default () => {
                             display: 'flex',
                             flex: '1 1 auto',
                             flexDirection: 'column',
-                            width: '100%'
+                            width: '100%',
+                            mx: 2
                         }}
                     >
                         <Outlet />
