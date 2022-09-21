@@ -145,6 +145,7 @@ const ProfileEdit = (props) => {
                 user_nickname: profile.user_nickname,
                 user_email: profile.user_email,
                 user_phoneNum: profile.user_phoneNum,
+                user_one_intro: profile.user_one_intro,
                 user_intro: profile.user_intro,
                 user_belong: profile.user_belong,
                 user_link: profile.user_link,
@@ -176,6 +177,40 @@ const ProfileEdit = (props) => {
         setCountList(countArr)
     }
 
+    // 입력창 추가 삭제 기능
+
+const onAddDetailDiv = () => {
+    let countArr = [...countList]
+    let counter = countArr.slice(-1)[0]
+    counter += 1
+    countArr.push(counter)	// index 사용 X
+    // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+    setCountList(countArr)
+    // axios
+    // .post("usersRouter/profileUpdate", {
+    //     user_field: selectedFields.map((s) => s.value),
+    //     // user_keyword: selectedKeywords.map((s) => s.value),
+    //     // user_personality: selectedPersonals.map((s) => s.value)
+    // })
+    // .then((response) => {
+    //     console.log(response);
+    //     if (response.data.success === true) {
+    //         window.location.href = "/";
+    //     } // 여기 안 됨
+    // })
+    // .catch(function (error) {
+    //     console.log(error);
+    // });
+};
+
+// const onAddLink = () => {
+//     let countArr = [...countLink]
+//     let counter = countArr.slice(-1)[0]
+//     counter += 1
+//     countArr.push(counter)	// index 사용 X
+//     // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+//     setCountLink(countArr)
+// }
 
     return (
         <>
@@ -220,6 +255,19 @@ const ProfileEdit = (props) => {
                                         </Form.Group>
                                     </Card.Body>
                                 </Card>
+                                <Card style={{ margin: '10px 0' }}>
+                            <Card.Body>
+                            <Card.Title>한줄 소개</Card.Title>
+                                <Card.Text>
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                            <Form.Control type="text" name="user_one_intro" placeholder=""
+                                                value={profile.user_one_intro}
+                                                onChange={handleInput}
+                                            />
+                                        </Form.Group>
+                                    </Card.Text>
+                            </Card.Body>
+                        </Card>
                             </div>
                             <div class="col-xl-9">
                                 <Card style={{ margin: '10px 0' }}>
@@ -242,6 +290,12 @@ const ProfileEdit = (props) => {
                                                         추가
                                                     </Button>
                                                 </InputGroup>
+                                                <AddInput countList={countList} />
+                                    <Form.Control type="text" name="user_belong" placeholder=""
+                                                value={profile.user_belong}
+                                                onChange={handleInput}
+                                            />
+                                     
                                             </div>
                                             <div class="item"><div class="contentTitle">분야</div>
                                                 {/* 여기부터 수정 버튼까 삭제해도됨 */}
@@ -272,8 +326,6 @@ const ProfileEdit = (props) => {
                                         value={selectedFields}
                                         onChange={setSelectedFields}
                                     /> */}
-                                                <div>
-                                                    선택됨: {profile.user_field}</div>
                                             </div>
 
                                             <div class="item">
@@ -309,7 +361,6 @@ const ProfileEdit = (props) => {
                                                     value={selectedKeywords}
                                                     onChange={setSelectedKeywords}
                                                 />
-                                                <div>선택됨: {profile.user_keyword}</div>
                                             </div>
                                             <div class="item"><div class="contentTitle">성향</div>
                                                 <MultiSelect
@@ -317,7 +368,6 @@ const ProfileEdit = (props) => {
                                                     value={selectedPersonals}
                                                     onChange={setSelectedPersonals}
                                                 />
-                                                <div>선택됨: {profile.user_personality}</div>
                                             </div>
                                             <div class="item">
                                                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">

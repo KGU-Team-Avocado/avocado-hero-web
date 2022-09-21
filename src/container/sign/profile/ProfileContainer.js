@@ -3,9 +3,9 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { MultiSelect } from "react-multi-select-component";
 import AddInput from "./AddInput";
-import './profile.css';
+// import './profile.css';
 import ProfileCard from "./ProfileCard";
-import Button from "react-bootstrap/esm/Button";
+import Button from "react-bootstrap/Button";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -39,6 +39,7 @@ const ProfileContainer = () => {
                     keyword: foundUser.user_keyword,
                     personality: foundUser.user_personality,
                     intro: foundUser.user_intro,
+                    one_intro: foundUser.user_one_intro,
                 })
             }
             else {
@@ -99,6 +100,8 @@ const ProfileContainer = () => {
                 profile={profile}
             />
             <Button href={"./ProfileUpdate/" + (user && user.user_id)}>프로필 수정</Button>
+            
+
             <ProfileGroup></ProfileGroup> 
             <ProfilePortpolio></ProfilePortpolio>
         </>
