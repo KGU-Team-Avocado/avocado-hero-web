@@ -84,7 +84,7 @@ export default (props) => {
                             <Card.Body>
                             <Card.Title>한줄 소개</Card.Title>
                                 <Card.Text>
-                                    (하드코딩)
+                                <div>{user && user.one_intro}</div>
                                     </Card.Text>
                             </Card.Body>
                         </Card>
@@ -111,7 +111,7 @@ export default (props) => {
 
                                     <div class="item">
                                         <div class="contentTitle">링크</div>
-                                        <div><a href="https://github.com/KGU-Team-Avocado">{user && user.link}</a></div>
+                                        <div><a href={user && user.link}>{user && user.link}</a></div>
                                     </div>
                                 </Card.Text>
                             </Card.Body>
@@ -126,12 +126,9 @@ export default (props) => {
                                         <div>{user && <TechStack tech_stack={user.keyword}/>}</div>
                                     </div>
                                     <div class="item">
-                                        <div class="contentTitle">성향
-                                        <br />
-                                        (성향만 보기가 안 뜸 .. 수정은 가능)</div>
+                                        <div class="contentTitle">성향</div>
                                         <div>{user && <TechStack tech_stack={user.personality
 }/>}</div>
-<div>{user && user.personality}</div>
                                     </div>
                                     <div class="item">
                                         <div class="contentTitle">소개글</div>
