@@ -105,7 +105,6 @@ const ProfileEdit = (props) => {
         { label: "신중한", value: "cautious" },
     ];
 
-    const [countList, setCountList] = useState([0]);
 
     // props.profile.user_field.map(())
 
@@ -166,9 +165,11 @@ const ProfileEdit = (props) => {
         window.location.href = "../../user/" + profile.user_id;
     };
 
-    const onClickBelong = () => {
-        // 현재 input의 내용을 배열에 저장하고 input을 하나 더 만드는 함수
+    const [countList, setCountList] = useState([0]);
 
+    const [countLink, setCountLink] = useState([0]);
+
+    const onAddDetailDiv = () => {
         let countArr = [...countList]
         let counter = countArr.slice(-1)[0]
         counter += 1
@@ -177,31 +178,61 @@ const ProfileEdit = (props) => {
         setCountList(countArr)
     }
 
-    // 입력창 추가 삭제 기능
+    const onAddLink = () => {
+        let countArr = [...countLink]
+        let counter = countArr.slice(-1)[0]
+        counter += 1
+        countArr.push(counter)	// index 사용 X
+        // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+        setCountLink(countArr)
+    }
 
-const onAddDetailDiv = () => {
-    let countArr = [...countList]
-    let counter = countArr.slice(-1)[0]
-    counter += 1
-    countArr.push(counter)	// index 사용 X
-    // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
-    setCountList(countArr)
-    // axios
-    // .post("usersRouter/profileUpdate", {
-    //     user_field: selectedFields.map((s) => s.value),
-    //     // user_keyword: selectedKeywords.map((s) => s.value),
-    //     // user_personality: selectedPersonals.map((s) => s.value)
-    // })
-    // .then((response) => {
-    //     console.log(response);
-    //     if (response.data.success === true) {
-    //         window.location.href = "/";
-    //     } // 여기 안 됨
-    // })
-    // .catch(function (error) {
-    //     console.log(error);
-    // });
-};
+
+    // const onAddLink = () => {
+    //     let countLink = [...countList];
+    //     let counter = countLink.slice(-1)[0];
+    //     counter += 1;
+    //     countLink.push(counter);
+    //     setCountList(countLink);
+    // }
+
+
+//     const onClickBelong = () => {
+//         // 현재 input의 내용을 배열에 저장하고 input을 하나 더 만드는 함수
+
+//         let countArr = [...countList]
+//         let counter = countArr.slice(-1)[0]
+//         counter += 1
+//         countArr.push(counter)	// index 사용 X
+//         // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+//         setCountList(countArr)
+//     }
+
+//     // 입력창 추가 삭제 기능
+
+// const onAddDetailDiv = () => {
+//     let countArr = [...countList]
+//     let counter = countArr.slice(-1)[0]
+//     counter += 1
+//     countArr.push(counter)	// index 사용 X
+//     // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
+//     setCountList(countArr)
+//     // axios
+//     // .post("usersRouter/profileUpdate", {
+//     //     user_field: selectedFields.map((s) => s.value),
+//     //     // user_keyword: selectedKeywords.map((s) => s.value),
+//     //     // user_personality: selectedPersonals.map((s) => s.value)
+//     // })
+//     // .then((response) => {
+//     //     console.log(response);
+//     //     if (response.data.success === true) {
+//     //         window.location.href = "/";
+//     //     } // 여기 안 됨
+//     // })
+//     // .catch(function (error) {
+//     //     console.log(error);
+//     // });
+// };
 
 // const onAddLink = () => {
 //     let countArr = [...countLink]
@@ -286,15 +317,15 @@ const onAddDetailDiv = () => {
                                                         value={profile.user_belong}
                                                         onChange={handleInput}
                                                     />
-                                                    <Button onClick={onClickBelong} variant="outline-secondary" id="button-addon2">
-                                                        추가
+                                                    <Button onClick={onAddDetailDiv} variant="outline-secondary" id="button-addon2">
+                                                       추가
                                                     </Button>
                                                 </InputGroup>
-                                                <AddInput countList={countList} />
-                                    <Form.Control type="text" name="user_belong" placeholder=""
+                                                <AddInput countList={countList} onAddDetailDiv={onAddDetailDiv}/>
+                                    {/* <Form.Control type="text" name="user_belong" placeholder=""
                                                 value={profile.user_belong}
                                                 onChange={handleInput}
-                                            />
+                                            /> */}
                                      
                                             </div>
                                             <div class="item"><div class="contentTitle">분야</div>
@@ -344,7 +375,12 @@ const onAddDetailDiv = () => {
                                                         type="text" name="user_link" placeholder=""
                                                         value={profile.user_link}
                                                         onChange={handleInput} />
+                                                        <Button onClick={onAddLink} variant="outline-secondary" id="button-addon2">
+                                                       추가
+                                                    </Button>
                                                 </InputGroup>
+                                                <AddInput countList={countLink} onAddLink={onAddLink}/>
+
                                             </div>
 
                                         </Card.Text>

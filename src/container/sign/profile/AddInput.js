@@ -8,12 +8,23 @@ import Button from 'react-bootstrap/Button';
 
 const AddInput = (props) => {
 
+  console.log(props.counter);
+
   return (
     <div>
       {props.countList && props.countList.map((item, i) => (
         <div key={i}>
-            <div>
+          {/* {
+            props.counter == 0``
+            ?
+<></>
+            :
+            
+          } */}
+
+<div>
             <InputGroup className="mb-3">
+      {/* form 태그에 id 다르게 주기 input1, input2... */}
                                                     <Form.Control
                                                         aria-label="Recipient's username"
                                                         aria-describedby="basic-addon2"
@@ -22,10 +33,11 @@ const AddInput = (props) => {
                                                         // onChange={handleInput}
                                                     />
                                                     <Button variant="outline-secondary" id="button-addon2">
-                                                        추가
+                                                        삭제
                                                     </Button>
                                                 </InputGroup>
             </div>
+            
         </div>
       ))}
     </div>
