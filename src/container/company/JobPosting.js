@@ -12,9 +12,18 @@ import { convertToHTML } from 'draft-convert';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { right } from "@popperjs/core";
 import * as API from "../../api/API"
+import { MultiSelect } from "react-multi-select-component";
 
 
 const JobPosting = () => {
+
+  const tags = [
+    { label: "#리액트", value: "react" },
+    { label: "#자바", value: "java" },
+    { label: "#html", value: "html" },
+  ];
+
+  const [selectedTags, setSelectedTags] = useState([]);
   
   const [company,setCompany]=useState({
     name:'',
@@ -39,7 +48,9 @@ const JobPosting = () => {
     setCompany({
       ...company,
       [e.target.id]:e.target.value,
+      //  
     });
+
   };
 
   const handleEditorChange = (state) => {
@@ -177,7 +188,12 @@ const JobPosting = () => {
             }}>
             </div>
         </div>
-        <input className="form-control" aria-label="With textarea" id="tag" value={company.tag} onChange={onInputHandler} style={{margin:10, marginBottom:"30px"}}></input>
+        {/* <input className="form-control" aria-label="With textarea" id="tag" value={company.tag} onChange={onInputHandler} style={{margin:10, marginBottom:"30px"}}></input> */}
+        <MultiSelect
+          options={tags}
+          value={selectedTags}
+          onChange={setSelectedTags}
+        />
 
         <div style={{
           // margin:30, 

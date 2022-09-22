@@ -64,8 +64,7 @@ function App() {
           <Route path="signin" element={<SignInContainer />} />
           <Route path="signup" element={<SignUpContainer />} />
           {/* 프로필 보기 */}
-          <Route path="user/:id" element={<ProfileContainer />} />
-          <Route path="userProfile/:id" element={<UserProfileContainer />} />
+          <Route path="old/user/:id" element={<ProfileContainer />} />
           <Route path="user/ProfileUpdate/:id" element={<ProfileUpdate />} />
           <Route path="user/ProfileGroup" element={<ProfileGroup />} />
           <Route path="user/ProfilePortpolio" element={<ProfilePortpolio />} />

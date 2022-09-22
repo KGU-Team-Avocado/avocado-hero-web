@@ -53,24 +53,25 @@ export default () => {
                     ?
                     <>
 
-                        <div className="btn-group me-2 my-3 d-flex justify-content-between">
+                        <div className="my-3 d-flex justify-content-between">
                             <div><h2>채용공고 리스트</h2></div>
                             <div></div>
-                            <div>
-                                <Button type="button" className="btn btn-light" onClick={() => setOnOff(false)}>전체보기</Button>
-                                <Button type="button" className="btn btn-secondary" onClick={() => setOnOff(true)}>북마크보기</Button>
+                            <div className="btn-group me-2">
+                                <button type="button" className="btn btn-sm btn-light" onClick={() => setOnOff(false)}>전체보기</button>
+                                <button type="button" className="btn btn-sm btn-secondary" onClick={() => setOnOff(true)}>북마크보기</button>
                             </div>
+                            
                         </div>
                         <JobList postings={bookmarks} userInfo={userInfo} bookmarks={bookmarks} />
                     </>
                     :
                     <>
-                        <div className="btn-group me-2 my-3 d-flex justify-content-between">
+                        <div className="my-3 d-flex justify-content-between">
                             <div><h2>채용공고 리스트</h2></div>
                             <div></div>
-                            <div>
-                                <Button type="button" className="btn btn-secondary" onClick={() => setOnOff(false)}>전체보기</Button>
-                                <Button type="button" className="btn btn-light" onClick={() => setOnOff(true)}>북마크보기</Button>
+                            <div className="btn-group me-2">
+                                <button type="button" className="btn btn-sm btn-secondary" onClick={() => setOnOff(false)}>전체보기</button>
+                                <button type="button" className="btn btn-sm  btn-light" onClick={() => setOnOff(true)}>북마크보기</button>
                             </div>
                         </div>
                         <JobList postings={postings} userInfo={userInfo} bookmarks={bookmarks} />
