@@ -6,6 +6,7 @@ import RankContainer from "container/example/RankContainer";
 import ReduxExample from "container/example/ReduxExample";
 import GroupFinderContainer from "container/group/finder/GroupFinderContainer";
 import HomeContainer from "container/home/HomeContainer";
+import ProfileContainer from "container/sign/profile/ProfileContainer";
 
 const mainRoutes = [
     {
@@ -21,6 +22,13 @@ const mainRoutes = [
         element: <GroupFinderContainer/>,
         name: '그룹찾기',
         description: '원하는 그룹을 찾아보아요',
+    },
+    {
+        key:2,
+        path: '/user/:id',
+        element: <ProfileContainer/>,
+        name: '프로필',
+        description: 'ㅇㅇ',
     },
 
 
