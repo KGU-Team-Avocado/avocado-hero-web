@@ -94,7 +94,10 @@ const ProjectContainer = () => {
     }
 
     const handleClose = () => {
+        setTitle("");
+        setDescription("");
         setShow(false);
+        setIsEdit(false);
     }
 
     return (
