@@ -9,24 +9,8 @@ import GroupJoinModal from "./modal/GroupJoinModal";
 export default () => {
 
 
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState('Dione');
+    const [groupCreateModalOpen, setGroupCreateModalOpen] = useState(false);
   
-    const handleClickListItem = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = (newValue) => {
-      setOpen(false);
-  
-      if (newValue) {
-        setValue(newValue);
-      }
-    };
-
-    
-
-
     const [groups, setGroups] = useState([]);
 
     useEffect(() => {
@@ -50,7 +34,7 @@ export default () => {
 
     return (
         <>
-            <button onClick={handleClickListItem}>ㅇㅇ</button>
+            <button onClick={()=>setGroupCreateModalOpen(true)}>ㅇㅇ</button>
             <div className="">
                 <div className="d-flex justify-content-between">
                     <div>
@@ -94,11 +78,10 @@ export default () => {
                 />
             </div>
             <ModalStaticBackdrop
-                id="ringtone-menu"
                 keepMounted
-                open={open}
-                onClose={handleClose}
-                value={value}
+                open={groupCreateModalOpen}
+                onClose={setGroupCreateModalOpen}
+                component={<GroupCeateModal />}
             />
         </>
     )
