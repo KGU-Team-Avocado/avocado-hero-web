@@ -1,4 +1,5 @@
 import axios from "axios";
+import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import GroupCard from "../../../component/group/card/GroupCard"
@@ -6,6 +7,25 @@ import GroupCeateModal from "./modal/GroupCeateModal";
 import GroupJoinModal from "./modal/GroupJoinModal";
 
 export default () => {
+
+
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState('Dione');
+  
+    const handleClickListItem = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = (newValue) => {
+      setOpen(false);
+  
+      if (newValue) {
+        setValue(newValue);
+      }
+    };
+
+    
+
 
     const [groups, setGroups] = useState([]);
 
@@ -17,26 +37,27 @@ export default () => {
             console.log(error);
         });
     }, [])
-    
+
     const [userInfo, setUserInfo] = useState(null);
-  
+
     useEffect(() => {
-      if (sessionStorage.getItem("user")) {
-        setUserInfo(JSON.parse(sessionStorage.getItem("user")));
-      }
+        if (sessionStorage.getItem("user")) {
+            setUserInfo(JSON.parse(sessionStorage.getItem("user")));
+        }
     }, []);
 
     const [selectedGroup, setSelectedGroup] = useState(null);
 
     return (
         <>
+            <button onClick={handleClickListItem}>ㅇㅇ</button>
             <div className="">
                 <div className="d-flex justify-content-between">
                     <div>
                         <h2>프로젝트 찾기</h2>
                     </div>
                     {
-                        userInfo&&
+                        userInfo &&
                         <div>
                             <Link className="btn btn-outline-success" to='/myWorkspace/'>내 워크스페이스 보기</Link>
                             <a className="btn btn-primary mx-2" href="#" data-bs-toggle="modal" data-bs-target="#group_create">프로젝트 등록하기</a>
@@ -72,6 +93,13 @@ export default () => {
                     selectedGroup={selectedGroup}
                 />
             </div>
+            <ModalStaticBackdrop
+                id="ringtone-menu"
+                keepMounted
+                open={open}
+                onClose={handleClose}
+                value={value}
+            />
         </>
     )
 }
