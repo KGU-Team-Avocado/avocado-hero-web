@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import * as API from "../../../api/API";
 import NoticeAcordion from "../../../component/workspace/notice/NoticeAcordion";
 import NoticeModal from "../../../component/workspace/notice/NoticeModal";
+import Typography from '@mui/material/Typography';
+import { Button, Divider, Grid } from "@mui/material";
 
 const ProjectContainer = () => {
     const [groupManager, setGroupManager] = useState({});
@@ -102,18 +104,20 @@ const ProjectContainer = () => {
 
     return (
         <>
-            <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 className="h2">공지사항</h1>
-                <div className="btn-toolbar mb-2 mb-md-0">
-                    {
-                        user.user_id === groupManager ?
-                            <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => setShow(true)} >
-                                공지사항 추가하기
-                            </button>
-                            : null
-                    }
-                </div>
-            </div>
+            <Grid container columnSpacing={2}>
+                <Grid display="flex" justifyContent="start" alignItems="center">
+                    <Typography variant="h2" mx={2}>
+                        공지사항
+                    </Typography>
+                </Grid>
+                <Grid xs display="flex" justifyContent="end" alignItems="center">
+                    <Button color="secondary"  variant="outlined" aria-label="upload picture" component="label" onClick={() => setShow(true)} >
+                        공지사항 추가하기
+                    </Button>
+                </Grid>
+            </Grid>
+
+            <Divider sx={{ border: 1 }}/>
 
             <NoticeAcordion
                 notices={notices}

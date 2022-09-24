@@ -10,7 +10,7 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EditIcon from '@mui/icons-material/Edit';
-import { Grid, IconButton } from '@mui/material';
+import { Box, Grid, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const Accordion = styled((props) => (
@@ -51,31 +51,33 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const NoticeAcordion = ({ notices, deleteNotice, showModifyModal, user, groupMgr }) => {
     return (
-        notices.map((notice) => (
-            <Accordion>
-                <AccordionSummary>
-                    <Typography>{notice.title}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Typography>{notice.description}</Typography>
-                    {user.user_id === groupMgr
-                        ?
-                        <Grid container columnSpacing={2} sx={{ order: { xs: 1, sm: 2 } }}>
-                            <Grid xs display="flex" justifyContent="end" alignItems="end">
-                                <IconButton color="primary" aria-label="upload picture" component="label" onClick={() => showModifyModal(notice)} >
-                                    <EditIcon />
-                                </IconButton>
-                            </Grid>
-                            <Grid display="flex" justifyContent="end" alignItems="end">
-                                <IconButton color="error" aria-label="upload picture" component="label" onClick={() => deleteNotice(notice._id)} >
-                                    <DeleteIcon />
-                                </IconButton>
-                            </Grid>
-                        </Grid>
-                        : null}
-                </AccordionDetails>
-            </Accordion>
-        ))
+      <Box sx={{ my: 2 }}>
+        {notices.map((notice) => (
+          <Accordion>
+            <AccordionSummary>
+              <Typography>{notice.title}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>{notice.description}</Typography>
+              {user.user_id === groupMgr
+                ?
+                <Grid container columnSpacing={2} sx={{ order: { xs: 1, sm: 2 } }}>
+                  <Grid xs display="flex" justifyContent="end" alignItems="end">
+                    <IconButton color="primary" aria-label="upload picture" component="label" onClick={() => showModifyModal(notice)} >
+                      <EditIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid display="flex" justifyContent="end" alignItems="end">
+                    <IconButton color="error" aria-label="upload picture" component="label" onClick={() => deleteNotice(notice._id)} >
+                      <DeleteIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
+                : null}
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </Box>
     )
 }
 
