@@ -1,12 +1,19 @@
+import { loginAsync } from "api/redux/user/userSlice";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import * as API from "../../../api/API"
 
 const SignInContainer = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const sessionStorage = window.sessionStorage;
+  let navigate = useNavigate();
+
+
+  const dispatch = useDispatch();
+
 
   const handleId = (e) => {
     setId(e.currentTarget.value);
@@ -27,7 +34,7 @@ const SignInContainer = () => {
         console.log(response.data);
         if (response.data.status === "success") {
           sessionStorage.setItem("user", JSON.stringify(response.data.user));
-          window.location.href = "/";
+          navigate("/");
         }
         else {
           return alert("아이디/비밀번호를 다시 입력해주세요.")
@@ -40,7 +47,8 @@ const SignInContainer = () => {
 
   const loginByRedux = async () => {
     console.log(id, password);
-    console.log(await API.loginCheck(id, password));
+    // console.log(await API.loginCheck(id, password));
+    dispatch(loginAsync({id,password}));
   }
 
   return (
@@ -82,10 +90,17 @@ const SignInContainer = () => {
           <button
             className="w-100 btn btn-lg btn-primary"
             type="submit"
+            onClick={() => login()}
+          >
+            Sign in
+          </button>
+          <button
+            className="w-100 btn btn-lg btn-danger my-3"
+            type="submit"
             // onClick={() => login()}
             onClick={() => loginByRedux()}
           >
-            Sign in
+            Sign in(Redux/미완성/사용불가)
           </button>
         </div>
       </div>

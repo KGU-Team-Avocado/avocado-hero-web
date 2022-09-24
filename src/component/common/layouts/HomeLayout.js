@@ -12,8 +12,13 @@ import DefaultNavbar from "./Navbars/DefaultNavbar";
 import DefaultFooter from "./Footers/DefaultFooter";
 import footerRoutes from "./Footers/footer.routes";
 import MKBox from "../mui-components/MKBox";
+import { useSelector } from "react-redux";
+import { selectUser } from "api/redux/user/userSlice";
+import { selectStatus } from "api/redux/user/userSlice";
 
 export default function () {
+  const user = useSelector(selectUser);
+  const status = useSelector(selectStatus)
 
   return (
     <>
@@ -32,6 +37,7 @@ export default function () {
         />
 
         {/* 대문 시작 */}
+        <div>{JSON.stringify(user)}</div>
         <HomeTitle/>
         {/* 대문 끝 */}
 
