@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import * as API from "../../../api/API"
 
 const SignInContainer = () => {
   const [id, setId] = useState("");
@@ -37,6 +37,11 @@ const SignInContainer = () => {
         console.log(error);
       });
   };
+
+  const loginByRedux = async () => {
+    console.log(id, password);
+    console.log(await API.loginCheck(id, password));
+  }
 
   return (
     <div className="d-flex justify-content-center pt-5">
@@ -77,7 +82,8 @@ const SignInContainer = () => {
           <button
             className="w-100 btn btn-lg btn-primary"
             type="submit"
-            onClick={() => login()}
+            // onClick={() => login()}
+            onClick={() => loginByRedux()}
           >
             Sign in
           </button>

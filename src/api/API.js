@@ -1,5 +1,17 @@
 import axios from "axios";
 
+export const loginCheck = async (user_id, user_password) => {
+    try {
+        const response = await axios.post("usersRouter/login", {
+          id: user_id,
+          password: user_password,
+        })
+        return response.data
+    } catch (error) {
+        return null;
+    }
+}
+
 export const findUsers = async () => {
     try {
         const response = await axios.post('/usersRouter/findUsers')
