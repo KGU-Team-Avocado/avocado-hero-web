@@ -9,10 +9,20 @@ import GroupJoinModal from "./modal/GroupJoinModal";
 
 export default () => {
 
+    const [userInfo, setUserInfo] = useState(null);
 
+    useEffect(() => {
+        if (sessionStorage.getItem("user")) {
+            setUserInfo(JSON.parse(sessionStorage.getItem("user")));
+        }
+    }, []);
+
+    
     const [groupCreateModalOpen, setGroupCreateModalOpen] = useState(false);
+    const [groupJoinModalOpen, setGroupJoinModalOpen] = useState(false);
 
     const [groups, setGroups] = useState([]);
+    const [selectedGroup, setSelectedGroup] = useState(null);
 
     useEffect(() => {
         axios.get("/groupsRouter/getGroups").then((response) => {
@@ -23,15 +33,6 @@ export default () => {
         });
     }, [])
 
-    const [userInfo, setUserInfo] = useState(null);
-
-    useEffect(() => {
-        if (sessionStorage.getItem("user")) {
-            setUserInfo(JSON.parse(sessionStorage.getItem("user")));
-        }
-    }, []);
-
-    const [selectedGroup, setSelectedGroup] = useState(null);
 
     return (
         <>
@@ -45,7 +46,7 @@ export default () => {
                         userInfo &&
                         <div>
                             <Link className="btn btn-outline-success" to='/myWorkspace/'>내 워크스페이스 보기</Link>
-                            <a className="btn btn-primary mx-2" href="#" data-bs-toggle="modal" data-bs-target="#group_create">프로젝트 등록하기</a>
+                            {/* <a className="btn btn-primary mx-2" href="#" data-bs-toggle="modal" data-bs-target="#group_create">프로젝트 등록하기</a> */}
                             <Button variant="contained" onClick={() => setGroupCreateModalOpen(true)}>프로젝트 등록하기(New)</Button>
                         </div>
                     }
@@ -63,6 +64,7 @@ export default () => {
                             <GroupCard
                                 key={group._id}
                                 group={group}
+                                setOpen={setGroupJoinModalOpen}
                                 setSelectedGroup={setSelectedGroup}
                             />
                         ))
@@ -70,17 +72,15 @@ export default () => {
                         <div>그룹이 없습니다.</div>
                 }
             </div>
-            {/* <!-- Modal --> */}
-            <div className="modal fade" id="group_create" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <GroupCeateModal />
-            </div>
-            <div className="modal fade" id="group_join" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <GroupJoinModal
-                    selectedGroup={selectedGroup}
-                />
-            </div>
             <ModalStaticBackdrop
                 keepMounted
+                width="xl"
+                open={groupJoinModalOpen}
+                component={<GroupJoinModal selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
+            />
+            <ModalStaticBackdrop
+                keepMounted
+                width="md"
                 open={groupCreateModalOpen}
                 component={<GroupCeateModal setOpen={setGroupCreateModalOpen} />}
             />

@@ -69,7 +69,7 @@ export default (props) => {
                 <div className="modal-body p-5">
                     <div className="modal-header">
                         <h2 className="fw-bold mb-0">신청하기</h2>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => props.setOpen(false)}></button>
                     </div>
                     {
                         group &&

@@ -3,32 +3,16 @@ import { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 
 export default function ModalStaticBackdrop(props) {
-  const { onClose, component, open, ...other } = props;
-
-  // const handleCancel = () => {
-  //   onClose();
-  // };
+  const { width, component, open, ...other } = props;
 
   return (
     <Dialog
-      sx={{ '& .MuiDialog-paper': { width: '80%', maxHeight: 435 } }}
-      maxWidth="xs"
-      // TransitionProps={{ onEntering: handleEntering }}
+      sx={{ '& .MuiDialog-paper': { borderRadius: '1rem' } }}
+      maxWidth={width}
       open={open}
       {...other}
     >
-      {/* <div className="modal-dialog" role="document">
-        <div className="modal-content rounded-4 shadow">
-          <div className="modal-body p-5  w-100"> */}
-            {component}
-          {/* </div>
-        </div>
-      </div> */}
+      {component}
     </Dialog>
   );
 }
-
-// ModalStaticBackdrop.propTypes = {
-//   onClose: PropTypes.func.isRequired,
-//   open: PropTypes.bool.isRequired,
-// };

@@ -4,7 +4,11 @@ export default (props) => {
 
     return (
         <div className="col">
-            <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#group_join" onClick={() => props.setSelectedGroup(props.group)}>
+            {/* <a href="#" className="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#group_join" onClick={() => props.setSelectedGroup(props.group)}> */}
+            <a href="#" className="text-decoration-none text-dark" onClick={() => {
+                props.setSelectedGroup(props.group)
+                props.setOpen(true)
+            }}>
                 <div className="card p-3 rounded-4">
                     <div className="row">
                         <div className="text-center col-xxl-4">
