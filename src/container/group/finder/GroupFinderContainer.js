@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import { useEffect, useState } from "react"
@@ -10,7 +11,7 @@ export default () => {
 
 
     const [groupCreateModalOpen, setGroupCreateModalOpen] = useState(false);
-  
+
     const [groups, setGroups] = useState([]);
 
     useEffect(() => {
@@ -34,7 +35,7 @@ export default () => {
 
     return (
         <>
-            <button onClick={()=>setGroupCreateModalOpen(true)}>ㅇㅇ</button>
+
             <div className="">
                 <div className="d-flex justify-content-between">
                     <div>
@@ -45,6 +46,7 @@ export default () => {
                         <div>
                             <Link className="btn btn-outline-success" to='/myWorkspace/'>내 워크스페이스 보기</Link>
                             <a className="btn btn-primary mx-2" href="#" data-bs-toggle="modal" data-bs-target="#group_create">프로젝트 등록하기</a>
+                            <Button variant="contained" onClick={() => setGroupCreateModalOpen(true)}>프로젝트 등록하기(New)</Button>
                         </div>
                     }
                 </div>
@@ -80,7 +82,7 @@ export default () => {
             <ModalStaticBackdrop
                 keepMounted
                 open={groupCreateModalOpen}
-                component={<GroupCeateModal setOpen={setGroupCreateModalOpen}/>}
+                component={<GroupCeateModal setOpen={setGroupCreateModalOpen} />}
             />
         </>
     )
