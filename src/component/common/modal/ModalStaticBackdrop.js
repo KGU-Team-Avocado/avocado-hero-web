@@ -7,9 +7,10 @@ export default function ModalStaticBackdrop(props) {
 
   return (
     <Dialog
-      sx={{ '& .MuiDialog-paper': { borderRadius: '1rem' } }}
+      sx={{ '& .MuiDialog-paper': { borderRadius: '1rem', width:"100%" } }}
       maxWidth={width}
       open={open}
+      scroll={"body"}
       {...other}
     >
       {component}

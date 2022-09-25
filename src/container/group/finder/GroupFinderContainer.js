@@ -1,11 +1,11 @@
 import { Button } from "@mui/material";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
+import GroupCardV2 from "component/group/card/GroupCardV2";
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
-import GroupCard from "../../../component/group/card/GroupCard"
 import GroupCeateModal from "./modal/GroupCeateModal";
-import GroupJoinModal from "./modal/GroupJoinModal";
+import GroupJoinModalV2 from "./modal/GroupJoinModalV2";
 
 export default () => {
 
@@ -33,6 +33,10 @@ export default () => {
         });
     }, [])
 
+    const handleGroupCard = (group) => {
+        setSelectedGroup(group)
+        setGroupJoinModalOpen(true)
+    }
 
     return (
         <>
@@ -61,11 +65,10 @@ export default () => {
                     groups.length > 0
                         ?
                         groups.map((group) => (
-                            <GroupCard
+                            <GroupCardV2
                                 key={group._id}
                                 group={group}
-                                setOpen={setGroupJoinModalOpen}
-                                setSelectedGroup={setSelectedGroup}
+                                handleGroupCard={handleGroupCard}
                             />
                         ))
                         :
@@ -74,9 +77,9 @@ export default () => {
             </div>
             <ModalStaticBackdrop
                 keepMounted
-                width="xl"
+                width="md"
                 open={groupJoinModalOpen}
-                component={<GroupJoinModal selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
+                component={<GroupJoinModalV2 selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
             />
             <ModalStaticBackdrop
                 keepMounted
