@@ -80,8 +80,7 @@ export default () => {
             <ModalStaticBackdrop
                 keepMounted
                 open={groupCreateModalOpen}
-                onClose={setGroupCreateModalOpen}
-                component={<GroupCeateModal />}
+                component={<GroupCeateModal setOpen={setGroupCreateModalOpen}/>}
             />
         </>
     )
