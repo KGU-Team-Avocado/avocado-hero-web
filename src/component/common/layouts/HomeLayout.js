@@ -38,13 +38,27 @@ export default function () {
 
         {/* 대문 시작 */}
         <div>{JSON.stringify(user)}</div>
-        <HomeTitle/>
+        <HomeTitle />
         {/* 대문 끝 */}
 
         <Card
           sx={{
-            p: 2,
-            mx: { xs: 2, lg: 3 },
+            p: {
+              xs: 2,
+              sm: 5,
+              md: 5,
+              lg: 5,
+              xl: 5,
+              xxl: 5
+            },
+            mx: {
+              xs: 2,
+              sm: 3,
+              md: 5,
+              lg: 10,
+              xl: 15,
+              xxl: 25
+            },
             mt: -8,
             mb: 4,
             backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
