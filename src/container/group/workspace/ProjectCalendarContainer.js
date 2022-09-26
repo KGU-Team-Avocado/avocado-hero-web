@@ -5,8 +5,9 @@ import CalendarModal from "../../../component/workspace/calendar/CalendarModal";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import * as API from "../../../api/API";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
+import { getGroupAsync } from "api/redux/group/groupSlice";
 
 const DayOfTheWeek = [
     {
@@ -41,6 +42,7 @@ const DayOfTheWeek = [
 
 const ProjecCalendarContainer = () => {
     const group = useSelector(selectGroup);
+    const dispatch = useDispatch();
 
     const [show, setShow] = useState(false);
     const [startDay, setStartDay] = useState("");
@@ -133,6 +135,7 @@ const ProjecCalendarContainer = () => {
             setColor("");
             setDaysOfWeek([]);
             setShow(false);
+            dispatch(getGroupAsync(project_id));
         }).catch(function (error) {
             console.log(error);
         });

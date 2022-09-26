@@ -5,24 +5,19 @@ import { role } from "../../../assets/tag/Role";
 import ModifyRole from "../../../component/workspace/role/ModifyRole";
 import RoleBadge from "../../../component/workspace/role/RoleBadge";
 import * as API from "../../../api/API";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
+import { getGroupAsync } from "api/redux/group/groupSlice";
 
 const ProjectRoleContainer = () => {
     const group = useSelector(selectGroup);
+    const dispatch = useDispatch();
+
     const params = useParams();
     const project_id = params.id;
 
     const [edit, setEdit] = useState('');
     const [selected, setSelected] = useState([]);
-    const inputRef = useRef();
-    const [members, setMembers] = useState([]); //멤버 배열
-    const [manager, setManager] = useState(''); //팀장
-
-    useEffect(()=>{
-        setMembers(group.members)
-        setManager(group.manager)
-    }, []);
 
     const modifyRole = (member) => {
         setEdit("");
@@ -35,14 +30,14 @@ const ProjectRoleContainer = () => {
             user_role: selecteRole
         }).then((response) => {
             console.log(response.data);
-            setMembers(response.data)
+            dispatch(getGroupAsync(project_id))
         }).catch(function (error) {
             console.log(error);
         });
     }
 
     const editWho = (edit) => {
-        const user = members.find((mem) => mem.user_id === edit)
+        const user = group.members.find((mem) => mem.user_id === edit)
         const select = user.user_role.map((role) => {return findRole(role)})
         setEdit(edit);
         setSelected(select)
@@ -60,7 +55,7 @@ const ProjectRoleContainer = () => {
             </div>
 
             <div className="row">
-                {members.map(member => (
+                {group.members.map(member => (
                     <div className="col-xl-4 col-lg-6 my-2" key={member.user_id}>
                         <div className="card p-3">
                             <div className="row g-0 align-items-center">
@@ -69,7 +64,7 @@ const ProjectRoleContainer = () => {
                                 </div>
                                 <div className="col-xxl-8">
                                     <div className="card-body">
-                                        {member.user_id === manager ?
+                                        {member.user_id === group.manager ?
                                             <h4 className="card-title">팀장</h4>
                                             :
                                             <h4 className="card-title">팀원</h4>

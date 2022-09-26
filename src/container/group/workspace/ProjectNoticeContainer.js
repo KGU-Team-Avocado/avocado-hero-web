@@ -7,10 +7,13 @@ import NoticeModal from "../../../component/workspace/notice/NoticeModal";
 import Typography from '@mui/material/Typography';
 import { Button, Divider, Grid } from "@mui/material";
 import { selectGroup } from "api/redux/group/groupSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getGroupAsync } from "api/redux/group/groupSlice";
 
 const ProjectContainer = () => {
     const group = useSelector(selectGroup);
+    const dispatch = useDispatch();
+
     const [groupManager, setGroupManager] = useState({});
     const [notices, setNotices] = useState([]); // 공지사항 배열
 
@@ -47,7 +50,8 @@ const ProjectContainer = () => {
             setTitle("");
             setDescription("");
             setShow(false);
-            setNotices(response.data)
+            // setNotices(response.data)
+            dispatch(getGroupAsync(project_id));
         }).catch(function (error) {
             console.log(error);
         });
@@ -59,7 +63,8 @@ const ProjectContainer = () => {
             notice_id: id
         }).then((response) => {
             console.log(response.data);
-            setNotices(response.data)
+            // setNotices(response.data)
+            dispatch(getGroupAsync(project_id));
         }).catch(function (error) {
             console.log(error);
         });
@@ -86,7 +91,7 @@ const ProjectContainer = () => {
             setKey(0);
             setIsEdit(false);
             setShow(false);
-            setNotices(response.data);
+            dispatch(getGroupAsync(project_id));
         }).catch(function (error) {
             console.log(error);
         });
@@ -117,7 +122,7 @@ const ProjectContainer = () => {
             <Divider sx={{ border: 1 }}/>
 
             <NoticeAcordion
-                notices={notices}
+                notices={group.notices}
                 deleteNotice={deleteNotice}
                 showModifyModal={showModifyModal}
                 user={user}

@@ -3,11 +3,14 @@ import Modal from 'react-bootstrap/Modal';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import * as API from "../../../api/API";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
+import { getGroupAsync } from "api/redux/group/groupSlice";
 
 const ProjectMembersContainer = () => {
     const group = useSelector(selectGroup);
+    const dispatch = useDispatch();
+
     const params = useParams();
     const project_id = params.id;
 
@@ -20,15 +23,9 @@ const ProjectMembersContainer = () => {
         }).catch(function (error) {
             console.log(error);
         });
-
-        setMembers(group.members);
-        setManager(group.manager);
-        setClose(group.close_application);
     }, []);
 
     const [applicants, setApplicants] = useState([]); // 프로젝트 지원자 배열
-    const [members, setMembers] = useState([]); //멤버 배열
-    const [manager, setManager] = useState('');
 
     const [show, setShow] = useState('null');
     const [close, setClose] = useState(false)
@@ -54,7 +51,7 @@ const ProjectMembersContainer = () => {
         }).then((response) => {
             console.log(response.data);
             setApplicants(response.data.applicants);
-            setMembers(response.data.members)
+            dispatch(getGroupAsync(project_id))
         }).catch(function (error) {
             console.log(error);
         });
@@ -86,7 +83,7 @@ const ProjectMembersContainer = () => {
             project_id: project_id
         }).then((response) => {
             console.log(response.data);
-            setMembers(response.data);
+            dispatch(getGroupAsync(project_id))
         }).catch(function (error) {
             console.log(error);
         });
@@ -99,6 +96,7 @@ const ProjectMembersContainer = () => {
         }).then((response) => {
             console.log(response.data);
             setClose(response.data);
+            dispatch(getGroupAsync(project_id))
         }).catch(function (error) {
             console.log(error);
         });
@@ -167,8 +165,8 @@ const ProjectMembersContainer = () => {
                         </tr>
                     </thead>
                     <tbody className="table-group-divider text-center">
-                        {members.map((member) => (
-                            member.user_id === manager ? null :
+                        {group.members.map((member) => (
+                            member.user_id === group.manager ? null :
                                 <tr key={member.user_id}>
                                     <th scope="row">1</th>
                                     <td>{member.user_id}</td>

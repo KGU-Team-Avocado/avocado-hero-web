@@ -49,7 +49,7 @@ export const saveJobPost = async (company) => {
 
 export const getGroupById = async (group_id) => {
     try {
-        const response = await axios.post("/groupsRouter/getGroup", group_id);
+        const response = await axios.post("/groupsRouter/getGroup", {_id: group_id});
         console.log(response)
         return response.data;
     } catch (err) {

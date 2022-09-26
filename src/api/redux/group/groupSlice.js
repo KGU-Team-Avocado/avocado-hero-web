@@ -11,6 +11,7 @@ export const getGroupAsync = createAsyncThunk(
     'group/getGroup',
     async (group_id) => {
       const response = await API.getGroupById(group_id);
+      console.log('response', response);
       return response;
     }
   );
@@ -37,6 +38,7 @@ export const groupSlice = createSlice({
           .addCase(getGroupAsync.fulfilled, (state, action) => {
             // incrementAsync가 끝나면
             state.status = 'idle';
+            console.log('action, ', action)
             state.group = action.payload;
           });
       },
