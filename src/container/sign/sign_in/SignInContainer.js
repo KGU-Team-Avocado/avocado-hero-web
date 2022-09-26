@@ -25,16 +25,15 @@ const SignInContainer = () => {
 
   const login = () => {
     console.log(id, password);
-    axios
-      .post("usersRouter/login", {
+    dispatch(loginAsync({id,password})); // Redux user Store에 저장하는 과정을 기존 로그인에 통합함.
+    axios.post("usersRouter/login", {
         id: id,
         password: password,
-      })
-      .then((response) => {
+      }).then((response) => {
         console.log(response.data);
         if (response.data.status === "success") {
           sessionStorage.setItem("user", JSON.stringify(response.data.user));
-          navigate("/");
+          navigate("/"); //현재 axios 명령어는 deprecated 되었지만, 이 부분을 redux에 추가로 이식해줘야하고, 기존 코드의 호환성을 위해서 유지중 임 ...
         }
         else {
           return alert("아이디/비밀번호를 다시 입력해주세요.")
@@ -45,11 +44,11 @@ const SignInContainer = () => {
       });
   };
 
-  const loginByRedux = async () => {
-    console.log(id, password);
-    // console.log(await API.loginCheck(id, password));
-    dispatch(loginAsync({id,password}));
-  }
+  // const loginByRedux = async () => {
+  //   console.log(id, password);
+  //   // console.log(await API.loginCheck(id, password));
+  //   dispatch(loginAsync({id,password}));
+  // }
 
   return (
     <div className="d-flex justify-content-center pt-5">
@@ -88,20 +87,20 @@ const SignInContainer = () => {
             <Link to='/signup'>아직 회원이 아니신가요?</Link>
           </div>
           <button
-            className="w-100 btn btn-lg btn-primary"
+            className="w-100 btn btn-lg btn-success"
             type="submit"
             onClick={() => login()}
           >
-            Sign in
+            Sign in (Redux Included)
           </button>
-          <button
+          {/* <button
             className="w-100 btn btn-lg btn-danger my-3"
             type="submit"
             // onClick={() => login()}
             onClick={() => loginByRedux()}
           >
             Sign in(Redux/미완성/사용불가)
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
