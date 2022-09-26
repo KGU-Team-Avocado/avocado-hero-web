@@ -5,8 +5,11 @@ import { role } from "../../../assets/tag/Role";
 import ModifyRole from "../../../component/workspace/role/ModifyRole";
 import RoleBadge from "../../../component/workspace/role/RoleBadge";
 import * as API from "../../../api/API";
+import { useSelector } from "react-redux";
+import { selectGroup } from "api/redux/group/groupSlice";
 
 const ProjectRoleContainer = () => {
+    const group = useSelector(selectGroup);
     const params = useParams();
     const project_id = params.id;
 
@@ -15,19 +18,12 @@ const ProjectRoleContainer = () => {
     const inputRef = useRef();
     const [members, setMembers] = useState([]); //멤버 배열
     const [manager, setManager] = useState(''); //팀장
-    const [group, setGroup] = useState({})
 
     useEffect(()=>{
-        getGroup();
-    }, []);
-
-    const getGroup = async () => {
-        const group = await API.getGroupById({ _id: project_id })
-
-        setGroup(group);
         setMembers(group.members)
         setManager(group.manager)
-    }
+    }, []);
+
     const modifyRole = (member) => {
         setEdit("");
         setSelected([]);

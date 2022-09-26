@@ -3,9 +3,11 @@ import Modal from 'react-bootstrap/Modal';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import * as API from "../../../api/API";
+import { useSelector } from "react-redux";
+import { selectGroup } from "api/redux/group/groupSlice";
 
 const ProjectMembersContainer = () => {
-
+    const group = useSelector(selectGroup);
     const params = useParams();
     const project_id = params.id;
 
@@ -19,16 +21,10 @@ const ProjectMembersContainer = () => {
             console.log(error);
         });
 
-        getGroup();
-    }, []);
-
-    const getGroup = async () => {
-        const group = await API.getGroupById({ _id: project_id })
-
         setMembers(group.members);
         setManager(group.manager);
         setClose(group.close_application);
-    }
+    }, []);
 
     const [applicants, setApplicants] = useState([]); // 프로젝트 지원자 배열
     const [members, setMembers] = useState([]); //멤버 배열

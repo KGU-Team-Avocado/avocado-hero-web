@@ -3,13 +3,17 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import GroupCard from "../../../component/group/card/GroupCard";
 import Table from "../../../component/common/Table";
+import { useDispatch } from "react-redux";
+import { getGroupAsync, selectedGroup } from "api/redux/group/groupSlice";
 
 export default () => {
     const [groups, setGroups] = useState([]);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const setSelectedGroup = (group) => {
         if (window.confirm(group.project_name + '으로 이동하시겠습니까?')) {
             // window.location.href = "/project/" + group._id;
+            dispatch(selectedGroup(group));
             navigate(`/workspace/${group._id}`)
         }
     }

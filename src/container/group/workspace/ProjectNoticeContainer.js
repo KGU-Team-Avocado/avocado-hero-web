@@ -6,8 +6,11 @@ import NoticeAcordion from "../../../component/workspace/notice/NoticeAcordion";
 import NoticeModal from "../../../component/workspace/notice/NoticeModal";
 import Typography from '@mui/material/Typography';
 import { Button, Divider, Grid } from "@mui/material";
+import { selectGroup } from "api/redux/group/groupSlice";
+import { useSelector } from "react-redux";
 
 const ProjectContainer = () => {
+    const group = useSelector(selectGroup);
     const [groupManager, setGroupManager] = useState({});
     const [notices, setNotices] = useState([]); // 공지사항 배열
 
@@ -29,16 +32,10 @@ const ProjectContainer = () => {
             console.log()
             setUser(JSON.parse(sessionStorage.getItem("user")));
         }
-        
-        getGroup();
-    }, []);
-
-    const getGroup = async () => {
-        const group = await API.getGroupById({ _id: project_id })
 
         setGroupManager(group.manager);
         setNotices(group.notices);
-    }
+    }, []);
 
     const saveNewNotice = () => {
         const newNotice = { title: inputTitle.current.value, description: inputDesc.current.value };
