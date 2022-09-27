@@ -1,18 +1,21 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ProjectEndContainer = () => {
+    const navigate = useNavigate();
     const params = useParams();
     const project_id = params.id;
 
     const endProject = () => {
-        axios.post("/groupsRouter/endProject", {
-            _id: project_id,
-        }).then((response) => {
-            window.location.href = "/workspace/" + project_id;
-        }).catch(function (error) {
-            console.log(error);
-        });
+        if(window.confirm('프로젝트를 종료하시겠습니까?')){
+            axios.post("/groupsRouter/endProject", {
+                _id: project_id,
+            }).then((response) => {
+                navigate(`/workspace/${project_id}`,  { replace: true});
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
     }
     return (
         <>

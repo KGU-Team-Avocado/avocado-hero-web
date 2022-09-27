@@ -179,8 +179,6 @@ export const DashboardSidebar = (props) => {
               icon={item.icon}
               href={item.href}
               title={item.title}
-              onlyForMgr={item.onlyForMgr}
-              showAfterEnd={item.showAfterEnd}
             />
           ))}
           {extraItems.map((item) => (
@@ -190,8 +188,6 @@ export const DashboardSidebar = (props) => {
               icon={item.icon}
               href={item.href}
               title={item.title}
-              onlyForMgr={item.onlyForMgr}
-              showAfterEnd={item.showAfterEnd}
             /> : null
           ))}
         </Box>
