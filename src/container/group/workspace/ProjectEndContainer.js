@@ -9,7 +9,7 @@ const ProjectEndContainer = () => {
         axios.post("/groupsRouter/endProject", {
             _id: project_id,
         }).then((response) => {
-            window.location.href = "/project/" + project_id;
+            window.location.href = "/workspace/" + project_id;
         }).catch(function (error) {
             console.log(error);
         });

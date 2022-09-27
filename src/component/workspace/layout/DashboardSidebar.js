@@ -15,6 +15,9 @@ import { Menu as MenuIcon } from '../icons/menu';
 import { Bell as BellIcon } from '../icons/bell';
 import { Link, useParams } from 'react-router-dom';
 import { NavItem } from './NavItem';
+import { useSelector } from 'react-redux';
+import { selectUser } from 'api/redux/user/userSlice';
+import { selectGroup } from 'api/redux/group/groupSlice';
 
 
 
@@ -27,6 +30,8 @@ export const DashboardSidebar = (props) => {
   });
   const params = useParams();
   const project_id = params.id;
+  const group = useSelector(selectGroup);
+  const user = useSelector(selectUser);
 
   const items = [
     {
@@ -57,6 +62,9 @@ export const DashboardSidebar = (props) => {
       onlyForMgr: false,
       showAfterEnd: true
     },
+  ];
+
+  const extraItems = [
     {
       href: `/workspace/${project_id}/role`,
       icon: (<UserIcon fontSize="small" />),
@@ -85,7 +93,7 @@ export const DashboardSidebar = (props) => {
       onlyForMgr: true,
       showAfterEnd: false
     }
-  ];
+  ]
 
   useEffect(
     () => {
@@ -174,6 +182,17 @@ export const DashboardSidebar = (props) => {
               onlyForMgr={item.onlyForMgr}
               showAfterEnd={item.showAfterEnd}
             />
+          ))}
+          {extraItems.map((item) => (
+            (!item.onlyForMgr || (user.user_id === group.manager)) && item.showAfterEnd === group.end_project ?
+            <NavItem
+              key={item.title}
+              icon={item.icon}
+              href={item.href}
+              title={item.title}
+              onlyForMgr={item.onlyForMgr}
+              showAfterEnd={item.showAfterEnd}
+            /> : null
           ))}
         </Box>
         <Divider sx={{ borderColor: '#2D3748' }} />
