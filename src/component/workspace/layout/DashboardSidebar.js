@@ -35,13 +35,6 @@ export const DashboardSidebar = (props) => {
 
   const items = [
     {
-      href: '',
-      icon: (<MenuIcon fontSize="small" />),
-      title: 'Main',
-      onlyForMgr: false,
-      showAfterEnd: true
-    },
-    {
       href: `/workspace/${project_id}`,
       icon: (<BellIcon fontSize="small" />),
       title: '공지사항',
