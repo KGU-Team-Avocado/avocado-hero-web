@@ -34,47 +34,37 @@ const mainRoutes = [
         name: '채용공고',
         description: '일자리를 찾아보아요',
     },
-
-
-
-
     {
-        key:991,
         path: '/example',
         element: <ExampleContainer/>,
         name: '대표 예제',
         description: 'FE + BE',
     },
     {
-        key:992,
         path: '/example/bestworker',
         element: <RankContainer/>,
         name: '활동 포인트',
         description: '열심히 합시다.',
     },
     {
-        key:993,
         path: '/example/database',
         element: <DatabaseContainer/>,
         name: 'DB 조회',
         description: 'ㅇㅇㅇㅇㅇㅇ',
     },
     {
-        key:994,
         path: '/example/multiSelectExample',
         element: <MultiSelectExampleContainer/>,
         name: '멀티 셀렉트 예제',
         description: 'ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',
     },
     {
-        key:995,
         path: '/example/fileUpload',
         element: <FileUploadExample/>,
         name: '파일업로드',
         description: '수리중',
     },
     {
-        key:996,
         path: '/example/redux',
         element: <ReduxExample/>,
         name: '리덕스 예제',
