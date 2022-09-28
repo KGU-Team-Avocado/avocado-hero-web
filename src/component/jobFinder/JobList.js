@@ -3,11 +3,15 @@ import { useEffect, useState } from "react"
 import axios from "axios";
 import { BiBookmark } from "react-icons/bi";
 import DOMPurify from "dompurify";
+import JobPostingCardV2 from "./JobPostingCardV2";
+import JobFinderViewModal from "./modal/JobFinderViewModal";
+import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 
 
 export default (props) => {
 
     const [selected, setSelected] = useState(null);
+    const [postingModalOpen, setPostingModalOpen] = useState(false);
     const [bookmarkBtn, setBookmarkBtn] = useState(false);
 
     const onClick = (e) => {
@@ -25,7 +29,7 @@ export default (props) => {
             })
             .then((response) => {
                 console.log(response.data);
-                alert("북마크에 추가되었습니다.");  
+                alert("북마크에 추가되었습니다.");
                 setBookmarkBtn(true);
                 window.location.href = "/jobFinder";
             })
@@ -50,7 +54,7 @@ export default (props) => {
                 console.log(error);
             });
     }
-        
+
     const createMarkup = (html) => {
         return {
             __html: DOMPurify.sanitize(html)
@@ -60,7 +64,7 @@ export default (props) => {
 
     const checkBookmark = (bookMark) => {
         const idx = props.bookmarks.findIndex((bookmarks) => bookmarks._id === bookMark._id);
-        
+
         if (idx == -1) {
             setBookmarkBtn(false);
         }
@@ -70,6 +74,11 @@ export default (props) => {
         setSelected(bookMark)
     }
 
+    const handleClick = (posting) => {
+        setPostingModalOpen(true);
+        setSelected(posting);
+    }
+
     return (
         <>
             <div>
@@ -77,11 +86,16 @@ export default (props) => {
                     props.postings.length > 0
                         ?
                         props.postings.map((posting) => (
-                            <JobPostingCard
+                            // <JobPostingCard
+                            //     key={posting._id}
+                            //     posting={posting}
+                            //     // setSelected={setSelected}
+                            //     checkBookmark={checkBookmark}
+                            // />
+                            <JobPostingCardV2
                                 key={posting._id}
                                 posting={posting}
-                                // setSelected={setSelected}
-                                checkBookmark={checkBookmark}
+                                handleClick={handleClick}
                             />
                         ))
                         :
@@ -89,6 +103,23 @@ export default (props) => {
                 }
             </div>
 
+            {/* new */}
+            <ModalStaticBackdrop
+                keepMounted
+                width="md"
+                open={postingModalOpen}
+                component={<JobFinderViewModal
+                    setOpen={setPostingModalOpen}
+                    selected={selected}
+                    bookmarkBtn={bookmarkBtn}
+                    bookMarkSave={bookMarkSave}
+                    bookMarkDelete={bookMarkDelete}
+                />}
+            />
+
+
+
+            {/* deprecated */}
             <div className="modal" id="job_modal" tabindex="-1" aria-labelledby="..." aria-hidden="true">
                 <div className="modal-dialog modal-lg">
                     <div className="modal-content rounded-4 shadow">
@@ -112,7 +143,7 @@ export default (props) => {
                                             }
                                             <button type="button" className="btn-close pt-4" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        
+
                                     </div>
                                     <div>
 
@@ -125,7 +156,7 @@ export default (props) => {
                                         <h5><b>태그</b></h5>
                                         <p>{selected.tag}</p>
                                         <hr />
-                                        <h5><b >상세소개글</b></h5>                             
+                                        <h5><b >상세소개글</b></h5>
                                         <div dangerouslySetInnerHTML={createMarkup(selected.description)}></div>
                                         <hr />
                                         <h5><b>모집인원</b></h5>
@@ -148,7 +179,7 @@ export default (props) => {
                                                     <BiBookmark />북마크
                                                 </button>
                                         } */}
-                                        
+
                                         <button className="btn btn-primary mt-2 w-100" type="button" onClick={onClick}>지원하기</button>
 
                                     </div>
