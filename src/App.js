@@ -68,7 +68,7 @@ function App() {
 
           {/* 기업용 버튼 */}
           <Route path="humanRes" element={<HumanResources />} />
-          <Route path="jobPosting" element={<JobPosting />} />
+          <Route path="old/jobPosting" element={<JobPosting />} />
 
           <Route
             path="*"

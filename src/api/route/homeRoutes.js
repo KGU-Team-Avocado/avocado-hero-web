@@ -1,3 +1,4 @@
+import JobPosting from "container/company/JobPosting";
 import DatabaseContainer from "container/example/DatabaseContainer";
 import ExampleContainer from "container/example/ExampleContainer";
 import FileUploadExample from "container/example/FileUploadExample";
@@ -35,6 +36,12 @@ const mainRoutes = [
         element: <JobFinderContainer/>,
         name: '채용공고',
         description: '일자리를 찾아보아요',
+    },
+    {
+        path: '/jobPosting',
+        element: <JobPosting/>,
+        name: '채용공고등록',
+        description: '일자리를 등록해요',
     },
     {
         path: '/signin',
