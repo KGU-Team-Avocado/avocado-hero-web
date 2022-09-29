@@ -108,7 +108,7 @@ const ProjectContainer = () => {
         <>
             <Grid container columnSpacing={2}>
                 <Grid display="flex" justifyContent="start" alignItems="center">
-                    <Typography variant="h2" mx={2}>
+                    <Typography variant="h3" mx={2}>
                         공지사항
                     </Typography>
                 </Grid>

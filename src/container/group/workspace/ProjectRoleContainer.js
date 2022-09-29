@@ -8,6 +8,7 @@ import * as API from "../../../api/API";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
 import { getGroupAsync } from "api/redux/group/groupSlice";
+import { Box, Card, CardContent, CardMedia, Divider, Grid, IconButton, Stack, Typography } from "@mui/material";
 
 const ProjectRoleContainer = () => {
     const group = useSelector(selectGroup);
@@ -50,59 +51,73 @@ const ProjectRoleContainer = () => {
 
     return (
         <>
-            <div className="pt-3 pb-2 mb-3 border-bottom">
-                <h1 className="h2">역할</h1>
-            </div>
+            <Grid container columnSpacing={2}>
+                <Grid display="flex" justifyContent="start" alignItems="center">
+                    <Typography variant="h3" mx={2}>
+                        역할
+                    </Typography>
+                </Grid>
+            </Grid>
 
-            <div className="row">
+            <Divider sx={{ border: 1 }}/>
+
+            <Stack
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+            >
                 {group.members.map(member => (
-                    <div className="col-xl-4 col-lg-6 my-2" key={member.user_id}>
-                        <div className="card p-3">
-                            <div className="row g-0 align-items-center">
-                                <div className="text-center col-xxl-4 py-4">
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" width="200" height="200" className="img-fluid rounded-circle my-3" alt="..." />
-                                </div>
-                                <div className="col-xxl-8">
-                                    <div className="card-body">
-                                        {member.user_id === group.manager ?
-                                            <h4 className="card-title">팀장</h4>
-                                            :
-                                            <h4 className="card-title">팀원</h4>
-                                        }
-                                        <h6 className="card-subtitle mb-2 text-muted">{member.user_name}</h6>
-                                        {edit === member.user_id ?
-                                            <ModifyRole
-                                                role={role}
-                                                member={member}
-                                                selected={selected}
-                                                setSelected={setSelected}
-                                                modifyRole={modifyRole}
-                                                cancleEdit={editWho}
-                                            />
-                                            :
-                                            <>
-                                                <RoleBadge
-                                                    findRole={findRole}
-                                                    member={member}
-                                                    selected={selected}
-                                                    editWho={editWho}
-                                                />
-                                                <div className="mt-2 d-flex justify-content-end">
-                                                {group.end_project ?
-                                                    <Link type="button" className="btn btn-secondary me-2" to={"/workspace/" +project_id + '/evaluation/' + member.user_id} >평가하기</Link>
+                    <Card sx={{ display: 'flex' }}>
+                        <CardMedia
+                            component="img"
+                            sx={{ width: 151 }}
+                            image="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                            alt="Live from space album cover"
+                        />
+                        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                            <CardContent sx={{ flex: '1 0 auto' }}>
+                                <Typography component="div" variant="h5">
+                                    {member.user_id === group.manager ?
+                                        '팀장'
+                                        :
+                                        '팀원'
+                                    }
+                                </Typography>
+                                <Typography variant="subtitle1" color="text.secondary" component="div">
+                                    {member.user_name}
+                                </Typography>
+                                {edit === member.user_id ?
+                                    <ModifyRole
+                                        role={role}
+                                        member={member}
+                                        selected={selected}
+                                        setSelected={setSelected}
+                                        modifyRole={modifyRole}
+                                        cancleEdit={editWho}
+                                    />
+                                    :
+                                    <>
+                                        <RoleBadge
+                                            findRole={findRole}
+                                            member={member}
+                                            selected={selected}
+                                            editWho={editWho}
+                                        />
+                                        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1, mt: 1 }}>
+                                            {group.end_project ?
+                                                <Link type="button" className="btn btn-secondary me-2" to={"/workspace/" + project_id + '/evaluation/' + member.user_id} >평가하기</Link>
                                                 :
-                                                    <button type="button" className="btn btn-secondary me-2" onClick={() => editWho(member.user_id)} >수정</button>
-                                                }
-                                                </div>
-                                            </>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                                <button type="button" className="btn btn-secondary me-2" onClick={() => editWho(member.user_id)} >수정</button>
+                                            }
+                                        </Box>
+                                    </>
+                                }
+                            </CardContent>
+                        </Box>
+                    </Card>
                 ))}
-            </div>
+            </Stack>
         </>
     )
 }
