@@ -58,11 +58,6 @@ function App() {
         <Route path="/" element={<DefaultLayout />}>
           {/* DefaultLayout의 Outlet으로 연결되는 부분 시작 */}
 
-          <Route path="old/groupFinder" element={<GroupFinderContainer />} />
-          <Route path="old/jobFinder" element={<JobFinderContainer />} />
-
-          <Route path="signin" element={<SignInContainer />} />
-          <Route path="signup" element={<SignUpContainer />} />
           {/* 프로필 보기 */}
           <Route path="old/user/:id" element={<ProfileContainer />} />
           <Route path="user/ProfileUpdate/:id" element={<ProfileUpdate />} />

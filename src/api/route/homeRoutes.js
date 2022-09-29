@@ -8,6 +8,8 @@ import GroupFinderContainer from "container/group/finder/GroupFinderContainer";
 import HomeContainer from "container/home/HomeContainer";
 import JobFinderContainer from "container/jobFinder/JobFinderContainer";
 import ProfileContainer from "container/sign/profile/ProfileContainer";
+import SignInContainer from "container/sign/sign_in/SignInContainer";
+import SignUpContainer from "container/sign/sign_up/SignUpContainer";
 
 const mainRoutes = [
     {
@@ -33,6 +35,18 @@ const mainRoutes = [
         element: <JobFinderContainer/>,
         name: '채용공고',
         description: '일자리를 찾아보아요',
+    },
+    {
+        path: '/signin',
+        element: <SignInContainer/>,
+        name: '로그인',
+        description: '누구냐 넌',
+    },
+    {
+        path: '/signup',
+        element: <SignUpContainer/>,
+        name: '회원가입',
+        description: '어서와 히어로는 처음이지?',
     },
     {
         path: '/example',

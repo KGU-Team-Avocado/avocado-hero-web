@@ -25,34 +25,29 @@ const SignInContainer = () => {
 
   const login = () => {
     console.log(id, password);
-    dispatch(loginAsync({id,password})); // Redux user Store에 저장하는 과정을 기존 로그인에 통합함.
+    dispatch(loginAsync({ id, password })); // Redux user Store에 저장하는 과정을 기존 로그인에 통합함.
     axios.post("usersRouter/login", {
-        id: id,
-        password: password,
-      }).then((response) => {
-        console.log(response.data);
-        if (response.data.status === "success") {
-          sessionStorage.setItem("user", JSON.stringify(response.data.user));
-          navigate("/"); //현재 axios 명령어는 deprecated 되었지만, 이 부분을 redux에 추가로 이식해줘야하고, 기존 코드의 호환성을 위해서 유지중 임 ...
-        }
-        else {
-          return alert("아이디/비밀번호를 다시 입력해주세요.")
-        }
-      })
+      id: id,
+      password: password,
+    }).then((response) => {
+      console.log(response.data);
+      if (response.data.status === "success") {
+        sessionStorage.setItem("user", JSON.stringify(response.data.user));
+        // navigate("/"); //현재 axios 명령어는 deprecated 되었지만, 이 부분을 redux에 추가로 이식해줘야하고, 기존 코드의 호환성을 위해서 유지중 임 ...
+        window.location.href = '/'; //헤더 초기화 문제 때문에 임시조치
+      }
+      else {
+        return alert("아이디/비밀번호를 다시 입력해주세요.")
+      }
+    })
       .catch(function (error) {
         console.log(error);
       });
   };
 
-  // const loginByRedux = async () => {
-  //   console.log(id, password);
-  //   // console.log(await API.loginCheck(id, password));
-  //   dispatch(loginAsync({id,password}));
-  // }
-
   return (
     <div className="d-flex justify-content-center pt-5">
-      <div className="card p-5 w-100" style={{'maxWidth':'500px','minWidth':'300px'}} >
+      <div className="card p-5 w-100" style={{ 'maxWidth': '500px', 'minWidth': '300px' }} >
         <h1>로그인</h1>
         <div className="py-3">
           <div className="form-floating">
@@ -93,14 +88,6 @@ const SignInContainer = () => {
           >
             Sign in (Redux Included)
           </button>
-          {/* <button
-            className="w-100 btn btn-lg btn-danger my-3"
-            type="submit"
-            // onClick={() => login()}
-            onClick={() => loginByRedux()}
-          >
-            Sign in(Redux/미완성/사용불가)
-          </button> */}
         </div>
       </div>
     </div>
