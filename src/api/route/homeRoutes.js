@@ -1,3 +1,4 @@
+import HumanResources from "container/company/HumanResources";
 import JobPosting from "container/company/JobPosting";
 import DatabaseContainer from "container/example/DatabaseContainer";
 import ExampleContainer from "container/example/ExampleContainer";
@@ -49,6 +50,12 @@ const mainRoutes = [
         element: <JobPosting/>,
         name: '채용공고등록',
         description: '일자리를 등록해요',
+    },
+    {
+        path: '/humanResources',
+        element: <HumanResources/>,
+        name: '채용 제의하기',
+        description: '인재 찾기ㅇㅇ',
     },
     {
         path: '/signin',

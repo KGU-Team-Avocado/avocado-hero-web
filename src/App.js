@@ -67,7 +67,7 @@ function App() {
           <Route path="old/myWorkspace" element={<WorkspaceListContainer />} />
 
           {/* 기업용 버튼 */}
-          <Route path="humanRes" element={<HumanResources />} />
+          <Route path="old/humanResources" element={<HumanResources />} />
           <Route path="old/jobPosting" element={<JobPosting />} />
 
           <Route

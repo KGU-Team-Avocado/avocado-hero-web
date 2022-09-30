@@ -42,12 +42,22 @@ const HumanResources = () => {
         {users.length > 0
           ?
           users.map((user) =>
-            <UserProfileCard key={user} user={user} convertProfile={convertProfile} />
+            <UserProfileCard
+              key={user}
+              user={user}
+              convertProfile={convertProfile}
+            />
           )
           :
           <div>회원이 없습니다.</div>
         }
       </div>
+      {/* <ModalStaticBackdrop
+                keepMounted
+                width="md"
+                open={groupJoinModalOpen}
+                component={<GroupJoinModalV2 selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
+            /> */}
       {/* <!-- Modal --> */}
       <div className="modal fade" id="profile_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div className="modal-dialog modal-xl" role="document">

@@ -61,7 +61,7 @@ const routes = [
       {
         name: "인재찾기",
         description: "인재를 직접 찾아보아요!",
-        route: "/humanRes",
+        route: "/humanResources",
       },
       {
         name: "채용공고",

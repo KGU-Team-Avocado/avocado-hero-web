@@ -75,7 +75,7 @@ const Header = () => {
 
                       <Dropdown.Menu>
                         <Dropdown.Item>
-                          <Link className="nav-link" to={"/humanRes"}>인재찾기</Link>
+                          <Link className="nav-link" to={"/humanResources"}>인재찾기</Link>
                         </Dropdown.Item>
                         <Dropdown.Item>
                           <Link className="nav-link" to="/jobPosting">채용공고하기</Link>
