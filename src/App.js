@@ -64,7 +64,7 @@ function App() {
           <Route path="user/ProfileGroup" element={<ProfileGroup />} />
           <Route path="user/ProfilePortpolio" element={<ProfilePortpolio />} />
           {/* 워크스페이스 */}
-          <Route path="myWorkspace" element={<WorkspaceListContainer />} />
+          <Route path="old/myWorkspace" element={<WorkspaceListContainer />} />
 
           {/* 기업용 버튼 */}
           <Route path="humanRes" element={<HumanResources />} />

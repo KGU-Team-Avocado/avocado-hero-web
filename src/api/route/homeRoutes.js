@@ -6,6 +6,7 @@ import MultiSelectExampleContainer from "container/example/MultiSelectExampleCon
 import RankContainer from "container/example/RankContainer";
 import ReduxExample from "container/example/ReduxExample";
 import GroupFinderContainer from "container/group/finder/GroupFinderContainer";
+import WorkspaceListContainer from "container/group/workspace/WorkspaceListContainer";
 import HomeContainer from "container/home/HomeContainer";
 import JobFinderContainer from "container/jobFinder/JobFinderContainer";
 import ProfileContainer from "container/sign/profile/ProfileContainer";
@@ -24,6 +25,12 @@ const mainRoutes = [
         element: <GroupFinderContainer/>,
         name: '그룹찾기',
         description: '원하는 그룹을 찾아보아요',
+    },
+    {
+        path: '/myWorkspace',
+        element: <WorkspaceListContainer/>,
+        name: '내 워크스페이스',
+        description: '속한 그룹 나옴',
     },
     {
         path: '/user/:id',
