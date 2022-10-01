@@ -6,6 +6,7 @@ import DOMPurify from "dompurify";
 import JobPostingCardV2 from "./JobPostingCardV2";
 import JobFinderViewModal from "./modal/JobFinderViewModal";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
+import { useNavigate } from "react-router-dom";
 
 
 export default (props) => {
@@ -13,9 +14,10 @@ export default (props) => {
     const [selected, setSelected] = useState(null);
     const [postingModalOpen, setPostingModalOpen] = useState(false);
     const [bookmarkBtn, setBookmarkBtn] = useState(false);
+    const navigate = useNavigate();
 
     const onClick = (e) => {
-        window.location.href = "/jobFinder";
+        navigate("/jobFinder");
         alert("지원이 완료되었습니다.");
     }
 

@@ -17,7 +17,7 @@ Coded by www.creative-tim.com
 import { Fragment, useState, useEffect } from "react";
 
 // react-router components
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -33,14 +33,28 @@ import MuiLink from "@mui/material/Link";
 
 // Material Kit 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
-
-import { Dropdown } from "react-bootstrap";
 import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
 import DefaultNavbarMobile from "./DefaultNavbarMobile";
 import MKTypography from "component/common/mui-components/MKTypography";
 import MKBox from "component/common/mui-components/MKBox";
 
+import { Button, Menu, MenuItem } from "@mui/material";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
+
 function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
+
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = (url) => {
+    navigate(url);
+    setAnchorEl(null);
+  };
+
 
   const [isSignIn, setSignIn] = useState(false); //임시로 해놓음
   const [userInfo, setUserInfo] = useState(null);
@@ -540,12 +554,14 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             {
               // 로그인 했을 때를 true, 안했을 때를 false로 관리해주세요
               isSignIn ? (
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant=""
-                    id="dropdown-basic"
-                    className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                  >
+                <>
+                <Button
+                  id="basic-button"
+                  aria-controls={open ? 'basic-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                  onClick={handleClick}
+                >
                     <img
                       src="https://github.com/mdo.png"
                       alt="mdo"
@@ -554,23 +570,22 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                       className="rounded-circle mx-1"
                     />
                     <div className="mx-1">{userInfo.user_id}</div>
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    {/* <Dropdown.Item>
-                      {userInfo.user_id}
-                    </Dropdown.Item> */}
-                    <Dropdown.Item href={"/user/" + userInfo.user_id}>
-                      프로필 보기
-                    </Dropdown.Item>
-                    <Dropdown.Item href="/myWorkspace">
-                      내 워크스페이스
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={() => logout()}>
-                      로그아웃
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                    <ArrowDropDownIcon/>
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  <MenuItem onClick={()=>handleClose(`/user/${userInfo.user_id}`)}>Profile</MenuItem>
+                  <MenuItem onClick={()=>handleClose(`myWorkspace`)}>My Workspace</MenuItem>
+                  <MenuItem onClick={()=>logout()}>Logout</MenuItem>
+                </Menu>
+                </>
               ) : (
                 <Link
                   to="/signin"
