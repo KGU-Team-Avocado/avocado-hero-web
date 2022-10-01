@@ -5,6 +5,7 @@ import DOMPurify from "dompurify";
 import axios from "axios";
 import { Box, Button, DialogActions, DialogContent, DialogTitle, IconButton, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
+import MKButton from "component/common/mui-components/MKButton";
 
 export default (props) => {
 
@@ -100,7 +101,7 @@ export default (props) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button className="btn btn-lg btn-success mt-5 w-100" disabled={userInfo?.user_id != group?.manager ? "" : "disabled"} onClick={() => groupApply()}>신청하기</Button>
+                    <MKButton color="success" onClick={() => groupApply()} fullWidth disabled={userInfo?.user_id == group?.manager }>신청하기</MKButton>
                 </DialogActions>
             </Box>
         </>

@@ -1,10 +1,32 @@
+import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material"
 import TechStack from "../../common/TechStack"
 
 export default (props) => {
 
     return (
         <div className="col">
-            <a href="#" className="text-decoration-none text-dark" onClick={() => {
+            <Card sx={{borderRadius:5}}
+                onClick={() => props.handleGroupCard(props.group)}>
+                <CardActionArea>
+                    <CardMedia
+                        component="img"
+                        height="140"
+                        image="/logo512.png"
+                        alt="green iguana"
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                            {props.group.group_name}
+                            /
+                            {props.group.manager}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                        (디자인 전면 수정 예정임)(디자인 전면 수정 예정임)(디자인 전면 수정 예정임)(디자인 전면 수정 예정임)(디자인 전면 수정 예정임)
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
+            {/* <a href="#" className="text-decoration-none text-dark" onClick={() => {
                 props.handleGroupCard(props.group)
             }}>
                 <div className="card p-3 rounded-4">
@@ -25,7 +47,7 @@ export default (props) => {
                         </div>
                     </div>
                 </div>
-            </a>
+            </a> */}
         </div>
     )
 }

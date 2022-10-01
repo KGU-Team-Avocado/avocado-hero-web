@@ -1,23 +1,22 @@
-import { Button } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
+import MKButton from "component/common/mui-components/MKButton";
 import GroupCardV2 from "component/group/card/GroupCardV2";
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import GroupCeateModal from "./modal/GroupCeateModal";
 import GroupJoinModalV2 from "./modal/GroupJoinModalV2";
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 export default () => {
 
-    const [userInfo, setUserInfo] = useState(null);
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        if (sessionStorage.getItem("user")) {
-            setUserInfo(JSON.parse(sessionStorage.getItem("user")));
-        }
-    }, []);
+    const userInfo = useSelector(selectUser);
 
-    
     const [groupCreateModalOpen, setGroupCreateModalOpen] = useState(false);
     const [groupJoinModalOpen, setGroupJoinModalOpen] = useState(false);
 
@@ -41,25 +40,26 @@ export default () => {
     return (
         <>
 
-            <div className="">
-                <div className="d-flex justify-content-between">
-                    <div>
-                        <h2>프로젝트 찾기</h2>
-                    </div>
-                    {
-                        userInfo &&
-                        <div>
-                            <Link className="btn btn-outline-success" to='/myWorkspace/'>내 워크스페이스 보기</Link>
-                            {/* <a className="btn btn-primary mx-2" href="#" data-bs-toggle="modal" data-bs-target="#group_create">프로젝트 등록하기</a> */}
-                            <Button variant="contained" onClick={() => setGroupCreateModalOpen(true)}>프로젝트 등록하기(New)</Button>
-                        </div>
-                    }
-                </div>
-                <div className="row">
-                    <div className="col-sm-6">훌륭한 팀을 구해보아요</div>
-                    <div className="col-sm-6 text-end"><a className="mx-2" href="#">정렬▿</a><a className="mx-2" href="#">필터링▿</a></div>
-                </div>
-            </div>
+            <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+            >
+                <MKButton
+                    color="dark"
+                    variant="outlined"
+                >
+                    <FilterListIcon/>
+                </MKButton>
+                <Stack
+                    direction="row"
+                    spacing={1}
+                >
+                    <MKButton variant="outlined" color="success" onClick={() => navigate('/myWorkspace/')}>내 워크스페이스 보기</MKButton>
+                    <MKButton variant="contained" color="info" onClick={() => setGroupCreateModalOpen(true)}>프로젝트 등록하기</MKButton>
+                </Stack>
+            </Stack>
+
             <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                 {
                     groups.length > 0
