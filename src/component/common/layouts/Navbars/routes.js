@@ -48,7 +48,6 @@ const routes = [
     name: "프로젝트",
     icon: <GitHubIcon />,
     route: "/groupFinder",
-    collapse : false
   },
   {
     name: "일자리",
