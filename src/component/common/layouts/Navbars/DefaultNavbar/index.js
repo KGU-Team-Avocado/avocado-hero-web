@@ -40,6 +40,8 @@ import MKBox from "component/common/mui-components/MKBox";
 
 import { Button, Menu, MenuItem } from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import MenuIcon from '@mui/icons-material/Menu';
+import MKButton from "component/common/mui-components/MKButton";
 
 
 function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
@@ -294,12 +296,13 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
               item.name
             )}
             {item.collapse && (
-              <Icon
-                fontSize="small"
-                sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
-              >
-                keyboard_arrow_right
-              </Icon>
+              <ArrowDropDownIcon/>
+              // <Icon
+              //   fontSize="small"
+              //   sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
+              // >
+              //   keyboard_arrow_right
+              // </Icon>
             )}
           </MKTypography>
         );
@@ -426,12 +429,13 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                     item.name
                   )}
                   {item.collapse && (
-                    <Icon
-                      fontSize="small"
-                      sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
-                    >
-                      keyboard_arrow_right
-                    </Icon>
+                    <ArrowDropDownIcon/>
+                    // <Icon
+                    //   fontSize="small"
+                    //   sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
+                    // >
+                    //   keyboard_arrow_right
+                    // </Icon>
                   )}
                 </MKTypography>
               );
@@ -519,49 +523,19 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             {renderNavbarItems}
           </MKBox>
           <MKBox ml={{ xs: "auto", lg: 0 }}>
-            {/* {action &&
-              (action.type === "internal" ? (
-                <MKButton
-                  component={Link}
-                  to={action.route}
-                  variant={
-                    action.color === "white" || action.color === "default"
-                      ? "contained"
-                      : "gradient"
-                  }
-                  color={action.color ? action.color : "info"}
-                  size="small"
-                >
-                  {action.label}
-                </MKButton>
-              ) : (
-                <MKButton
-                  component="a"
-                  href={action.route}
-                  target="_blank"
-                  rel="noreferrer"
-                  variant={
-                    action.color === "white" || action.color === "default"
-                      ? "contained"
-                      : "gradient"
-                  }
-                  color={action.color ? action.color : "info"}
-                  size="small"
-                >
-                  {action.label}
-                </MKButton>
-              ))} */}
             {
               // 로그인 했을 때를 true, 안했을 때를 false로 관리해주세요
               isSignIn ? (
                 <>
-                <Button
-                  id="basic-button"
-                  aria-controls={open ? 'basic-menu' : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? 'true' : undefined}
-                  onClick={handleClick}
-                >
+                  <MKButton
+                    variant="outline"
+                    // color="dark"
+                    id="basic-button"
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                  >
                     <img
                       src="https://github.com/mdo.png"
                       alt="mdo"
@@ -570,30 +544,24 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                       className="rounded-circle mx-1"
                     />
                     <div className="mx-1">{userInfo.user_id}</div>
-                    <ArrowDropDownIcon/>
-                </Button>
-                <Menu
-                  id="basic-menu"
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                  MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                  }}
-                >
-                  <MenuItem onClick={()=>handleClose(`/user/${userInfo.user_id}`)}>Profile</MenuItem>
-                  <MenuItem onClick={()=>handleClose(`myWorkspace`)}>My Workspace</MenuItem>
-                  <MenuItem onClick={()=>logout()}>Logout</MenuItem>
-                </Menu>
+                    <ArrowDropDownIcon />
+                  </MKButton>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <MenuItem onClick={() => handleClose(`/user/${userInfo.user_id}`)}>Profile</MenuItem>
+                    <MenuItem onClick={() => handleClose(`myWorkspace`)}>My Workspace</MenuItem>
+                    <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                  </Menu>
                 </>
               ) : (
-                <Link
-                  to="/signin"
-                  className="btn btn-outline-success"
-                  aria-current="page"
-                >
-                  로그인
-                </Link>
+                <MKButton color="success" onClick={() => navigate('/signin')}>로그인</MKButton>
               )
             }
           </MKBox>
@@ -606,7 +574,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             sx={{ cursor: "pointer" }}
             onClick={openMobileNavbar}
           >
-            <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
+            <MenuIcon />
+            {/* <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon> */}
           </MKBox>
         </MKBox>
         <MKBox

@@ -48,6 +48,7 @@ const routes = [
     name: "프로젝트",
     icon: <GitHubIcon />,
     route: "/groupFinder",
+    collapse : false
   },
   {
     name: "일자리",
@@ -56,7 +57,7 @@ const routes = [
   },
   {
     name: "기업전용",
-    icon: <Icon>article</Icon>,
+    icon: <GitHubIcon />,
     collapse: [
       {
         name: "인재찾기",
@@ -72,7 +73,7 @@ const routes = [
   },
   {
     name: "개발모드",
-    icon: <Icon>dashboard</Icon>,
+    icon: <GitHubIcon />,
     columns: 1,
     rowsPerColumn: 2,
     collapse: [
