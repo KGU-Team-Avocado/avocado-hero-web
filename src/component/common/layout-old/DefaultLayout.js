@@ -14,7 +14,7 @@ export default function DefaultLayout() {
   return (
     <div>
       <div className="mb-2">
-      <div>{JSON.stringify(user)}</div>
+      {/* <div>{JSON.stringify(user)}</div> */}
         <Header />
       </div>
       <div className="container">

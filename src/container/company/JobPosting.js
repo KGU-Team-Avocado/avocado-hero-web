@@ -109,7 +109,7 @@ const JobPosting = () => {
 
   return (
 
-    <div className="container" style={{padding: "90px"}}>
+    <div>
 
       {/* <div style={{
         height: "2px",
