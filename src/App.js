@@ -63,12 +63,6 @@ function App() {
           <Route path="user/ProfileUpdate/:id" element={<ProfileUpdate />} />
           <Route path="user/ProfileGroup" element={<ProfileGroup />} />
           <Route path="user/ProfilePortpolio" element={<ProfilePortpolio />} />
-          {/* 워크스페이스 */}
-          <Route path="old/myWorkspace" element={<WorkspaceListContainer />} />
-
-          {/* 기업용 버튼 */}
-          <Route path="old/humanResources" element={<HumanResources />} />
-          <Route path="old/jobPosting" element={<JobPosting />} />
 
           <Route
             path="*"
