@@ -1,3 +1,4 @@
+import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import { useEffect, useState } from "react";
 import * as API from "../../api/API"
 import UserProfileCard from "../../component/jobFinder/UserProfileCard";
@@ -7,6 +8,7 @@ const HumanResources = () => {
 
   const [users, setUsers] = useState([]);
   const [profile, setProfile] = useState(null);
+  const [profileCardModalOpen, setProfileCardModalOpen] = useState(false);
 
   useEffect(() => {
     getUsers();
@@ -18,7 +20,12 @@ const HumanResources = () => {
     setUsers(temp.user);
   }
 
-  const convertProfile = (user) => {
+  const convertProfile = () => {
+
+  }
+
+  const handleUserProfileCard = (user) => {
+    setProfileCardModalOpen(true);
     setProfile({
       user_id: user.user_id,
       name: user.user_name,
@@ -45,21 +52,26 @@ const HumanResources = () => {
             <UserProfileCard
               key={user}
               user={user}
-              convertProfile={convertProfile}
+              handleUserProfileCard={handleUserProfileCard}
             />
           )
           :
           <div>회원이 없습니다.</div>
         }
       </div>
-      {/* <ModalStaticBackdrop
-                keepMounted
-                width="md"
-                open={groupJoinModalOpen}
-                component={<GroupJoinModalV2 selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
-            /> */}
+      <ModalStaticBackdrop
+        keepMounted
+        width="md"
+        open={profileCardModalOpen}
+        component={
+          profile &&
+          <ProfileCard
+            profile={profile}
+          />
+        }
+      />
       {/* <!-- Modal --> */}
-      <div className="modal fade" id="profile_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      {/* <div className="modal fade" id="profile_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div className="modal-dialog modal-xl" role="document">
           <div className="modal-content rounded-4 shadow">
             <div className="modal-body p-5  w-100">
@@ -79,7 +91,7 @@ const HumanResources = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
