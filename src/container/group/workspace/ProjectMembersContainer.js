@@ -6,6 +6,7 @@ import * as API from "../../../api/API";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
 import { getGroupAsync } from "api/redux/group/groupSlice";
+import { Alert, Divider, FormControlLabel, FormGroup, Grid, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 
 const ProjectMembersContainer = () => {
     const group = useSelector(selectGroup);
@@ -29,6 +30,41 @@ const ProjectMembersContainer = () => {
 
     const [show, setShow] = useState('null');
     const [close, setClose] = useState(false)
+
+    const columns = [
+        { id: 'index', label: '#', minWidth: 50 },
+        { id: 'user_id', label: '아이디', align: 'center', minWidth: 100 },
+        {
+            id: 'user_name',
+            label: '이름',
+            minWidth: 100,
+            align: 'center',
+        },
+        {
+            id: 'user_email',
+            label: '이메일',
+            minWidth: 170,
+            align: 'center',
+        },
+        {
+            id: 'accept',
+            label: '승인/반려',
+            minWidth: 100,
+            align: 'center',
+        },
+    ];
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
 
     const handleClose = () => setShow('null');
     const handleShow = (applicant) => {
@@ -104,84 +140,133 @@ const ProjectMembersContainer = () => {
 
     return (
         <>
-            <div className="pt-3 pb-2 mb-3 border-bottom">
-                <h1 className="h2">멤버관리</h1>
-            </div>
+            <Grid container columnSpacing={2}>
+                <Grid display="flex" justifyContent="start" alignItems="center">
+                    <Typography variant="h3" mx={2}>
+                        신청자 목록
+                    </Typography>
+                </Grid>
+                <Grid xs display="flex" justifyContent="end" alignItems="center">
+                    <FormGroup>
+                        <FormControlLabel control={<Switch onChange={() => handleCloseApplication(!close)} />} label="마감" />
+                    </FormGroup>
+                </Grid>
+            </Grid>
 
-            <div className="d-flex justify-content-between">
-                <h2>신청자 목록</h2>
-                <div className="form-check form-switch align-self-center">
-                    <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked={close} onChange={() => handleCloseApplication(!close)} />
-                    <label className="form-check-label" for="flexSwitchCheckChecked">마감</label>
-                </div>
-            </div>
+            <Divider sx={{ border: 1 }} />
 
             {close ?
-                <div className="alert alert-warning" role="alert">팀원 신청이 마감되었습니다.</div>
+                <Alert severity="warning">팀원 신청이 마감되었습니다.</Alert>
                 :
-                <div className="table-responsive">
-                    <table className="table table-hover">
-                        <thead className="table-light text-center">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">아이디</th>
-                                <th scope="col">이름</th>
-                                <th scope="col">이메일</th>
-                                <th scope="col">승인/반려</th>
-                            </tr>
-                        </thead>
-                        <tbody className="table-group-divider text-center">
-                            {applicants.map((applicant) => (
-                                <tr key={applicant.user_id}>
-                                    <th onClick={() => handleShow(applicant)} scope="row">1</th>
-                                    <td onClick={() => handleShow(applicant)}>{applicant.user_id}</td>
-                                    <td onClick={() => handleShow(applicant)}>{applicant.user_name}</td>
-                                    <td onClick={() => handleShow(applicant)}>{applicant.user_email}</td>
-                                    <td>
-                                        <button type="button" className="btn btn-primary btn-sm me-2" onClick={() => acceptMember(applicant)} >승인</button>
-                                        <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(applicant)} >반려</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                    <TableContainer sx={{ maxHeight: 440 }}>
+                        <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                    {columns.map((column) => (
+                                        <TableCell
+                                            key={column.id}
+                                            align={column.align}
+                                            style={{ minWidth: column.minWidth }}
+                                        >
+                                            {column.label}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {applicants.map((applicant, index) => (
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={applicant.user_id} onClick={() => handleShow(applicant)} >
+                                        {columns.map((column) => {
+                                            const value = applicant[column.id];
+                                            return (
+                                                <TableCell key={column.id} align={column.align}>
+                                                    {column.id === 'index'
+                                                        ? index + 1
+                                                        : column.id === 'accept' ?
+                                                            <>
+                                                                <button type="button" className="btn btn-primary btn-sm me-2" onClick={() => acceptMember(applicant)} >승인</button>
+                                                                <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(applicant)} >반려</button></>
+                                                            : value}
+                                                </TableCell>
+                                            );
+                                        })}
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[10, 25, 100]}
+                        component="div"
+                        count={applicants.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Paper>
             }
 
-            <hr />
+            <Grid container columnSpacing={2} mt={2}>
+                <Grid display="flex" justifyContent="start" alignItems="center">
+                    <Typography variant="h3" mx={2}>
+                        현재 팀원
+                    </Typography>
+                </Grid>
+            </Grid>
 
-            <div className="table-responsive">
-                <h2>현재 팀원</h2>
-                <table className="table table-hover">
-                    <thead className="table-light text-center">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">아이디</th>
-                            <th scope="col">이름</th>
-                            <th scope="col">이메일</th>
-                            {close ? null :
-                                <th scope="col">방출</th>
-                            }
-                        </tr>
-                    </thead>
-                    <tbody className="table-group-divider text-center">
-                        {group.members.map((member) => (
-                            member.user_id === group.manager ? null :
-                                <tr key={member.user_id}>
-                                    <th scope="row">1</th>
-                                    <td>{member.user_id}</td>
-                                    <td>{member.user_name}</td>
-                                    <td>{member.user_email}</td>
-                                    {close ? null :
-                                        <td>
-                                            <button type="button" className="btn btn-danger btn-sm" onClick={() => cancleAccept(member)} >방출</button>
-                                        </td>
-                                    }
-                                </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            <Divider sx={{ border: 1 }} />
+
+            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                <TableContainer sx={{ maxHeight: 440 }}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{ minWidth: column.minWidth }}
+                                    >
+                                        {column.id === 'accept' ?
+                                            "방출"
+                                            : column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {group.members.map((member, index) => (
+                                member.user_id === group.manager ? null :
+                                <TableRow hover role="checkbox" tabIndex={-1} key={member.user_id}>
+                                    {columns.map((column) => {
+                                        const value = member[column.id];
+                                        return (
+                                            <TableCell key={column.id} align={column.align}>
+                                                {column.id === 'index'
+                                                    ? index
+                                                    : column.id === 'accept' ?
+                                                        <button type="button" className="btn btn-danger btn-sm" onClick={() => cancleAccept(member)} >방출</button>
+                                                        : value}
+                                            </TableCell>
+                                        );
+                                    })}
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={applicants.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper>
 
             <Modal show={show !== 'null'} onHide={handleClose} animation={false} centered>
                 <Modal.Header closeButton>
