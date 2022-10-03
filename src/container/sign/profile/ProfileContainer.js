@@ -12,9 +12,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import ProfileGroup from './ProfileGroup';
 import ProfilePortpolio from './ProfilePortpolio';
 import * as API from "../../../api/API"
+import { useSelector } from "react-redux";
+import { selectUser } from "api/redux/user/userSlice";
 
 const ProfileContainer = () => {
     const params = useParams(); //url로 넘어온 파라미터를 받는 역할 (App.js 의 :id 참고)
+    const user = useSelector(selectUser);
     const user_id = params.id; //(params의 :id를 받는 역할)
     const [profile, setProfile] = useState(null);
 
@@ -47,7 +50,13 @@ const ProfileContainer = () => {
                         <ProfileCard
                             profile={profile}
                         />
-                        <Button href={"./ProfileUpdate/" + (profile.user_id)}>프로필 수정</Button>
+                        {
+                            user.user_id === profile.user_id
+                                ?
+                                <Button href={"./ProfileUpdate/" + (profile.user_id)}>프로필 수정</Button>
+                                :
+                                <></>
+                        }
 
                         <ProfileGroup></ProfileGroup>
                         <ProfilePortpolio></ProfilePortpolio>
