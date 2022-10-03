@@ -4,7 +4,7 @@ export default ({ user, handleUserProfileCard }) => {
     return (
         <div className="col">
             <Card sx={{ borderRadius: 5 }}
-                onClick={() => handleUserProfileCard(user)}
+                onClick={() => handleUserProfileCard(user.user_id)}
             >
                 <CardActionArea>
                     <CardMedia

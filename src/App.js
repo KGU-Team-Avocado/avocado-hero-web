@@ -10,7 +10,6 @@ import JobPosting from "./container/company/JobPosting";
 import GroupFinderContainer from "./container/group/finder/GroupFinderContainer";
 import JobFinderContainer from "./container/jobFinder/JobFinderContainer";
 import WorkspaceListContainer from "./container/group/workspace/WorkspaceListContainer";
-import UserProfileContainer from "./container/sign/user_profile/UserProfileContainer";
 import ProfileUpdate from "./container/sign/profile/ProfileUpdate";
 import ProjectEvaluationContainer from "./container/group/workspace/ProjectEvaluationContainer";
 import ProfileGroup from "./container/sign/profile/ProfileGroup";
