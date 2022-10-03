@@ -1,4 +1,5 @@
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
+import ProfileViewModal from "component/jobFinder/modal/ProfileViewModal";
 import { useEffect, useState } from "react";
 import * as API from "../../api/API"
 import UserProfileCard from "../../component/jobFinder/UserProfileCard";
@@ -27,7 +28,7 @@ const HumanResources = () => {
   const handleUserProfileCard = (user) => {
     setProfileCardModalOpen(true);
     setProfile({
-      user_id: user.user_id,
+      user_id:user.user_id,
       name: user.user_name,
       nickname: user.user_nickname,
       email: user.user_email,
@@ -36,15 +37,15 @@ const HumanResources = () => {
       field: user.user_field,
       link: user.user_link,
       keyword: user.user_keyword,
-      personal: user.user_personal,
+      personality: user.user_personality,
       intro: user.user_intro,
-    })
+      one_intro: user.user_one_intro,
+  })
   }
 
   //인재찾기 페이지
   return (
     <>
-      <h2>인재 찾기</h2>
       <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
         {users.length > 0
           ?
@@ -61,13 +62,10 @@ const HumanResources = () => {
       </div>
       <ModalStaticBackdrop
         keepMounted
-        width="md"
+        width="xl"
         open={profileCardModalOpen}
         component={
-          profile &&
-          <ProfileCard
-            profile={profile}
-          />
+          <ProfileViewModal setOpen={setProfileCardModalOpen} profile={profile} />
         }
       />
       {/* <!-- Modal --> */}
