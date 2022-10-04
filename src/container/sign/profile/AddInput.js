@@ -36,6 +36,7 @@ const AddInput = (props) => {
                                                         삭제
                                                     </Button>
                                                 </InputGroup>
+
             </div>
             
         </div>
