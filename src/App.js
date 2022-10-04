@@ -21,7 +21,6 @@ import theme from "assets/theme";
 import ReduxExample from "container/example/ReduxExample";
 import homeRoutes from "api/route/homeRoutes";
 import HomeLayout from "component/common/layouts/HomeLayout";
-import DefaultLayout from "component/common/layout-old/DefaultLayout";
 import workspaceRoutes from "api/route/workspaceRoutes";
 
 const WorkspaceRoute = () => {
@@ -51,32 +50,7 @@ function App() {
     <>
       <HomeRoute />
       <WorkspaceRoute />
-      <Routes>
-        {/* 이 Layout 안에 갇히게 됨... nested된 Container들은 Layout의 Outlet으로 연결된다 */}
-
-        <Route path="/" element={<DefaultLayout />}>
-          {/* DefaultLayout의 Outlet으로 연결되는 부분 시작 */}
-
-          {/* 프로필 보기 */}
-          <Route path="old/user/:id" element={<ProfileContainer />} />
-          <Route path="old/user/ProfileUpdate/:id" element={<ProfileUpdate />} />
-          <Route path="user/ProfileGroup" element={<ProfileGroup />} />
-          <Route path="user/ProfilePortpolio" element={<ProfilePortpolio />} />
-
-          <Route
-            path="*"
-            element={
-              <main style={{ padding: "1rem" }}>
-                <p>잘못된 요청입니다!</p>
-              </main>
-            }
-          />
-          {/* DefaultLayout의 Outlet으로 연결되는 부분 끝 */}
-        </Route>
-
-      </Routes>
     </>
-
   );
 }
 
