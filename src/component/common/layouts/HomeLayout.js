@@ -39,6 +39,7 @@ export default function () {
 
         {/* 대문 시작 */}
         <div><button className={`btn btn-${user?"success":"danger"}`}>{user?"User Redux ON":"User Redux OFF"}</button></div>
+        <div>{JSON.stringify(user)}</div>
         <HomeTitle />
         {/* 대문 끝 */}
 

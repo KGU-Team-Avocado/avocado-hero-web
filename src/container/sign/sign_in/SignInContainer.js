@@ -1,10 +1,13 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Card, CardContent, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from "@mui/material";
+import { initStatus } from "api/redux/user/userSlice";
+import { selectStatus } from "api/redux/user/userSlice";
+import { selectUser } from "api/redux/user/userSlice";
 import { loginAsync } from "api/redux/user/userSlice";
 import axios from "axios";
 import MKButton from "component/common/mui-components/MKButton";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as API from "../../../api/API"
 
@@ -31,14 +34,16 @@ const SignInContainer = () => {
     event.preventDefault();
   };
 
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const sessionStorage = window.sessionStorage;
+  const user = useSelector(selectUser);
+  const status = useSelector(selectStatus);
+
+  const [id, setId] = useState(""); //deprecated
+  const [password, setPassword] = useState(""); //deprecated
+  const sessionStorage = window.sessionStorage; //deprecated
+
   let navigate = useNavigate();
 
-
   const dispatch = useDispatch();
-
 
   const handleId = (e) => {
     setId(e.currentTarget.value);
@@ -48,26 +53,33 @@ const SignInContainer = () => {
     setPassword(e.currentTarget.value);
   };
 
+  useEffect(() => {
+    return () => {
+      //clean up function으로 나갈 때 status를 초기 상태인 idle로 되돌려줌
+      dispatch(initStatus());
+    }
+  }, [])
+
+  useEffect(() => {
+    // console.log('user is changed');
+    // 로그인 성공 시
+    if (user) {
+      sessionStorage.setItem("user", JSON.stringify(user));
+      navigate('/');
+    }
+  }, [user]);
+
+  useEffect(() => {
+    // console.log('user is changed');
+    // 로그인 성공 시
+    if (status === 'failed') {
+      alert("아이디/비밀번호를 다시 입력해주세요.")
+    }
+  }, [status]);
+
   const login = () => {
-    console.log(id, password);
+    // console.log(id, password);
     dispatch(loginAsync({ id, password })); // Redux user Store에 저장하는 과정을 기존 로그인에 통합함.
-    axios.post("usersRouter/login", {
-      id: id,
-      password: password,
-    }).then((response) => {
-      console.log(response.data);
-      if (response.data.status === "success") {
-        sessionStorage.setItem("user", JSON.stringify(response.data.user));
-        // navigate("/"); //현재 axios 명령어는 deprecated 되었지만, 이 부분을 redux에 추가로 이식해줘야하고, 기존 코드의 호환성을 위해서 유지중 임 ...
-        window.location.href = '/'; //헤더 초기화 문제 때문에 임시조치
-      }
-      else {
-        return alert("아이디/비밀번호를 다시 입력해주세요.")
-      }
-    })
-      .catch(function (error) {
-        console.log(error);
-      });
   };
 
   return (
@@ -76,16 +88,16 @@ const SignInContainer = () => {
         direction="row"
         justifyContent="center"
       >
-        <Card sx={{ 
-          maxWidth: 500, 
-          width: "100%", 
-          py: 5, 
-          px:{
-            xs:1,
-            sm:2,
-            md:5,
-          } 
-          }}>
+        <Card sx={{
+          maxWidth: 500,
+          width: "100%",
+          py: 5,
+          px: {
+            xs: 1,
+            sm: 2,
+            md: 5,
+          }
+        }}>
           <CardContent>
             <Typography variant="h2">로그인(프론트만 제작)</Typography>
             <Stack my={3} spacing={1}>
@@ -133,8 +145,8 @@ const SignInContainer = () => {
           </CardContent>
         </Card>
       </Stack>
-
-      <div className="d-flex justify-content-center pt-5">
+      {status}
+      <div className="d-flex justify-content-center">
         <div className="card p-5 w-100" style={{ 'maxWidth': '500px', 'minWidth': '300px' }} >
           <h1>로그인(Deprecated)</h1>
           <div className="py-3">
