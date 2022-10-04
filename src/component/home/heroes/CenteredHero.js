@@ -1,17 +1,35 @@
+import { Grid, Stack, Typography } from "@mui/material"
+import MKButton from "component/common/mui-components/MKButton"
+import { Navigate, useNavigate } from "react-router-dom"
+
 export default () => {
+    const navigate = useNavigate();
     return (
         <>
-            <div className="px-4 py-5 my-5 text-center">
-                <img className="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57" />
-                <h1 className="display-5 fw-bold">포트폴리오, 더이상 혼자 고민하지 마세요!</h1>
-                <div className="col-lg-10 mx-auto">
-                    <p className="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-                    <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                        <button type="button" className="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
-                        <button type="button" className="btn btn-outline-secondary btn-lg px-4">Secondary</button>
-                    </div>
-                </div>
-            </div>
+            <Stack align="center">
+                <img className="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="프로필 예제 화면 사진이 올 자리" width="500" height="50" />
+            </Stack>
+            <Stack
+                align="center"
+                sx={{
+                    px: {
+                        xs: 2,
+                        sm: 5,
+                        md: 7,
+                        lg: 10,
+                        xl: 11,
+                        xxl: 12
+                    },
+                }}
+                spacing={5}
+            >
+                <Typography variant="h1">포트폴리오, 더이상 혼자 고민하지 마세요!</Typography>
+                <Typography>포트폴리오 관리에 어려움이 있으신가요? 히어로에서 활동하시면 여러분의 활동 기록을 자동으로 상세하게 관리해드립니다!</Typography>
+                <Stack align="center" direction="row" justifyContent="center" spacing={3}>
+                    <MKButton variant="contained" color="success" size="large" onClick={()=>navigate('/user/gabrielyoon7')}>포트폴리오 예제 구경하기</MKButton>
+                    <MKButton variant="outlined" color="secondary" size="large" onClick={()=>navigate('/signup')}>회원가입 하기</MKButton>
+                </Stack>
+            </Stack>
         </>
     )
 }

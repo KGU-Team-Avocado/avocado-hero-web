@@ -23,6 +23,8 @@ const ProfileContainer = () => {
 
     const navigate = useNavigate();
 
+    console.log(`user_id : ${user_id}`);
+
     useEffect(() => {
         getAndSetUserProfile(user_id);
     }, [user_id]);
@@ -60,7 +62,7 @@ const ProfileContainer = () => {
                             profile={profile}
                         />
                         {
-                            user.user_id === profile.user_id
+                            user?.user_id === profile.user_id
                                 ?
                                 <MKButton variant="contained" color="info" onClick={()=>navigate(`/user/ProfileUpdate/${profile.user_id}`)}>프로필 수정</MKButton>
                                 :

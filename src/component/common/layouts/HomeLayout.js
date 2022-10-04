@@ -5,7 +5,7 @@ import routes from "./Navbars/routes";
 import Card from "@mui/material/Card";
 
 
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, responsiveFontSizes, ThemeProvider } from "@mui/material";
 import theme from "assets/theme";
 import HomeTitle from "component/home/title/HomeTitle";
 import DefaultNavbar from "./Navbars/DefaultNavbar";
@@ -22,7 +22,8 @@ export default function () {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
+    {/* Responsive Font Size를 적용하려면 responsiveFontSizes를 써야한다 */}
+      <ThemeProvider theme={responsiveFontSizes(theme)}>
         <CssBaseline />
 
         <DefaultNavbar
