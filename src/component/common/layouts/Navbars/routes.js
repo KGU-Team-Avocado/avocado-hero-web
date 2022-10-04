@@ -77,19 +77,6 @@ const routes = [
     rowsPerColumn: 2,
     collapse: [
       {
-        name: "테마",
-        collapse: [
-          {
-            name: "main theme",
-            route: "/presentation",
-          },
-          {
-            name: "workspace theme",
-            route: "/workspace/630b7190409e908dbc8a1633",
-          },
-        ],
-      },
-      {
         name: "테스트",
         collapse: [
           {
