@@ -100,9 +100,9 @@ export default (props) => {
                         onChange={handleMessageChange}
                     />
                 </DialogContent>
-                <DialogActions>
+                {/* <DialogActions> */}
                     <MKButton color="success" onClick={() => groupApply()} fullWidth disabled={userInfo?.user_id == group?.manager }>신청하기</MKButton>
-                </DialogActions>
+                {/* </DialogActions> */}
             </Box>
         </>
     )
