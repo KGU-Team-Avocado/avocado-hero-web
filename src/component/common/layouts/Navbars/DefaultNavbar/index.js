@@ -42,6 +42,8 @@ import { Button, Menu, MenuItem } from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import MenuIcon from '@mui/icons-material/Menu';
 import MKButton from "component/common/mui-components/MKButton";
+import { useSelector } from "react-redux";
+import { selectUser } from "api/redux/user/userSlice";
 
 
 function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
@@ -58,14 +60,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
   };
 
 
-  const [userInfo, setUserInfo] = useState(null);
-  const sessionStorage = window.sessionStorage;
-
-  useEffect(() => {
-    if (sessionStorage.getItem("user")) {
-      setUserInfo(JSON.parse(sessionStorage.getItem("user")));
-    }
-  }, []);
+  const userInfo = useSelector(selectUser);
 
   const logout = () => {
     sessionStorage.clear();
