@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material"
+import { Card, CardActionArea, CardContent, CardMedia, Stack, Typography } from "@mui/material"
 import TechStack from "../../common/TechStack"
 
 export default (props) => {
@@ -8,12 +8,14 @@ export default (props) => {
             <Card sx={{ borderRadius: 5 }}
                 onClick={() => props.handleGroupCard(props.group)}>
                 <CardActionArea>
-                    <CardMedia
-                        component="img"
-                        height="140"
-                        image="/logo512.png"
-                        alt="green iguana"
-                    />
+                    <Stack align="center">
+                        <CardMedia
+                            component="img"
+                            height="200"
+                            image="/logo512.png"
+                            alt="green iguana"
+                        />
+                    </Stack>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
                             {props.group.group_name}

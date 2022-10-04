@@ -59,7 +59,7 @@ function App() {
 
           {/* 프로필 보기 */}
           <Route path="old/user/:id" element={<ProfileContainer />} />
-          <Route path="user/ProfileUpdate/:id" element={<ProfileUpdate />} />
+          <Route path="old/user/ProfileUpdate/:id" element={<ProfileUpdate />} />
           <Route path="user/ProfileGroup" element={<ProfileGroup />} />
           <Route path="user/ProfilePortpolio" element={<ProfilePortpolio />} />
 

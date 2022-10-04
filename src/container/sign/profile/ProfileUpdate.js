@@ -10,6 +10,7 @@ import { MultiSelect } from "react-multi-select-component";
 import AddInput from "./AddInput";
 import './profile.css';
 import ProfileEdit from "./ProfileEdit";
+import * as API from "../../../api/API"
 
 export default () => {
     const params = useParams(); //url로 넘어온 파라미터를 받는 역할 (App.js 의 :id 참고)
@@ -17,6 +18,7 @@ export default () => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
+        // getAndSetUserProfile(user_id);
         axios.post('/usersRouter/findUser', {
             user_id: user_id
         }).then((response) => { //서버로부터 받아온 id
@@ -26,7 +28,7 @@ export default () => {
                 const foundUser = response.data.user;
                 console.log(foundUser);
                 setUser(foundUser);
-            }  
+            }
             else {
                 return alert("조회된 아이디가 없습니다.")
             }
@@ -35,9 +37,14 @@ export default () => {
         });
     }, []);
 
+    const getAndSetUserProfile = async (user_id) => {
+        const temp = await API.findOneUserByUserId(user_id)
+        setUser(temp);
+    }
+
     return (
-    <>
-    <ProfileEdit profile={user} />
-    </>
+        <>
+            <ProfileEdit profile={user} />
+        </>
     )
 }
