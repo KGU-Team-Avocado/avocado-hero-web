@@ -9,6 +9,7 @@ import { selectGroup } from "api/redux/group/groupSlice";
 import { getGroupAsync } from "api/redux/group/groupSlice";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import RoleCard from "component/workspace/role/RoleCard";
+import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
 
 const ProjectRoleContainer = () => {
     const group = useSelector(selectGroup);
@@ -57,15 +58,9 @@ const ProjectRoleContainer = () => {
 
     return (
         <>
-            <Grid container columnSpacing={2}>
-                <Grid display="flex" justifyContent="start" alignItems="center">
-                    <Typography variant="h3" mx={2}>
-                        역할
-                    </Typography>
-                </Grid>
-            </Grid>
-
-            <Divider sx={{ border: 1 }}/>
+            <WorkspaceHeader
+                title={'역할'}
+            />
 
             <Box mt={{ xs: 1, sm: 1, md: 2 }}>
                 <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2 }} columnSpacing={{ sm: 1, md: 2 }}>

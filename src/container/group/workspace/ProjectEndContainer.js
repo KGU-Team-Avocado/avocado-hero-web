@@ -1,5 +1,6 @@
 import { Alert, AlertTitle, Box, Button, Divider, Grid, Typography } from "@mui/material";
 import axios from "axios";
+import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
 import { useNavigate, useParams } from "react-router-dom";
 
 const ProjectEndContainer = () => {
@@ -20,15 +21,9 @@ const ProjectEndContainer = () => {
     }
     return (
         <>
-            <Grid container columnSpacing={2}>
-                <Grid display="flex" justifyContent="start" alignItems="center">
-                    <Typography variant="h3" mx={2}>
-                        신청자 목록
-                    </Typography>
-                </Grid>
-            </Grid>
-
-            <Divider sx={{ border: 1 }} />
+            <WorkspaceHeader
+                title={'신청자 목록'}
+            />
 
             <Box mt={2}>
                 <Alert severity="warning" action={

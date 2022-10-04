@@ -1,12 +1,14 @@
+import { Box, Button, FormControl, FormControlLabel, FormLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
 import axios from "axios";
+import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const ProjectEvaluationContainer = () => {
     const params = useParams();
-    const {id, user_id} = params;
+    const { id, user_id } = params;
     const commentInput = useRef();
-    const [userInfo, setUserInfo] = useState({user_id: ''});
+    const [userInfo, setUserInfo] = useState({ user_id: '' });
     const evaluation_index = [
         {
             label: '질적 공헌도',
@@ -127,7 +129,7 @@ const ProjectEvaluationContainer = () => {
         question.score = parseInt(score);
         const total_score = evaluation_index[idx].questions.reduce(function add(sum, currValue) {
             return sum + currValue.score;
-          }, 0);
+        }, 0);
         evaluation_index[idx].avg_score = total_score / evaluation_index[idx].questions.length;
         // console.log(evaluation_index[idx]);
     }
@@ -140,6 +142,7 @@ const ProjectEvaluationContainer = () => {
                 delete q.question;
             })
         })
+
         const newData = {
             project_id: id,
             from: userInfo.user_id,
@@ -149,7 +152,7 @@ const ProjectEvaluationContainer = () => {
         }
 
         axios.post("/evaluationsRouter/saveEvaluation", newData).then((response) => {
-            if(response.data.success) {
+            if (response.data.success) {
                 window.history.back();
             }
         }).catch(function (error) {
@@ -158,41 +161,50 @@ const ProjectEvaluationContainer = () => {
     }
 
     return (
-        <div className="mt-3">
-            {evaluation_index.map((evaluation, idx) => 
-                <div className="mb-5" key={evaluation.value}>
-                    <h1>{evaluation.label}</h1>
-                    <hr />
-                    {evaluation.questions.map((question) =>
-                        <div className="mb-3" key={question.id}>
-                            <h3>{question.question}</h3>
-                            {score.map((s, index) =>
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" name={question.id} id={"inlineRadio"+index} value={s.value} onClick={() => selectScore(idx, question, s.value)} />
-                                    <label className="form-check-label" for={"inlineRadio" + index}>{s.label}</label>
-                                </div>
+        <Grid container justifyContent="center">
+            <Grid item xs={6} md={8} >
+                <Paper sx={{ px: 3, py:1, m:1 }} elevation={6}>
+                    {evaluation_index.map((evaluation, idx) =>
+                        <Box>
+                            <WorkspaceHeader
+                                title={evaluation.label}
+                            />
+                            {evaluation.questions.map((question) =>
+                                <FormControl fullWidth>
+                                    <FormLabel id="demo-row-radio-buttons-group-label">{question.question}</FormLabel>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="row-radio-buttons-group"
+                                    >
+                                        {score.map((s, index) =>
+                                            <FormControlLabel value={s.value} control={<Radio onChange={() => selectScore(idx, question, s.value)} />} label={s.label} />
+                                        )}
+                                    </RadioGroup>
+                                </FormControl>
                             )}
-                        </div>
+                        </Box>
                     )}
-                </div>
-            )}
 
-            <div className="mb-5">
-                <h1>기타</h1>
-                <hr />
-                <div className="mb-3">
-                    <h3>팀원에 대한 평가를 써주세요.</h3>
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" ref={commentInput} id="floatingTextarea2" style={{height: "100px"}}></textarea>
-                        <label for="floatingTextarea2">Comments</label>
-                    </div>
-                </div>
-            </div>
+                    <WorkspaceHeader
+                        title={"기타"}
+                    />
 
-            <div class="d-grid gap-2 col-4 mx-auto mb-4">
-                <button class="btn btn-primary" type="button" onClick={() => saveEvaluation()}>저장</button>
-            </div>
-        </div> 
+                    <TextField
+                        id="outlined-multiline-static"
+                        label="팀원에 대한 평가를 써주세요."
+                        multiline
+                        fullWidth
+                        rows={4}
+                        inputRef={commentInput} 
+                    />
+
+                    <Box my={2}>
+                        <Button variant="outlined" fullWidth onClick={() => saveEvaluation()}>저장</Button>
+                    </Box>
+                </Paper>
+            </Grid>
+        </Grid>
     )
 }
 

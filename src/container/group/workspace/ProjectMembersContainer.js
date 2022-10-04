@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
 import { getGroupAsync } from "api/redux/group/groupSlice";
 import { Alert, Divider, FormControlLabel, FormGroup, Grid, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
+import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
 
 const ProjectMembersContainer = () => {
     const group = useSelector(selectGroup);
@@ -140,20 +141,14 @@ const ProjectMembersContainer = () => {
 
     return (
         <>
-            <Grid container columnSpacing={2}>
-                <Grid display="flex" justifyContent="start" alignItems="center">
-                    <Typography variant="h3" mx={2}>
-                        신청자 목록
-                    </Typography>
-                </Grid>
-                <Grid xs display="flex" justifyContent="end" alignItems="center">
+            <WorkspaceHeader
+                title={'신청자 목록'}
+                action={
                     <FormGroup>
                         <FormControlLabel control={<Switch onChange={() => handleCloseApplication(!close)} />} label="마감" />
                     </FormGroup>
-                </Grid>
-            </Grid>
-
-            <Divider sx={{ border: 1 }} />
+                }
+            />
 
             {close ?
                 <Alert severity="warning">팀원 신청이 마감되었습니다.</Alert>
@@ -208,15 +203,9 @@ const ProjectMembersContainer = () => {
                 </Paper>
             }
 
-            <Grid container columnSpacing={2} mt={2}>
-                <Grid display="flex" justifyContent="start" alignItems="center">
-                    <Typography variant="h3" mx={2}>
-                        현재 팀원
-                    </Typography>
-                </Grid>
-            </Grid>
-
-            <Divider sx={{ border: 1 }} />
+            <WorkspaceHeader
+                title={'현재 팀원'}
+            />
 
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>

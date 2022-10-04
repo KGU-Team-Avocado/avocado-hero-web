@@ -51,7 +51,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const NoticeAcordion = ({ notices, deleteNotice, showModifyModal, user, groupMgr }) => {
     return (
-      <Box sx={{ my: 2 }}>
+      <Box>
         {notices.map((notice) => (
           <Accordion>
             <AccordionSummary>

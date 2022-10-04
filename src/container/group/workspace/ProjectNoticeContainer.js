@@ -9,6 +9,7 @@ import { Button, Divider, Grid } from "@mui/material";
 import { selectGroup } from "api/redux/group/groupSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getGroupAsync } from "api/redux/group/groupSlice";
+import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
 
 const ProjectContainer = () => {
     const group = useSelector(selectGroup);
@@ -106,20 +107,14 @@ const ProjectContainer = () => {
 
     return (
         <>
-            <Grid container columnSpacing={2}>
-                <Grid display="flex" justifyContent="start" alignItems="center">
-                    <Typography variant="h3" mx={2}>
-                        공지사항
-                    </Typography>
-                </Grid>
-                <Grid xs display="flex" justifyContent="end" alignItems="center">
-                    <Button color="secondary"  variant="outlined" aria-label="upload picture" component="label" onClick={() => setShow(true)} >
+            <WorkspaceHeader
+                title={'공지사항'}
+                action={
+                    <Button color="secondary" variant="outlined" aria-label="upload picture" component="label" onClick={() => setShow(true)} >
                         공지사항 추가하기
                     </Button>
-                </Grid>
-            </Grid>
-
-            <Divider sx={{ border: 1 }}/>
+                }
+            />
 
             <NoticeAcordion
                 notices={group.notices}
