@@ -58,19 +58,16 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
   };
 
 
-  const [isSignIn, setSignIn] = useState(false); //임시로 해놓음
   const [userInfo, setUserInfo] = useState(null);
   const sessionStorage = window.sessionStorage;
 
   useEffect(() => {
     if (sessionStorage.getItem("user")) {
       setUserInfo(JSON.parse(sessionStorage.getItem("user")));
-      setSignIn(true);
     }
   }, []);
 
   const logout = () => {
-    setSignIn(!isSignIn);
     sessionStorage.clear();
     window.location.href = '/'
   };
@@ -525,7 +522,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           <MKBox ml={{ xs: "auto", lg: 0 }}>
             {
               // 로그인 했을 때를 true, 안했을 때를 false로 관리해주세요
-              isSignIn ? (
+              userInfo ? (
                 <>
                   <MKButton
                     variant="outline"

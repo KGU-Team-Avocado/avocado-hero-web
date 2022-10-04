@@ -23,33 +23,17 @@ import homeRoutes from "api/route/homeRoutes";
 import HomeLayout from "component/common/layouts/HomeLayout";
 import workspaceRoutes from "api/route/workspaceRoutes";
 
-const WorkspaceRoute = () => {
+function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<HomeLayout />}>
+          {homeRoutes.map((route) => <Route path={route.path} element={route.element} key={route.path} />)}
+        </Route>
         <Route path="/workspace" element={<WorkspaceLayout />}>
           {workspaceRoutes.map((route) => <Route path={route.path} element={route.element} key={route.path} />)}
         </Route>
       </Routes>
-    </>
-  )
-}
-
-const HomeRoute = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<HomeLayout />}>
-        {homeRoutes.map((route) => <Route path={route.path} element={route.element} key={route.path} />)}
-      </Route>
-    </Routes>
-  )
-}
-
-function App() {
-  return (
-    <>
-      <HomeRoute />
-      <WorkspaceRoute />
     </>
   );
 }

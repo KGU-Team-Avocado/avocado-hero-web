@@ -136,7 +136,7 @@ const SignInContainer = () => {
 
       <div className="d-flex justify-content-center pt-5">
         <div className="card p-5 w-100" style={{ 'maxWidth': '500px', 'minWidth': '300px' }} >
-          <h1>로그인</h1>
+          <h1>로그인(Deprecated)</h1>
           <div className="py-3">
             <div className="form-floating">
               <input
