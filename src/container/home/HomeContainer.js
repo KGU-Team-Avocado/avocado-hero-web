@@ -38,38 +38,6 @@ const HomeContainer = () => {
 
     return (
         <>
-            <ToastContainer
-                    position="top-center"
-                    autoClose={3000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                />
-                {
-                    (
-                        url == null
-                            ?
-                            <LoadingSpinner />
-                            :
-                            <div className="alert alert-warning alert-dismissible fade show" role="alert">
-                                <div><strong>알림!</strong></div>
-                                <div>모바일에서 테스트하고 싶으시면 <b>스마트폰과 PC를 같은 공유기에 연결 후</b>
-                                    <a href={url}>{url}</a> 으로 접속하세요. </div>
-                                <button className="btn btn-outline-success" onClick={() => copyURL()}>주소를 클립보드로 복사하기</button>
-                                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                    )
-
-                }
-                <div className="alert alert-success alert-dismissible fade show" role="alert">
-                    <div><strong>[공지]</strong> 기록 인정을 위해 반드시 로그인 후 작업해주세요.</div>
-                    <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-
                 <CenteredHero />
                 <CenteredScreenshotHero />
                 <ResponsiveLeftAlignedHero />

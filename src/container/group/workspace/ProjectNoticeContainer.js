@@ -4,8 +4,16 @@ import { useParams } from "react-router-dom";
 import * as API from "../../../api/API";
 import NoticeAcordion from "../../../component/workspace/notice/NoticeAcordion";
 import NoticeModal from "../../../component/workspace/notice/NoticeModal";
+import Typography from '@mui/material/Typography';
+import { Button, Divider, Grid } from "@mui/material";
+import { selectGroup } from "api/redux/group/groupSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getGroupAsync } from "api/redux/group/groupSlice";
 
 const ProjectContainer = () => {
+    const group = useSelector(selectGroup);
+    const dispatch = useDispatch();
+
     const [groupManager, setGroupManager] = useState({});
     const [notices, setNotices] = useState([]); // 공지사항 배열
 
@@ -27,16 +35,10 @@ const ProjectContainer = () => {
             console.log()
             setUser(JSON.parse(sessionStorage.getItem("user")));
         }
-        
-        getGroup();
-    }, []);
-
-    const getGroup = async () => {
-        const group = await API.getGroupById({ _id: project_id })
 
         setGroupManager(group.manager);
         setNotices(group.notices);
-    }
+    }, []);
 
     const saveNewNotice = () => {
         const newNotice = { title: inputTitle.current.value, description: inputDesc.current.value };
@@ -48,7 +50,8 @@ const ProjectContainer = () => {
             setTitle("");
             setDescription("");
             setShow(false);
-            setNotices(response.data)
+            // setNotices(response.data)
+            dispatch(getGroupAsync(project_id));
         }).catch(function (error) {
             console.log(error);
         });
@@ -60,7 +63,8 @@ const ProjectContainer = () => {
             notice_id: id
         }).then((response) => {
             console.log(response.data);
-            setNotices(response.data)
+            // setNotices(response.data)
+            dispatch(getGroupAsync(project_id));
         }).catch(function (error) {
             console.log(error);
         });
@@ -87,33 +91,38 @@ const ProjectContainer = () => {
             setKey(0);
             setIsEdit(false);
             setShow(false);
-            setNotices(response.data);
+            dispatch(getGroupAsync(project_id));
         }).catch(function (error) {
             console.log(error);
         });
     }
 
     const handleClose = () => {
+        setTitle("");
+        setDescription("");
         setShow(false);
+        setIsEdit(false);
     }
 
     return (
         <>
-            <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 className="h2">공지사항</h1>
-                <div className="btn-toolbar mb-2 mb-md-0">
-                    {
-                        user.user_id === groupManager ?
-                            <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => setShow(true)} >
-                                공지사항 추가하기
-                            </button>
-                            : null
-                    }
-                </div>
-            </div>
+            <Grid container columnSpacing={2}>
+                <Grid display="flex" justifyContent="start" alignItems="center">
+                    <Typography variant="h3" mx={2}>
+                        공지사항
+                    </Typography>
+                </Grid>
+                <Grid xs display="flex" justifyContent="end" alignItems="center">
+                    <Button color="secondary"  variant="outlined" aria-label="upload picture" component="label" onClick={() => setShow(true)} >
+                        공지사항 추가하기
+                    </Button>
+                </Grid>
+            </Grid>
+
+            <Divider sx={{ border: 1 }}/>
 
             <NoticeAcordion
-                notices={notices}
+                notices={group.notices}
                 deleteNotice={deleteNotice}
                 showModifyModal={showModifyModal}
                 user={user}

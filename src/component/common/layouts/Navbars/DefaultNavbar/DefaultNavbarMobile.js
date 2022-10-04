@@ -41,7 +41,7 @@ function DefaultNavbarMobile({ routes, open }) {
         name={name}
         icon={icon}
         collapseStatus={name === collapse}
-        onClick={() => handleSetCollapse(name)}
+        onClick={() => Boolean(navCollapse)&&handleSetCollapse(name)}
         href={href}
         route={route}
         collapse={Boolean(navCollapse)}

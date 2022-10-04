@@ -7,7 +7,7 @@ import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
 import { options } from '../../../../assets/tag/Tech'
 
-export default () => {
+export default (props) => {
 
     const [userInfo, setUserInfo] = useState(null);
 
@@ -67,62 +67,64 @@ export default () => {
         console.log(newGroupData)
 
         const hasValue = Object.values(newGroupData).includes("");
-        if(hasValue){
+        if (hasValue) {
             alert('빈 칸을 모두 채워주세요')
         }
-        else{
+        else {
             axios
-            .post("/groupsRouter/create", newGroupData)
-            .then((response) => {
-                console.log(response.data);
-                window.location.reload()
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                .post("/groupsRouter/create", newGroupData)
+                .then((response) => {
+                    console.log(response.data);
+                    window.location.reload()
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 
     return (
-        <div className="modal-dialog" role="document">
-            <div className="modal-content rounded-4 shadow">
-                <div className="modal-body p-5  w-100">
-                    <div className="modal-header">
-                        <h2 className="fw-bold mb-0">프로젝트 그룹 만들기</h2>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+        <>
+         <div className="modal-dialog" role="document">
+             <div className="modal-content rounded-4 shadow">
+                 <div className="modal-body p-5 w-100">
+                        <div className="modal-header">
+                            <h2 className="fw-bold mb-0">프로젝트 그룹 만들기</h2>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => props.setOpen(false)}></button>
+                        </div>
 
-                    <div className="d-grid my-5 list-unstyled">
-                        <h4>그룹명</h4>
-                        <input type="text" className="form-control mb-4" value={project.group_name} id="group_name" onChange={handleInput} />
-                        <h4>프로젝트명</h4>
-                        <input type="text" className="form-control mb-4" value={project.project_name} id="project_name" onChange={handleInput} />
-                        <h4>간단소개글</h4>
-                        <input type="text" className="form-control mb-4" value={project.short_description} id="short_description" onChange={handleInput} />
-                        <div className="mb-4">
-                            <h4>Tech Stack</h4>
-                            {/* <pre>{JSON.stringify(selected)}</pre> */}
-                            <MultiSelect
-                                options={options}
-                                value={selected}
-                                onChange={setSelected}
-                                labelledBy="Select"
-                            />
+                        <div className="d-grid my-5 list-unstyled">
+                            <h4>그룹명</h4>
+                            <input type="text" className="form-control mb-4" value={project.group_name} id="group_name" onChange={handleInput} />
+                            <h4>프로젝트명</h4>
+                            <input type="text" className="form-control mb-4" value={project.project_name} id="project_name" onChange={handleInput} />
+                            <h4>간단소개글</h4>
+                            <input type="text" className="form-control mb-4" value={project.short_description} id="short_description" onChange={handleInput} />
+                            <div className="mb-4">
+                                <h4>Tech Stack</h4>
+                                {/* <pre>{JSON.stringify(selected)}</pre> */}
+                                <MultiSelect
+                                    options={options}
+                                    value={selected}
+                                    onChange={setSelected}
+                                    labelledBy="Select"
+                                />
+                            </div>
+                            <h4>상세소개글</h4>
+                            <div>
+                                <Editor
+                                    editorState={editorState}
+                                    toolbarClassName="toolbarClassName"
+                                    wrapperClassName="wrapperClassName"
+                                    editorClassName="editorClassName"
+                                    onEditorStateChange={handleEditorChange}
+                                />
+                            </div>
                         </div>
-                        <h4>상세소개글</h4>
-                        <div>
-                            <Editor
-                                editorState={editorState}
-                                toolbarClassName="toolbarClassName"
-                                wrapperClassName="wrapperClassName"
-                                editorClassName="editorClassName"
-                                onEditorStateChange={handleEditorChange}
-                            />
-                        </div>
-                    </div>
-                    <button type="button" className="btn btn-lg btn-success mt-5 w-100" onClick={() => createGroup()}>등록하기</button>
-                </div>
-            </div>
-        </div>
+                        <button type="button" className="btn btn-lg btn-success mt-5 w-100" onClick={() => createGroup()}>등록하기</button>
+                 </div>
+             </div>
+         </div>
+        </>
     )
 }

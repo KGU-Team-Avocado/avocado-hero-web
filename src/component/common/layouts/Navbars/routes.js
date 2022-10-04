@@ -56,12 +56,12 @@ const routes = [
   },
   {
     name: "기업전용",
-    icon: <Icon>article</Icon>,
+    icon: <GitHubIcon />,
     collapse: [
       {
         name: "인재찾기",
         description: "인재를 직접 찾아보아요!",
-        route: "/humanRes",
+        route: "/humanResources",
       },
       {
         name: "채용공고",
@@ -72,7 +72,7 @@ const routes = [
   },
   {
     name: "개발모드",
-    icon: <Icon>dashboard</Icon>,
+    icon: <GitHubIcon />,
     columns: 1,
     rowsPerColumn: 2,
     collapse: [

@@ -11,13 +11,21 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { store } from 'api/redux/store';
 import { Provider } from 'react-redux';
 
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+let persistor = persistStore(store);
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

@@ -24,6 +24,7 @@ import Collapse from "@mui/material/Collapse";
 import Icon from "@mui/material/Icon";
 import MKBox from "component/common/mui-components/MKBox";
 import MKTypography from "component/common/mui-components/MKTypography";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 
 function DefaultNavbarDropdown({
@@ -81,8 +82,8 @@ function DefaultNavbarDropdown({
           {name}
         </MKTypography>
         <MKTypography variant="body2" color={light ? "white" : "dark"} ml="auto">
-          <Icon sx={{ fontWeight: "normal", verticalAlign: "middle" }}>
-            {collapse && "keyboard_arrow_down"}
+          <Icon sx={{ fontWeight: "normal"}}>
+            {collapse && <ArrowDropDownIcon/>}
           </Icon>
         </MKTypography>
       </MKBox>

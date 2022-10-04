@@ -5,6 +5,9 @@ import CalendarModal from "../../../component/workspace/calendar/CalendarModal";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import * as API from "../../../api/API";
+import { useDispatch, useSelector } from "react-redux";
+import { selectGroup } from "api/redux/group/groupSlice";
+import { getGroupAsync } from "api/redux/group/groupSlice";
 
 const DayOfTheWeek = [
     {
@@ -38,6 +41,9 @@ const DayOfTheWeek = [
 ]
 
 const ProjecCalendarContainer = () => {
+    const group = useSelector(selectGroup);
+    const dispatch = useDispatch();
+
     const [show, setShow] = useState(false);
     const [startDay, setStartDay] = useState("");
     const [endDay, setEndDay] = useState("");
@@ -52,27 +58,11 @@ const ProjecCalendarContainer = () => {
     const project_id = params.id;
 
     useEffect(() => {
-        axios.post("/groupsRouter/getGroup", {
-            _id: project_id,
-        }).then((response) => {
-            const recursive = response.data.events.recursive.map((rec) => { return {...rec, id: rec._id} })
-            const nonrecursive = response.data.events.nonrecursive.map((non) => { return {...non, id: non._id} })
-            setEvents([...recursive, ...nonrecursive]);
-            console.log([...recursive, ...nonrecursive])
-        }).catch(function (error) {
-            console.log(error);
-        });
-
-        getGroup();
-    }, []);
-
-    const getGroup = async () => {
-        const group = await API.getGroupById({ _id: project_id })
-
         const recursive = group.events.recursive.map((rec) => { return { ...rec, id: rec._id } })
         const nonrecursive = group.events.nonrecursive.map((non) => { return { ...non, id: non._id } })
+
         setEvents([...recursive, ...nonrecursive]);
-    }
+    }, []);
 
     const handleDateClick = (arg) => { // bind with an arrow function
         console.log(arg)
@@ -145,6 +135,7 @@ const ProjecCalendarContainer = () => {
             setColor("");
             setDaysOfWeek([]);
             setShow(false);
+            dispatch(getGroupAsync(project_id));
         }).catch(function (error) {
             console.log(error);
         });

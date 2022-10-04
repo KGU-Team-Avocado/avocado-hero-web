@@ -2,21 +2,19 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Button, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import { ChartBar as ChartBarIcon } from '../icons/chart-bar';
-import { Cog as CogIcon } from '../icons/cog';
-import { Lock as LockIcon } from '../icons/lock';
 import { Selector as SelectorIcon } from '../icons/selector';
-import { ShoppingBag as ShoppingBagIcon } from '../icons/shopping-bag';
 import { User as UserIcon } from '../icons/user';
-import { UserAdd as UserAddIcon } from '../icons/user-add';
 import { Users as UsersIcon } from '../icons/users';
 import { XCircle as XCircleIcon } from '../icons/x-circle';
-import { Menu as MenuIcon } from '../icons/menu';
 import { Bell as BellIcon } from '../icons/bell';
 import { Link, useParams } from 'react-router-dom';
 import { NavItem } from './NavItem';
-
-
+import { useSelector } from 'react-redux';
+import { selectUser } from 'api/redux/user/userSlice';
+import { selectGroup } from 'api/redux/group/groupSlice';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 
 export const DashboardSidebar = (props) => {
   const { open, onClose } = props;
@@ -27,15 +25,10 @@ export const DashboardSidebar = (props) => {
   });
   const params = useParams();
   const project_id = params.id;
+  const group = useSelector(selectGroup);
+  const user = useSelector(selectUser);
 
   const items = [
-    {
-      href: '',
-      icon: (<MenuIcon fontSize="small" />),
-      title: 'Main',
-      onlyForMgr: false,
-      showAfterEnd: true
-    },
     {
       href: `/workspace/${project_id}`,
       icon: (<BellIcon fontSize="small" />),
@@ -45,21 +38,24 @@ export const DashboardSidebar = (props) => {
     },
     {
       href: `/workspace/${project_id}/calendar`,
-      icon: (<SelectorIcon fontSize="small" />),
+      icon: (<EventNoteIcon fontSize="small" />),
       title: '일정(아이콘 미정)',
       onlyForMgr: false,
       showAfterEnd: true
     },
     {
       href: `/workspace/${project_id}/todo`,
-      icon: (<SelectorIcon fontSize="small" />),
+      icon: (<FormatListBulletedIcon fontSize="small" />),
       title: 'Todo(아이콘 미정)',
       onlyForMgr: false,
       showAfterEnd: true
     },
+  ];
+
+  const extraItems = [
     {
       href: `/workspace/${project_id}/role`,
-      icon: (<UserIcon fontSize="small" />),
+      icon: (<FactCheckOutlinedIcon fontSize="small" />),
       title: '상호평가',
       onlyForMgr: false,
       showAfterEnd: true
@@ -85,7 +81,7 @@ export const DashboardSidebar = (props) => {
       onlyForMgr: true,
       showAfterEnd: false
     }
-  ];
+  ]
 
   useEffect(
     () => {
@@ -171,9 +167,16 @@ export const DashboardSidebar = (props) => {
               icon={item.icon}
               href={item.href}
               title={item.title}
-              onlyForMgr={item.onlyForMgr}
-              showAfterEnd={item.showAfterEnd}
             />
+          ))}
+          {extraItems.map((item) => (
+            (!item.onlyForMgr || (user.user_id === group.manager)) && item.showAfterEnd === group.end_project ?
+            <NavItem
+              key={item.title}
+              icon={item.icon}
+              href={item.href}
+              title={item.title}
+            /> : null
           ))}
         </Box>
         <Divider sx={{ borderColor: '#2D3748' }} />

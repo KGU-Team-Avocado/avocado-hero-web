@@ -62,25 +62,34 @@ const JobPosting = () => {
     setConvertedContent(currentContentAsHTML);
 };
 
-  const onClick = async (e) => {
-    e.preventDefault();
+  const onClick = async () => {
+    // e.preventDefault();
+    alert('버튼은 눌렀음')
     // console.log(Object.keys(company).map((key)=>company[key]))
     if (company.name.length < 1) {
+      console.log('1')
       return;
     } else if (company.title.length < 1) {
+      console.log('2')
       return;
     } else if (company.field.length < 1) {
+      console.log('3')
       return;
     } else if (company.recruit_number.length < 1) {
+      console.log('4')
       return;
-    } else if (company.tag.length < 1) {
-      return;
+    // } else if (company.tag.length < 1) {
+    //   console.log('5')
+    //   return;
     } else if (company.period.length < 1) {
+      console.log('6')
       return;
     } else if (company.site.length < 1) {
+      console.log('7')
       return;
     }
      else {
+      console.log('저장시도')
       await API.saveJobPost({
         ...company,
         description:convertedContent
@@ -100,7 +109,7 @@ const JobPosting = () => {
 
   return (
 
-    <div className="container" style={{padding: "90px"}}>
+    <div>
 
       {/* <div style={{
         height: "2px",
@@ -289,7 +298,7 @@ const JobPosting = () => {
                           </div>
       </div>
       <div  style={{display: "flex", justifyContent: "center", alignItems: "center", margin:100}}>
-        <Button onClick={onClick} variant="primary" size="lg">
+        <Button onClick={()=>onClick()} variant="primary" size="lg">
           등록하기
         </Button>
       </div>

@@ -5,19 +5,25 @@ import routes from "./Navbars/routes";
 import Card from "@mui/material/Card";
 
 
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, responsiveFontSizes, ThemeProvider } from "@mui/material";
 import theme from "assets/theme";
 import HomeTitle from "component/home/title/HomeTitle";
 import DefaultNavbar from "./Navbars/DefaultNavbar";
 import DefaultFooter from "./Footers/DefaultFooter";
 import footerRoutes from "./Footers/footer.routes";
 import MKBox from "../mui-components/MKBox";
+import { useSelector } from "react-redux";
+import { selectUser } from "api/redux/user/userSlice";
+import { selectStatus } from "api/redux/user/userSlice";
 
 export default function () {
+  const user = useSelector(selectUser);
+  const status = useSelector(selectStatus)
 
   return (
     <>
-      <ThemeProvider theme={theme}>
+    {/* Responsive Font Size를 적용하려면 responsiveFontSizes를 써야한다 */}
+      <ThemeProvider theme={responsiveFontSizes(theme)}>
         <CssBaseline />
 
         <DefaultNavbar
@@ -32,13 +38,28 @@ export default function () {
         />
 
         {/* 대문 시작 */}
-        <HomeTitle/>
+        <div><button className={`btn btn-${user?"success":"danger"}`}>{user?"User Redux ON":"User Redux OFF"}</button></div>
+        <HomeTitle />
         {/* 대문 끝 */}
 
         <Card
           sx={{
-            p: 2,
-            mx: { xs: 2, lg: 3 },
+            p: {
+              xs: 2,
+              sm: 5,
+              md: 5,
+              lg: 5,
+              xl: 5,
+              xxl: 5
+            },
+            mx: {
+              xs: 2,
+              sm: 3,
+              md: 5,
+              lg: 10,
+              xl: 15,
+              xxl: 25
+            },
             mt: -8,
             mb: 4,
             backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),

@@ -32,6 +32,7 @@ export const NavItem = (props) => {
           textTransform: 'none',
           width: '100%',
         }}
+        replace
       >
         <Button
           startIcon={icon}
