@@ -13,6 +13,14 @@ import * as API from "../../../api/API"
 
 const SignInContainer = () => {
 
+  const sessionStorage = window.sessionStorage; //deprecated
+
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const user = useSelector(selectUser);
+  const status = useSelector(selectStatus);
+
   const [values, setValues] = useState({
     id: '',
     password: '',
@@ -34,24 +42,6 @@ const SignInContainer = () => {
     event.preventDefault();
   };
 
-  const user = useSelector(selectUser);
-  const status = useSelector(selectStatus);
-
-  const [id, setId] = useState(""); //deprecated
-  const [password, setPassword] = useState(""); //deprecated
-  const sessionStorage = window.sessionStorage; //deprecated
-
-  let navigate = useNavigate();
-
-  const dispatch = useDispatch();
-
-  const handleId = (e) => {
-    setId(e.currentTarget.value);
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.currentTarget.value);
-  };
 
   useEffect(() => {
     return () => {
@@ -61,7 +51,6 @@ const SignInContainer = () => {
   }, [])
 
   useEffect(() => {
-    // console.log('user is changed');
     // 로그인 성공 시
     if (user) {
       sessionStorage.setItem("user", JSON.stringify(user));
@@ -69,18 +58,22 @@ const SignInContainer = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-    // console.log('user is changed');
-    // 로그인 성공 시
-    if (status === 'failed') {
-      alert("아이디/비밀번호를 다시 입력해주세요.")
-    }
-  }, [status]);
-
   const login = () => {
-    // console.log(id, password);
-    dispatch(loginAsync({ id, password })); // Redux user Store에 저장하는 과정을 기존 로그인에 통합함.
+    dispatch(loginAsync({ id: values.id, password: values.password })); // Redux user Store에 저장
   };
+
+  const statusDescription = (status) => {
+    switch (status) {
+      case "idle":
+        return "";
+      case "loading":
+        return "확인중...";
+      case "failed":
+        return "로그인 실패!";
+      default:
+        return "?????";
+    }
+  }
 
   return (
     <>
@@ -99,7 +92,7 @@ const SignInContainer = () => {
           }
         }}>
           <CardContent>
-            <Typography variant="h2">로그인(프론트만 제작)</Typography>
+            <Typography variant="h2">로그인</Typography>
             <Stack my={3} spacing={1}>
               {/* id */}
               <TextField
@@ -131,6 +124,9 @@ const SignInContainer = () => {
                   label="Password"
                 />
               </FormControl>
+              <Typography variant="h6" color="red">
+                {statusDescription(status)}
+              </Typography>
               <Link to="/signup">
                 아직 회원이 아니신가요?
               </Link>
@@ -138,6 +134,7 @@ const SignInContainer = () => {
                 color="success"
                 variant="contained"
                 size="large"
+                onClick={() => login()}
               >
                 로그인
               </MKButton>
@@ -145,52 +142,6 @@ const SignInContainer = () => {
           </CardContent>
         </Card>
       </Stack>
-      {status}
-      <div className="d-flex justify-content-center">
-        <div className="card p-5 w-100" style={{ 'maxWidth': '500px', 'minWidth': '300px' }} >
-          <h1>로그인(Deprecated)</h1>
-          <div className="py-3">
-            <div className="form-floating">
-              <input
-                type="id"
-                className="form-control"
-                id="floatingInput"
-                placeholder="아이디"
-                onChange={handleId}
-                value={id}
-              />
-              <label htmlhtmlFor="floatingInput">ID</label>
-            </div>
-            <div className="form-floating">
-              <input
-                type="password"
-                className="form-control"
-                id="floatingPassword"
-                placeholder="Password"
-                onChange={handlePassword}
-                value={password}
-              />
-              <label htmlhtmlFor="floatingPassword">Password</label>
-            </div>
-
-            <div className="checkbox">
-              <label>
-                <input type="checkbox" value="remember-me" /> Remember me
-              </label>
-            </div>
-            <div className="my-3">
-              <Link to='/signup'>아직 회원이 아니신가요?</Link>
-            </div>
-            <button
-              className="w-100 btn btn-lg btn-success"
-              type="submit"
-              onClick={() => login()}
-            >
-              Sign in (Redux Included)
-            </button>
-          </div>
-        </div>
-      </div>
     </>
   );
 };
