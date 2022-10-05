@@ -25,7 +25,7 @@ const ProjectEndContainer = () => {
                 title={'신청자 목록'}
             />
 
-            <Box mt={2}>
+            <Box>
                 <Alert severity="warning" action={
                     <Button color="error" size="large" onClick={() => endProject()}>
                         종료

@@ -62,7 +62,7 @@ const ProjectRoleContainer = () => {
                 title={'역할'}
             />
 
-            <Box mt={{ xs: 1, sm: 1, md: 2 }}>
+            <Box>
                 <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2 }} columnSpacing={{ sm: 1, md: 2 }}>
                     {group.members.map((member, index) => (
                         <RoleCard 

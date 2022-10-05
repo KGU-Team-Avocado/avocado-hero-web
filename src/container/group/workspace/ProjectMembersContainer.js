@@ -6,8 +6,9 @@ import * as API from "../../../api/API";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
 import { getGroupAsync } from "api/redux/group/groupSlice";
-import { Alert, Divider, FormControlLabel, FormGroup, Grid, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
+import { Alert, Button, Divider, FormControlLabel, FormGroup, Grid, Paper, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
+import MemberModal from "../../../component/workspace/members/MemberModal";
 
 const ProjectMembersContainer = () => {
     const group = useSelector(selectGroup);
@@ -16,21 +17,12 @@ const ProjectMembersContainer = () => {
     const params = useParams();
     const project_id = params.id;
 
-    useEffect(() => {
-        axios.post("/groupsRouter/getApplicants", {
-            group_id: project_id,
-        }).then((response) => {
-            console.log(response.data);
-            setApplicants(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }, []);
-
     const [applicants, setApplicants] = useState([]); // 프로젝트 지원자 배열
 
     const [show, setShow] = useState('null');
-    const [close, setClose] = useState(false)
+    const [close, setClose] = useState(false);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const columns = [
         { id: 'index', label: '#', minWidth: 50 },
@@ -55,8 +47,15 @@ const ProjectMembersContainer = () => {
         },
     ];
 
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    useEffect(() => {
+        axios.post("/groupsRouter/getApplicants", {
+            group_id: project_id,
+        }).then((response) => {
+            setApplicants(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }, []);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -67,7 +66,8 @@ const ProjectMembersContainer = () => {
         setPage(0);
     };
 
-    const handleClose = () => setShow('null');
+    const handleClose = () => {setShow('null');}
+
     const handleShow = (applicant) => {
         console.log(show);
         setShow(applicant);
@@ -179,9 +179,10 @@ const ProjectMembersContainer = () => {
                                                     {column.id === 'index'
                                                         ? index + 1
                                                         : column.id === 'accept' ?
-                                                            <>
-                                                                <button type="button" className="btn btn-primary btn-sm me-2" onClick={() => acceptMember(applicant)} >승인</button>
-                                                                <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(applicant)} >반려</button></>
+                                                            <Stack spacing={2} direction="row" justifyContent="center">
+                                                                <Button size="small" variant="outlined" onClick={() => acceptMember(applicant)} >승인</Button>
+                                                                <Button size="small" variant="outlined" color="error" onClick={() => rejectMember(applicant)} >반려</Button>
+                                                            </Stack>
                                                             : value}
                                                 </TableCell>
                                             );
@@ -236,7 +237,7 @@ const ProjectMembersContainer = () => {
                                                 {column.id === 'index'
                                                     ? index
                                                     : column.id === 'accept' ?
-                                                        <button type="button" className="btn btn-danger btn-sm" onClick={() => cancleAccept(member)} >방출</button>
+                                                        <Button size="small" variant="outlined" color="error" onClick={() => cancleAccept(member)} >방출</Button>
                                                         : value}
                                             </TableCell>
                                         );
@@ -257,16 +258,29 @@ const ProjectMembersContainer = () => {
                 />
             </Paper>
 
-            <Modal show={show !== 'null'} onHide={handleClose} animation={false} centered>
+            {/* <Modal show={show !== 'null'} onHide={handleClose} animation={false} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>{show.user_name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{show.message}</Modal.Body>
                 <Modal.Footer>
-                    <button type="button" className="btn btn-primary btn-sm me-2" onClick={() => { acceptMember(show) }} >승인</button>
-                    <button type="button" className="btn btn-danger btn-sm" onClick={() => rejectMember(show)} >반려</button>
+                    <Stack spacing={2} direction="row" justifyContent="center">
+                        <Button size="small" variant="outlined" onClick={() => acceptMember(applicant)} >승인</Button>
+                        <Button size="small" variant="outlined" color="error" onClick={() => rejectMember(applicant)} >반려</Button>
+                    </Stack>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
+
+            <MemberModal
+                show={show}
+                handleClose={handleClose}
+                title={show.user_name}
+                body={show.message}
+                footer={<>
+                    <Button size="small" variant="outlined" onClick={() => acceptMember(show)} >승인</Button>
+                    <Button size="small" variant="outlined" color="error" onClick={() => rejectMember(show)} >반려</Button>
+                </>}
+            />
         </>
     )
 }
