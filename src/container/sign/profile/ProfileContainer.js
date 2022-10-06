@@ -63,7 +63,11 @@ const ProfileContainer = () => {
                             // 위치를 상단 프로필이랑 justify-content-between으로 적용하기
                             user?.user_id === profile.user_id
                                 ?
-                                <MKButton variant="contained" color="info" onClick={()=>navigate(`/user/ProfileUpdate/${profile.user_id}`)}>프로필 수정</MKButton>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+<MKButton variant="contained" color="info" onClick={()=>navigate(`/user/ProfileUpdate/${profile.user_id}`)} style={{
+
+}}>프로필 수정</MKButton>
+                                </div>
                                 :
                                 <></>
                         }

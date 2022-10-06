@@ -53,7 +53,7 @@ export default (props) => {
 
             <div className="my-3">
                 <br />
-                <h4>소속된 그룹</h4>
+                <h4>현재 소속 그룹</h4>
                 <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
                         groups.length > 0
@@ -77,7 +77,7 @@ export default (props) => {
 
             <div className="my-3">
                 <br />
-                <h4>종료된 소속 그룹?</h4>
+                <h4>종료된 소속 그룹</h4>
                 <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
                         groups.length > 0
