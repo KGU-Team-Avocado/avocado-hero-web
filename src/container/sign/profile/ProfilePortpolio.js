@@ -64,7 +64,7 @@ const ProfilePortpolio = () => {
             </div>
 
             {/* 그래프 */}
-            <div style={{ width: '1000px', height: '300px', margin: '0 auto' }}>
+            <div style={{ width: '100%', height: '300px', margin: '0 auto' }}>
                 <ResponsiveBar
                 data={[
                     {
