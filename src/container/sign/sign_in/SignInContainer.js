@@ -53,7 +53,7 @@ const SignInContainer = () => {
   useEffect(() => {
     // 로그인 성공 시
     if (user) {
-      sessionStorage.setItem("user", JSON.stringify(user));
+      sessionStorage.setItem("user", JSON.stringify(user)); //deprecated
       navigate('/');
     }
   }, [user]);

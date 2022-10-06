@@ -58,10 +58,9 @@ const ProfileContainer = () => {
                                 <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </div>
-                        <ProfileCard
-                            profile={profile}
-                        />
+                        
                         {
+                            // 위치를 상단 프로필이랑 justify-content-between으로 적용하기
                             user?.user_id === profile.user_id
                                 ?
                                 <MKButton variant="contained" color="info" onClick={()=>navigate(`/user/ProfileUpdate/${profile.user_id}`)}>프로필 수정</MKButton>
@@ -69,8 +68,10 @@ const ProfileContainer = () => {
                                 <></>
                         }
 
-                        <ProfileGroup />
-                        <ProfilePortpolio />
+                        <ProfileCard
+                            profile={profile}
+                        />
+                    
                     </>
                     :
                     <>

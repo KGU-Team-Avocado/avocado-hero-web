@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import GroupCard from "../../../component/group/card/GroupCard";
 import Avatar from "./avatar/Avatar";
 import { Box, Card, CardActionArea, CardContent, Grid, Stack, Typography } from "@mui/material";
+import ProfileGroup from "./ProfileGroup";
+import ProfilePortpolio from "./ProfilePortpolio";
 
 export default (props) => {
 
@@ -106,6 +108,8 @@ export default (props) => {
                     </Stack>
                 </Grid>
             </Grid>
+            <ProfileGroup />
+            <ProfilePortpolio />
         </>
     )
 }
