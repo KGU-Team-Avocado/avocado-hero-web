@@ -1,4 +1,5 @@
 import { useHref } from "react-router-dom"
+import MKButton from "component/common/mui-components/MKButton"
 
 export default () => {
     return (
@@ -11,8 +12,8 @@ export default () => {
                     <h1 className="display-5 fw-bold lh-1 mb-3">당신과 딱 맞는 회사를 찾아보세요!</h1>
                     <p className="lead">히어로가 일자리를 소개합니다. 당신과 딱 맞는 일자리를 찾아보고 당신의 포토폴리오로 당신이 인재임을 증명해보세요!</p>
                     <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                        <button type="button" className="btn btn-primary btn-lg px-4 me-md-2" onClick={()=> window.location.href = "/jobFinder"}>일자리 찾기</button>
-                        <button type="button" className="btn btn-outline-secondary btn-lg px-4">Default</button>
+                    <MKButton variant="contained" color="success" size="large" onClick={()=>window.location.href = "/jobFinder"}>일자리 찾기</MKButton>
+                    <MKButton variant="outlined" color="secondary" size="large">default</MKButton>                    
                     </div>
                 </div>
             </div>
