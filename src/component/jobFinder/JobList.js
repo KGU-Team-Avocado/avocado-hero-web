@@ -7,6 +7,7 @@ import JobPostingCardV2 from "./JobPostingCardV2";
 import JobFinderViewModal from "./modal/JobFinderViewModal";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import { useNavigate } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 
 
 export default (props) => {
@@ -71,7 +72,7 @@ export default (props) => {
 
     return (
         <>
-            <div>
+            <Box>
                 {
                     props.postings.length > 0
                         ?
@@ -83,9 +84,9 @@ export default (props) => {
                             />
                         ))
                         :
-                        <div>채용공고가 없습니다.</div>
+                        <Typography variant="h3">채용공고가 없습니다.</Typography>
                 }
-            </div>
+            </Box>
 
             {/* new */}
             <ModalStaticBackdrop

@@ -1,5 +1,5 @@
 export default (props) => {
-    
+    // 수정 예정
     return (
         <div>
             <div className="list-group list-group-light">

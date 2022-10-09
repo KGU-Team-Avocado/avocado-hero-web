@@ -4,6 +4,8 @@ import JobPostingCard from "../jobFinder/JobPostingCard"
 import Button from "react-bootstrap/Button";
 import { BiBookmark } from "react-icons/bi";
 import JobList from "../../component/jobFinder/JobList";
+import { Box, Typography } from "@mui/material";
+import MKButton from "component/common/mui-components/MKButton";
 
 export default () => {
 
@@ -46,25 +48,24 @@ export default () => {
 
     return (
         <>
-            <>
-                <div className="my-3 d-flex justify-content-between">
-                    <div><h2>채용공고 리스트</h2></div>
-                    <div></div>
-                    <div className="btn-group me-2">
-                        <button type="button" className={`btn btn-sm ${onOff ? 'btn-light' : 'btn-secondary'}`} onClick={() => setOnOff(false)}>전체보기</button>
-                        <button type="button" className={`btn btn-sm ${onOff ? 'btn-secondary' : 'btn-light'}`} onClick={() => setOnOff(true)}>북마크보기</button>
-                    </div>
-                </div>
+            <Box p={5}>
+                <Box
+                    width="100%"
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    mb={5}
+                >
+                    <Box>
+                        <Typography variant="h2">채용공고 리스트</Typography>
+                    </Box>
+                    <Box>
+                        <MKButton variant={onOff ? 'outlined' : 'contained'} color='dark' onClick={() => setOnOff(false)}>전체보기</MKButton>
+                        <MKButton variant={onOff ? 'contained' : 'outlined'} color='dark' onClick={() => setOnOff(true)}>북마크보기</MKButton>
+                    </Box>
+                </Box>
                 <JobList postings={onOff ? bookmarks : postings} userInfo={userInfo} bookmarks={bookmarks} />
-            </>
+            </Box>
         </>
     )
 }
-
-
-
-
-
-
-
-
