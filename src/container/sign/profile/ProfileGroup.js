@@ -14,7 +14,7 @@ export default (props) => {
 
     const handleGroupCard = (group) => {
         // alert(JSON.stringify(group))
-        if (window.confirm(group.project_name + '으로 이동하시겠습니까?')) {
+        if (window.confirm(`${group.project_name}으로 이동하시겠습니까?`)) {
             navigate(`/workspace/${group._id}`);
         }
     }
