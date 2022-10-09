@@ -2,26 +2,20 @@ import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import GroupCard from "../../../component/group/card/GroupCard";
 import * as API from "../../../api/API";
+import GroupCardV2 from "component/group/card/GroupCardV2";
+import { useNavigate } from "react-router-dom";
 
 export default (props) => {
+    
+    const navigate = useNavigate();
+
     const [groups, setGroups] = useState([]);
     const [group, setGroup] = useState({});
 
-    // useEffect(()=>{
-    //     getGroup();
-    // }, []);
-
-    // const getGroup = async () => {
-    //     const group = await API.getGroupById({ _id: project_id })
-
-    //     setGroup(group);
-    // }
-
-    // const [selectedGroup, setSelectedGroup] = useState(null);
-    const setSelectedGroup = (group) => {
+    const handleGroupCard = (group) => {
         // alert(JSON.stringify(group))
         if (window.confirm(group.project_name + '으로 이동하시겠습니까?')) {
-            window.location.href = "/project/" + group._id;
+            navigate(`/workspace/${group._id}`);
         }
     }
 
@@ -61,10 +55,10 @@ export default (props) => {
                             <>
                                 {
                                     groups.map((group) => (
-                                        <GroupCard
+                                        <GroupCardV2
                                             key={group._id}
                                             group={group}
-                                            setSelectedGroup={setSelectedGroup}
+                                            handleGroupCard={handleGroupCard}
                                         />
                                     ))
                                 }
@@ -86,10 +80,10 @@ export default (props) => {
                                 {
                                     groups.map((group) => {
                                         if (group.end_project == true) {
-                                           return <GroupCard
+                                           return <GroupCardV2
                                                 key={group._id}
                                                 group={group}
-                                                setSelectedGroup={setSelectedGroup}
+                                                handleGroupCard={handleGroupCard}
                                             />
                                         }
                                         else
