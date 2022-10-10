@@ -1,28 +1,23 @@
+import { Card, CardActionArea, CardContent, Stack, Typography } from "@mui/material"
+
 export default (props) => {
     // 수정 예정
     return (
-        <div>
-            <div className="list-group list-group-light">
-                <a
-                    href="#"
-                    className="list-group-item list-group-item-action px-3 py-3 border-0 border-top border-bottom"
-                    onClick={() => props.handleClick(props.posting)}
-                >
-                    <div className="row">
-                        <div className="col">
-                            <h5>{props.posting.name}</h5>
-                        </div>
-                        <div className="col-6">
-                            <h5>{props.posting.title}</h5>
-                        </div>
-                        <div className="col">
-                            <p>{props.posting.field}</p>
-                            <p>~{props.posting.period}</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-        </div>
+        <Card
+            sx={{
+                my:2,
+                // backgroundColor:'#f3f3f3'
+            }}
+            onClick={() => props.handleClick(props.posting)}
+        >
+            <CardActionArea>
+                <CardContent>
+                <Typography variant="h2">{props.posting.name}</Typography>
+                <Typography variant="h3">{props.posting.title}</Typography>
+                <Typography variant="h5">{props.posting.field}</Typography>
+                <Typography variant="h6">{props.posting.period}</Typography>
+                </CardContent>
+            </CardActionArea>
+        </Card>
     )
 }
