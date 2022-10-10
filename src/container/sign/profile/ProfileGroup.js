@@ -4,9 +4,10 @@ import GroupCard from "../../../component/group/card/GroupCard";
 import * as API from "../../../api/API";
 import GroupCardV2 from "component/group/card/GroupCardV2";
 import { useNavigate } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 
 export default (props) => {
-    
+
     const navigate = useNavigate();
 
     const [groups, setGroups] = useState([]);
@@ -44,10 +45,10 @@ export default (props) => {
 
     return (
         <>
-
-            <div className="my-3">
-                <br />
-                <h4>현재 소속 그룹</h4>
+            <Box sx={{ my: 3 }}>
+                <Typography variant="h4">
+                    현재 소속 그룹
+                </Typography>
                 <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
                         groups.length > 0
@@ -64,39 +65,35 @@ export default (props) => {
                                 }
                             </>
                             :
-                            <div>프로젝트가 없습니다.</div>
+                            <Typography variant="h6">현재 소속된 프로젝트가 없습니다.</Typography>
                     }
                 </div>
-            </div>
+            </Box>
 
-            <div className="my-3">
-                <br />
-                <h4>종료된 소속 그룹</h4>
+            <Box sx={{ my: 3 }}>
+                <Typography variant="h4">
+                    종료된 소속 그룹
+                </Typography>
                 <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
-                        groups.length > 0
+                        groups.filter((group) => group.end_project === true).length > 0
                             ?
                             <>
                                 {
-                                    groups.map((group) => {
-                                        if (group.end_project == true) {
-                                           return <GroupCardV2
-                                                key={group._id}
-                                                group={group}
-                                                handleGroupCard={handleGroupCard}
-                                            />
-                                        }
-                                        else
-                                        {<div>종료된 프로젝트가 없습니다.</div>}   
-                                    }
-                                    )
+                                    groups.filter((group) => group.end_project === true).map((group) => (
+                                        <GroupCardV2
+                                            key={group._id}
+                                            group={group}
+                                            handleGroupCard={handleGroupCard}
+                                        />
+                                    ))
                                 }
                             </>
                             :
-                            <div>종료된 프로젝트가 없습니다.</div>
+                            <Typography variant="h6">종료된 프로젝트가 없습니다.</Typography>
                     }
                 </div>
-            </div>
+            </Box>
         </>
     )
 }
