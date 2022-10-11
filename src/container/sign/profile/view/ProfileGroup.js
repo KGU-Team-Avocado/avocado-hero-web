@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
+import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
 import GroupCardV2 from "component/group/card/GroupCardV2";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as API from "../../../../api/API";
 
@@ -20,27 +22,18 @@ export default (props) => {
         }
     }
 
-    const [appliedGroups, setAppliedGroups] = useState([]);
-    const sessionStorage = window.sessionStorage;
+    const user = useSelector(selectUser);
 
     useEffect(() => {
-        if (sessionStorage.getItem("user")) {
-            const userInfo = JSON.parse(sessionStorage.getItem("user"))
-            axios.post("/groupsRouter/getAppliedGroup", {
-                user_id: userInfo.user_id,
-            }).then((response) => {
-                setAppliedGroups(response.data);
-            }).catch(function (error) {
-                console.log(error);
-            });
-            axios.post("/groupsRouter/getMyGroup", {
-                user_id: userInfo.user_id,
-            }).then((response) => {
-                setLiveGroups(response.data);
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }
+        // API로 분리할 필요성이 있음
+        axios.post("/groupsRouter/getMyGroup", {
+            user_id: user.user_id,
+        }).then((response) => {
+            setLiveGroups(response.data);
+            setEndGroups(response.data.filter((group) => group.end_project === true))
+        }).catch(function (error) {
+            console.log(error);
+        });
     }, []);
 
     return (
@@ -76,11 +69,11 @@ export default (props) => {
                 </Typography>
                 <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
-                        liveGroups.filter((group) => group.end_project === true).length > 0
+                        endGroups.length > 0
                             ?
                             <>
                                 {
-                                    liveGroups.filter((group) => group.end_project === true).map((group) => (
+                                    endGroups.map((group) => (
                                         <GroupCardV2
                                             key={group._id}
                                             group={group}
