@@ -9,11 +9,11 @@ import Button from 'react-bootstrap/Button';
 import Form from "react-bootstrap/Form";
 import { MultiSelect } from "react-multi-select-component";
 import AddInput from "./AddInput";
-import './profile.css';
+import '../profile.css';
 import InputGroup from 'react-bootstrap/InputGroup';
-import Avatar from "./avatar/Avatar";
-import AvatarEditButton from "./avatar/AvatarEditButton";
 import ModifyOption from "./ModifyOption";
+import Avatar from "../avatar/Avatar";
+import AvatarEditButton from "../avatar/AvatarEditButton";
 
 const ProfileEdit = (props) => {
     const [edit, setEdit] = useState(false);

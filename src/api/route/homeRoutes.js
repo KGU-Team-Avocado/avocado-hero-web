@@ -10,8 +10,8 @@ import GroupFinderContainer from "container/group/finder/GroupFinderContainer";
 import WorkspaceListContainer from "container/group/workspace/WorkspaceListContainer";
 import HomeContainer from "container/home/HomeContainer";
 import JobFinderContainer from "container/jobFinder/JobFinderContainer";
-import ProfileContainer from "container/sign/profile/ProfileContainer";
-import ProfileUpdate from "container/sign/profile/ProfileUpdate";
+import ProfileUpdate from "container/sign/profile/edit/ProfileUpdate";
+import ProfileContainer from "container/sign/profile/view/ProfileContainer";
 import SignInContainer from "container/sign/sign_in/SignInContainer";
 import SignUpContainer from "container/sign/sign_up/SignUpContainer";
 

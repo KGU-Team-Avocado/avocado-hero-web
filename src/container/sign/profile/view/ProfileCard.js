@@ -1,29 +1,23 @@
-import { useEffect, useState, useRef } from "react";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-import ProfileUpdate from "./ProfileUpdate";
-import { useResolvedPath } from "react-router-dom";
-import TechStack from "../../../component/common/TechStack";
-import { Link } from 'react-router-dom';
-import GroupCard from "../../../component/group/card/GroupCard";
-import Avatar from "./avatar/Avatar";
-import { Box, Card, CardActionArea, CardContent, Grid, Stack, Typography } from "@mui/material";
+import { Card, CardActionArea, CardContent, Grid, Stack, Typography } from "@mui/material";
+import TechStack from "component/common/TechStack";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Avatar from "../avatar/Avatar";
 import ProfileGroup from "./ProfileGroup";
 import ProfilePortpolio from "./ProfilePortpolio";
 
 export default (props) => {
 
+    const navigate = useNavigate();
     const [groups, setGroups] = useState([]);
 
     const setSelectedGroup = (group) => {
         if (window.confirm(group.project_name + '으로 이동하시겠습니까?')) {
-            window.location.href = "/project/" + group._id;
+            navigate(`/workspace/${group._id}`);
         }
     }
 
     const user = props.profile;
-
 
     return (
         <>

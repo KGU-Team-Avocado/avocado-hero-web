@@ -1,21 +1,13 @@
-import axios from "axios";
-import { useEffect, useState, useRef } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { MultiSelect } from "react-multi-select-component";
-import AddInput from "./AddInput";
-// import './profile.css';
-import ProfileCard from "./ProfileCard";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import ProfileGroup from './ProfileGroup';
-import ProfilePortpolio from './ProfilePortpolio';
-import * as API from "../../../api/API"
-import { useSelector } from "react-redux";
-import { selectUser } from "api/redux/user/userSlice";
-import MKButton from "component/common/mui-components/MKButton";
-import { Alert, Box, CircularProgress, Collapse, IconButton, Stack, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import { Alert, Box, CircularProgress, Collapse, IconButton, Typography } from '@mui/material';
+import { selectUser } from 'api/redux/user/userSlice';
+import MKButton from 'component/common/mui-components/MKButton';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import * as API from "../../../../api/API"
+import ProfileCard from './ProfileCard';
+
 
 const ProfileContainer = () => {
     const navigate = useNavigate();

@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { role } from "../../../assets/tag/Role";
-import * as API from "../../../api/API";
+import { role } from "../../../../assets/tag/Role";
+import * as API from "../../../../api/API";
 import { CardMembership, Groups } from "@mui/icons-material";
-import GroupCard from "../../../component/group/card/GroupCard";
+import GroupCard from "../../../../component/group/card/GroupCard";
 import RoleCard from "component/group/card/RoleCard";
 import { ResponsiveBar } from '@nivo/bar'
 

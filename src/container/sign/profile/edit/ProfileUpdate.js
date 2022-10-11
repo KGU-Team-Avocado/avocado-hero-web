@@ -1,16 +1,11 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Form from "react-bootstrap/Form";
 import { MultiSelect } from "react-multi-select-component";
 import AddInput from "./AddInput";
-import './profile.css';
+import '../profile.css';
 import ProfileEdit from "./ProfileEdit";
-import * as API from "../../../api/API"
+import * as API from "../../../../api/API"
 
 export default () => {
     const params = useParams(); //url로 넘어온 파라미터를 받는 역할 (App.js 의 :id 참고)

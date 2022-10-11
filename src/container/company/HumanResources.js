@@ -3,7 +3,6 @@ import ProfileViewModal from "component/jobFinder/modal/ProfileViewModal";
 import { useEffect, useState } from "react";
 import * as API from "../../api/API"
 import UserProfileCard from "../../component/jobFinder/UserProfileCard";
-import ProfileCard from "../sign/profile/ProfileCard";
 
 const HumanResources = () => {
 

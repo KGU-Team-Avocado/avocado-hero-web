@@ -3,7 +3,7 @@ import { BiBookmark } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
-import ProfileCard from "container/sign/profile/ProfileCard";
+import ProfileCard from "container/sign/profile/view/ProfileCard";
 
 export default (props) => {
 

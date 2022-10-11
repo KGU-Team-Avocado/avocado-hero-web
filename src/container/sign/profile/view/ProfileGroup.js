@@ -1,17 +1,17 @@
-import axios from "axios";
-import { useEffect, useState, useRef } from "react";
-import GroupCard from "../../../component/group/card/GroupCard";
-import * as API from "../../../api/API";
-import GroupCardV2 from "component/group/card/GroupCardV2";
-import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
+import axios from "axios";
+import GroupCardV2 from "component/group/card/GroupCardV2";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import * as API from "../../../../api/API";
+
 
 export default (props) => {
 
     const navigate = useNavigate();
 
-    const [groups, setGroups] = useState([]);
-    const [group, setGroup] = useState({});
+    const [liveGroups, setLiveGroups] = useState([]);
+    const [endGroups, setEndGroups] = useState({});
 
     const handleGroupCard = (group) => {
         // alert(JSON.stringify(group))
@@ -36,7 +36,7 @@ export default (props) => {
             axios.post("/groupsRouter/getMyGroup", {
                 user_id: userInfo.user_id,
             }).then((response) => {
-                setGroups(response.data);
+                setLiveGroups(response.data);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -51,11 +51,11 @@ export default (props) => {
                 </Typography>
                 <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
-                        groups.length > 0
+                        liveGroups.length > 0
                             ?
                             <>
                                 {
-                                    groups.map((group) => (
+                                    liveGroups.map((group) => (
                                         <GroupCardV2
                                             key={group._id}
                                             group={group}
@@ -76,11 +76,11 @@ export default (props) => {
                 </Typography>
                 <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
-                        groups.filter((group) => group.end_project === true).length > 0
+                        liveGroups.filter((group) => group.end_project === true).length > 0
                             ?
                             <>
                                 {
-                                    groups.filter((group) => group.end_project === true).map((group) => (
+                                    liveGroups.filter((group) => group.end_project === true).map((group) => (
                                         <GroupCardV2
                                             key={group._id}
                                             group={group}
