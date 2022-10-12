@@ -27,16 +27,7 @@ function FileUploadExample() {
     setImage(img)
   }
 
-  const [image, setImage] = useState();
-
-  useEffect(()=>{
-
-  },[]);
-
-  const loadImage = async (id) => {
-    const response = await fetch(`testsRouter/testImg/${id}`);
-
-  }
+  const [uploadedImage, setUploadedImage] = useState();
 
   return (
     <div className='App'>
@@ -44,12 +35,11 @@ function FileUploadExample() {
       {`현재 로그인 된 아이디 : ${user?.user_id}`}
       <hr />
       <h3>해당 아이디로 업로드 된 이미지</h3>
-      {image}
-      {/* <img
-        src={`http://localhost:5000/testsRouter/testImg/${user?.user_id}`}
+      <img
+        src={`${process.env.REACT_APP_API_URL}/testsRouter/testImg/${user?.user_id}`}
         alt='사진이 서버에 없는뎁쇼'
         width='300' height='300'
-      /> */}
+      />
       <hr />
       <form onSubmit={handleSubmit}>
         <div>

@@ -110,19 +110,6 @@ const JobPosting = () => {
   return (
 
     <div>
-
-      {/* <div style={{
-        height: "2px",
-        width: "500px",
-        overflow: "visible",
-        color: "#999",
-        position: "relative",
-        margin: "2em auto",
-        background: "linear-gradient(to right, transparent, #999, transparent)",
-      }}>
-      </div> */}
-
-
         <div style={{
           // margin:30, 
           width: "200px", textAlign: "center", fontSize: "20px"}}>회사명
