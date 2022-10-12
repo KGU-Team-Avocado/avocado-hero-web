@@ -33,7 +33,11 @@ function FileUploadExample() {
       {`현재 로그인 된 아이디 : ${user?.user_id}`}
       <hr />
       <h3>해당 아이디로 업로드 된 이미지</h3>
-      <img src='' alt='사진이 서버에 없는뎁쇼' />
+      <img
+        src={`http://localhost:5000/testsRouter/testImg/${user?.user_id}`}
+        alt='사진이 서버에 없는뎁쇼'
+        width='300' height='300'
+      />
       <hr />
       <form onSubmit={handleSubmit}>
         <div>
@@ -52,7 +56,7 @@ function FileUploadExample() {
 
       </form>
       {status && <div className='my-2'>
-        <hr/>
+        <hr />
         <h3>전송 상태</h3>
         <h4>{status}</h4>
       </div>
