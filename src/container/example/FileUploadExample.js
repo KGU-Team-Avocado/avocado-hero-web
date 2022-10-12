@@ -1,6 +1,9 @@
+import { selectUser } from 'api/redux/user/userSlice'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 function FileUploadExample() {
+  const user = useSelector(selectUser);
   const [image, setImage] = useState({ preview: '', data: '' })
   const [status, setStatus] = useState('')
   const handleSubmit = async (e) => {
@@ -26,6 +29,7 @@ function FileUploadExample() {
   return (
     <div className='App'>
       <h1>Upload to server</h1>
+      {`${user?.user_id}`}
       {image.preview && <img src={image.preview} width='100' height='100' />}
       <hr></hr>
       <form onSubmit={handleSubmit}>
@@ -38,45 +42,3 @@ function FileUploadExample() {
 }
 
 export default FileUploadExample
-
-
-// import React, {useState} from 'react';
-// import axios from 'axios';
-
-// function FileUploadExample() {
-
-//   const [file, setFile] = useState()
-
-//   function handleChange(event) {
-//     setFile(event.target.files[0])
-//   }
-  
-//   function handleSubmit(event) {
-//     event.preventDefault()
-//     const url = '/testsRouter/uploadFile';
-//     const formData = new FormData();
-//     formData.append('file', file);
-//     formData.append('fileName', file.name);
-//     const config = {
-//       headers: {
-//         'content-type': 'multipart/form-data',
-//       },
-//     };
-//     axios.post(url, formData, config).then((response) => {
-//       console.log(response.data);
-//     });
-
-//   }
-
-//   return (
-//     <div className="App">
-//         <form onSubmit={handleSubmit}>
-//           <h1>React File Upload</h1>
-//           <input type="file" onChange={handleChange}/>
-//           <button type="submit">Upload</button>
-//         </form>
-//     </div>
-//   );
-// }
-
-// export default FileUploadExample;
