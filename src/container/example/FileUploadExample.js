@@ -9,8 +9,8 @@ function FileUploadExample() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     let formData = new FormData()
-    formData.append('file', image.data);
     formData.append('user_id',user?.user_id);
+    formData.append('file', image.data); //반드시 file을 마지막에 append 해야 오류가 없음!!
     const response = await fetch('/testsRouter/uploadFile', {
       method: 'POST',
       body: formData,
