@@ -9,7 +9,8 @@ function FileUploadExample() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     let formData = new FormData()
-    formData.append('file', image.data)
+    formData.append('file', image.data);
+    formData.append('user_id',user?.user_id);
     const response = await fetch('/testsRouter/uploadFile', {
       method: 'POST',
       body: formData,
