@@ -9,7 +9,7 @@ function FileUploadExample() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     let formData = new FormData()
-    formData.append('user_id',user?.user_id);
+    formData.append('user_id', user?.user_id);
     formData.append('file', image.data); //반드시 file을 마지막에 append 해야 오류가 없음!!
     const response = await fetch('/testsRouter/uploadFile', {
       method: 'POST',
@@ -30,14 +30,33 @@ function FileUploadExample() {
   return (
     <div className='App'>
       <h1>Upload to server</h1>
-      {`${user?.user_id}`}
-      {image.preview && <img src={image.preview} width='100' height='100' />}
-      <hr></hr>
+      {`현재 로그인 된 아이디 : ${user?.user_id}`}
+      <hr />
+      <h3>해당 아이디로 업로드 된 이미지</h3>
+      <img src='' alt='사진이 서버에 없는뎁쇼' />
+      <hr />
       <form onSubmit={handleSubmit}>
-        <input type='file' name='file' onChange={handleFileChange}></input>
-        <button type='submit'>Submit</button>
+        <div>
+          <h3>업로드 하기</h3>
+          <input className='form-control' type='file' name='file' onChange={handleFileChange}></input>
+        </div>
+        {image.preview && <>
+          <div className='my-3'>
+            <img src={image.preview} width='300' height='300' />
+          </div>
+          <div>
+            <button className='btn btn-success' type='submit'>업로드 하기</button>
+          </div>
+        </>
+        }
+
       </form>
-      {status && <h4>{status}</h4>}
+      {status && <div className='my-2'>
+        <hr/>
+        <h3>전송 상태</h3>
+        <h4>{status}</h4>
+      </div>
+      }
     </div>
   )
 }
