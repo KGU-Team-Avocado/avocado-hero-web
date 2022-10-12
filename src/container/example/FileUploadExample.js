@@ -35,7 +35,7 @@ function FileUploadExample() {
 
   const loadImage = async (id) => {
     const response = await fetch(`testsRouter/testImg/${id}`);
-    
+
   }
 
   return (
@@ -44,7 +44,7 @@ function FileUploadExample() {
       {`현재 로그인 된 아이디 : ${user?.user_id}`}
       <hr />
       <h3>해당 아이디로 업로드 된 이미지</h3>
-      { <img alt="dontknowyet" className="blog-list-image" src={image} // and so on...}
+      {image}
       {/* <img
         src={`http://localhost:5000/testsRouter/testImg/${user?.user_id}`}
         alt='사진이 서버에 없는뎁쇼'
