@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/avocado-hero-web/static/css/main.ef524245.css",
+    "main.js": "/avocado-hero-web/static/js/main.7e0a6ea2.js",
+    "static/js/787.0e057c44.chunk.js": "/avocado-hero-web/static/js/787.0e057c44.chunk.js",
+    "static/media/title.jpg": "/avocado-hero-web/static/media/title.eecd89d29d7d0f8da641.jpg",
+    "static/media/bg2.jpg": "/avocado-hero-web/static/media/bg2.561b23be47f5f633635f.jpg",
+    "static/media/bootstrap-icons.woff?": "/avocado-hero-web/static/media/bootstrap-icons.e559bf06bc84fd9525e6.woff",
+    "static/media/bootstrap-icons.woff2?": "/avocado-hero-web/static/media/bootstrap-icons.ea98e12d2d58747f9fc5.woff2",
+    "static/media/logo.svg": "/avocado-hero-web/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/avocado-hero-web/index.html",
+    "main.ef524245.css.map": "/avocado-hero-web/static/css/main.ef524245.css.map",
+    "main.7e0a6ea2.js.map": "/avocado-hero-web/static/js/main.7e0a6ea2.js.map",
+    "787.0e057c44.chunk.js.map": "/avocado-hero-web/static/js/787.0e057c44.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef524245.css",
+    "static/js/main.7e0a6ea2.js"
+  ]
+}
