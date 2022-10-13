@@ -4,8 +4,10 @@ import { useSelector } from 'react-redux'
 
 function FileUploadExample() {
   const user = useSelector(selectUser);
+  const [uploadedImage, setUploadedImage] = useState('');
   const [image, setImage] = useState({ preview: '', data: '' })
   const [status, setStatus] = useState('')
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     let formData = new FormData()
@@ -27,7 +29,16 @@ function FileUploadExample() {
     setImage(img)
   }
 
-  const [uploadedImage, setUploadedImage] = useState();
+  const fetchImage = async () => {
+    const res = await fetch(`/testsRouter/testImg/${user?.user_id}`);
+    const imageBlob = await res.blob();
+    const imageObjectURL = URL.createObjectURL(imageBlob);
+    setUploadedImage(imageObjectURL);
+  };
+
+  useEffect(() => {
+    fetchImage();
+  }, []);
 
   return (
     <div className='App'>
@@ -35,6 +46,12 @@ function FileUploadExample() {
       {`현재 로그인 된 아이디 : ${user?.user_id}`}
       <hr />
       <h3>해당 아이디로 업로드 된 이미지</h3>
+      {/* fetch + state로 작업하기 */}
+      <img
+        src={uploadedImage}
+        alt='사진이 서버에 없는뎁쇼'
+        width='300' height='300'
+      />
       <img
         src={`${process.env.REACT_APP_API_URL}/testsRouter/testImg/${user?.user_id}`}
         alt='사진이 서버에 없는뎁쇼'

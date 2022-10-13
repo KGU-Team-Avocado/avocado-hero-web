@@ -6,6 +6,7 @@ export default (props) => {
     let userImage;
     try {
         userImage = require(`../../../../assets/img/profile/${props.user_id}.png`)
+        // userImage=fetch
     }
     catch (e) {
         if (e instanceof Error && e.code === "MODULE_NOT_FOUND")
