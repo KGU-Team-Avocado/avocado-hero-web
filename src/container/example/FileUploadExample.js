@@ -52,11 +52,11 @@ function FileUploadExample() {
         alt='사진이 서버에 없는뎁쇼'
         width='300' height='300'
       />
-      <img
+      {/* <img
         src={`${process.env.REACT_APP_API_URL}/testsRouter/testImg/${user?.user_id}`}
         alt='사진이 서버에 없는뎁쇼'
         width='300' height='300'
-      />
+      /> */}
       <hr />
       <form onSubmit={handleSubmit}>
         <div>

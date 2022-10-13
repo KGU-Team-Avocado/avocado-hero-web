@@ -1,29 +1,34 @@
+import { useEffect, useState } from "react";
+
 export default (props) => {
-    /**
-     * 지금은 파일을 프론트에서 찾고 있는데, 앞으로는 axios를 사용하여 nodejs에서 받아와야 하는 방식으로 바꿔야 함.
-     * 현재는 require 문법 테스트 하느라 임시로 이렇게 해둠
-     */
-    let userImage;
-    try {
-        userImage = require(`../../../../assets/img/profile/${props.user_id}.png`)
-        // userImage=fetch
-    }
-    catch (e) {
-        if (e instanceof Error && e.code === "MODULE_NOT_FOUND")
-            console.log("Can't load foo!");
-        else
-            throw e;
-    }
+    const [uploadedImage, setUploadedImage] = useState(null);
+
+    const fetchImage = async () => {
+        const res = await fetch(`/usersRouter/profileImage/${props?.user_id}`);
+        const imageBlob = await res.blob();
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+        if(res.status==200){
+            setUploadedImage(imageObjectURL);
+        }
+        else{
+            setUploadedImage(null);
+        }
+    };
+
+    useEffect(() => {
+        fetchImage();
+    }, []);
+
     return (
         <>
             <div class="itemCenter">
                 {
-                    userImage ?
+                    uploadedImage ?
                         <img
                             className="img-thumbnail rounded-circle"
                             width="140"
                             height="140"
-                            src={userImage}
+                            src={uploadedImage}
                             alt="profile"
                         />
                         :
