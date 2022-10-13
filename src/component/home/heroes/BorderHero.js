@@ -19,7 +19,7 @@ export default () => {
                             <CardMedia
                                 component="img"
                                 height="140" col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg
-                                image="/logo512.png"
+                                image="./logo512.png"
                                 alt="green iguana"
                             />
                             <CardContent>

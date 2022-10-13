@@ -12,7 +12,7 @@ export default (props) => {
                         <CardMedia
                             component="img"
                             height="200"
-                            image="/logo512.png"
+                            image="./logo512.png"
                             alt="green iguana"
                         />
                     </Stack>

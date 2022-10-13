@@ -3,7 +3,7 @@ import axios from "axios";
 export const loginCheck = async (user_id, user_password) => {
     console.log(user_id, user_password);
     try {
-        const response = await axios.post("usersRouter/login", {
+        const response = await axios.post("/usersRouter/login", {
           id: user_id,
           password: user_password,
         })

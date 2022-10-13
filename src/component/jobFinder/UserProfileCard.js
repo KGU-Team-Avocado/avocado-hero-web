@@ -10,7 +10,7 @@ export default ({ user, handleUserProfileCard }) => {
                     <CardMedia
                         component="img"
                         height="140"
-                        image="/logo512.png"
+                        image="./logo512.png"
                         alt="green iguana"
                     />
                     <CardContent>
