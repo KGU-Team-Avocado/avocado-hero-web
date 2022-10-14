@@ -63,7 +63,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
 
   const logout = () => {
     sessionStorage.clear();
-    window.location.href = '/'
+    window.location.href = ''
   };
 
 
