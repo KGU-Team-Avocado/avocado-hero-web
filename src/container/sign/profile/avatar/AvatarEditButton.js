@@ -16,10 +16,10 @@
 //         method: 'POST',
 //         body: formData,
 //       })
-  
+
 //       if (response) window.location.reload()
 //     }
-  
+
 //     const handleFileChange = (e) => {
 //       const img = {
 //         preview: URL.createObjectURL(e.target.files[0]),
@@ -51,10 +51,9 @@ import { selectUser } from 'api/redux/user/userSlice'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-export default ({fetchImage}) => {
+export default ({ setProfileImage }) => {
   const user = useSelector(selectUser);
   const [image, setImage] = useState({ preview: '', data: '' })
-  const [status, setStatus] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -67,8 +66,7 @@ export default ({fetchImage}) => {
     })
 
     if (response) {
-      setStatus(response.response)
-      fetchImage();
+      setProfileImage(); //부모의 프로필 이미지를 수정해줌
       setImage({ preview: '', data: '' });
     }
   }
@@ -83,7 +81,7 @@ export default ({fetchImage}) => {
 
   return (
     <div className='App'>
-      
+
       <form onSubmit={handleSubmit}>
         <div>
           <h3>업로드 하기</h3>
@@ -98,14 +96,7 @@ export default ({fetchImage}) => {
           </div>
         </>
         }
-
       </form>
-      {status && <div className='my-2'>
-        <hr />
-        <h3>전송 상태</h3>
-        <h4>{status}</h4>
-      </div>
-      }
     </div>
   )
 }

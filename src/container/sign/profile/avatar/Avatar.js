@@ -1,24 +1,17 @@
 import { useEffect, useState } from "react";
 import AvatarEditButton from "./AvatarEditButton";
+import * as API from '../../../../api/API';
 
 export default ({ user_id, edit }) => {
     const [uploadedImage, setUploadedImage] = useState(null);
 
-    const fetchImage = async (user_id) => {
-        const res = await fetch(`/usersRouter/profileImage/${user_id}`);
-        const imageBlob = await res.blob();
-        const imageObjectURL = URL.createObjectURL(imageBlob);
-        if (res.status == 200) {
-            setUploadedImage(imageObjectURL);
-        }
-        else {
-            setUploadedImage(null);
-        }
-    };
-
     useEffect(() => {
-        fetchImage(user_id);
+        setProfileImage();
     }, []);
+
+    const setProfileImage = async () => {
+        setUploadedImage(await API.fetchImage(user_id)); //프로필 이미지 불러오는 코드
+    }
 
     return (
         <>
@@ -48,7 +41,7 @@ export default ({ user_id, edit }) => {
                         </svg>
                 }
                 {
-                    edit && <AvatarEditButton fetchImage={fetchImage}/>
+                    edit && <AvatarEditButton setProfileImage={setProfileImage}/>
                 }
             </div>
         </>
