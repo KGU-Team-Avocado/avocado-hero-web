@@ -44,7 +44,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
-
+import * as API from '../../../../../api/API';
 
 function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
 
@@ -58,7 +58,6 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
     navigate(url);
     setAnchorEl(null);
   };
-
 
   const userInfo = useSelector(selectUser);
 
@@ -80,7 +79,15 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
 
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
 
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const setProfileImage = async () => {
+    setUploadedImage(await API.fetchImage(userInfo?.user_id)); //프로필 이미지 불러오는 코드
+  }
+
   useEffect(() => {
+
+    setProfileImage();
+
     // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
       if (window.innerWidth < breakpoints.values.lg) {
@@ -288,7 +295,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
               item.name
             )}
             {item.collapse && (
-              <ArrowDropDownIcon/>
+              <ArrowDropDownIcon />
               // <Icon
               //   fontSize="small"
               //   sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
@@ -421,7 +428,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                     item.name
                   )}
                   {item.collapse && (
-                    <ArrowDropDownIcon/>
+                    <ArrowDropDownIcon />
                     // <Icon
                     //   fontSize="small"
                     //   sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
@@ -528,13 +535,29 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                   >
-                    <img
-                      src="https://github.com/mdo.png"
-                      alt="mdo"
-                      width="32"
-                      height="32"
-                      className="rounded-circle mx-1"
-                    />
+                    {
+                      uploadedImage
+                        ?
+                        <img
+                          src={uploadedImage}
+                          width="32"
+                          height="32"
+                          className="rounded-circle mx-1"
+                        />
+                        :
+                        <svg
+                          className="img-thumbnail rounded-circle"
+                          width="32"
+                          height="32"
+                          xmlns="http://www.w3.org/2000/svg"
+                          role="img"
+                          aria-label="Placeholder: 140x140"
+                          preserveAspectRatio="xMidYMid slice"
+                          focusable="false"
+                        >
+                          <rect width="100%" height="100%" fill="#777" />
+                        </svg>
+                    }
                     <div className="mx-1">{userInfo.user_id}</div>
                     <ArrowDropDownIcon />
                   </MKButton>
