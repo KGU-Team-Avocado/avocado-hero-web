@@ -4,13 +4,20 @@ import * as API from '../../api/API';
 
 export default ({ user, handleUserProfileCard }) => {
     const [uploadedImage, setUploadedImage] = useState(null);
+    const [isLoaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        setProfileImage();
+        if(isLoaded===false){
+            setProfileImage();
+        }
+        return () => {
+            setLoaded(true);
+        }
     }, []);
 
     const setProfileImage = async () => {
         setUploadedImage(await API.fetchImage(user.user_id)); //프로필 이미지 불러오는 코드
+        setLoaded(true);
     }
 
     return (

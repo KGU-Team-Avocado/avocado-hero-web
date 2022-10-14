@@ -572,9 +572,9 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                       'aria-labelledby': 'basic-button',
                     }}
                   >
-                    <MenuItem onClick={() => handleClose(`/user/${userInfo.user_id}`)}>Profile</MenuItem>
-                    <MenuItem onClick={() => handleClose(`myWorkspace`)}>My Workspace</MenuItem>
-                    <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                    <MenuItem onClick={() => handleClose(`/user/${userInfo.user_id}`)}>프로필</MenuItem>
+                    <MenuItem onClick={() => handleClose(`myWorkspace`)}>내 워크스페이스</MenuItem>
+                    <MenuItem onClick={() => logout()}>로그아웃</MenuItem>
                   </Menu>
                 </>
               ) : (
