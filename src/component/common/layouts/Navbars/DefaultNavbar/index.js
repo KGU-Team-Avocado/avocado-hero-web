@@ -86,8 +86,6 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
 
   useEffect(() => {
 
-    setProfileImage();
-
     // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
       if (window.innerWidth < breakpoints.values.lg) {
@@ -111,6 +109,10 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
+
+  useEffect(()=>{
+    setProfileImage();
+  },[userInfo]);
 
   const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
     <DefaultNavbarDropdown
