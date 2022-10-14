@@ -7,9 +7,6 @@ export default ({ user_id, edit }) => {
 
     useEffect(() => {
         setProfileImage();
-        return () =>{
-            setUploadedImage(null);
-        }
     }, [user_id]);
 
     const setProfileImage = async () => {
