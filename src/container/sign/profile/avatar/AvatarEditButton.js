@@ -33,25 +33,25 @@ export default ({ setProfileImage }) => {
   }
 
   return (
-      <FormControl>
-        <Stack>
-          <Typography variant='h4' my={1}>사진 수정하기</Typography>
-          <input className='form-control' type='file' name='file' onChange={handleFileChange}></input>
-        </Stack>
-        {image.preview && <>
-          <Box my={3}>
-            <img src={image.preview} width='300' height='300' />
-          </Box>
-          <MKButton
-           variant="contained" 
-           color='success' 
-           type='submit'
-           onClick={handleSubmit}
-           >
-            업로드 하기
-            </MKButton>
-        </>
-        }
-      </FormControl>
+    <FormControl>
+      <Stack>
+        <Typography variant='h4' my={1}>사진 수정하기</Typography>
+        <input className='form-control' type='file' name='file' onChange={handleFileChange}></input>
+      </Stack>
+      {image.preview && <>
+        <Box my={3}>
+          <img src={image.preview} width='300' height='300' />
+        </Box>
+        <MKButton
+          variant="contained"
+          color='success'
+          type='submit'
+          onClick={handleSubmit}
+        >
+          업로드 하기
+        </MKButton>
+      </>
+      }
+    </FormControl>
   )
 }
