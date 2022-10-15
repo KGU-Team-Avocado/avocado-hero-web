@@ -5,9 +5,13 @@ import { Card, CardContent, FormControl, FormControlLabel, FormLabel, IconButton
 import MKButton from "component/common/mui-components/MKButton";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "api/redux/user/userSlice";
 
 export default () => {
     let navigate = useNavigate();
+
+    const user = useSelector(selectUser);
 
     const [values, setValues] = useState({
         id: '',
@@ -73,98 +77,107 @@ export default () => {
                 }
             }}>
                 <CardContent>
-                    <Typography variant="h2">회원가입</Typography>
-                    <Stack my={3} spacing={1}>
-                        {/* id */}
-                        <TextField
-                            id="outlined-basic-id"
-                            label="아이디"
-                            variant="outlined"
-                            onChange={handleChange('id')}
-                        />
-                        {/* pw */}
-                        <FormControl sx={{}} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">비밀번호</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
-                                value={values.password}
-                                onChange={handleChange('password')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={() => setShowPassword(!showPassword)}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
+                    {
+                        user
+                            ?
+                            <Typography variant="h3">이미 로그인이 되어있네요</Typography>
+                            :
+                            <>
+                                <Typography variant="h2">회원가입</Typography>
+                                <Stack my={3} spacing={1}>
+                                    {/* id */}
+                                    <TextField
+                                        id="outlined-basic-id"
+                                        label="아이디"
+                                        variant="outlined"
+                                        onChange={handleChange('id')}
+                                    />
+                                    {/* pw */}
+                                    <FormControl sx={{}} variant="outlined">
+                                        <InputLabel htmlFor="outlined-adornment-password">비밀번호</InputLabel>
+                                        <OutlinedInput
+                                            id="outlined-adornment-password"
+                                            type={showPassword ? 'text' : 'password'}
+                                            value={values.password}
+                                            onChange={handleChange('password')}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={() => setShowPassword(!showPassword)}
+                                                        onMouseDown={handleMouseDownPassword}
+                                                        edge="end"
+                                                    >
+                                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                            label="Password"
+                                        />
+                                    </FormControl>
+                                    {/* confirmPassword */}
+                                    <FormControl sx={{}} variant="outlined">
+                                        <InputLabel htmlFor="outlined-adornment-password">비밀번호 확인</InputLabel>
+                                        <OutlinedInput
+                                            id="outlined-adornment-confirm-password"
+                                            type={showPassword ? 'text' : 'password'}
+                                            value={values.confirmPassword}
+                                            onChange={handleChange('confirmPassword')}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={() => setShowPassword(!showPassword)}
+                                                        onMouseDown={handleMouseDownPassword}
+                                                        edge="end"
+                                                    >
+                                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                            label="Password"
+                                        />
+                                    </FormControl>
+                                    {/* userName */}
+                                    <TextField
+                                        id="outlined-basic-name"
+                                        label="이름"
+                                        variant="outlined"
+                                        onChange={handleChange('userName')}
+                                    />
+                                    {/* email */}
+                                    <TextField
+                                        id="outlined-basic-email"
+                                        label="이메일"
+                                        variant="outlined"
+                                        onChange={handleChange('email')}
+                                    />
+                                    {/* type */}
+                                    <FormControl>
+                                        <FormLabel id="demo-controlled-radio-buttons-group">회원유형</FormLabel>
+                                        <RadioGroup
+                                            row
+                                            aria-labelledby="demo-controlled-radio-buttons-group"
+                                            name="controlled-radio-buttons-group"
+                                            value={values.type}
+                                            onChange={handleChange('type')}
                                         >
-                                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
-                            />
-                        </FormControl>
-                        {/* confirmPassword */}
-                        <FormControl sx={{}} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">비밀번호 확인</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-confirm-password"
-                                type={showPassword ? 'text' : 'password'}
-                                value={values.confirmPassword}
-                                onChange={handleChange('confirmPassword')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={() => setShowPassword(!showPassword)}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
-                            />
-                        </FormControl>
-                        {/* userName */}
-                        <TextField
-                            id="outlined-basic-name"
-                            label="이름"
-                            variant="outlined"
-                            onChange={handleChange('userName')}
-                        />
-                        {/* email */}
-                        <TextField
-                            id="outlined-basic-email"
-                            label="이메일"
-                            variant="outlined"
-                            onChange={handleChange('email')}
-                        />
-                        {/* type */}
-                        <FormControl>
-                            <FormLabel id="demo-controlled-radio-buttons-group">회원유형</FormLabel>
-                            <RadioGroup
-                                row
-                                aria-labelledby="demo-controlled-radio-buttons-group"
-                                name="controlled-radio-buttons-group"
-                                value={values.type}
-                                onChange={handleChange('type')}
-                            >
-                                <FormControlLabel value="개인" control={<Radio />} label="개인" />
-                                <FormControlLabel value="기업" control={<Radio />} label="기업" />
-                            </RadioGroup>
-                        </FormControl>
-                        <MKButton
-                            color="success"
-                            variant="contained"
-                            size="large"
-                            onClick={() => signUp()}
-                        >
-                            회원가입
-                        </MKButton>
-                    </Stack>
+                                            <FormControlLabel value="개인" control={<Radio />} label="개인" />
+                                            <FormControlLabel value="기업" control={<Radio />} label="기업" />
+                                        </RadioGroup>
+                                    </FormControl>
+                                    <MKButton
+                                        color="success"
+                                        variant="contained"
+                                        size="large"
+                                        onClick={() => signUp()}
+                                    >
+                                        회원가입
+                                    </MKButton>
+                                </Stack>
+
+                            </>
+                    }
                 </CardContent>
             </Card>
         </>
