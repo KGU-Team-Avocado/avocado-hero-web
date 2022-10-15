@@ -4,18 +4,21 @@ import { useEffect, useState } from "react";
 import LodingSpinner from "../../component/common/LodingSpinner";
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
+import { Accordion, AccordionDetails, AccordionSummary, Stack, Typography } from "@mui/material";
+import { HorizontalRule } from "@mui/icons-material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default () => {
     const [data, setData] = useState([]);
     const [user, setUser] = useState([]);
     const realUser = ["gabrielyoon7", "wlstn", "201912069", "hido", "seeun", "yeonsu"]
     const attendances = {
-        "gabrielyoon7": 10,
-        "wlstn": 9,
-        "201912069": 8,
-        "hido": 9,
-        "seeun": 8,
-        "yeonsu": 9
+        "gabrielyoon7": 13,
+        "wlstn": 12,
+        "201912069": 11,
+        "hido": 12,
+        "seeun": 11,
+        "yeonsu": 11
     }  //6월 30일 이후 출석 기록 (백엔드로 만들기 귀찮아서 일단 이렇게 해둠)
     const [sum, setSum] = useState(0);
 
@@ -32,7 +35,7 @@ export default () => {
                         log["time"] = koreanTime(log.time); //로그의 모든 시간을 한국 시간으로 변경 후 저장
                     }); //서버쪽에서 실수로 영국시간 받고 있었어서 부득이하게 이렇게 조치함
                 }
-                temp = temp.filter((log)=>realUser.includes(log.user_id))
+                temp = temp.filter((log) => realUser.includes(log.user_id))
                 setData(temp); //로그를 data state에 저장
                 setUser([]); //혹시 몰라서 user를 한번 비워줌 (전에 핫 리프레시 하다가 몇 번 버그 생겼어서 이렇게 함)
             })
@@ -54,9 +57,9 @@ export default () => {
         setUser(temp); // 위와 같이 완성된 temp는 곧 user의 정보와 동일하므로 user state에 저장
     }, [data]); //data state가 변경되는 이후에만 동작함
 
-    useEffect(()=>{
+    useEffect(() => {
         let sum = 0
-        user.map((u)=>sum+=(u.attendances_times * 5 + u.visited_date.size * 2))
+        user.map((u) => sum += (u.attendances_times * 5 + u.visited_date.size * 2))
         setSum(sum)
     }, [user])
 
@@ -111,98 +114,83 @@ export default () => {
 
     return (
         <>
-            <div>
-                <h1>포인트 계산기</h1>
-                <div className="my-3">
-                    <div className="my-3">
-                        <h3>그래프</h3>
-                        <Bar data={datachart} height={100} options={options} />
-                    </div>
-                    <div className="d-flex justify-content-between">
-                        <h3>유저별 포인트</h3>
-                        <h2 className="accordion-header" id="headingOne">
-                            <button
-                                className="accordion-button"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne"
-                                aria-expanded="true"
-                                aria-controls="collapseOne"
-                                onClick={() => setListOpen(!isListOpen)}
+            <Stack>
+                <Typography variant="h1">
+                    포인트 계산기
+                </Typography>
+                <Typography variant="h3">
+                    그래프
+                </Typography>
+                <Bar data={datachart} height={100} options={options} />
+                <Typography>대면 회의 출석 횟수 기준일 : 2022-10-15</Typography>
+                <Typography variant="h3">
+                    유저별 포인트
+                </Typography>
+                {user.length > 0 ? (
+                    user.map((user) => (
+                        <Accordion key={user.user_id}>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
                             >
-                                {isListOpen ? "닫기▵" : "펼치기▿"}
-                            </button>
-                        </h2>
-                    </div>
-                    <p>대면 회의 출석 횟수 기준일 : 2022-09-20</p>
-                    <div>
-                        {user.length > 0 ? (
-                            user.map((user) => (
-                                <div key={user.user_id} className=" my-2">
-                                    <div className="d-flex justify-content-between">
-                                        <h4>
-                                            [
-                                            <Link className="" to={"/user/" + user.user_id}>
-                                                {user.user_id}
-                                            </Link>
-                                            ]
-                                        </h4>
-                                        <h4>총 {user.attendances_times * 5 + user.visited_date.size * 2}점</h4>
+                                <Typography>                                            [
+                                    <Link className="" to={"/user/" + user.user_id}>
+                                        {user.user_id}
+                                    </Link>
+                                    ] 총 {user.attendances_times * 5 + user.visited_date.size * 2}점</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Typography>
+                                    <div>- 대면 회의 출석 횟수 {user.attendances_times}회 (+{user.attendances_times * 5}점)</div>
+                                    {Array.from(user.visited_date).map((d) => (
+                                        <div>- {d} (+2점)</div>
+                                    ))}
+                                </Typography>
+                            </AccordionDetails>
+                        </Accordion>
+                    ))
+                ) : (
+                    <LodingSpinner />
+                )}
+                <Typography variant="h3">장학금 예상 수령 금액 [총{400000 + (6 * 100000) + 300000}원]</Typography>
+                {
+                    user.length > 0
+                        ?
+                        (
+                            user.map((user) => <Typography>{user.user_id + " : " + parseInt((user.attendances_times * 5 + user.visited_date.size * 2) / sum * (400000 + (6 * 100000) + 300000)) + "원"}</Typography>)
+                        )
+                        :
+                        (
+                            <Typography>데이터가 없습니다.</Typography>
+                        )
+                }
+                <Accordion >
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                    >
+                        <Typography>
+                            전체 로그
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            {data.length > 0 ? (
+                                data.map((log) => (
+                                    <div key={log.secure_num}>
+                                        {log.secure_num} {log.time}{" "}
+                                        <Link to={"/user/" + log.user_id}>{log.user_id}</Link>{" "}
                                     </div>
-                                    <div className="accordion-item">
-                                        <div className="accordion-item">
-                                            <div
-                                                id="collapseOne"
-                                                className="accordion-collapse collapse show"
-                                                aria-labelledby="headingOne"
-                                                data-bs-parent="#accordionExample"
-                                            >
-                                                <div className="accordion-body">
-                                                    <div>
-                                                        <div>- 대면 회의 출석 횟수 {user.attendances_times}회 (+{user.attendances_times * 5}점)</div>
-                                                        {Array.from(user.visited_date).map((d) => (
-                                                            <div>- {d} (+2점)</div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                </div>
-                            ))
-                        ) : (
-                            <LodingSpinner />
-                        )}
-                    </div>
-                </div>
-                <h3>장학금 예상 수령 금액 [총{400000+(6*100000)+300000}원]</h3>
-                <div>
-                    {
-                        user.length > 0
-                            ?
-                            (
-                                user.map((user) => <div>{user.user_id +" : "+ parseInt((user.attendances_times * 5 + user.visited_date.size * 2)/sum*(400000+(6*100000)+300000))+"원"}</div>)
-                            )
-                            :
-                            (
-                                <div>데이터가 없습니다.</div>
+                                ))
+                            ) : (
+                                <LodingSpinner />
                             )}
-                </div>
-                <h3>전체 로그</h3>
-                <div>
-                    {data.length > 0 ? (
-                        data.map((log) => (
-                            <div key={log.secure_num}>
-                                {log.secure_num} {log.time}{" "}
-                                <Link to={"/user/" + log.user_id}>{log.user_id}</Link>{" "}
-                            </div>
-                        ))
-                    ) : (
-                        <LodingSpinner />
-                    )}
-                </div>
-            </div>
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+            </Stack>
         </>
     );
 };
