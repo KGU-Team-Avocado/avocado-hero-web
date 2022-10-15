@@ -46,8 +46,8 @@ export default () => {
                         alert("이미 사용중인 아이디입니다.");
                     }
                     if (response.data.success === true) {
-                        navigate('/')
-                        // window.location.href = "/";
+                        // navigate('/')
+                        window.location.href = ""; //홈에서 회원가입 하는 사람을 위해서는 그냥 refresh가 더 나음
                     }
                 })
                 .catch(function (error) {

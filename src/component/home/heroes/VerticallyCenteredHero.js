@@ -1,3 +1,5 @@
+import SignIn from "container/sign/sign_in/SignIn"
+
 export default () => {
     return (
         <div className="container col-xl-10 col-xxl-10 px-4 py-5">
@@ -12,7 +14,8 @@ export default () => {
                     </p>
                 </div>
                 <div className="col-md-10 mx-auto col-lg-5">
-                    <form className="p-4 p-md-5 border rounded-3 bg-light">
+                    <SignIn/>
+                    {/* <form className="p-4 p-md-5 border rounded-3 bg-light">
                         <div className="form-floating mb-3">
                             <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" />
                             <label htmlFor="floatingInput">Email address</label>
@@ -29,7 +32,7 @@ export default () => {
                         <button className="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
                         <hr className="my-4" />
                         <small className="text-muted">By clicking Sign up, you agree to the terms of use.</small>
-                    </form>
+                    </form> */}
                 </div>
             </div>
         </div>
