@@ -19,7 +19,7 @@ export default ({ user_id, edit }) => {
                 {
                     uploadedImage ?
                         <img
-                            className="img-thumbnail rounded-circle"
+                            className="border rounded-circle"
                             width="140"
                             height="140"
                             src={uploadedImage}

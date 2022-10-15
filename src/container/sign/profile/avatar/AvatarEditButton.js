@@ -1,4 +1,6 @@
+import { Box, Button, FormControl, Stack, Typography } from '@mui/material';
 import { selectUser } from 'api/redux/user/userSlice'
+import MKButton from 'component/common/mui-components/MKButton';
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -31,23 +33,25 @@ export default ({ setProfileImage }) => {
   }
 
   return (
-    <div className='App'>
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          <h3>업로드 하기</h3>
+      <FormControl>
+        <Stack>
+          <Typography variant='h4' my={1}>사진 수정하기</Typography>
           <input className='form-control' type='file' name='file' onChange={handleFileChange}></input>
-        </div>
+        </Stack>
         {image.preview && <>
-          <div className='my-3'>
+          <Box my={3}>
             <img src={image.preview} width='300' height='300' />
-          </div>
-          <div>
-            <button className='btn btn-success' type='submit'>업로드 하기</button>
-          </div>
+          </Box>
+          <MKButton
+           variant="contained" 
+           color='success' 
+           type='submit'
+           onClick={handleSubmit}
+           >
+            업로드 하기
+            </MKButton>
         </>
         }
-      </form>
-    </div>
+      </FormControl>
   )
 }
