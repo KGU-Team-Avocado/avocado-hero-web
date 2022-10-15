@@ -2,8 +2,7 @@ import { Grid, Stack, Typography } from "@mui/material"
 import MKButton from "component/common/mui-components/MKButton"
 import { Navigate, useNavigate } from "react-router-dom"
 
-export default () => {
-    const navigate = useNavigate();
+export default ({navigate}) => {
     return (
         <>
             <Stack align="center">

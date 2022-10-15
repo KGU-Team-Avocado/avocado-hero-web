@@ -1,7 +1,7 @@
 import { Grid, Stack, Typography } from "@mui/material"
 import MKButton from "component/common/mui-components/MKButton"
 
-export default () => {
+export default ({navigate}) => {
     return (
         <>
             <Stack
@@ -16,7 +16,7 @@ export default () => {
                     아직도 팀플 조를 랜덤으로 구성하시나요?
                 </Typography>
                 <Typography>
-                    원하는 사람들과 만나 팀을 구성하고 팀플 워크스페이스를 활용하여... 가나다라마바사아자차카타파하
+                    원하는 사람들과 만나 팀을 구성하고 워크스페이스를 활용하여 팀 활동을 관리하세요. 모르는 사람도 마음에 드신다면 하나의 그룹으로 매칭될 수 있도록 서로 지원하세요.
                 </Typography>
                 <Stack
                     direction={{ xs: "column", sm: "row" }}
@@ -32,8 +32,8 @@ export default () => {
                         }
                     }}
                 >
-                    <MKButton variant="contained" color="warning" size="large">팀플 워크스페이스 구경하기</MKButton>
-                    <MKButton variant="outlined" color="dark" size="large">Secondary</MKButton>
+                    <MKButton variant="contained" color="warning" size="large" onClick={()=>navigate('/groupFinder')}>프로젝트 찾기</MKButton>
+                    <MKButton variant="outlined" color="dark" size="large" onClick={()=>navigate('/workspace/630b7190409e908dbc8a1633')}>워크스페이스 구경하기</MKButton>
                 </Stack>
                 <div className="overflow-hidden" style={{ "maxHeight": "30vh" }}>
                     <div className="container px-5">

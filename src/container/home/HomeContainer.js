@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BorderHero from "../../component/home/heroes/BorderHero";
 import CenteredHero from "../../component/home/heroes/CenteredHero";
 import CenteredScreenshotHero from "../../component/home/heroes/CenteredScreenshotHero";
@@ -36,13 +36,15 @@ const HomeContainer = () => {
         }
     }
 
+    const navigate = useNavigate();
+
     return (
         <>
-                <CenteredHero />
-                <CenteredScreenshotHero />
-                <ResponsiveLeftAlignedHero />
-                <VerticallyCenteredHero />
-                <BorderHero />
+                <CenteredHero navigate={navigate}/>
+                <CenteredScreenshotHero navigate={navigate}/>
+                <ResponsiveLeftAlignedHero navigate={navigate}/>
+                <VerticallyCenteredHero navigate={navigate}/>
+                <BorderHero navigate={navigate}/>
         </>
     )
 }

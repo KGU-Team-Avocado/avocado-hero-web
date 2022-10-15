@@ -1,8 +1,7 @@
 import { useHref, useNavigate } from "react-router-dom"
 import MKButton from "component/common/mui-components/MKButton"
 
-export default () => {
-    let navigate = useNavigate();
+export default ({navigate}) => {
     return (
         <div className="container col-xxl-10 px-4 py-5">
             <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
