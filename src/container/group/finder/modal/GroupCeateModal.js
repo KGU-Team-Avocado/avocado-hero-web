@@ -6,6 +6,9 @@ import { EditorState } from 'draft-js';
 import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
 import { options } from '../../../../assets/tag/Tech'
+import { Box, DialogContent, DialogTitle, IconButton, TextField, Typography } from "@mui/material";
+import ClearIcon from '@mui/icons-material/Clear';
+import MKButton from "component/common/mui-components/MKButton";
 
 export default (props) => {
 
@@ -85,46 +88,56 @@ export default (props) => {
 
     return (
         <>
-         <div className="modal-dialog" role="document">
-             <div className="modal-content rounded-4 shadow">
-                 <div className="modal-body p-5 w-100">
-                        <div className="modal-header">
-                            <h2 className="fw-bold mb-0">프로젝트 그룹 만들기</h2>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => props.setOpen(false)}></button>
-                        </div>
-
-                        <div className="d-grid my-5 list-unstyled">
-                            <h4>그룹명</h4>
-                            <input type="text" className="form-control mb-4" value={project.group_name} id="group_name" onChange={handleInput} />
-                            <h4>프로젝트명</h4>
-                            <input type="text" className="form-control mb-4" value={project.project_name} id="project_name" onChange={handleInput} />
-                            <h4>간단소개글</h4>
-                            <input type="text" className="form-control mb-4" value={project.short_description} id="short_description" onChange={handleInput} />
-                            <div className="mb-4">
-                                <h4>Tech Stack</h4>
-                                {/* <pre>{JSON.stringify(selected)}</pre> */}
-                                <MultiSelect
-                                    options={options}
-                                    value={selected}
-                                    onChange={setSelected}
-                                    labelledBy="Select"
-                                />
-                            </div>
-                            <h4>상세소개글</h4>
-                            <div>
-                                <Editor
-                                    editorState={editorState}
-                                    toolbarClassName="toolbarClassName"
-                                    wrapperClassName="wrapperClassName"
-                                    editorClassName="editorClassName"
-                                    onEditorStateChange={handleEditorChange}
-                                />
-                            </div>
-                        </div>
-                        <button type="button" className="btn btn-lg btn-success mt-5 w-100" onClick={() => createGroup()}>등록하기</button>
-                 </div>
-             </div>
-         </div>
+            <Box
+                sx={{
+                    p: {
+                        xs: 1,
+                        sm: 2,
+                        md: 3,
+                        lg: 4,
+                        xl: 5,
+                        xxl: 6
+                    },
+                }}
+            >
+                <DialogTitle id="scroll-dialog-title">
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Typography variant="h4" variant="h3">
+                            프로젝트 그룹 만들기
+                        </Typography>
+                        <IconButton size="large" onClick={() => props.setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
+                    </Box>
+                </DialogTitle>
+                <DialogContent dividers={true}>
+                    <Typography variant="h4">그룹명</Typography>
+                    <TextField type="text" className="form-control mb-4" value={project.group_name} id="group_name" onChange={handleInput} />
+                    <Typography variant="h4">프로젝트명</Typography>
+                    <TextField type="text" className="form-control mb-4" value={project.project_name} id="project_name" onChange={handleInput} />
+                    <Typography variant="h4">간단소개글</Typography>
+                    <TextField type="text" className="form-control mb-4" value={project.short_description} id="short_description" onChange={handleInput} />
+                    <div className="mb-4">
+                        <Typography variant="h4">Tech Stack</Typography>
+                        {/* <pre>{JSON.stringify(selected)}</pre> */}
+                        <MultiSelect
+                            options={options}
+                            value={selected}
+                            onChange={setSelected}
+                            labelledBy="Select"
+                        />
+                    </div>
+                    <Typography variant="h4">상세소개글</Typography>
+                    <div>
+                        <Editor
+                            editorState={editorState}
+                            toolbarClassName="toolbarClassName"
+                            wrapperClassName="wrapperClassName"
+                            editorClassName="editorClassName"
+                            onEditorStateChange={handleEditorChange}
+                        />
+                    </div>
+                </DialogContent>
+                <MKButton color="success" onClick={() => createGroup()} fullWidth disabled={userInfo === null}>등록하기</MKButton>
+            </Box>
         </>
     )
 }
