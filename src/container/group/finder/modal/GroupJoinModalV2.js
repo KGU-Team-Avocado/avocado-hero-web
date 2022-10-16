@@ -40,8 +40,8 @@ export default (props) => {
             group_name: group.group_name,
             project_name: group.project_name,
             user_id: userInfo.user_id,
-            user_name: userInfo.user_name,
-            user_email: userInfo.user_email,
+            user_name: userInfo.name,
+            user_email: userInfo.email,
             status: "대기",
             message: message,
         }).then((response) => { //서버로부터 받아온 id

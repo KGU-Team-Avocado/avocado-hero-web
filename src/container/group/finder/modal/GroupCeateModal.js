@@ -59,8 +59,8 @@ export default (props) => {
             manager: userInfo.user_id,
             members: [{
                 user_id: userInfo.user_id,
-                user_name: userInfo.user_name,
-                user_email: userInfo.user_email,
+                user_name: userInfo.name,
+                user_email: userInfo.email,
                 user_role: []
             }],
             close_application: false,

@@ -55,7 +55,7 @@ export default ({ user, handleUserProfileCard }) => {
                             {user.user_id}
                         </Typography>
                         <Typography gutterBottom variant="h6" component="div">
-                            {user.user_name}
+                            {user.name}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             <div>희망 직무 : </div>
