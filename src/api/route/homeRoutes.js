@@ -1,5 +1,6 @@
 import HumanResources from "container/company/HumanResources";
 import JobPosting from "container/company/JobPosting";
+import Prices from "container/company/Prices";
 import DatabaseContainer from "container/example/DatabaseContainer";
 import ExampleContainer from "container/example/ExampleContainer";
 import FileUploadExample from "container/example/FileUploadExample";
@@ -63,6 +64,12 @@ const mainRoutes = [
         element: <HumanResources/>,
         name: '채용 제의하기',
         description: '인재 찾기ㅇㅇ',
+    },
+    {
+        path: '/prices',
+        element: <Prices/>,
+        name: '요금제',
+        description: '더 많은 기능을 사용해보아요',
     },
     {
         path: '/signin',
