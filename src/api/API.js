@@ -51,21 +51,8 @@ export const findOneUserByUserId = async (user_id) => {
         const response = await axios.post('/usersRouter/findUser', {
             user_id: user_id
         })
-        const foundUser = response.data.user;
-        return({
-            user_id:foundUser.user_id,
-            name: foundUser.user_name,
-            nickname: foundUser.user_nickname,
-            email: foundUser.user_email,
-            phoneNum: foundUser.user_phoneNum,
-            belong: foundUser.user_belong,
-            field: foundUser.user_field,
-            link: foundUser.user_link,
-            keyword: foundUser.user_keyword,
-            personality: foundUser.user_personality,
-            intro: foundUser.user_intro,
-            one_intro: foundUser.user_one_intro,
-        })
+        // const foundUser = response.data.user;
+        return(response.data.user)
     } catch (error) {
         
     }

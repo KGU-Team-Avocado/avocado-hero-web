@@ -40,9 +40,9 @@ export default () => {
                 .post("/usersRouter/register", {
                     user_id: values.id,
                     user_password: values.password,
-                    user_name: values.userName,
-                    user_email: values.email,
-                    user_type: values.type,
+                    name: values.userName,
+                    email: values.email,
+                    type: values.type,
                 })
                 .then((response) => {
                     console.log(response);

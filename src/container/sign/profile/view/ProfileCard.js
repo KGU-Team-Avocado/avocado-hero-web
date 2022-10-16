@@ -17,7 +17,7 @@ export default (props) => {
         }
     }
 
-    const user = props.profile;
+    const profile = props.profile;
 
     return (
         <>
@@ -27,18 +27,18 @@ export default (props) => {
                         <Card>
                             <CardActionArea>
                                 <CardContent>
-                                    <Avatar user_id={user?.user_id} />
+                                    <Avatar user_id={profile?.user_id} />
                                     <Typography>
-                                        {user.nickname}
+                                        {profile?.nickname}
                                     </Typography>
                                     <Typography>
-                                        {user.name}
+                                        {profile?.name}
                                     </Typography>
                                     <Typography>
-                                        {user.email}
+                                        {profile?.email}
                                     </Typography>
                                     <Typography>
-                                        {user.phoneNum}
+                                        {profile?.phoneNumber}
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -50,7 +50,7 @@ export default (props) => {
                                         한줄 소개
                                     </Typography>
                                     <Typography>
-                                        {user.one_intro}
+                                        {profile?.introduceOne}
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -68,13 +68,13 @@ export default (props) => {
                                         {/* {
                                                 belongs.map(belong => (<Map mapper={belong} />))
                                             } */}
-                                        {user && user.belong}
+                                        {profile && profile?.belongs}
                                     </Typography>
                                     <Typography>분야</Typography>
-                                    <Typography>{user && <TechStack tech_stack={user.field} />}</Typography>
+                                    <Typography>{profile && <TechStack tech_stack={profile?.fields} />}</Typography>
                                     <Typography>링크</Typography>
                                     <Typography>
-                                        <a href={user && user.link}>{user && user.link}</a>
+                                        <a href={profile && profile?.links}>{profile && profile?.links}</a>
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -84,18 +84,18 @@ export default (props) => {
                                 <CardContent>
                                     <Typography>세부 정보</Typography>
                                     <Typography>키워드</Typography>
-                                    <Typography>{user && <TechStack tech_stack={user.keyword} />}</Typography>
+                                    <Typography>{profile && <TechStack tech_stack={profile?.keywords} />}</Typography>
                                     <Typography>성향</Typography>
                                     <Typography>
                                         {
-                                            user &&
+                                            profile &&
                                             <TechStack
-                                                tech_stack={user.personality}
+                                                tech_stack={profile.personalities}
                                             />
                                         }
                                     </Typography>
                                     <Typography>소개글</Typography>
-                                    <Typography>{user && user.intro}</Typography>
+                                    <Typography>{profile && profile?.introduce}</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>
