@@ -18,13 +18,11 @@ import AvatarEditButton from "../avatar/AvatarEditButton";
 const ProfileEdit = (props) => {
     const [edit, setEdit] = useState(false);
     const [selected, setSelected] = useState([]);
-
     const [profile, setProfile] = useState();
 
     // const [selectedFields, setSelectedFields] = useState([
     //     // Object.entries(profile.user_field)
     // ]); // 여기에 현재 저장된 거를 넣어야 함 ?
-
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [selectedPersonals, setSelectedPersonals] = useState([]);
 
@@ -34,11 +32,10 @@ const ProfileEdit = (props) => {
         }
         setProfile(props.profile);
         console.log('profileEdit 출력' + props.profile);
-        // setSelectedFields(props.profile.user_field)
 
-        setSelected(props.profile.user_field.map((field) => { return findProfile(field) }))
-        setSelectedKeywords(props.profile.user_keyword && props.profile.user_keyword.map((keyword) => { return findKeyword(keyword) }))
-        setSelectedPersonals(props.profile.user_personality && props.profile.user_personality.map((personal) => { return findPersonal(personal) }))
+        setSelected(props.profile.fields.map((field) => { return findProfile(field) }))
+        setSelectedKeywords(props.profile.keywords && props.profile.keywords.map((keyword) => { return findKeyword(keyword) }))
+        setSelectedPersonals(props.profile.personalities && props.profile.personalities.map((personal) => { return findPersonal(personal) }))
     }, [props.profile]);
 
     const modifyOption = () => {
@@ -47,9 +44,9 @@ const ProfileEdit = (props) => {
 
         axios.post("/usersRouter/profileUpdate", {
             user_id: profile.user_id,
-            user_field: selectedFields,
-            // user_keyword: selectedKeywords.map((s) => s.value),
-            // user_personality: selectedPersonals.map((s) => s.value)
+            fields: selectedFields,
+            // keywords: selectedKeywords.map((s) => s.value),
+            // personalities: selectedPersonals.map((s) => s.value)
         }).then((response) => {
             console.log(response.data);
         }).catch(function (error) {
@@ -62,12 +59,12 @@ const ProfileEdit = (props) => {
         setEdit(true);
         console.log(profile)
 
-        // const select = profile.user_field.map((field) => {return findProfile(field)});
+        // const select = profile.fields.map((field) => {return findProfile(field)});
         // setSelected(select)
 
-        setSelected(profile.user_field.map((field) => { return findProfile(field) }))
-        setSelectedKeywords(profile.user_keyword.map((keyword) => { return findKeyword(keyword) }))
-        setSelectedPersonals(profile.user_personality.map((personal) => { return findPersonal(personal) }))
+        setSelected(profile.fields.map((field) => { return findProfile(field) }))
+        setSelectedKeywords(profile.keywords.map((keyword) => { return findKeyword(keyword) }))
+        setSelectedPersonals(profile.personalities.map((personal) => { return findPersonal(personal) }))
     }
 
     const findProfile = (r) => {
@@ -106,18 +103,18 @@ const ProfileEdit = (props) => {
     ];
 
 
-    // props.profile.user_field.map(())
+    // props.profile.fields.map(())
 
     // setSelectedFields = [
     //     { label: ,
     //     value: }
     // ]
 
-    // profile.user_field.length > 0 
+    // profile.fields.length > 0 
     // ? 
     // (
-    //     profile.user_field.map((profile.user_field) => 
-    //     setSelectedFields(profile.user_field))
+    //     profile.fields.map((profile.fields) => 
+    //     setSelectedFields(profile.fields))
     // )
     // :
     // (
@@ -125,8 +122,8 @@ const ProfileEdit = (props) => {
     // )
 
     // useEffect(() => {
-    //     setSelectedFields(props.profile.user_field)
-    // }, [props.profile.user_field]);
+    //     setSelectedFields(props.profile.fields)
+    // }, [props.profile.fields]);
 
     const handleInput = (e) => {
         console.log(e);
@@ -140,17 +137,17 @@ const ProfileEdit = (props) => {
         axios
             .post("/usersRouter/profileUpdate", {
                 user_id: profile.user_id,
-                user_name: profile.user_name,
-                user_nickname: profile.user_nickname,
-                user_email: profile.user_email,
-                user_phoneNum: profile.user_phoneNum,
-                user_one_intro: profile.user_one_intro,
-                user_intro: profile.user_intro,
-                user_belong: profile.user_belong,
-                user_link: profile.user_link,
-                // user_field: selectedFields.map((s) => s.value),
-                user_keyword: selectedKeywords.map((s) => s.value),
-                user_personality: selectedPersonals.map((s) => s.value)
+                name: profile.name,
+                nickname: profile.nickname,
+                email: profile.email,
+                phoneNumber: profile.phoneNumber,
+                introduceOne: profile.introduceOne,
+                introduce: profile.introduce,
+                belongs: profile.belongs,
+                links: profile.links,
+                // fields: selectedFields.map((s) => s.value),
+                keywords: selectedKeywords.map((s) => s.value),
+                personalities: selectedPersonals.map((s) => s.value)
             })
             .then((response) => {
                 console.log(response);
@@ -219,9 +216,9 @@ const ProfileEdit = (props) => {
 //     setCountList(countArr)
 //     // axios
 //     // .post("usersRouter/profileUpdate", {
-//     //     user_field: selectedFields.map((s) => s.value),
-//     //     // user_keyword: selectedKeywords.map((s) => s.value),
-//     //     // user_personality: selectedPersonals.map((s) => s.value)
+//     //     fields: selectedFields.map((s) => s.value),
+//     //     // keywords: selectedKeywords.map((s) => s.value),
+//     //     // personalities: selectedPersonals.map((s) => s.value)
 //     // })
 //     // .then((response) => {
 //     //     console.log(response);
@@ -262,26 +259,26 @@ const ProfileEdit = (props) => {
 
                                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                             <Form.Label>닉네임</Form.Label>
-                                            <Form.Control type="text" name="user_nickname" placeholder=""
-                                                value={profile.user_nickname}
+                                            <Form.Control type="text" name="nickname" placeholder=""
+                                                value={profile.nickname}
                                                 onChange={handleInput}
                                             />
                                         </Form.Group>
 
                                         <Form.Group className="mb-3" contro lId="exampleForm.ControlInput1">
                                             <Form.Label>이름</Form.Label>
-                                            <Form.Control type="text" name="user_name" placeholder="" onChange={handleInput}
-                                                value={profile.user_name} />
+                                            <Form.Control type="text" name="name" placeholder="" onChange={handleInput}
+                                                value={profile.name} />
                                         </Form.Group>
                                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                             <Form.Label>이메일</Form.Label>
-                                            <Form.Control type="text" name="user_email" placeholder="" onChange={handleInput}
-                                                value={profile.user_email} />
+                                            <Form.Control type="text" name="email" placeholder="" onChange={handleInput}
+                                                value={profile.email} />
                                         </Form.Group>
                                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                             <Form.Label>전화번호</Form.Label>
-                                            <Form.Control type="text" name="user_phoneNum" placeholder="" onChange={handleInput}
-                                                value={profile.user_phoneNum} />
+                                            <Form.Control type="text" name="phoneNumber" placeholder="" onChange={handleInput}
+                                                value={profile.phoneNumber} />
                                         </Form.Group>
                                     </Card.Body>
                                 </Card>
@@ -290,8 +287,8 @@ const ProfileEdit = (props) => {
                             <Card.Title>한줄 소개</Card.Title>
                                 <Card.Text>
                                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                            <Form.Control type="text" name="user_one_intro" placeholder=""
-                                                value={profile.user_one_intro}
+                                            <Form.Control type="text" name="introduceOne" placeholder=""
+                                                value={profile.introduceOne}
                                                 onChange={handleInput}
                                             />
                                         </Form.Group>
@@ -312,8 +309,8 @@ const ProfileEdit = (props) => {
                                                     <Form.Control
                                                         aria-label="Recipient's username"
                                                         aria-describedby="basic-addon2"
-                                                        type="text" name="user_belong" placeholder=""
-                                                        value={profile.user_belong}
+                                                        type="text" name="belongs" placeholder=""
+                                                        value={profile.belongs}
                                                         onChange={handleInput}
                                                     />
                                                     <Button onClick={onAddDetailDiv} variant="outline-secondary" id="button-addon2">
@@ -321,8 +318,8 @@ const ProfileEdit = (props) => {
                                                     </Button>
                                                 </InputGroup>
                                                 <AddInput countList={countList} onAddDetailDiv={onAddDetailDiv}/>
-                                    {/* <Form.Control type="text" name="user_belong" placeholder=""
-                                                value={profile.user_belong}
+                                    {/* <Form.Control type="text" name="belongs" placeholder=""
+                                                value={profile.belongs}
                                                 onChange={handleInput}
                                             /> */}
                                      
@@ -361,8 +358,8 @@ const ProfileEdit = (props) => {
                                             <div class="item">
                                                 {/* <AddInput countList={countLink} />
                                     <Button onClick={onAddLink}>+</Button>
-                                     <Form.Control type="text" name="user_link" placeholder=""
-                                                value={profile.user_link}
+                                     <Form.Control type="text" name="links" placeholder=""
+                                                value={profile.links}
                                                 onChange={handleInput}
                                             /> */}
                                                 <Form.Label htmlFor="basic-url">링크</Form.Label>
@@ -371,8 +368,8 @@ const ProfileEdit = (props) => {
                                                         https://example.com/users/
                                                     </InputGroup.Text>
                                                     <Form.Control id="basic-url" aria-describedby="basic-addon3"
-                                                        type="text" name="user_link" placeholder=""
-                                                        value={profile.user_link}
+                                                        type="text" name="links" placeholder=""
+                                                        value={profile.links}
                                                         onChange={handleInput} />
                                                         <Button onClick={onAddLink} variant="outline-secondary" id="button-addon2">
                                                        추가
@@ -407,8 +404,8 @@ const ProfileEdit = (props) => {
                                             <div class="item">
                                                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                                     <Form.Label>소개글</Form.Label>
-                                                    <Form.Control as="textarea" name="user_intro" placeholder="" rows={3} onChange={handleInput}
-                                                        value={profile.user_intro} />
+                                                    <Form.Control as="textarea" name="introduce" placeholder="" rows={3} onChange={handleInput}
+                                                        value={profile.introduce} />
                                                 </Form.Group>
                                             </div>
                                         </Card.Text>
