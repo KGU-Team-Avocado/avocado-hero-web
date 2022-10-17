@@ -6,7 +6,7 @@ import { EditorState } from 'draft-js';
 import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
 import { options } from '../../../../assets/tag/Tech'
-import { Box, DialogContent, DialogTitle, IconButton, TextField, Typography } from "@mui/material";
+import { Box, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 
@@ -109,32 +109,54 @@ export default (props) => {
                     </Box>
                 </DialogTitle>
                 <DialogContent dividers={true}>
-                    <Typography variant="h4">그룹명</Typography>
-                    <TextField type="text" className="form-control mb-4" value={project.group_name} id="group_name" onChange={handleInput} />
-                    <Typography variant="h4">프로젝트명</Typography>
-                    <TextField type="text" className="form-control mb-4" value={project.project_name} id="project_name" onChange={handleInput} />
-                    <Typography variant="h4">간단소개글</Typography>
-                    <TextField type="text" className="form-control mb-4" value={project.short_description} id="short_description" onChange={handleInput} />
-                    <div className="mb-4">
-                        <Typography variant="h4">Tech Stack</Typography>
-                        {/* <pre>{JSON.stringify(selected)}</pre> */}
-                        <MultiSelect
-                            options={options}
-                            value={selected}
-                            onChange={setSelected}
-                            labelledBy="Select"
+                    <Stack spacing={1}>
+                        <Box>이 자리에 사진 업로드 기능 추가 예정</Box>
+                        <TextField
+                            sx={{ width: "100%" }}
+                            label="그룹명"
+                            variant="outlined"
+                            value={project.group_name}
+                            id="group_name"
+                            onChange={handleInput}
                         />
-                    </div>
-                    <Typography variant="h4">상세소개글</Typography>
-                    <div>
-                        <Editor
-                            editorState={editorState}
-                            toolbarClassName="toolbarClassName"
-                            wrapperClassName="wrapperClassName"
-                            editorClassName="editorClassName"
-                            onEditorStateChange={handleEditorChange}
+                        <TextField
+                            sx={{ width: "100%" }}
+                            label="프로젝트명"
+                            variant="outlined"
+                            value={project.project_name}
+                            id="project_name"
+                            onChange={handleInput}
                         />
-                    </div>
+                        <TextField
+                            sx={{ width: "100%" }}
+                            label="간단소개글"
+                            variant="outlined"
+                            value={project.short_description}
+                            id="short_description"
+                            onChange={handleInput}
+                        />
+                        <Box>
+                            <Typography variant="h4">Tech Stack</Typography>
+                            <MultiSelect
+                                options={options}
+                                value={selected}
+                                onChange={setSelected}
+                                labelledBy="Select"
+                            />
+                        </Box>
+                        <Box sx={{minHeight:'400px'}}>
+                            <Typography variant="h4">상세소개글</Typography>
+                            <Box>
+                                <Editor
+                                    editorState={editorState}
+                                    toolbarClassName="toolbarClassName"
+                                    wrapperClassName="wrapperClassName"
+                                    editorClassName="editorClassName"
+                                    onEditorStateChange={handleEditorChange}
+                                />
+                            </Box>
+                        </Box>
+                    </Stack>
                 </DialogContent>
                 <MKButton color="success" onClick={() => createGroup()} fullWidth disabled={userInfo === null}>등록하기</MKButton>
             </Box>
