@@ -133,15 +133,13 @@ export const DashboardSidebar = (props) => {
                   color="inherit"
                   variant="subtitle1"
                 >
-                  Material UI
+                  프로젝트 제목
                 </Typography>
                 <Typography
                   color="neutral.400"
                   variant="body2"
                 >
-                  테스트
-                  {' '}
-                  화면입니다
+                  그룹명
                 </Typography>
               </div>
               <SelectorIcon
@@ -190,13 +188,13 @@ export const DashboardSidebar = (props) => {
             color="neutral.100"
             variant="subtitle2"
           >
-            Need more featrues?
+            프로젝트 기간
           </Typography>
           <Typography
             color="neutral.500"
             variant="body2"
           >
-            Check out our Pro solution template.
+            2022-05-00 ~ 2022-11-30
           </Typography>
           <Box
             sx={{
@@ -223,10 +221,7 @@ export const DashboardSidebar = (props) => {
             sx={{ mt: 2 }}
             variant="contained"
           >
-            {/* <Link
-            to="https://material-kit-pro-react.devias.io/"
-          >
-              Pro Live Preview</Link> */}
+            프로젝트 진행중
           </Button>
         </Box>
       </Box>
