@@ -5,6 +5,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Bell as BellIcon } from '../icons/bell';
 import { UserCircle as UserCircleIcon } from '../icons/user-circle';
 import { Users as UsersIcon } from '../icons/users';
+import { useState } from 'react';
+import ProfileButton from 'component/common/ProfileButton';
 
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
@@ -14,6 +16,9 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 
 export default (props) => {
     const { onSidebarOpen, ...other } = props;
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
 
     return (
         <>
@@ -68,16 +73,14 @@ export default (props) => {
                             </Badge>
                         </IconButton>
                     </Tooltip>
-                    <Avatar
-                        sx={{
-                            height: 40,
-                            width: 40,
-                            ml: 1
-                        }}
-                        src="/static/images/avatars/avatar_1.png"
-                    >
-                        <UserCircleIcon fontSize="small" />
-                    </Avatar>
+                    <Box sx={{ ml: 1 }}>
+                        <ProfileButton
+                            open={open}
+                            anchorEl={anchorEl}
+                            setAnchorEl={setAnchorEl}
+                            workspace={true}
+                        />
+                    </Box>
                 </Toolbar>
             </DashboardNavbarRoot>
         </>

@@ -4,13 +4,14 @@ import * as API from '../../api/API';
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { Menu, MenuItem } from "@mui/material";
+import { Button, Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default ({
     open,
     anchorEl,
-    setAnchorEl
+    setAnchorEl,
+    workspace
 }) => {
 
     const navigate = useNavigate();
@@ -32,23 +33,15 @@ export default ({
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    
+
     const logout = () => {
         sessionStorage.clear();
-        window.location.href = ''
+        window.location.href = '/'
     };
 
-    return (
-        <>
-            <MKButton
-                variant="outline"
-                // color="dark"
-                id="basic-button"
-                aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-            >
+    const Content = () => {
+        return (
+            <>
                 {
                     uploadedImage
                         ?
@@ -74,7 +67,40 @@ export default ({
                 }
                 <div className="mx-1">{userInfo.user_id}</div>
                 <ArrowDropDownIcon />
-            </MKButton>
+            </>
+        )
+    }
+
+    return (
+        <>
+            {
+                workspace
+                    ?
+                    <Button
+                        variant="outlined"
+                        color="info"
+                        id="basic-button"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                    >
+                        <Content />
+                    </Button>
+                    :
+                    <MKButton
+                        variant="outline"
+                        // color="dark"
+                        id="basic-button"
+                        aria-controls={open ? 'basic-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : undefined}
+                        onClick={handleClick}
+                    >
+                        <Content />
+                    </MKButton>
+            }
+
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
