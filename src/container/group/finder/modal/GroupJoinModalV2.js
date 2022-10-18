@@ -6,6 +6,8 @@ import axios from "axios";
 import { Box, Button, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Tooltip, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
+import { useSelector } from "react-redux";
+import { selectUser } from "api/redux/user/userSlice";
 
 export default (props) => {
 
@@ -18,13 +20,7 @@ export default (props) => {
         console.log(event.target.value);
     };
 
-    const [userInfo, setUserInfo] = useState(null); //redux로 수정예정
-
-    useEffect(() => {
-        if (sessionStorage.getItem("user")) {
-            setUserInfo(JSON.parse(sessionStorage.getItem("user")));
-        }
-    }, []);
+    const userInfo = useSelector(selectUser);
 
     const createMarkup = (html) => {
         return {
@@ -125,7 +121,8 @@ export default (props) => {
                 <MKButton
                     color="success"
                     onClick={() => groupApply()}
-                    fullWidth disabled={userInfo?.user_id == group?.manager}
+                    fullWidth 
+                    disabled={userInfo===null||(userInfo?.user_id == group?.manager)}
                 >
                     신청하기
                 </MKButton>
