@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TechStack from "../../../../component/common/TechStack";
 import DOMPurify from "dompurify";
 import axios from "axios";
-import { Box, Button, DialogActions, DialogContent, DialogTitle, IconButton, Typography } from "@mui/material";
+import { Box, Button, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Tooltip, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 
@@ -18,7 +18,7 @@ export default (props) => {
         console.log(event.target.value);
     };
 
-    const [userInfo, setUserInfo] = useState(null);
+    const [userInfo, setUserInfo] = useState(null); //redux로 수정예정
 
     useEffect(() => {
         if (sessionStorage.getItem("user")) {
@@ -78,21 +78,42 @@ export default (props) => {
                     </Box>
                 </DialogTitle>
                 <DialogContent dividers={true}>
-                    <h4>{group?.group_name}</h4>
-                    <h3>{group?.project_name}</h3>
-                    <h5>{group?.short_description}</h5>
-                    <hr />
+                    <Typography variant="h4">
+                        {group?.group_name}
+                    </Typography>
+                    <Typography variant="h3">
+                        {group?.project_name}
+                    </Typography>
+                    <Typography variant="h5">
+                        {group?.short_description}
+                    </Typography>
+                    <Divider />
+                    <Typography variant="h5">
+                        Tech Stack
+                    </Typography>
+                    <TechStack tech_stack={group ? group.tech_stack : []} />
+                    <Divider />
+                    <Typography variant="h5">
+                        팀장
+                    </Typography>
+                    <Tooltip title="새 창으로 이동합니다.">
+                        <MKButton
+                            variant="contained"
+                            color="info"
+                            onClick={() => window.open(`user/${group?.manager}`)}
+                        >
+                            {group?.manager}의 프로필 보기
+                        </MKButton>
+                    </Tooltip>
+                    <Divider />
+                    <Typography variant="h5">
+                        상세 소개
+                    </Typography>
                     <div dangerouslySetInnerHTML={createMarkup(group?.long_description)}></div>
-                    <hr />
-                    <h5>Tech Stack</h5>
-                    <div>
-                        <TechStack tech_stack={group ? group.tech_stack : []} />
-                    </div>
-                    <hr />
-                    <h5>팀장</h5>
-                    <div><Link target="_blank" to={'/user/' + group?.manager}>{group?.manager}</Link></div>
-                    <hr />
-                    <h5>자기소개서</h5>
+                    <Divider />
+                    <Typography variant="h5">
+                        자기소개서
+                    </Typography>
                     <textarea
                         id="message"
                         name="message"
@@ -101,7 +122,13 @@ export default (props) => {
                     />
                 </DialogContent>
                 {/* <DialogActions> */}
-                    <MKButton color="success" onClick={() => groupApply()} fullWidth disabled={userInfo?.user_id == group?.manager }>신청하기</MKButton>
+                <MKButton
+                    color="success"
+                    onClick={() => groupApply()}
+                    fullWidth disabled={userInfo?.user_id == group?.manager}
+                >
+                    신청하기
+                </MKButton>
                 {/* </DialogActions> */}
             </Box>
         </>

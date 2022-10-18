@@ -144,18 +144,21 @@ export default (props) => {
                                 labelledBy="Select"
                             />
                         </Box>
-                        <Box sx={{minHeight:'400px'}}>
-                            <Typography variant="h4">상세소개글</Typography>
-                            <Box>
-                                <Editor
-                                    editorState={editorState}
-                                    toolbarClassName="toolbarClassName"
-                                    wrapperClassName="wrapperClassName"
-                                    editorClassName="editorClassName"
-                                    onEditorStateChange={handleEditorChange}
-                                />
+                        {
+                            props.groupCreateModalOpen &&
+                            <Box sx={{ minHeight: '400px' }}>
+                                <Typography variant="h4">상세소개글</Typography>
+                                <Box>
+                                    <Editor
+                                        editorState={editorState}
+                                        toolbarClassName="toolbarClassName"
+                                        wrapperClassName="wrapperClassName"
+                                        editorClassName="editorClassName"
+                                        onEditorStateChange={handleEditorChange}
+                                    />
+                                </Box>
                             </Box>
-                        </Box>
+                        }
                     </Stack>
                 </DialogContent>
                 <MKButton color="success" onClick={() => createGroup()} fullWidth disabled={userInfo === null}>등록하기</MKButton>

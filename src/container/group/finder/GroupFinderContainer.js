@@ -101,7 +101,7 @@ export default () => {
                 keepMounted
                 width="md"
                 open={groupCreateModalOpen}
-                component={<GroupCeateModal setOpen={setGroupCreateModalOpen} />}
+                component={<GroupCeateModal groupCreateModalOpen={groupCreateModalOpen} setOpen={setGroupCreateModalOpen} />}
             />
         </>
     )
