@@ -133,13 +133,13 @@ export const DashboardSidebar = (props) => {
                   color="inherit"
                   variant="subtitle1"
                 >
-                  프로젝트 제목
+                  {group.project_name}
                 </Typography>
                 <Typography
                   color="neutral.400"
                   variant="body2"
                 >
-                  그룹명
+                  {group.group_name}
                 </Typography>
               </div>
               <SelectorIcon
@@ -194,7 +194,7 @@ export const DashboardSidebar = (props) => {
             color="neutral.500"
             variant="body2"
           >
-            2022-05-00 ~ 2022-11-30
+            {new Date(group.start_date).toLocaleDateString()} ~ ??
           </Typography>
           <Box
             sx={{
