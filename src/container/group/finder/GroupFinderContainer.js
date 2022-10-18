@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Tooltip, Typography } from "@mui/material";
 import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
@@ -15,7 +15,7 @@ export default () => {
 
     const navigate = useNavigate();
 
-    const userInfo = useSelector(selectUser);
+    const user = useSelector(selectUser);
 
     const [groupCreateModalOpen, setGroupCreateModalOpen] = useState(false);
     const [groupJoinModalOpen, setGroupJoinModalOpen] = useState(false);
@@ -49,14 +49,30 @@ export default () => {
                     color="dark"
                     variant="outlined"
                 >
-                    <FilterListIcon/>
+                    <FilterListIcon />
                 </MKButton>
                 <Stack
                     direction="row"
                     spacing={1}
                 >
-                    <MKButton variant="outlined" color="success" onClick={() => navigate('/myWorkspace/')}>내 워크스페이스 보기</MKButton>
-                    <MKButton variant="contained" color="info" onClick={() => setGroupCreateModalOpen(true)}>프로젝트 등록하기</MKButton>
+                    <Tooltip title={user ? "나의 워크스페이스 목록을 조회합니다." : "로그인이 필요한 메뉴입니다."}>
+                        <MKButton
+                            variant="outlined"
+                            color={user ? "success" : "secondary"}
+                            onClick={() => user && navigate('/myWorkspace/')}
+                        >
+                            내 워크스페이스 보기
+                        </MKButton>
+                    </Tooltip>
+                    <Tooltip title={user ? "새 프로젝트를 등록하여 팀원을 모집합니다." : "로그인이 필요한 메뉴입니다."}>
+                        <MKButton
+                            variant="contained"
+                            color={user ? "info" : "secondary"}
+                            onClick={() => user && setGroupCreateModalOpen(true)}
+                        >
+                            프로젝트 등록하기
+                        </MKButton>
+                    </Tooltip>
                 </Stack>
             </Stack>
 
