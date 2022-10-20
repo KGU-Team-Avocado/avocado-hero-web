@@ -41,7 +41,7 @@ export default ({ user_id, imgURL, edit }) => {
                         </svg>
                 }
                 {
-                    edit && <AvatarEditButton setProfileImage={setProfileImage}/>
+                    edit && <AvatarEditButton setUploadedImage={setUploadedImage}/>
                 }
             </div>
         </>

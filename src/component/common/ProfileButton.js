@@ -23,7 +23,7 @@ export default ({
 
     useEffect(() => {
         setProfileImage();
-    }, [userInfo]);
+    }, [userInfo.imgURL]);
 
     const handleClose = (url) => {
         navigate(url);

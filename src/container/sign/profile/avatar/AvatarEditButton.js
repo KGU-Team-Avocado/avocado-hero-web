@@ -1,12 +1,15 @@
 import { Box, Button, FormControl, Stack, Typography } from '@mui/material';
+import { refreshUserAsync } from 'api/redux/user/userSlice';
 import { selectUser } from 'api/redux/user/userSlice'
 import MKButton from 'component/common/mui-components/MKButton';
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import * as API from '../../../../api/API';
 
-export default ({ setProfileImage }) => {
+export default ({ setUploadedImage }) => {
   const user = useSelector(selectUser);
   const [image, setImage] = useState({ preview: '', data: '' })
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -19,8 +22,9 @@ export default ({ setProfileImage }) => {
     })
 
     if (response) {
-      setProfileImage(); //부모의 프로필 이미지를 수정해줌
+      setUploadedImage(image.preview); //부모의 프로필 이미지를 수정해줌
       setImage({ preview: '', data: '' });
+      dispatch(refreshUserAsync(user?.user_id));
     }
   }
 

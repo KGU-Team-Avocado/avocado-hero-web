@@ -20,6 +20,19 @@ export const loginAsync = createAsyncThunk(
   }
 );
 
+export const refreshUserAsync = createAsyncThunk(
+  'user/refresh',
+  async (user_id, { rejectedValue }) => {
+    const response = await API.findOneUserByUserId(user_id);
+    if (response) {
+      return response;
+    }
+    else {
+      return rejectedValue();
+    }
+  }
+)
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -44,6 +57,9 @@ export const userSlice = createSlice({
       .addCase(loginAsync.rejected, (state, action) => {
         // incrementAsync가 실패라면
         state.status = 'failed';
+      })
+      .addCase(refreshUserAsync.fulfilled, (state, action) => {
+        state.user = action.payload;
       })
       ;
   },
