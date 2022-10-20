@@ -10,7 +10,7 @@ export default ({ user_id, edit }) => {
     }, [user_id]);
 
     const setProfileImage = async () => {
-        setUploadedImage(await API.fetchImage(user_id)); //프로필 이미지 불러오는 코드
+        setUploadedImage(await API.fetchProfileImage(user_id)); //프로필 이미지 불러오는 코드
     }
 
     return (

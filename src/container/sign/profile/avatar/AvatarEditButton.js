@@ -29,6 +29,7 @@ export default ({ setProfileImage }) => {
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
     }
+    console.log(img)
     setImage(img)
   }
 
