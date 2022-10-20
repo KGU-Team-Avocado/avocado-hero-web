@@ -70,8 +70,8 @@ export const getGroupById = async (group_id) => {
     }
 }
 
-export const fetchProfileImage = async (url) => {
-    const res = await fetch(`/usersRouter/profileImage/${url}`);
+export const fetchProfileImage = async (imgURL) => {
+    const res = await fetch(`/usersRouter/profileImage/${imgURL}`);
     const imageBlob = await res.blob();
     const imageObjectURL = URL.createObjectURL(imageBlob);
     if (res.status == 200) {

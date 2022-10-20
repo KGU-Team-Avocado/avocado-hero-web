@@ -16,7 +16,7 @@ export default ({ user, handleUserProfileCard }) => {
     }, []);
 
     const setProfileImage = async () => {
-        setUploadedImage(await API.fetchProfileImage(user.user_id)); //프로필 이미지 불러오는 코드
+        setUploadedImage(await API.fetchProfileImage(user.imgURL)); //프로필 이미지 불러오는 코드
         setLoaded(true);
     }
 

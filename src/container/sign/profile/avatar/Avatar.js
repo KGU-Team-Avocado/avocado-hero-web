@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AvatarEditButton from "./AvatarEditButton";
 import * as API from '../../../../api/API';
 
-export default ({ user_id, edit }) => {
+export default ({ user_id, imgURL, edit }) => {
     const [uploadedImage, setUploadedImage] = useState(null);
 
     useEffect(() => {
@@ -10,7 +10,7 @@ export default ({ user_id, edit }) => {
     }, [user_id]);
 
     const setProfileImage = async () => {
-        setUploadedImage(await API.fetchProfileImage(user_id)); //프로필 이미지 불러오는 코드
+        setUploadedImage(await API.fetchProfileImage(imgURL)); //프로필 이미지 불러오는 코드
     }
 
     return (

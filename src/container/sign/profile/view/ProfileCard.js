@@ -27,7 +27,7 @@ export default (props) => {
                         <Card>
                             <CardActionArea>
                                 <CardContent>
-                                    <Avatar user_id={profile?.user_id} />
+                                    <Avatar user_id={profile?.user_id} imgURL={profile?.imgURL}/>
                                     <Typography>
                                         {profile?.nickname}
                                     </Typography>

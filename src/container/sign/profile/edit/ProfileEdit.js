@@ -255,7 +255,7 @@ const ProfileEdit = (props) => {
                                             <svg className="img-thumbnail rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
                                             <div class="itemCenter"><Button >변경</Button></div>
                                         </div> */}
-                                        <Avatar edit={true} user_id={profile?.user_id} />
+                                        <Avatar edit={true} user_id={profile?.user_id} imgURL={profile?.imgURL}/>
 
                                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                             <Form.Label>닉네임</Form.Label>

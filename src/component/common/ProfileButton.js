@@ -18,7 +18,7 @@ export default ({
     const userInfo = useSelector(selectUser);
     const [uploadedImage, setUploadedImage] = useState(null);
     const setProfileImage = async () => {
-        setUploadedImage(await API.fetchProfileImage(userInfo?.user_id)); //프로필 이미지 불러오는 코드
+        setUploadedImage(await API.fetchProfileImage(userInfo?.imgURL)); //프로필 이미지 불러오는 코드
     }
 
     useEffect(() => {
