@@ -6,7 +6,7 @@ export default ({navigate}) => {
     return (
         <>
             <Stack align="center">
-                <img className="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="프로필 예제 화면 사진이 올 자리" width="500" height="50" />
+                <img className="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="프로필 예제 화면 사진이 올 자리" />
             </Stack>
             <Stack
                 align="center"
