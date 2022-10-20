@@ -77,7 +77,7 @@ export default (props) => {
             axios
                 .post("/groupsRouter/create", newGroupData)
                 .then((response) => {
-                    console.log(response.data);
+                    alert(JSON.stringify(response.data));
                     window.location.reload()
                 })
                 .catch(function (error) {
@@ -85,6 +85,16 @@ export default (props) => {
                 });
         }
     }
+
+    const [image, setImage] = useState({ preview: '', data: '' })
+    const handleFileChange = (e) => {
+        const img = {
+          preview: URL.createObjectURL(e.target.files[0]),
+          data: e.target.files[0],
+        }
+        console.log(img)
+        setImage(img)
+      }
 
     return (
         <>
@@ -110,7 +120,16 @@ export default (props) => {
                 </DialogTitle>
                 <DialogContent dividers={true}>
                     <Stack spacing={1}>
-                        <Box>이 자리에 사진 업로드 기능 추가 예정</Box>
+                        <Stack>
+                            <Typography variant='h4' my={1}>대표 사진</Typography>
+                            <input className='form-control' type='file' name='file' onChange={handleFileChange}></input>
+                        </Stack>
+                        {image.preview && <>
+                            <Box my={3}>
+                                <img src={image.preview} width='100%' height='300' />
+                            </Box>
+                        </>
+                        }
                         <TextField
                             sx={{ width: "100%" }}
                             label="그룹명"
