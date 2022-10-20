@@ -1,7 +1,19 @@
 import { Card, CardActionArea, CardContent, CardMedia, Stack, Typography } from "@mui/material"
+import { useEffect, useState } from "react";
 import TechStack from "../../common/TechStack"
+import * as API from "../../../api/API"
 
 export default (props) => {
+
+    const [uploadedImage, setUploadedImage] = useState(null);
+
+    useEffect(() => {
+        setGruopImage();
+    }, []);
+
+    const setGruopImage = async () => {
+        setUploadedImage(await API.fetchGroupImage(props.group.imageURL)); //프로필 이미지 불러오는 코드
+    }
 
     return (
         <div className="col">
@@ -9,11 +21,11 @@ export default (props) => {
                 onClick={() => props.handleGroupCard(props.group)}>
                 <CardActionArea>
                     <Stack align="center">
-                        <CardMedia
-                            component="img"
+                        <img
+                            className="border rounded-top"
+                            width="100%"
                             height="200"
-                            image="./logo512.png"
-                            alt="green iguana"
+                            src={uploadedImage}
                         />
                     </Stack>
                     <CardContent>
