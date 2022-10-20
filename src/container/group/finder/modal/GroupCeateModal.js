@@ -190,7 +190,7 @@ export default (props) => {
                         </Box>
                         {
                             props.groupCreateModalOpen &&
-                            <Box sx={{ minHeight: '400px' }}>
+                            <Box>
                                 <Typography variant="h4">상세소개글</Typography>
                                 <Box>
                                     <Editor
@@ -199,6 +199,7 @@ export default (props) => {
                                         wrapperClassName="wrapperClassName"
                                         editorClassName="editorClassName"
                                         onEditorStateChange={handleEditorChange}
+                                        editorStyle={{ height: 300, margin: 12, borderWidth: 0.5, padding: 10, borderRadius: "2px" }}
                                     />
                                 </Box>
                             </Box>
