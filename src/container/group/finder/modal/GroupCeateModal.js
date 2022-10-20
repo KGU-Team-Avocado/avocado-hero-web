@@ -77,8 +77,20 @@ export default (props) => {
             axios
                 .post("/groupsRouter/create", newGroupData)
                 .then((response) => {
-                    alert(JSON.stringify(response.data));
-                    window.location.reload()
+                    if (response.data.success === true) {
+                        // alert(JSON.stringify(response.data.group._id));
+                        if (image.data !== '') {
+                            alert('yes img')
+                            uploadImage(response.data.group._id);
+                        }
+                        else {
+                            alert('no img')
+                            window.location.reload();
+                        }
+                    }
+                    else {
+                        alert('server error.')
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -86,15 +98,28 @@ export default (props) => {
         }
     }
 
+    const uploadImage = async (group_id) => {
+        let formData = new FormData()
+        formData.append('group_id', group_id);
+        formData.append('file', image.data); //반드시 file을 마지막에 append 해야 오류가 없음!!
+        const response = await fetch('/groupsRouter/uploadImage', {
+            method: 'POST',
+            body: formData,
+        })
+        if (response) {
+            window.location.reload();
+        }
+    }
+
     const [image, setImage] = useState({ preview: '', data: '' })
     const handleFileChange = (e) => {
         const img = {
-          preview: URL.createObjectURL(e.target.files[0]),
-          data: e.target.files[0],
+            preview: URL.createObjectURL(e.target.files[0]),
+            data: e.target.files[0],
         }
         console.log(img)
         setImage(img)
-      }
+    }
 
     return (
         <>
