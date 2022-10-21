@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { BsCheckCircleFill, BsCheckCircle } from "react-icons/bs";
-import "../workspace/Todo.css";
+import "./Todo.css";
 
 const TodoItem = ({ todo, onDelete }) => {
   const { _id, project_id, todo_text, todo_isChecked } = todo;

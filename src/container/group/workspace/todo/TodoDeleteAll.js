@@ -1,4 +1,4 @@
-import "../workspace/Todo.css";
+import "./Todo.css";
 
 const TodoDeleteAll = ({onDeleteAll, onDeleteComplete}) => {
 

@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getGroupAsync } from "api/redux/group/groupSlice";
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
 
-const ProjectContainer = () => {
+const NoticeContainer = () => {
     const group = useSelector(selectGroup);
     const dispatch = useDispatch();
 
@@ -139,4 +139,4 @@ const ProjectContainer = () => {
     )
 }
 
-export default ProjectContainer;
+export default NoticeContainer;

@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import TodoList from "./TodoList";
-import TodoCreate from "./TodoCreate";
-import TodoDeleteAll from "./TodoDeleteAll";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import TodoCreate from "./todo/TodoCreate";
+import TodoDeleteAll from "./todo/TodoDeleteAll";
+import TodoList from "./todo/TodoList";
 
-const ProjectTodoContainer = () => {
+const TodoContainer = () => {
   
   //URL에서 프로젝트 id를 가져옴
   const params = useParams();
@@ -166,4 +166,4 @@ const ProjectTodoContainer = () => {
   );
 };
 
-export default ProjectTodoContainer;
+export default TodoContainer;

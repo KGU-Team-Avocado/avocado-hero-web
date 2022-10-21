@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "../workspace/Todo.css";
+import "./Todo.css";
 import Form from "react-bootstrap/Form";
 
 const TodoCreate = ({ onCreate }) => {

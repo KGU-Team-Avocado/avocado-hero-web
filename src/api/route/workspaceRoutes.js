@@ -1,40 +1,45 @@
 import ProjectEndContainer from "container/group/workspace/ProjectEndContainer";
 import ProjectEvaluationContainer from "container/group/workspace/ProjectEvaluationContainer";
 import ProjectMembersContainer from "container/group/workspace/ProjectMembersContainer";
-import ProjectContainer from "container/group/workspace/ProjectNoticeContainer";
+import NoticeContainer from "container/group/workspace/NoticeContainer";
 import ProjectRoleContainer from "container/group/workspace/ProjectRoleContainer";
-import ProjectTodoContainer from "container/group/workspace/ProjectTodoContainer";
-import ProjectCalendarContainer from "container/group/workspace/ProjectCalendarContainer";
+import TodoContainer from "container/group/workspace/TodoContainer";
+import CalendarContainer from "container/group/workspace/CalendarContainer";
+import ReadmeContainer from "container/group/workspace/ReadmeContainer";
 
 
 const workspaceRoutes = [
     {
         path: '/workspace/:id',
-        element: <ProjectContainer/>,
+        element: <ReadmeContainer />,
+    },
+    {
+        path: '/workspace/:id/notice',
+        element: <NoticeContainer />,
     },
     {
         path: '/workspace/:id/calendar',
-        element: <ProjectCalendarContainer/>,
+        element: <CalendarContainer />,
     },
     {
         path: '/workspace/:id/todo',
-        element: <ProjectTodoContainer/>,
+        element: <TodoContainer />,
     },
     {
         path: '/workspace/:id/role',
-        element: <ProjectRoleContainer/>,
+        element: <ProjectRoleContainer />,
     },
     {
         path: '/workspace/:id/members',
-        element: <ProjectMembersContainer/>,
+        element: <ProjectMembersContainer />,
     },
     {
         path: '/workspace/:id/end',
-        element: <ProjectEndContainer/>,
+        element: <ProjectEndContainer />,
     },
     {
         path: '/workspace/:id/evaluation/:user_id',
-        element: <ProjectEvaluationContainer/>,
+        element: <ProjectEvaluationContainer />,
     },
 ];
 export default workspaceRoutes;

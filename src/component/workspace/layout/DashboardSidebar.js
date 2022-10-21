@@ -7,7 +7,7 @@ import { User as UserIcon } from '../icons/user';
 import { Users as UsersIcon } from '../icons/users';
 import { XCircle as XCircleIcon } from '../icons/x-circle';
 import { Bell as BellIcon } from '../icons/bell';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { NavItem } from './NavItem';
 import { useSelector } from 'react-redux';
 import { selectUser } from 'api/redux/user/userSlice';
@@ -15,6 +15,7 @@ import { selectGroup } from 'api/redux/group/groupSlice';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
+import HomeIcon from '@mui/icons-material/Home';
 
 export const DashboardSidebar = (props) => {
   const { open, onClose } = props;
@@ -27,10 +28,18 @@ export const DashboardSidebar = (props) => {
   const project_id = params.id;
   const group = useSelector(selectGroup);
   const user = useSelector(selectUser);
+  const navigate = useNavigate();
 
   const items = [
     {
       href: `/workspace/${project_id}`,
+      icon: (<HomeIcon fontSize="small" />),
+      title: 'README',
+      onlyForMgr: false,
+      showAfterEnd: true
+    },
+    {
+      href: `/workspace/${project_id}/notice`,
       icon: (<BellIcon fontSize="small" />),
       title: '공지사항',
       onlyForMgr: false,
@@ -109,11 +118,14 @@ export const DashboardSidebar = (props) => {
       >
         <div>
           <Box sx={{ p: 3 }}>
-            <Link
-              to="/"
+            <Button
+              onClick={() => navigate('/')}
+              variant="contained"
+              fullWidth
+              endIcon={(<HomeIcon />)}
             >
-              <div>메인으로 돌아가기</div>
-            </Link>
+              메인으로 돌아가기
+            </Button>
           </Box>
           <Box sx={{ px: 2 }}>
             <Box
@@ -142,13 +154,13 @@ export const DashboardSidebar = (props) => {
                   {group.group_name}
                 </Typography>
               </div>
-              <SelectorIcon
+              {/* <SelectorIcon
                 sx={{
                   color: 'neutral.500',
                   width: 14,
                   height: 14
                 }}
-              />
+              /> */}
             </Box>
           </Box>
         </div>
@@ -169,12 +181,12 @@ export const DashboardSidebar = (props) => {
           ))}
           {extraItems.map((item) => (
             (!item.onlyForMgr || (user.user_id === group.manager)) && item.showAfterEnd === group.end_project ?
-            <NavItem
-              key={item.title}
-              icon={item.icon}
-              href={item.href}
-              title={item.title}
-            /> : null
+              <NavItem
+                key={item.title}
+                icon={item.icon}
+                href={item.href}
+                title={item.title}
+              /> : null
           ))}
         </Box>
         <Divider sx={{ borderColor: '#2D3748' }} />
@@ -188,6 +200,18 @@ export const DashboardSidebar = (props) => {
             color="neutral.100"
             variant="subtitle2"
           >
+            참여 인원
+          </Typography>
+          <Typography
+            color="neutral.500"
+            variant="body2"
+          >
+            0명
+          </Typography>
+          <Typography
+            color="neutral.100"
+            variant="subtitle2"
+          >
             프로젝트 기간
           </Typography>
           <Typography
@@ -196,7 +220,7 @@ export const DashboardSidebar = (props) => {
           >
             {new Date(group.start_date).toLocaleDateString()} ~ ??
           </Typography>
-          <Box
+          {/* <Box
             sx={{
               display: 'flex',
               mt: 2,
@@ -211,12 +235,10 @@ export const DashboardSidebar = (props) => {
               alt="Go to pro"
               src="/static/images/sidebar_pro.png"
             />
-          </Box>
+          </Box> */}
 
           <Button
             color="secondary"
-            component="a"
-            endIcon={(<OpenInNewIcon />)}
             fullWidth
             sx={{ mt: 2 }}
             variant="contained"

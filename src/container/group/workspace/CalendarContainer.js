@@ -40,7 +40,7 @@ const DayOfTheWeek = [
     },
 ]
 
-const ProjecCalendarContainer = () => {
+const CalendarContainer = () => {
     const group = useSelector(selectGroup);
     const dispatch = useDispatch();
 
@@ -268,4 +268,4 @@ const ProjecCalendarContainer = () => {
     )
 }
 
-export default ProjecCalendarContainer;
+export default CalendarContainer;
