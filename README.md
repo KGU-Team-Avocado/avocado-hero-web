@@ -11,9 +11,37 @@
 
 
 
-## Tech Stack
+## Tech
 
 **Client:** React, Redux, Material UI
 
 **Server:** Node, Express, Mongo DB
+
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/KGU-Team-Avocado/avocado-hero-web
+```
+
+Go to the project directory
+
+```bash
+  cd avocado-hero-web
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm start
+```
 
