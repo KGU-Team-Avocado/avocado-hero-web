@@ -8,6 +8,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
+import UserProfileCard from "component/jobFinder/UserProfileCard";
 
 export default (props) => {
 
@@ -92,6 +93,11 @@ export default (props) => {
                     <Typography variant="h5">
                         팀장
                     </Typography>
+                    {/* findOneUserByUserId로 manager 정보 불러와서 하단에 연동해 줄 예정임 */}
+                    <UserProfileCard
+                        user={{ user_id: group?.manager, name: '수정예정' }}
+                        handleUserProfileCard={null}
+                    />
                     <Tooltip title="새 창으로 이동합니다.">
                         <MKButton
                             variant="contained"
@@ -121,8 +127,8 @@ export default (props) => {
                 <MKButton
                     color="success"
                     onClick={() => groupApply()}
-                    fullWidth 
-                    disabled={userInfo===null||(userInfo?.user_id == group?.manager)}
+                    fullWidth
+                    disabled={userInfo === null || (userInfo?.user_id == group?.manager)}
                 >
                     신청하기
                 </MKButton>
