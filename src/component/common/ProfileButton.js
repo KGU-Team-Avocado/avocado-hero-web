@@ -36,7 +36,7 @@ export default ({
 
     const logout = () => {
         sessionStorage.clear();
-        window.location.href = '/'
+        window.location.href = '/avocado-hero-web/'
     };
 
     const Content = () => {

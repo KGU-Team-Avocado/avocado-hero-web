@@ -1,5 +1,5 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Card, CardContent, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from "@mui/material";
+import { Card, CardContent, CircularProgress, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from "@mui/material";
 import { initStatus } from "api/redux/user/userSlice";
 import { selectStatus } from "api/redux/user/userSlice";
 import { selectUser } from "api/redux/user/userSlice";
@@ -74,6 +74,19 @@ export default () => {
         }
     }
 
+    const statusButtonText = (status) => {
+        switch (status) {
+            case "idle":
+                return "로그인";
+            case "loading":
+                return <CircularProgress />;
+            case "failed":
+                return "로그인";
+            default:
+                return "?????";
+        }
+    }
+
     return (
         <>
             <Card sx={{
@@ -134,7 +147,7 @@ export default () => {
                             size="large"
                             onClick={() => login()}
                         >
-                            로그인
+                            {statusButtonText(status)}
                         </MKButton>
                     </Stack>
                 </CardContent>

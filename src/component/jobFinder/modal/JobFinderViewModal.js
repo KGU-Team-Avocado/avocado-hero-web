@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import ClearIcon from '@mui/icons-material/Clear';
 import DOMPurify from "dompurify";
 import MKButton from "component/common/mui-components/MKButton";
+import { useSelector } from "react-redux";
+import { selectUser } from "api/redux/user/userSlice";
 
 export default (props) => {
     const { selected, bookmarkBtn, bookMarkSave, bookMarkDelete } = props;
@@ -14,6 +16,8 @@ export default (props) => {
             __html: DOMPurify.sanitize(html)
         }
     };
+
+    const user = useSelector(selectUser);
 
     return (
         <>
@@ -75,8 +79,16 @@ export default (props) => {
                     justifyContent="center"
                     alignItems="center"
                 >
-                    <MKButton variant={bookmarkBtn ? "contained" : "outlined"} color="warning" onClick={() => bookmarkBtn ? bookMarkDelete(selected?._id) : bookMarkSave(selected?._id)} fullWidth><BiBookmark />즐겨찾기 {bookmarkBtn ? "삭제" : "등록"}</MKButton>
-                    <MKButton variant="contained" color="info" fullWidth>지원하기</MKButton>
+                    {
+                        user === null
+                            ?
+                            <MKButton variant="contained" color="secondary" fullWidth disabled>로그인이 필요한 메뉴입니다.</MKButton>
+                            :
+                            <>
+                                <MKButton variant={bookmarkBtn ? "contained" : "outlined"} color="warning" onClick={() => bookmarkBtn ? bookMarkDelete(selected?._id) : bookMarkSave(selected?._id)} fullWidth><BiBookmark />즐겨찾기 {bookmarkBtn ? "삭제" : "등록"}</MKButton>
+                                <MKButton variant="contained" color="info" fullWidth>지원하기</MKButton>
+                            </>
+                    }
                 </Stack>
                 {/* </DialogActions> */}
             </Box>
