@@ -59,8 +59,26 @@ export default () => {
                     <Typography variant="h2">채용공고 리스트</Typography>
                 </Box>
                 <Box>
-                    <MKButton variant={onOff ? 'outlined' : 'contained'} color='dark' onClick={() => setOnOff(false)}>전체보기</MKButton>
-                    <MKButton variant={onOff ? 'contained' : 'outlined'} color='dark' onClick={() => setOnOff(true)}>북마크보기</MKButton>
+                    {
+                        userInfo !== null
+                        &&
+                        <>
+                            <MKButton
+                                variant={onOff ? 'outlined' : 'contained'}
+                                color='dark'
+                                onClick={() => setOnOff(false)}
+                            >
+                                전체보기
+                            </MKButton>
+                            <MKButton
+                                variant={onOff ? 'contained' : 'outlined'}
+                                color='dark'
+                                onClick={() => setOnOff(true)}
+                            >
+                                북마크보기
+                            </MKButton>
+                        </>
+                    }
                 </Box>
             </Box>
             <JobList postings={onOff ? bookmarks : postings} userInfo={userInfo} bookmarks={bookmarks} />

@@ -1,4 +1,4 @@
-import { Container, Grid } from "@mui/material"
+import { Container, Grid, Stack } from "@mui/material"
 import { useLocation } from "react-router-dom";
 
 // Images
@@ -25,30 +25,20 @@ export default () => {
                 }}
             >
                 <Container>
-                    <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
+                    <Stack direction={"column"} alignItems="center">
                         <MKTypography
                             variant="h1"
                             color="white"
-                            mt={-6}
-                            mb={1}
-                            sx={({ breakpoints, typography: { size } }) => ({
-                                [breakpoints.down("md")]: {
-                                    fontSize: size["3xl"],
-                                },
-                            })}
                         >
                             {routeInfo?.name}
                         </MKTypography>
                         <MKTypography
                             variant="body1"
                             color="white"
-                            textAlign="center"
-                            px={{ xs: 6, lg: 12 }}
-                            mt={1}
                         >
                             {routeInfo?.description}
                         </MKTypography>
-                    </Grid>
+                    </Stack>
                 </Container>
             </MKBox>
         </>
