@@ -12,8 +12,8 @@ export default (props) => {
 
     const navigate = useNavigate();
 
-    const [liveGroups, setLiveGroups] = useState([]);
-    const [endGroups, setEndGroups] = useState({});
+    const [onGroups, setOnGroups] = useState({});
+    const [offGroups, setOffGroups] = useState({});
 
     const handleGroupCard = (group) => {
         // alert(JSON.stringify(group))
@@ -29,8 +29,8 @@ export default (props) => {
         axios.post("/groupsRouter/getMyGroup", {
             user_id: user.user_id,
         }).then((response) => {
-            setLiveGroups(response.data);
-            setEndGroups(response.data.filter((group) => group.end_project === true))
+            setOnGroups(response.data.filter((group) => group.end_project === false))
+            setOffGroups(response.data.filter((group) => group.end_project === true))
         }).catch(function (error) {
             console.log(error);
         });
@@ -40,15 +40,15 @@ export default (props) => {
         <>
             <Box sx={{ my: 3 }}>
                 <Typography variant="h4">
-                    현재 소속 그룹
+                    현재 진행중인 프로젝트
                 </Typography>
                 <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
-                        liveGroups.length > 0
+                        onGroups.length > 0
                             ?
                             <>
                                 {
-                                    liveGroups.map((group) => (
+                                    onGroups.map((group) => (
                                         <GroupCardV2
                                             key={group._id}
                                             group={group}
@@ -65,15 +65,15 @@ export default (props) => {
 
             <Box sx={{ my: 3 }}>
                 <Typography variant="h4">
-                    종료된 소속 그룹
+                    종료된 프로젝트
                 </Typography>
                 <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
                     {
-                        endGroups.length > 0
+                        offGroups.length > 0
                             ?
                             <>
                                 {
-                                    endGroups.map((group) => (
+                                    offGroups.map((group) => (
                                         <GroupCardV2
                                             key={group._id}
                                             group={group}
