@@ -2,6 +2,7 @@ import { Card, CardActionArea, CardContent, CardMedia, Stack, Typography } from 
 import { useEffect, useState } from "react";
 import TechStack from "../../common/TechStack"
 import * as API from "../../../api/API"
+import defaultImage from '../../../assets/img/logo512.png';
 
 export default (props) => {
 
@@ -12,7 +13,12 @@ export default (props) => {
     }, []);
 
     const setGruopImage = async () => {
-        setUploadedImage(await API.fetchGroupImage(props.group.imageURL)); //프로필 이미지 불러오는 코드
+        const image = await API.fetchGroupImage(props.group.imageURL); //프로필 이미지 불러오는 코드
+        setUploadedImage(image);
+    }
+    
+    const handleImgError = (e) => {
+        e.target.src = defaultImage;
     }
 
     return (
@@ -26,6 +32,7 @@ export default (props) => {
                             width="100%"
                             height="200"
                             src={uploadedImage}
+                            onError={handleImgError}
                         />
                     </Stack>
                     <CardContent>

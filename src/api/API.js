@@ -1,4 +1,5 @@
 import axios from "axios";
+// import defaultImage from "../assets/img/title.jpg";
 
 export const loginCheck = async (user_id, user_password) => {
     console.log(user_id, user_password);
