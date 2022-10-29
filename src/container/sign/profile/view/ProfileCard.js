@@ -90,7 +90,7 @@ export default (props) => {
                     </Stack>
                 </Grid>
             </Grid>
-            <ProfileGroup />
+            <ProfileGroup user_id={profile?.user_id}/>
             <ProfilePortpolio />
         </>
     )

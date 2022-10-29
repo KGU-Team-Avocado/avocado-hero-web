@@ -1,33 +1,35 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
+import { selectedGroup } from "api/redux/group/groupSlice";
 import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
 import GroupCardV2 from "component/group/card/GroupCardV2";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as API from "../../../../api/API";
 
 
-export default (props) => {
+export default ({ user_id }) => {
 
     const navigate = useNavigate();
 
     const [onGroups, setOnGroups] = useState({});
     const [offGroups, setOffGroups] = useState({});
 
+    const dispatch = useDispatch();
+
     const handleGroupCard = (group) => {
         // alert(JSON.stringify(group))
         if (window.confirm(`${group.project_name}으로 이동하시겠습니까?`)) {
+            dispatch(selectedGroup(group));
             navigate(`/workspace/${group._id}`);
         }
     }
 
-    const user = useSelector(selectUser);
-
     useEffect(() => {
         // API로 분리할 필요성이 있음
         axios.post("/groupsRouter/getMyGroup", {
-            user_id: user.user_id,
+            user_id: user_id,
         }).then((response) => {
             setOnGroups(response.data.filter((group) => group.end_project === false))
             setOffGroups(response.data.filter((group) => group.end_project === true))
@@ -42,50 +44,62 @@ export default (props) => {
                 <Typography variant="h4">
                     현재 진행중인 프로젝트
                 </Typography>
-                <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
+                <Grid
+                    container
+                    spacing={1}
+                    alignItems="stretch"
+                >
                     {
                         onGroups.length > 0
                             ?
                             <>
                                 {
                                     onGroups.map((group) => (
-                                        <GroupCardV2
-                                            key={group._id}
-                                            group={group}
-                                            handleGroupCard={handleGroupCard}
-                                        />
+                                        <Grid item xs={12} md={6} xxl={4}>
+                                            <GroupCardV2
+                                                key={group._id}
+                                                group={group}
+                                                handleGroupCard={handleGroupCard}
+                                            />
+                                        </Grid>
                                     ))
                                 }
                             </>
                             :
                             <Typography variant="h6">현재 소속된 프로젝트가 없습니다.</Typography>
                     }
-                </div>
+                </Grid>
             </Box>
 
             <Box sx={{ my: 3 }}>
                 <Typography variant="h4">
                     종료된 프로젝트
                 </Typography>
-                <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
+                <Grid
+                    container
+                    spacing={1}
+                    alignItems="stretch"
+                >
                     {
                         offGroups.length > 0
                             ?
                             <>
                                 {
                                     offGroups.map((group) => (
-                                        <GroupCardV2
-                                            key={group._id}
-                                            group={group}
-                                            handleGroupCard={handleGroupCard}
-                                        />
+                                        <Grid item xs={12} md={6} xxl={4}>
+                                            <GroupCardV2
+                                                key={group._id}
+                                                group={group}
+                                                handleGroupCard={handleGroupCard}
+                                            />
+                                        </Grid>
                                     ))
                                 }
                             </>
                             :
                             <Typography variant="h6">종료된 프로젝트가 없습니다.</Typography>
                     }
-                </div>
+                </Grid>
             </Box>
         </>
     )
