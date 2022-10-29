@@ -1,6 +1,7 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material"
+import { Card, CardActionArea, CardContent, CardMedia, Skeleton, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
 import * as API from '../../api/API';
+import defaultImage from '../../assets/img/logo512.png';
 
 export default ({ user, handleUserProfileCard }) => {
     const [uploadedImage, setUploadedImage] = useState(null);
@@ -20,6 +21,10 @@ export default ({ user, handleUserProfileCard }) => {
         setLoaded(true);
     }
 
+    const handleImgError = (e) => {
+        e.target.src = defaultImage;
+    }
+
     return (
         <div className="col">
             <Card sx={{ borderRadius: 5 }}
@@ -33,22 +38,10 @@ export default ({ user, handleUserProfileCard }) => {
                                 component="img"
                                 height="140"
                                 image={uploadedImage}
-                                alt="green iguana"
+                                onError={handleImgError}
                             />
                             :
-                            <svg
-                                className="img-thumbnail rounded-circle"
-                                width="140"
-                                height="140"
-                                xmlns="http://www.w3.org/2000/svg"
-                                role="img"
-                                aria-label="Placeholder: 140x140"
-                                preserveAspectRatio="xMidYMid slice"
-                                focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#777" />
-                                <text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
-                            </svg>
+                            <Skeleton variant="circular" width={140} height={140} />
                     }
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
