@@ -34,7 +34,7 @@ export default (props) => {
                 console.log(response.data);
                 alert("북마크에 추가되었습니다.");
                 setBookmarkBtn(true);
-                window.location.href = "/jobFinder";
+                navigate("/jobFinder");
             })
             .catch(function (error) {
                 console.log(error);
@@ -51,7 +51,7 @@ export default (props) => {
                 console.log(response.data);
                 alert("북마크에서 삭제되었습니다.");
                 setBookmarkBtn(false);
-                window.location.href = "/jobFinder";
+                navigate("/jobFinder");
             })
             .catch(function (error) {
                 console.log(error);

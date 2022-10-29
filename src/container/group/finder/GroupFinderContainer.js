@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Tooltip, Typography } from "@mui/material";
 import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
@@ -76,21 +76,27 @@ export default () => {
                 </Stack>
             </Stack>
 
-            <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
+            <Grid
+                container
+                spacing={1}
+                alignItems="stretch"
+            >
                 {
                     groups.length > 0
                         ?
                         groups.map((group) => (
-                            <GroupCardV2
-                                key={group._id}
-                                group={group}
-                                handleGroupCard={handleGroupCard}
-                            />
+                            <Grid item xs={12} md={6} xxl={4}>
+                                <GroupCardV2
+                                    key={group._id}
+                                    group={group}
+                                    handleGroupCard={handleGroupCard}
+                                />
+                            </Grid>
                         ))
                         :
                         <div>그룹이 없습니다.</div>
                 }
-            </div>
+            </Grid>
             <ModalStaticBackdrop
                 keepMounted
                 width="md"

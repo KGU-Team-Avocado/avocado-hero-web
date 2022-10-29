@@ -6,6 +6,7 @@ import Table from "../../../component/common/Table";
 import { useDispatch } from "react-redux";
 import { getGroupAsync, selectedGroup } from "api/redux/group/groupSlice";
 import GroupCardV2 from "component/group/card/GroupCardV2";
+import { Grid, Stack, Typography } from "@mui/material";
 
 export default () => {
     const [groups, setGroups] = useState([]);
@@ -43,28 +44,36 @@ export default () => {
 
     return (
         <>
-            <div className="my-3">
-                <h3>소속된 그룹</h3>
-                <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
-                    {
-                        groups.length > 0
-                            ?
-                            <>
-                                {
-                                    groups.map((group) => (
+            <Stack>
+                <Typography variant="h3">
+                    소속된 그룹
+                </Typography>
+            </Stack>
+            <Grid
+                container
+                spacing={1}
+                alignItems="stretch"
+            >
+                {
+                    groups.length > 0
+                        ?
+                        <>
+                            {
+                                groups.map((group) => (
+                                    <Grid item xs={12} md={6} xxl={4}>
                                         <GroupCardV2
                                             key={group._id}
                                             group={group}
                                             handleGroupCard={handleGroupCard}
                                         />
-                                    ))
-                                }
-                            </>
-                            :
-                            <div>프로젝트가 없습니다.</div>
-                    }
-                </div>
-            </div>
+                                    </Grid>
+                                ))
+                            }
+                        </>
+                        :
+                        <div>프로젝트가 없습니다.</div>
+                }
+            </Grid>
             <div className="my-3">
                 <h3>그룹 신청 결과</h3>
                 <div className="table-responsive">
