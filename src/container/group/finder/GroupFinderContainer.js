@@ -10,6 +10,8 @@ import { Link, useNavigate } from "react-router-dom";
 import GroupCeateModal from "./modal/GroupCeateModal";
 import GroupJoinModalV2 from "./modal/GroupJoinModalV2";
 import FilterListIcon from '@mui/icons-material/FilterList';
+import SearchIcon from '@mui/icons-material/Search';
+import GroupFilterModal from "./modal/GroupFilterModal";
 
 export default () => {
 
@@ -19,6 +21,7 @@ export default () => {
 
     const [groupCreateModalOpen, setGroupCreateModalOpen] = useState(false);
     const [groupJoinModalOpen, setGroupJoinModalOpen] = useState(false);
+    const [groupFilterModalOpen, setGroupFilterModalOpen] = useState(false);
 
     const [groups, setGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState(null);
@@ -44,12 +47,14 @@ export default () => {
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
+                mb={5}
             >
                 <MKButton
-                    color="dark"
-                    variant="outlined"
+                    color="success"
+                    variant="contained"
+                    onClick={()=>setGroupFilterModalOpen(true)}
                 >
-                    <FilterListIcon />
+                    <SearchIcon />
                 </MKButton>
                 <Stack
                     direction="row"
@@ -108,6 +113,12 @@ export default () => {
                 width="md"
                 open={groupCreateModalOpen}
                 component={<GroupCeateModal groupCreateModalOpen={groupCreateModalOpen} setOpen={setGroupCreateModalOpen} />}
+            />
+            <ModalStaticBackdrop
+                keepMounted
+                width="md"
+                open={groupFilterModalOpen}
+                component={<GroupFilterModal setOpen={setGroupFilterModalOpen} />}
             />
         </>
     )
