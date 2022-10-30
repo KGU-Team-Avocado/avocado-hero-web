@@ -50,8 +50,8 @@ export default () => {
                                         }
                                     }}
                                 >
-                                    <MKButton variant="contained" color="info" size="large" onClick={() => navigate('/')}>인재 찾으러 가기</MKButton>
-                                    <MKButton variant="outlined" color="secondary" size="large" onClick={() => navigate('/')}>채용 공고하러 가기</MKButton>
+                                    <MKButton variant="contained" color="info" size="large" onClick={() => navigate('/humanResources')}>인재 찾으러 가기</MKButton>
+                                    <MKButton variant="outlined" color="secondary" size="large" onClick={() => navigate('/prices')}>채용 공고하러 가기</MKButton>
                                 </Stack>
 
                             </Stack>
