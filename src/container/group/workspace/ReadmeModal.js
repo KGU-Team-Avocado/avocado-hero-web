@@ -14,7 +14,7 @@ export default ({group, setOpen}) => {
     const handleGroupCard = (group) => {
         // alert(JSON.stringify(group))
         if (window.confirm(`${group.project_name}으로 이동하시겠습니까?`)) {
-            dispatch(selectedGroup(group));
+            //dispatch(selectedGroup(group));
             navigate(`/workspace/${group._id}`);
         }
     }
@@ -35,7 +35,7 @@ export default ({group, setOpen}) => {
             >
                 <DialogTitle id="scroll-dialog-title">
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Typography variant="h4" variant="h3">
+                        <Typography variant="h4" >
                             {group?.project_name}의 Read Me
                         </Typography>
                         <IconButton size="large" onClick={() => setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
