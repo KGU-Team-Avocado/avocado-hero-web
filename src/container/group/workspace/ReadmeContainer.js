@@ -1,4 +1,4 @@
-import { Button } from "@mui/material"
+import { Box, Button } from "@mui/material"
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader"
 
 export default () => {
@@ -18,6 +18,9 @@ export default () => {
                     </Button>
                 }
             />
+            <Box>
+                이 자리에는 그룹에서 설정한 Read Me를 띄워줄 예정임
+            </Box>
         </>
     )
 }

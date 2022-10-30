@@ -2,7 +2,9 @@ import { Box, Grid, Typography } from "@mui/material";
 import { selectedGroup } from "api/redux/group/groupSlice";
 import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
+import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import GroupCardV2 from "component/group/card/GroupCardV2";
+import ReadmeModal from "container/group/workspace/ReadmeModal";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -16,14 +18,19 @@ export default ({ user_id }) => {
     const [onGroups, setOnGroups] = useState({});
     const [offGroups, setOffGroups] = useState({});
 
+    const [selectedGroup, setSelectedGroup] = useState(null);
+    const [groupReadmeModalOpen, setGroupReadmeModalOpen] = useState(false);
+
     const dispatch = useDispatch();
 
     const handleGroupCard = (group) => {
         // alert(JSON.stringify(group))
-        if (window.confirm(`${group.project_name}으로 이동하시겠습니까?`)) {
-            dispatch(selectedGroup(group));
-            navigate(`/workspace/${group._id}`);
-        }
+        // if (window.confirm(`${group.project_name}으로 이동하시겠습니까?`)) {
+        //     dispatch(selectedGroup(group));
+        //     navigate(`/workspace/${group._id}`);
+        // }
+        setSelectedGroup(group);
+        setGroupReadmeModalOpen(true);
     }
 
     useEffect(() => {
@@ -101,6 +108,13 @@ export default ({ user_id }) => {
                     }
                 </Grid>
             </Box>
+
+            <ModalStaticBackdrop
+                keepMounted
+                width="md"
+                open={groupReadmeModalOpen}
+                component={<ReadmeModal group={selectedGroup} setOpen={setGroupReadmeModalOpen} />}
+            />
         </>
     )
 }
