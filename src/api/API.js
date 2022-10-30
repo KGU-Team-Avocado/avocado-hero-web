@@ -36,7 +36,7 @@ export const saveJobPost = async (company) => {
           }
           if (response.data.success === true) {
             alert("채용공고 등록 성공.");
-            window.location.href = "/";
+            window.location.href = "/avocado-hero-web/";
             // return true;
           }
         // return false;
