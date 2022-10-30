@@ -29,7 +29,7 @@ export default () => {
     const project_id = params.id;
     
     useEffect(() => {
-        if(group._id !== project_id){
+        if(group?._id !== project_id){
             dispatch(getGroupAsync(project_id));
         }
     }, [])

@@ -145,13 +145,13 @@ export const DashboardSidebar = (props) => {
                   color="inherit"
                   variant="subtitle1"
                 >
-                  {group.project_name}
+                  {group?.project_name}
                 </Typography>
                 <Typography
                   color="neutral.400"
                   variant="body2"
                 >
-                  {group.group_name}
+                  {group?.group_name}
                 </Typography>
               </div>
               {/* <SelectorIcon
@@ -180,7 +180,7 @@ export const DashboardSidebar = (props) => {
             />
           ))}
           {extraItems.map((item) => (
-            (!item.onlyForMgr || (user.user_id === group.manager)) && item.showAfterEnd === group.end_project ?
+            (!item.onlyForMgr || (user?.user_id === group?.manager)) && item.showAfterEnd === group?.end_project ?
               <NavItem
                 key={item.title}
                 icon={item.icon}
@@ -218,7 +218,7 @@ export const DashboardSidebar = (props) => {
             color="neutral.500"
             variant="body2"
           >
-            {new Date(group.start_date).toLocaleDateString()} ~ ??
+            {new Date(group?.start_date).toLocaleDateString()} ~ ??
           </Typography>
           {/* <Box
             sx={{

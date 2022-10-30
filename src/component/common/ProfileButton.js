@@ -23,7 +23,7 @@ export default ({
 
     useEffect(() => {
         setProfileImage();
-    }, [userInfo.imgURL]);
+    }, [userInfo?.imgURL]);
 
     const handleClose = (url) => {
         navigate(url);
@@ -65,7 +65,7 @@ export default ({
                             <rect width="100%" height="100%" fill="#777" />
                         </svg>
                 }
-                <div className="mx-1">{userInfo.user_id}</div>
+                <div className="mx-1">{userInfo?.user_id}</div>
                 <ArrowDropDownIcon />
             </>
         )
