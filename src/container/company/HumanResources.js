@@ -1,8 +1,11 @@
+import { Grid, Stack } from "@mui/material";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
+import MKButton from "component/common/mui-components/MKButton";
 import ProfileViewModal from "component/jobFinder/modal/ProfileViewModal";
 import { useEffect, useState } from "react";
 import * as API from "../../api/API"
 import UserProfileCard from "../../component/jobFinder/UserProfileCard";
+import SearchIcon from '@mui/icons-material/Search';
 
 const HumanResources = () => {
 
@@ -29,20 +32,36 @@ const HumanResources = () => {
   //인재찾기 페이지
   return (
     <>
-      <div className="my-3 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 align-items-stretch ">
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={5}
+      >
+        <MKButton
+          color="success"
+          variant="contained"
+        // onClick={() => setGroupFilterModalOpen(true)}
+        >
+          <SearchIcon />
+        </MKButton>
+      </Stack>
+      <Grid container spacing={2}>
         {users.length > 0
           ?
           users.map((user) =>
-            <UserProfileCard
-              key={user}
-              user={user}
-              handleUserProfileCard={handleUserProfileCard}
-            />
+            <Grid item xs={12} md={6} xl={4}>
+              <UserProfileCard
+                key={user}
+                user={user}
+                handleUserProfileCard={handleUserProfileCard}
+              />
+            </Grid>
           )
           :
           <div>회원이 없습니다.</div>
         }
-      </div>
+      </Grid>
       <ModalStaticBackdrop
         keepMounted
         width="xl"
