@@ -7,7 +7,7 @@ import JobPostingCardV2 from "./JobPostingCardV2";
 import JobFinderViewModal from "./modal/JobFinderViewModal";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import { useNavigate } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 
 export default (props) => {
@@ -72,21 +72,23 @@ export default (props) => {
 
     return (
         <>
-            <Box>
+            <Grid container spacing={2}>
                 {
                     props.postings.length > 0
                         ?
                         props.postings.map((posting) => (
-                            <JobPostingCardV2
-                                key={posting._id}
-                                posting={posting}
-                                handleClick={handleClick}
-                            />
+                            <Grid item xs={12} lg={6}>
+                                <JobPostingCardV2
+                                    key={posting._id}
+                                    posting={posting}
+                                    handleClick={handleClick}
+                                />
+                            </Grid>
                         ))
                         :
                         <Typography variant="h3">채용공고가 없습니다.</Typography>
                 }
-            </Box>
+            </Grid>
 
             {/* new */}
             <ModalStaticBackdrop
