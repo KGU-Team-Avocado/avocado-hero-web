@@ -16,6 +16,7 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 import HomeIcon from '@mui/icons-material/Home';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export const DashboardSidebar = (props) => {
   const { open, onClose } = props;
@@ -89,7 +90,14 @@ export const DashboardSidebar = (props) => {
       title: '프로젝트 종료',
       onlyForMgr: true,
       showAfterEnd: false
-    }
+    },
+    {
+      href: `/workspace/${project_id}/settings`,
+      icon: (<SettingsIcon fontSize="small" />),
+      title: '설정(역할/멤버관리/프로젝트종료 합친 메뉴인데 테스트용임)',
+      onlyForMgr: false, //점검 필요
+      showAfterEnd: true //점검 필요
+    },
   ]
 
   useEffect(
@@ -238,12 +246,12 @@ export const DashboardSidebar = (props) => {
           </Box> */}
 
           <Button
-            color="secondary"
+            color={group?.end_project === true ? 'error' : 'secondary'}
             fullWidth
             sx={{ mt: 2 }}
             variant="contained"
           >
-            프로젝트 진행중
+            {group?.end_project === true ? '종료된 프로젝트' : '프로젝트 진행중'}
           </Button>
         </Box>
       </Box>
