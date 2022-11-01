@@ -35,16 +35,14 @@ export default (props) => {
                     />
                 </Stack>
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography gutterBottom variant="caption">
                         {props.group.group_name}
-                        |
+                    </Typography>
+                    <Typography gutterBottom variant="h3">
                         {props.group.project_name}
                     </Typography>
-                    <Typography gutterBottom variant="h6" component="div">
-                        {props.group.manager}
-                    </Typography>
 
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2">
                         {props.group.short_description}
                     </Typography>
                     <Typography>
