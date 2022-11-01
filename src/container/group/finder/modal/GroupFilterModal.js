@@ -1,4 +1,4 @@
-import { Box, DialogContent, DialogTitle, IconButton, Typography } from "@mui/material"
+import { Box, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from "@mui/material"
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 
@@ -28,7 +28,12 @@ export default (props) => {
                     </Box>
                 </DialogTitle>
                 <DialogContent dividers={true}>
-                    필터링 기능이 올 곳
+                    <Stack spacing={2}>
+                        <TextField label="팀명" />
+                        <TextField label="프로젝트명" />
+                        <TextField label="팀장 아이디" />
+                        <TextField label="태그" />
+                    </Stack>
                 </DialogContent>
                 {/* <DialogActions> */}
                 <MKButton
