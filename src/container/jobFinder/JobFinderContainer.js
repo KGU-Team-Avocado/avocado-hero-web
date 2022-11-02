@@ -4,7 +4,7 @@ import JobPostingCard from "./JobPostingCard"
 import Button from "react-bootstrap/Button";
 import { BiBookmark } from "react-icons/bi";
 import JobList from "../../component/jobFinder/JobList";
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import MKButton from "component/common/mui-components/MKButton";
 
 export default () => {
@@ -62,7 +62,7 @@ export default () => {
                     {
                         userInfo !== null
                         &&
-                        <>
+                        <Stack spacing={1} direction="row">
                             <MKButton
                                 variant={onOff ? 'outlined' : 'contained'}
                                 color='dark'
@@ -77,7 +77,7 @@ export default () => {
                             >
                                 북마크보기
                             </MKButton>
-                        </>
+                        </Stack>
                     }
                 </Box>
             </Box>

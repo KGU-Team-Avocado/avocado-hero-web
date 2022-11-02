@@ -16,14 +16,14 @@ const RoleCard = ({group, member, index, roleBadge, modifyRole, edit, editWho}) 
                 />
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
-                        <Typography component="div" variant="h5">
+                        <Typography component="div" variant="caption">
                             {member.user_id === group.manager ?
                                 '팀장'
                                 :
                                 '팀원'
                             }
                         </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div">
+                        <Typography variant="h5" component="div">
                             {member.user_name}
                         </Typography>
                         {edit === member.user_id ?

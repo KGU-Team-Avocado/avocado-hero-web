@@ -1,3 +1,5 @@
+import { Button, IconButton } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { BsCheckCircleFill, BsCheckCircle } from "react-icons/bs";
@@ -41,15 +43,14 @@ const TodoItem = ({ todo, onDelete }) => {
         </div>
       </div>
       <div className="TodoItemButton">
-        <button
-          type="button"
-          class="btn btn-secondary me-2"
-          onClick={() => {
-            onDelete(todo._id);
-          }}
-        >
-          삭제
-        </button>
+        <IconButton 
+        color="error" 
+        component="label" 
+        onClick={() => {
+          onDelete(todo._id);
+        }}>
+          <DeleteIcon />
+        </IconButton>
       </div>
     </div>
   );

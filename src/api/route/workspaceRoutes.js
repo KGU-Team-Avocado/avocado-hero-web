@@ -6,6 +6,7 @@ import ProjectRoleContainer from "container/group/workspace/ProjectRoleContainer
 import TodoContainer from "container/group/workspace/TodoContainer";
 import CalendarContainer from "container/group/workspace/CalendarContainer";
 import ReadmeContainer from "container/group/workspace/ReadmeContainer";
+import SettingsContainer from "container/group/workspace/SettingsContainer";
 
 
 const workspaceRoutes = [
@@ -40,6 +41,10 @@ const workspaceRoutes = [
     {
         path: '/workspace/:id/evaluation/:user_id',
         element: <ProjectEvaluationContainer />,
+    },
+    {
+        path: '/workspace/:id/settings',
+        element: <SettingsContainer />,
     },
 ];
 export default workspaceRoutes;

@@ -116,7 +116,7 @@ export default () => {
             />
             <ModalStaticBackdrop
                 keepMounted
-                width="md"
+                width="sm"
                 open={groupFilterModalOpen}
                 component={<GroupFilterModal setOpen={setGroupFilterModalOpen} />}
             />

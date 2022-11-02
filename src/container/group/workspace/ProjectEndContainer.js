@@ -35,6 +35,10 @@ const ProjectEndContainer = () => {
                     <Typography variant="body1" >프로젝트 종료 후에는 프로젝트 내용을 수정할 수 없으며, <strong>팀원 상대평가</strong>가 이뤄집니다. 종료를 원하시면 우측의 <strong>'종료'</strong> 버튼을 눌러주세요.</Typography>
                 </Alert>
             </Box>
+
+            <Alert>
+                이 부분 지금 오류 있는데?
+            </Alert>
         </> 
     )
 }
