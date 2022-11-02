@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import "./Todo.css";
 import Form from "react-bootstrap/Form";
+import { TextField } from "@mui/material";
 
 const TodoCreate = ({ onCreate }) => {
   const todoInput = useRef();
@@ -18,14 +19,17 @@ const TodoCreate = ({ onCreate }) => {
   };
 
   return (
-      <div className="TodoCreate">
-        <Form.Control
-          ref={todoInput}
-          type="text"
-          placeholder="할 일 추가"
-          onKeyPress={onCheckEnter}
-        />
-      </div>
+    <div className="TodoCreate">
+      <TextField
+        focused
+        fullWidth
+        label="할 일 추가"
+        color="secondary"
+        defaultValue={""}
+        inputRef={todoInput}
+        onKeyPress={onCheckEnter}
+      />
+    </div>
   );
 };
 
