@@ -226,7 +226,7 @@ export const DashboardSidebar = (props) => {
             color="neutral.500"
             variant="body2"
           >
-            {new Date(group?.start_date).toLocaleDateString()} ~ ??
+            {new Date(group?.start_date).toLocaleDateString()} ~ {group?.end_project===true && new Date(group?.end_date).toLocaleDateString()}
           </Typography>
           {/* <Box
             sx={{
