@@ -96,7 +96,7 @@ export const DashboardSidebar = (props) => {
       icon: (<SettingsIcon fontSize="small" />),
       title: '설정(역할/멤버관리/프로젝트종료 합친 메뉴인데 테스트용임)',
       onlyForMgr: false, //점검 필요
-      showAfterEnd: true //점검 필요
+      showAfterEnd: false //점검 필요
     },
   ]
 
