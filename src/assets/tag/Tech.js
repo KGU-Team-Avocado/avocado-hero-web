@@ -22,16 +22,44 @@ export const options = [
     { label: "??", value: "??", bgColor: "", txtColor: '#FFFFFF', disabled: true },
 
     // 분야
-    { type: "fe", label: "front", value: "front-end", bgColor: "#004080", txtColor: '#FFFFFF' },
-    { type: "fe", label: "back", value: "back-end", bgColor: '#FF0000', txtColor: '#FFFFFF' },
-    { type: "fe", label: "server", value: "server", bgColor: "#8000ff", txtColor: '#FFFFFF' },
-    { type: "fe", label: "기획", value: "enterprise", bgColor: '#FFBB00', txtColor: '#FFFFFF' },
-    { type: "fe", label: "개발", value: "coding", bgColor: '#F6F6F6', txtColor: '#FFFFFF' },
+    { type: "fe", label: "front-end", value: "front-end", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "back-end", value: "back-end", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "web-design", value: "front-end", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "server", value: "server", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "기획/전략/PM", value: "enterprise", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "개발/프로그래밍", value: "coding", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "IoT", value: "IoT", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "DB", value: "database", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "보안", value: "security", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "네트워크", value: "network", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "GAME", value: "game", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "UI/UX", value: "ui-ux", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "사무", value: "office", bgColor: "#004080", txtColor: '#FFFFFF' },
+
+    // 키워드
+    { type: "fe", label: "javascript", value: "javascript", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "C", value: "c", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "C++", value: "cplpl", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "SQL", value: "sql", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "Spring", value: "spring", bgColor: "#004080", txtColor: '#FFFFFF' },
 
     // 성향
-    { type: "fe", label: "호기심많은", value: "curious", bgColor: "#000000", txtColor: '#FFFFFF' },
+    { type: "fe", label: "창의적인", value: "creative", bgColor: "#000000", txtColor: '#FFFFFF' },
     { type: "fe", label: "외향적인", value: "extroverted", bgColor: "#000000", txtColor: '#FFFFFF' },
     { type: "fe", label: "신중한", value: "cautious", bgColor: "#000000", txtColor: '#FFFFFF' },
+    { type: "fe", label: "성실한", value: "hardworking", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "주도적인", value: "leading", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "성장하는", value: "grwoing", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "도전적인", value: "challenging", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "밝은", value: "bright", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "적극적인", value: "active", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "야망있는", value: "ambitious", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "긍정적인", value: "positive", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "책임감있는", value: "responsible", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "노력하는", value: "trying", bgColor: "#004080", txtColor: '#FFFFFF' },
+    { type: "fe", label: "주도적인", value: "leading", bgColor: "#004080", txtColor: '#FFFFFF' },
+
+
 ];
 
 

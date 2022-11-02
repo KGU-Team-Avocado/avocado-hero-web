@@ -85,21 +85,49 @@ const ProfileEdit = (props) => {
     const fields = [
         { label: "프론트", value: "front-end" },
         { label: "백엔드", value: "back-end" },
+        { label: "웹디자인", value: "web-design" },
         { label: "서버", value: "server" },
-        { label: "기획", value: "enterprise" },
-        { label: "개발", value: "coding" },
+        { label: "기획/전략/PM", value: "enterprise" },
+        { label: "개발/프로그래밍", value: "coding" },
+        { label: "IoT", value: "IoT"},
+        { label: "데이터베이스", value: "database" },
+        { label: "보안", value: "security" },
+        { label: "네트워크", value: "network" },
+        { label: "게임 프로그래밍", value: "game" },
+        { label: "ui/ux", value: "ui-ux" },
+        { label: "사무", value: "office" },
     ];
 
     const keywords = [
         { label: "#리액트", value: "react" },
         { label: "#자바", value: "java" },
         { label: "#html", value: "html" },
+        { label: "#파이썬", value: "python" },
+        { label: "#자바스크립트", value: "javascript" },
+        { label: "#C언어", value: "c" },
+        { label: "#C++", value: "cplpl" },
+        { label: "#SQL", value: "sql" },
+        { label: "#MongoDB", value: "mongo-db" },
+        { label: "#스프링", value: "spring" },
+        { label: "#Node.js", value: "node-js" },
+        { label: "#jQuery", value: "jquery" },
     ];
 
     const personals = [
-        { label: "호기심많은", value: "curious" },
+        { label: "창의적인", value: "creative" },
         { label: "외향적인", value: "extroverted" },
         { label: "신중한", value: "cautious" },
+        { label: "성실한", value: "hardworking" },
+        { label: "주도적인", value: "leading" },
+        { label: "성장하는", value: "growing" },
+        { label: "도전적인", value: "challenging" },
+        { label: "밝은", value: "bright" },
+        { label: "적극적인", value: "active" },
+        { label: "야망있는", value: "ambitious" },
+        { label: "긍정적인", value: "positive" },
+        { label: "책임감있는", value: "responsible" },
+        { label: "노력하는", value: "trying" },
+        { label: "주도적인", value: "leading" },
     ];
 
 
