@@ -6,6 +6,7 @@ import { selectUser } from "api/redux/user/userSlice";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { Button, Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import defaultImage from '../../assets/img/logo512.png';
 
 export default ({
     open,
@@ -39,32 +40,21 @@ export default ({
         window.location.href = '/avocado-hero-web/'
     };
 
+    const handleImgError = (e) => {
+        e.target.src = defaultImage;
+    }
+
+
     const Content = () => {
         return (
             <>
-                {
-                    uploadedImage
-                        ?
-                        <img
-                            src={uploadedImage}
-                            width="32"
-                            height="32"
-                            className="rounded-circle mx-1"
-                        />
-                        :
-                        <svg
-                            className="img-thumbnail rounded-circle"
-                            width="32"
-                            height="32"
-                            xmlns="http://www.w3.org/2000/svg"
-                            role="img"
-                            aria-label="Placeholder: 140x140"
-                            preserveAspectRatio="xMidYMid slice"
-                            focusable="false"
-                        >
-                            <rect width="100%" height="100%" fill="#777" />
-                        </svg>
-                }
+                <img
+                    src={uploadedImage}
+                    onError={handleImgError}
+                    width="32"
+                    height="32"
+                    className="rounded-circle mx-1"
+                />
                 <div className="mx-1">{userInfo?.user_id}</div>
                 <ArrowDropDownIcon />
             </>
