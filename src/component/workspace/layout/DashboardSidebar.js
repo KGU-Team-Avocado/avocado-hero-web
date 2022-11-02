@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Button, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -17,6 +17,8 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
+import defaultImage from '../../../assets/img/logo512.png';
+import * as API from "../../../api/API"
 
 export const DashboardSidebar = (props) => {
   const { open, onClose } = props;
@@ -30,6 +32,22 @@ export const DashboardSidebar = (props) => {
   const group = useSelector(selectGroup);
   const user = useSelector(selectUser);
   const navigate = useNavigate();
+
+
+  const [uploadedImage, setUploadedImage] = useState(null);
+
+  useEffect(() => {
+    setGruopImage();
+  }, [group?.imageURL]);
+
+  const setGruopImage = async () => {
+    const image = await API.fetchGroupImage(group?.imageURL); //프로필 이미지 불러오는 코드
+    setUploadedImage(image);
+  }
+
+  const handleImgError = (e) => {
+    e.target.src = defaultImage;
+  }
 
   const items = [
     {
@@ -148,7 +166,7 @@ export const DashboardSidebar = (props) => {
                 borderRadius: 1
               }}
             >
-              <div>
+              <Box>
                 <Typography
                   color="inherit"
                   variant="subtitle1"
@@ -161,14 +179,16 @@ export const DashboardSidebar = (props) => {
                 >
                   {group?.group_name}
                 </Typography>
-              </div>
-              {/* <SelectorIcon
-                sx={{
-                  color: 'neutral.500',
-                  width: 14,
-                  height: 14
-                }}
-              /> */}
+              </Box>
+              <Box>
+                <img
+                  className="border rounded"
+                  width="50"
+                  height="50"
+                  src={uploadedImage}
+                  onError={handleImgError}
+                />
+              </Box>
             </Box>
           </Box>
         </div>
@@ -226,7 +246,7 @@ export const DashboardSidebar = (props) => {
             color="neutral.500"
             variant="body2"
           >
-            {new Date(group?.start_date).toLocaleDateString()} ~ {group?.end_project===true && new Date(group?.end_date).toLocaleDateString()}
+            {new Date(group?.start_date).toLocaleDateString()} ~ {group?.end_project === true && new Date(group?.end_date).toLocaleDateString()}
           </Typography>
           {/* <Box
             sx={{
