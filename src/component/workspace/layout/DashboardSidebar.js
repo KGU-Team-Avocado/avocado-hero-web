@@ -214,7 +214,7 @@ export const DashboardSidebar = (props) => {
             color="neutral.500"
             variant="body2"
           >
-            0명
+            {group?.members.length}명
           </Typography>
           <Typography
             color="neutral.100"
