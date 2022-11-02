@@ -38,6 +38,7 @@ const SelectColor = ({color, handleColor}) => {
             <div key={"inline-radio"} className="mb-3" onChange={(e) => handleColor(e.target.id)}>
                 {backgroudColor.map((bg) => (
                     <Form.Check
+                        key={bg.className}
                         inline
                         label={<div className={"rounded " + bg.className}>&nbsp;&nbsp;&nbsp;&nbsp;</div>}
                         name="group1"
