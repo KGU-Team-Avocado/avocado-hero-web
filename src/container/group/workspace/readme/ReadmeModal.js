@@ -5,6 +5,7 @@ import MKButton from "component/common/mui-components/MKButton";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { selectedGroup } from "api/redux/group/groupSlice";
+import Readme from "./Readme";
 
 export default ({group, setOpen}) => {
 
@@ -43,7 +44,7 @@ export default ({group, setOpen}) => {
                 </DialogTitle>
                 <DialogContent dividers={true}>
                     <Stack spacing={1}>
-                        이 자리에는 그룹에서 설정한 Read Me를 띄워줄 예정임
+                        <Readme group_id={group?._id}/>
                     </Stack>
                 </DialogContent>
                 <MKButton color="success" onClick={() => handleGroupCard(group)} fullWidth>워크스페이스로 이동하기</MKButton>

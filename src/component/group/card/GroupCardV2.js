@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, CardMedia, Stack, Typography } from "@mui/material"
+import { Box, Card, CardActionArea, CardContent, CardMedia, Chip, Stack, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
 import TechStack from "../../common/TechStack"
 import * as API from "../../../api/API"
@@ -35,9 +35,14 @@ export default (props) => {
                     />
                 </Stack>
                 <CardContent>
-                    <Typography gutterBottom variant="caption">
-                        {props.group.group_name}
-                    </Typography>
+                    <Stack direction="row" justifyContent="space-between">
+                        <Box>
+                            <Chip label={props.group.group_name} color="secondary" variant="outlined" />
+                        </Box>
+                        <Box>
+                            <Chip label={props.group.close_application ? "모집종료" : "모집중"} color={props.group.close_application ? "error" : "success"} />
+                        </Box>
+                    </Stack>
                     <Typography gutterBottom variant="h3">
                         {props.group.project_name}
                     </Typography>

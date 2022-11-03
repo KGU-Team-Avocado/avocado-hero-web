@@ -1,7 +1,13 @@
 import { Box, Button } from "@mui/material"
+import { selectGroup } from "api/redux/group/groupSlice";
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader"
+import { useDispatch, useSelector } from "react-redux";
+import Readme from "./Readme"
 
 export default () => {
+    const group = useSelector(selectGroup);
+    const dispatch = useDispatch();
+
     return (
         <>
             <WorkspaceHeader
@@ -19,7 +25,7 @@ export default () => {
                 }
             />
             <Box>
-                이 자리에는 그룹에서 설정한 Read Me를 띄워줄 예정임
+                <Readme group_id={group?._id}/>
             </Box>
         </>
     )
