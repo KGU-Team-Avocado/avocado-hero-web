@@ -43,7 +43,7 @@ export default ({ user_id }) => {
         }).catch(function (error) {
             console.log(error);
         });
-    }, []);
+    }, [user_id]);
 
     return (
         <>
