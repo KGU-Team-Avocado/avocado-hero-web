@@ -1,4 +1,5 @@
 import { Box, Button, Card, CardContent, CardHeader, Container, Grid, Switch, Typography } from "@mui/material";
+import MKButton from "component/common/mui-components/MKButton";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -6,44 +7,50 @@ export default (props) => {
 
 
   const content = {
-    'badge': 'LOREM IPSUM',
-    'header-p1': 'Donec lacinia',
-    'header-p2': 'turpis non sapien lobortis pretium',
-    'description': 'Integer feugiat massa sapien, vitae tristique metus suscipit nec.', 
-    'option1': 'Monthly',
-    'option2': 'Annual',
-    '01_title': 'Lorem ipsum',
-    '01_price': '$9',
-    '01_suffix': ' / mo',
-    '01_benefit1': '3 Emails',
-    '01_benefit2': '1 Database',
-    '01_benefit3': 'Unlimited Domains',
-    '01_benefit4': '10 GB Storage',
-    '01_primary-action': 'Select plan',
-    '01_secondary-action': 'Learn more',
-    '02_title': 'Dolor sit amet',
-    '02_price': '$49',
-    '02_suffix': ' / mo',
-    '02_benefit1': '6 Emails',
-    '02_benefit2': '2 Database',
-    '02_benefit3': 'Unlimited Domains',
-    '02_benefit4': '25 GB Storage',
-    '02_primary-action': 'Select plan',
-    '02_secondary-action': 'Learn more',
-    '03_title': 'Consectuter',
-    '03_price': '$499',
-    '03_suffix': ' / mo',
-    '03_benefit1': '9 Emails',
-    '03_benefit2': '3 Database',
-    '03_benefit3': 'Unlimited Domains',
-    '03_benefit4': '50 GB Storage',
-    '03_primary-action': 'Select plan',
-    '03_secondary-action': 'Learn more',
+    'badge': '히어로 요금제',
+    'header-p1': '합리적인 비용',
+    'header-p2': '으로 모든 기능을 누려보세요',
+    'description': '연 단위 계약시 할인 혜택이 주어집니다.', 
+    'option1': '월 단위',
+    'option2': '연 단위',
+    '01_title': '무료 플랜',
+    '01_price_month': '0',
+    '01_suffix_month': '원 / 월',
+    '01_price_year': '0',
+    '01_suffix_year': '원 / 연',
+    '01_benefit1': '워크스페이스 개설',
+    '01_benefit2': '그룹 신청',
+    '01_benefit3': '포트폴리오 생성',
+    '01_benefit4': '일자리 찾기',
+    '01_primary-action': '선택 하기',
+    '01_secondary-action': '자세히 보기',
+    '02_title': '프로 플랜',
+    '02_price_month': '4,990',
+    '02_suffix_month': '원 / 월',
+    '02_price_year': '49,900',
+    '02_suffix_year': '원 / 연',
+    '02_benefit1': '무료 플랜 기능 전부',
+    '02_benefit2': '그룹 전용 코드',
+    '02_benefit3': '그룹 광고',
+    '02_benefit4': '펀딩',
+    '02_primary-action': '선택 하기',
+    '02_secondary-action': '자세히 보기',
+    '03_title': '엔터프라이즈 플랜',
+    '03_price_month': '499,990',
+    '03_suffix_month': '원 / 월',
+    '03_price_year': '4,999,900',
+    '03_suffix_year': '원 / 연',
+    '03_benefit1': '프로 플랜 기능 전부',
+    '03_benefit2': '무료 채용 공고',
+    '03_benefit3': '채용 제의',
+    '03_benefit4': '기업 홍보',
+    '03_primary-action': '선택 하기',
+    '03_secondary-action': '자세히 보기',
     ...props.content
   };
 
   const [state, setState] = useState({
-    checkbox: true,
+    checkbox: false,
   });
 
   const handleChange = (event) => {
@@ -77,17 +84,17 @@ export default (props) => {
                 <CardContent>
                   <Box px={1}>
                     <Typography variant="h3" component="h2" gutterBottom={true}>
-                      {content['01_price']}
-                      <Typography variant="h6" color="textSecondary" component="span">{content['01_suffix']}</Typography>
+                      {state.checkbox?content['01_price_year']:content['01_price_month']}
+                      <Typography variant="h6" color="textSecondary" component="span">{state.checkbox?content['01_suffix_year']:content['01_suffix_month']}</Typography>
                     </Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p">{content['01_benefit1']}</Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p">{content['01_benefit2']}</Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p">{content['01_benefit3']}</Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p" paragraph={true}>{content['01_benefit4']}</Typography>
                   </Box>
-                  <Button variant="outlined" color="primary" >{content['01_primary-action']}</Button>
+                  <MKButton variant="outlined" color="primary" >{content['01_primary-action']}</MKButton>
                   <Box mt={2}>
-                    <Link to="#" color="primary">{content['03_secondary-action']}</Link>
+                    <Link to="#" color="primary">{content['01_secondary-action']}</Link>
                   </Box>
                 </CardContent>
               </Card>
@@ -98,17 +105,17 @@ export default (props) => {
                 <CardContent>
                   <Box px={1}>
                     <Typography variant="h3" component="h2" gutterBottom={true}>
-                      {content['02_price']}
-                      <Typography variant="h6" color="textSecondary" component="span">{content['02_suffix']}</Typography>
+                      {state.checkbox?content['02_price_year']:content['02_price_month']}
+                      <Typography variant="h6" color="textSecondary" component="span">{state.checkbox?content['02_suffix_year']:content['02_suffix_month']}</Typography>
                     </Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p">{content['02_benefit1']}</Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p">{content['02_benefit2']}</Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p">{content['02_benefit3']}</Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p" paragraph={true}>{content['02_benefit4']}</Typography>
                   </Box>
-                  <Button variant="contained" color="primary">{content['02_primary-action']}</Button>
+                  <MKButton variant="contained" color="primary">{content['02_primary-action']}</MKButton>
                   <Box mt={2}>
-                    <Link to="#" color="primary">{content['03_secondary-action']}</Link>
+                    <Link to="#" color="primary">{content['02_secondary-action']}</Link>
                   </Box>
                 </CardContent>
               </Card>
@@ -119,15 +126,15 @@ export default (props) => {
                 <CardContent>
                   <Box px={1}>
                     <Typography variant="h3" component="h2" gutterBottom={true}>
-                      {content['03_price']}
-                      <Typography variant="h6" color="textSecondary" component="span">{content['03_suffix']}</Typography>
+                      {state.checkbox?content['03_price_year']:content['03_price_month']}
+                      <Typography variant="h6" color="textSecondary" component="span">{state.checkbox?content['03_suffix_year']:content['03_suffix_month']}</Typography>
                     </Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p">{content['03_benefit1']}</Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p">{content['03_benefit2']}</Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p">{content['03_benefit3']}</Typography>
                     <Typography color="textSecondary" variant="subtitle1" component="p" paragraph={true}>{content['03_benefit4']}</Typography>
                   </Box>
-                  <Button variant="outlined" color="primary">{content['03_primary-action']}</Button>
+                  <MKButton variant="outlined" color="primary">{content['03_primary-action']}</MKButton>
                   <Box mt={2}>
                     <Link to="#" color="primary">{content['03_secondary-action']}</Link>
                   </Box>
