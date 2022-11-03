@@ -1,12 +1,13 @@
 import { Grid, Stack, Typography } from "@mui/material"
 import MKButton from "component/common/mui-components/MKButton"
 import { Navigate, useNavigate } from "react-router-dom"
+import image3 from '../../../assets/img/3.png';
 
 export default ({navigate}) => {
     return (
         <>
             <Stack align="center">
-                <img className="d-block mx-auto mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="프로필 예제 화면 사진이 올 자리" />
+                <img className="img-fluid d-block mx-auto mb-4 w-50" src={image3} alt="프로필 예제 화면 사진이 올 자리" />
             </Stack>
             <Stack
                 align="center"
@@ -22,7 +23,7 @@ export default ({navigate}) => {
                 }}
                 spacing={5}
             >
-                <Typography variant="h1">포트폴리오, 더이상 혼자 고민하지 마세요!</Typography>
+                <Typography variant="h2">포트폴리오, 더이상 혼자 고민하지 마세요!</Typography>
                 <Typography>포트폴리오 관리에 어려움이 있으신가요? 히어로에서 활동하시면 여러분의 활동 기록을 자동으로 상세하게 관리해드립니다!</Typography>
                 <Stack
                     direction={{ xs: "column", sm: "row" }}
