@@ -121,6 +121,7 @@ export default (props) => {
                         name="message"
                         value={message}
                         onChange={handleMessageChange}
+                        className="w-100"
                     />
                 </DialogContent>
                 {/* <DialogActions> */}
