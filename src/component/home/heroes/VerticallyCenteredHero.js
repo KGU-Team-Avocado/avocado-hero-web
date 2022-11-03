@@ -11,7 +11,7 @@ export default () => {
                     spacing={3}
                 >
                     <Grid container spacing={2} alignItems="center">
-                        <Grid item xs={12} lg={7}>
+                        <Grid item xs={12} xl={7}>
                             <Typography variant="h1">히어로, 오늘 팀 일정 알려줘</Typography>
                             <Typography>
                                 더이상의 왔다갔다 시간낭비는 NO!! 팀 일정을 오직 한 곳에서 관리하세요
@@ -20,7 +20,7 @@ export default () => {
                                 중요한 정보를 정리하고 체계화해 관리해 보세요
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} lg={5}>
+                        <Grid item xs={12} xl={5}>
                             <Box maxWidth={400}>
                                 <SignIn />
                             </Box>
