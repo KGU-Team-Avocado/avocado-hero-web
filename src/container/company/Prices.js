@@ -1,7 +1,9 @@
-import { Box, Button, Card, CardContent, CardHeader, Container, Grid, Switch, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, Container, Grid, Stack, Switch, Typography } from "@mui/material";
+import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import MKButton from "component/common/mui-components/MKButton";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import PriceModal from "./PriceModal";
 
 export default (props) => {
 
@@ -10,10 +12,10 @@ export default (props) => {
     'badge': '히어로 요금제',
     'header-p1': '합리적인 비용',
     'header-p2': '으로 모든 기능을 누려보세요',
-    'description': '연 단위 계약시 할인 혜택이 주어집니다.', 
+    'description': '연 단위 계약시 할인 혜택이 주어집니다.',
     'option1': '월 단위',
     'option2': '연 단위',
-    '01_title': '무료 플랜',
+    '01_title': '베이직 플랜',
     '01_price_month': '0',
     '01_suffix_month': '원 / 월',
     '01_price_year': '0',
@@ -22,19 +24,17 @@ export default (props) => {
     '01_benefit2': '그룹 신청',
     '01_benefit3': '포트폴리오 생성',
     '01_benefit4': '일자리 찾기',
-    '01_primary-action': '선택 하기',
-    '01_secondary-action': '자세히 보기',
+    '01_primary-action': '확인 하기',
     '02_title': '프로 플랜',
     '02_price_month': '4,990',
     '02_suffix_month': '원 / 월',
     '02_price_year': '49,900',
     '02_suffix_year': '원 / 연',
-    '02_benefit1': '무료 플랜 기능 전부',
+    '02_benefit1': '베이직 플랜 기능 전부',
     '02_benefit2': '그룹 전용 코드',
     '02_benefit3': '그룹 광고',
     '02_benefit4': '펀딩',
-    '02_primary-action': '선택 하기',
-    '02_secondary-action': '자세히 보기',
+    '02_primary-action': '확인 하기',
     '03_title': '엔터프라이즈 플랜',
     '03_price_month': '499,990',
     '03_suffix_month': '원 / 월',
@@ -44,8 +44,7 @@ export default (props) => {
     '03_benefit2': '무료 채용 공고',
     '03_benefit3': '채용 제의',
     '03_benefit4': '기업 홍보',
-    '03_primary-action': '선택 하기',
-    '03_secondary-action': '자세히 보기',
+    '03_primary-action': '확인 하기',
     ...props.content
   };
 
@@ -57,8 +56,18 @@ export default (props) => {
     setState({ ...state, checkbox: event.target.checked });
   };
 
+  const [priceModalOpen, setPriceModalOpen] = useState(false);
+  const [priceContents, setPriceContents] = useState(null);
+
+  const handleModal = (type) => {
+    setPriceModalOpen(true);
+    setPriceContents({
+      type:type
+    })
+  }
+
   return (
-    <section>
+    <>
       <Container maxWidth="lg">
         <Box py={8} textAlign="center">
           <Box mb={3}>
@@ -77,73 +86,110 @@ export default (props) => {
               </div>
             </Container>
           </Box>
-          <Grid container spacing={3}>
+          <Grid
+            container
+            spacing={3}
+          // alignItems="stretch"
+          >
             <Grid item xs={12} md={4}>
-              <Card variant="outlined">
-                <CardHeader title={content['01_title']} ></CardHeader>
-                <CardContent>
-                  <Box px={1}>
-                    <Typography variant="h3" component="h2" gutterBottom={true}>
-                      {state.checkbox?content['01_price_year']:content['01_price_month']}
-                      <Typography variant="h6" color="textSecondary" component="span">{state.checkbox?content['01_suffix_year']:content['01_suffix_month']}</Typography>
-                    </Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p">{content['01_benefit1']}</Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p">{content['01_benefit2']}</Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p">{content['01_benefit3']}</Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p" paragraph={true}>{content['01_benefit4']}</Typography>
+              <Card variant="outlined" sx={{ height: '100%' }}>
+                <Stack
+                  direction="column"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  spacing={2}
+                  py={5}
+                >
+                  <CardHeader title={content['01_title']} ></CardHeader>
+                  <CardContent>
+                    <Box>
+                      <Typography variant="h3" component="h2" gutterBottom={true}>
+                        {state.checkbox ? content['01_price_year'] : content['01_price_month']}
+                        <Typography variant="h6" color="textSecondary" component="span">{state.checkbox ? content['01_suffix_year'] : content['01_suffix_month']}</Typography>
+                      </Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p">{content['01_benefit1']}</Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p">{content['01_benefit2']}</Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p">{content['01_benefit3']}</Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p" paragraph={true}>{content['01_benefit4']}</Typography>
+                    </Box>
+                  </CardContent>
+                  <Box>
+                    <MKButton variant="outlined" color="primary" onClick={() => handleModal(0)}>{content['01_primary-action']}</MKButton>
                   </Box>
-                  <MKButton variant="outlined" color="primary" >{content['01_primary-action']}</MKButton>
-                  <Box mt={2}>
-                    <Link to="#" color="primary">{content['01_secondary-action']}</Link>
-                  </Box>
-                </CardContent>
+                </Stack>
               </Card>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Card variant="outlined">
-                <CardHeader title={content['02_title']} ></CardHeader>
-                <CardContent>
-                  <Box px={1}>
-                    <Typography variant="h3" component="h2" gutterBottom={true}>
-                      {state.checkbox?content['02_price_year']:content['02_price_month']}
-                      <Typography variant="h6" color="textSecondary" component="span">{state.checkbox?content['02_suffix_year']:content['02_suffix_month']}</Typography>
-                    </Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p">{content['02_benefit1']}</Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p">{content['02_benefit2']}</Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p">{content['02_benefit3']}</Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p" paragraph={true}>{content['02_benefit4']}</Typography>
+              <Card variant="outlined" sx={{ height: '100%' }}>
+                <Stack
+                  direction="column"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  spacing={2}
+                  py={5}
+                >
+                  <CardHeader title={content['02_title']} ></CardHeader>
+                  <CardContent>
+                    <Box>
+                      <Typography variant="h3" component="h2" gutterBottom={true}>
+                        {state.checkbox ? content['02_price_year'] : content['02_price_month']}
+                        <Typography variant="h6" color="textSecondary" component="span">{state.checkbox ? content['02_suffix_year'] : content['02_suffix_month']}</Typography>
+                      </Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p">{content['02_benefit1']}</Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p">{content['02_benefit2']}</Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p">{content['02_benefit3']}</Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p" paragraph={true}>{content['02_benefit4']}</Typography>
+                    </Box>
+                  </CardContent>
+                  <Box>
+                    <MKButton variant="contained" color="primary" onClick={() => handleModal(1)}>{content['02_primary-action']}</MKButton>
                   </Box>
-                  <MKButton variant="contained" color="primary">{content['02_primary-action']}</MKButton>
-                  <Box mt={2}>
-                    <Link to="#" color="primary">{content['02_secondary-action']}</Link>
-                  </Box>
-                </CardContent>
+                </Stack>
               </Card>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Card variant="outlined">
-                <CardHeader title={content['03_title']}  ></CardHeader>
-                <CardContent>
-                  <Box px={1}>
-                    <Typography variant="h3" component="h2" gutterBottom={true}>
-                      {state.checkbox?content['03_price_year']:content['03_price_month']}
-                      <Typography variant="h6" color="textSecondary" component="span">{state.checkbox?content['03_suffix_year']:content['03_suffix_month']}</Typography>
-                    </Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p">{content['03_benefit1']}</Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p">{content['03_benefit2']}</Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p">{content['03_benefit3']}</Typography>
-                    <Typography color="textSecondary" variant="subtitle1" component="p" paragraph={true}>{content['03_benefit4']}</Typography>
+              <Card variant="outlined" sx={{ height: '100%' }}>
+                <Stack
+                  direction="column"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  spacing={2}
+                  py={5}
+                >
+                  <CardHeader title={content['03_title']}  ></CardHeader>
+                  <CardContent>
+                    <Box>
+                      <Typography variant="h3" component="h2" gutterBottom={true}>
+                        {state.checkbox ? content['03_price_year'] : content['03_price_month']}
+                        <Typography variant="h6" color="textSecondary" component="span">{state.checkbox ? content['03_suffix_year'] : content['03_suffix_month']}</Typography>
+                      </Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p">{content['03_benefit1']}</Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p">{content['03_benefit2']}</Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p">{content['03_benefit3']}</Typography>
+                      <Typography color="textSecondary" variant="subtitle1" component="p" paragraph={true}>{content['03_benefit4']}</Typography>
+                    </Box>
+                  </CardContent>
+                  <Box>
+                    <MKButton variant="outlined" color="primary" onClick={() => handleModal(2)}>{content['03_primary-action']}</MKButton>
                   </Box>
-                  <MKButton variant="outlined" color="primary">{content['03_primary-action']}</MKButton>
-                  <Box mt={2}>
-                    <Link to="#" color="primary">{content['03_secondary-action']}</Link>
-                  </Box>
-                </CardContent>
+                </Stack>
               </Card>
             </Grid>
           </Grid>
         </Box>
       </Container>
-    </section>
+      <ModalStaticBackdrop
+        keepMounted
+        width="sm"
+        open={priceModalOpen}
+        component={
+          <PriceModal
+            priceContents={priceContents}
+            setOpen={setPriceModalOpen}
+          />
+        }
+      />
+    </>
+
   );
 }
