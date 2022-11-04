@@ -1,10 +1,14 @@
 import { Alert, AlertTitle, Box, Button, Divider, Grid, Typography } from "@mui/material";
+import { getGroupAsync } from "api/redux/group/groupSlice";
 import axios from "axios";
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 const ProjectEndContainer = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const params = useParams();
     const project_id = params.id;
 
@@ -13,6 +17,7 @@ const ProjectEndContainer = () => {
             axios.post("/groupsRouter/endProject", {
                 _id: project_id,
             }).then((response) => {
+                dispatch(getGroupAsync(project_id))
                 navigate(`/workspace/${project_id}`,  { replace: true});
             }).catch(function (error) {
                 console.log(error);
