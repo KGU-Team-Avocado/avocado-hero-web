@@ -12,19 +12,26 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 export default (props) => {
     const [selected, setSelected] = useState([]);
+    const [filterData, setFilterData] = useState({
+        group_name: "",
+        project_name: "",
+        manager: "",
+        tech_stack: []
+    })
     const inputTN = useRef();
     const inputPN = useRef();
     const inputMID = useRef();
 
     const filter = async () => {
-        const filterData = {
-            group_name : inputTN.current.value,
-            project_name : inputPN.current.value,
-            manager : inputMID.current.value,
-            tech_stack : selected
+        const newfilterData = {
+            group_name: inputTN.current.value,
+            project_name: inputPN.current.value,
+            manager: inputMID.current.value,
+            tech_stack: selected.map((item) => {return item.value})
         }
 
-        const response = await API.groupFilter(filterData);
+        setFilterData(newfilterData)
+        const response = await API.groupFilter(newfilterData);
         props.filterGroup(response);
     }
 
@@ -53,16 +60,17 @@ export default (props) => {
                 </DialogTitle>
                 <DialogContent dividers={true}>
                     <Stack spacing={2}>
-                        <TextField label="팀명" inputRef={inputTN} defaultValue="" />
-                        <TextField label="프로젝트명" inputRef={inputPN} defaultValue="" />
-                        <TextField label="팀장 아이디" inputRef={inputMID} defaultValue="" />
+                        <TextField label="팀명" inputRef={inputTN} defaultValue={filterData.group_name} />
+                        <TextField label="프로젝트명" inputRef={inputPN} defaultValue={filterData.project_name} />
+                        <TextField label="팀장 아이디" inputRef={inputMID} defaultValue={filterData.manager} />
                         <Autocomplete
                             multiple
                             options={options}
                             disableCloseOnSelect
                             getOptionLabel={(option) => option.label}
+                            value={selected}
                             onChange={(event, newValue) => {
-                                setSelected(newValue.map((item) => {return item.value}));
+                                setSelected(newValue);
                             }}
                             renderOption={(props, option, { selected }) => (
                                 <li {...props}>
