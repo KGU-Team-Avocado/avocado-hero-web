@@ -50,7 +50,7 @@ const HumanResources = () => {
         {users.length > 0
           ?
           users.map((user) =>
-            <Grid item xs={12} md={6} xl={4}>
+            <Grid item xs={12} xl={6}>
               <UserProfileCard
                 key={user}
                 user={user}
