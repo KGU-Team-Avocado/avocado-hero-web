@@ -25,7 +25,7 @@ export default (props) => {
         }
 
         const response = await API.groupFilter(filterData);
-        console.log(response);
+        props.filterGroup(response);
     }
 
     return (

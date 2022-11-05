@@ -40,6 +40,11 @@ export default () => {
         setGroupJoinModalOpen(true)
     }
 
+    const filterGroup = (filteredGroups) => {
+        setGroups(filteredGroups);
+        setGroupFilterModalOpen(false);
+    }
+
     return (
         <>
 
@@ -118,7 +123,7 @@ export default () => {
                 keepMounted
                 width="sm"
                 open={groupFilterModalOpen}
-                component={<GroupFilterModal setOpen={setGroupFilterModalOpen} />}
+                component={<GroupFilterModal filterGroup={filterGroup} setOpen={setGroupFilterModalOpen} />}
             />
         </>
     )
