@@ -9,6 +9,7 @@ import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
 import UserProfileCard from "component/jobFinder/UserProfileCard";
+import * as API from "../../../../api/API"
 
 export default (props) => {
 
@@ -50,6 +51,20 @@ export default (props) => {
             console.log(error);
         });
     }
+
+
+
+    // const [groupManager, setGroupManager] = useState(null);
+
+    // useEffect(() => {
+    //     console.log("ddd"+group?.manager);
+    //     handleGroupManager(group?.manager);
+    // }, []);  
+
+    // const handleGroupManager = async (user_id) => {
+    //     await setGroupManager(await API.findOneUserByUserId(user_id));
+    // }   
+
 
     return (
         <>
@@ -95,7 +110,7 @@ export default (props) => {
                     </Typography>
                     {/* findOneUserByUserId로 manager 정보 불러와서 하단에 연동해 줄 예정임 */}
                     <UserProfileCard
-                        user={{ user_id: group?.manager, name: '수정예정' }}
+                        user={{ user_id: group?.manager, name: props.groupManager?.name}}
                         handleUserProfileCard={null}
                     />
                     <Tooltip title="새 창으로 이동합니다.">

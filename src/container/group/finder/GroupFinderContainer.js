@@ -12,6 +12,7 @@ import GroupJoinModalV2 from "./modal/GroupJoinModalV2";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import SearchIcon from '@mui/icons-material/Search';
 import GroupFilterModal from "./modal/GroupFilterModal";
+import * as API from "../../../api/API"
 
 export default () => {
 
@@ -35,10 +36,20 @@ export default () => {
         });
     }, [])
 
+    const [groupManager, setGroupManager] = useState(null);
+   
     const handleGroupCard = (group) => {
         setSelectedGroup(group)
         setGroupJoinModalOpen(true)
+        
+        console.log("ddd"+group?.manager);
+        handleGroupManager(group?.manager);
     }
+    const handleGroupManager = async (user_id) => {
+        const temp = await API.findOneUserByUserId(user_id)
+        setGroupManager(temp);
+        
+    } 
 
     const filterGroup = (filteredGroups) => {
         setGroups(filteredGroups);
@@ -100,6 +111,7 @@ export default () => {
                                     key={group._id}
                                     group={group}
                                     handleGroupCard={handleGroupCard}
+
                                 />
                             </Grid>
                         ))
@@ -111,7 +123,7 @@ export default () => {
                 keepMounted
                 width="md"
                 open={groupJoinModalOpen}
-                component={<GroupJoinModalV2 selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
+                component={<GroupJoinModalV2 groupManager={groupManager} selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
             />
             <ModalStaticBackdrop
                 keepMounted
