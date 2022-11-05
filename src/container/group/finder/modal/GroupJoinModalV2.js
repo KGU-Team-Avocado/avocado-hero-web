@@ -9,6 +9,9 @@ import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
 import UserProfileCard from "component/jobFinder/UserProfileCard";
+import ReadmeContainer from "container/group/workspace/ReadmeContainer";
+import GroupCeateModal from "./GroupCeateModal";
+import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 
 export default (props) => {
 
@@ -16,10 +19,17 @@ export default (props) => {
 
     const [message, setMessage] = useState('');
 
+    const [readMe, setReadme] = useState('');
+
     const handleMessageChange = event => {
         setMessage(event.target.value);
         console.log(event.target.value);
     };
+
+    const handleReadmeChange = event => {
+        setReadme(event.target.value);
+        console.log(event.target.value);   
+    }
 
     const userInfo = useSelector(selectUser);
 
@@ -50,6 +60,29 @@ export default (props) => {
             console.log(error);
         });
     }
+
+    const modifyGroup = () => {
+        console.log('낄낄!')
+        axios.post('/groupsRouter/apply', {
+            group_id: group._id,
+            read_me: readMe,
+        }).then((response) => { //서버로부터 받아온 id
+            console.log(response.data)
+            if (response.data.success === true) {
+                window.location.reload()
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    const [readmeModalOpen, setReadmeModalOpen] = useState(false);
+
+    const handleReadme = (group) => {
+        setReadmeModalOpen(true)
+    }
+
+    const [readmeCreateModalOpen, setReadmeCreateModalOpen] = useState(false);
 
     return (
         <>
@@ -132,8 +165,22 @@ export default (props) => {
                 >
                     신청하기
                 </MKButton>
+                <MKButton
+                    color="secondary"
+                    onClick={() => setReadmeModalOpen(true)}
+
+                >
+                    수정하기(리드미 작성)
+                </MKButton>
                 {/* </DialogActions> */}
             </Box>
+
+            {/* <ModalStaticBackdrop
+                keepMounted
+                width="md"
+                open={readmeCreateModalOpen}
+                component={<GroupCeateModal readmeCreateModalOpen={readmeCreateModalOpen} setOpen={setReadmeCreateModalOpen} />}
+            /> */}
         </>
     )
 }
