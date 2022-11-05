@@ -62,9 +62,19 @@ export default () => {
 
 
 
+    // 필터링된 그룹 데이터 저장, 모달 숨김
     const filterGroup = (filteredGroups) => {
         setGroups(filteredGroups);
         setGroupFilterModalOpen(false);
+    }
+
+    // 필터링을 초기화했기 때문에 다시 전체 데이터를 받아오기 위한 메소드
+    const resetGroups = () => {
+        axios.get("/groupsRouter/getGroups").then((response) => {
+            setGroups(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (
@@ -146,7 +156,7 @@ export default () => {
                 keepMounted
                 width="sm"
                 open={groupFilterModalOpen}
-                component={<GroupFilterModal filterGroup={filterGroup} setOpen={setGroupFilterModalOpen} />}
+                component={<GroupFilterModal filterGroup={filterGroup} resetGroups={resetGroups} setOpen={setGroupFilterModalOpen} />}
             />
         </>
     )

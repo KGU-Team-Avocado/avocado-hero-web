@@ -55,6 +55,7 @@ export default (props) => {
 
 
     const isApplicant = (user_id) => {
+        
         for (var i = 0; i < props?.applicants?.length; i++) {
             if (user_id === props?.applicants[i]?.user_id)
                 return true;
