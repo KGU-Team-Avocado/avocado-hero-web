@@ -20,7 +20,7 @@ export default ({ user_id, imgURL, edit }) => {
 
     return (
         <>
-            <div class="itemCenter">
+            <div className="itemCenter">
                 <img
                     className="border rounded-circle"
                     width="140"

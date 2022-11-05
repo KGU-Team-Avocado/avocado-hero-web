@@ -41,22 +41,24 @@ import Icon from "@mui/material/Icon";
 
 // @mui icons
 import GitHubIcon from "@mui/icons-material/GitHub";
-
+import GroupsIcon from '@mui/icons-material/Groups';
+import WorkIcon from '@mui/icons-material/Work';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
 const routes = [
   {
     name: "프로젝트",
-    icon: <GitHubIcon />,
+    icon: <GroupsIcon />,
     route: "/groupFinder",
   },
   {
     name: "일자리",
-    icon: <GitHubIcon />,
+    icon: <WorkIcon />,
     route: "/jobFinder",
   },
   {
-    name: "기업전용",
-    icon: <GitHubIcon />,
+    name: "Premium",
+    icon: <WorkspacePremiumIcon />,
     collapse: [
       {
         name: "인재찾기",

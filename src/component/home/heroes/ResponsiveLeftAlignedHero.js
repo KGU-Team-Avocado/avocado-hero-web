@@ -1,6 +1,7 @@
 import { useHref, useNavigate } from "react-router-dom"
 import MKButton from "component/common/mui-components/MKButton"
 import { Container, Grid, Stack, Typography } from "@mui/material"
+import image2 from '../../../assets/img/2.png';
 
 export default ({ navigate }) => {
     return (
@@ -34,7 +35,7 @@ export default ({ navigate }) => {
                             </Stack>
                         </Grid>
                         <Grid xs={12} lg={6}>
-                            <img src="bootstrap-themes.png" className="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy" />
+                            <img src={image2} className="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy" />
                         </Grid>
                     </Grid>
                 </Stack>

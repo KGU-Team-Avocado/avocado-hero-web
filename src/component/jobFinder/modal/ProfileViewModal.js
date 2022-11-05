@@ -38,16 +38,15 @@ export default (props) => {
                         />
                     }
                 </DialogContent>
-                {/* <DialogActions> */}
                 <Stack
                     direction="row"
                     spacing={2}
                     justifyContent="center"
                     alignItems="center"
                 >
-                    <MKButton variant="contained" color="info" fullWidth>제의하기</MKButton>
+                    <MKButton variant="contained" color="light" fullWidth>프로젝트 팀원으로 제의하기</MKButton>
+                    <MKButton variant="contained" color="success" fullWidth>채용 제의하기</MKButton>
                 </Stack>
-                {/* </DialogActions> */}
             </Box>
         </>
     )

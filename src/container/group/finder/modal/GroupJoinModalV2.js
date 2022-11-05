@@ -9,9 +9,6 @@ import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
 import UserProfileCard from "component/jobFinder/UserProfileCard";
-import ReadmeContainer from "container/group/workspace/ReadmeContainer";
-import GroupCeateModal from "./GroupCeateModal";
-import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 
 export default (props) => {
 
@@ -61,29 +58,6 @@ export default (props) => {
         });
     }
 
-    const modifyGroup = () => {
-        console.log('낄낄!')
-        axios.post('/groupsRouter/apply', {
-            group_id: group._id,
-            read_me: readMe,
-        }).then((response) => { //서버로부터 받아온 id
-            console.log(response.data)
-            if (response.data.success === true) {
-                window.location.reload()
-            }
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }
-
-    const [readmeModalOpen, setReadmeModalOpen] = useState(false);
-
-    const handleReadme = (group) => {
-        setReadmeModalOpen(true)
-    }
-
-    const [readmeCreateModalOpen, setReadmeCreateModalOpen] = useState(false);
-
     return (
         <>
             <Box
@@ -104,7 +78,14 @@ export default (props) => {
                         <Typography variant="h3">
                             신청하기
                         </Typography>
-                        <IconButton size="large" onClick={() => props.setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
+                        <IconButton
+                            size="large"
+                            onClick={() => {
+                                props.setOpen(false);
+                                setMessage('');
+                            }}>
+                            <ClearIcon fontSize="inherit" />
+                        </IconButton >
                     </Box>
                 </DialogTitle>
                 <DialogContent dividers={true}>
@@ -128,7 +109,7 @@ export default (props) => {
                     </Typography>
                     {/* findOneUserByUserId로 manager 정보 불러와서 하단에 연동해 줄 예정임 */}
                     <UserProfileCard
-                        user={{ user_id: group?.manager, name: '수정예정' }}
+                        user={{ user_id: group?.manager, name: props.groupManager?.name}}
                         handleUserProfileCard={null}
                     />
                     <Tooltip title="새 창으로 이동합니다.">
@@ -154,6 +135,7 @@ export default (props) => {
                         name="message"
                         value={message}
                         onChange={handleMessageChange}
+                        className="w-100"
                     />
                 </DialogContent>
                 {/* <DialogActions> */}
@@ -161,7 +143,7 @@ export default (props) => {
                     color="success"
                     onClick={() => groupApply()}
                     fullWidth
-                    disabled={userInfo === null || (userInfo?.user_id == group?.manager)}
+                    disabled={userInfo === null || (userInfo?.user_id == group?.manager) || isApplicant(userInfo.user_id) || isGroupMember(userInfo.user_id)}
                 >
                     신청하기
                 </MKButton>

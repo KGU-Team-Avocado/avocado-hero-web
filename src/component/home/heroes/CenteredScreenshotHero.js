@@ -1,5 +1,6 @@
 import { Grid, Stack, Typography } from "@mui/material"
 import MKButton from "component/common/mui-components/MKButton"
+import image1 from '../../../assets/img/1.png';
 
 export default ({navigate}) => {
     return (
@@ -12,7 +13,7 @@ export default ({navigate}) => {
                 spacing={3}
                 sx={{ borderBottom: 1 }}
             >
-                <Typography variant="h1">
+                <Typography variant="h2">
                     아직도 팀플 조를 랜덤으로 구성하시나요?
                 </Typography>
                 <Typography>
@@ -37,7 +38,7 @@ export default ({navigate}) => {
                 </Stack>
                 <div className="overflow-hidden" style={{ "maxHeight": "30vh" }}>
                     <div className="container px-5">
-                        <img src="bootstrap-docs.png" className="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy" />
+                        <img src={image1} className="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy" />
                     </div>
                 </div>
             </Stack>

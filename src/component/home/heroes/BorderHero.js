@@ -1,11 +1,19 @@
 import { Box, Card, CardActionArea, CardContent, CardMedia, Grid, Stack, Typography } from "@mui/material"
 import MKButton from "component/common/mui-components/MKButton"
 import UserProfileCard from "component/jobFinder/UserProfileCard";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ProfileViewModal from "component/jobFinder/modal/ProfileViewModal";
+import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 
 export default () => {
 
     const navigate = useNavigate();
+    const [profileCardModalOpen, setProfileCardModalOpen] = useState(false);
+
+    const handleUserProfileCard = () => {
+        setProfileCardModalOpen(true);
+    }
 
     return (
         <>
@@ -24,7 +32,7 @@ export default () => {
                     }}
                 >
                     <Grid container spacing={2} alignItems="center">
-                        <Grid xs={12} lg={6}>
+                        <Grid item xs={12} xl={6}>
                             <Stack
                                 sx={{ alignItems: 'center' }}
                                 spacing={3}
@@ -56,19 +64,47 @@ export default () => {
 
                             </Stack>
                         </Grid>
-                        <Grid xs={12} lg={6}>
+                        <Grid item xs={12} xl={6}>
                             <Stack
                                 m={2}
                             >
                                 <UserProfileCard
                                     user={{ user_id: 'gabrielyoon7', name: '윤주현' }}
-                                    handleUserProfileCard={null}
+                                    handleUserProfileCard={handleUserProfileCard}
                                 />
                             </Stack>
                         </Grid>
                     </Grid>
                 </Card>
             </Stack>
+            <ModalStaticBackdrop
+                keepMounted
+                width="xl"
+                open={profileCardModalOpen}
+                component={
+                    <ProfileViewModal
+                        setOpen={setProfileCardModalOpen}
+                        profile={{
+                              "user_id": "user",
+                              "user_password": "1234",
+                              "name": "아보카도",
+                              "email": "avocado@gmail.com",
+                              "type": "개인",
+                              "phoneNumber": "010-0000-0000",
+                              "age": "9개월",
+                              "nickname": "아보카도히어로",
+                              "imgURL": "undefined",
+                              "belongs": [],
+                              "fields": [],
+                              "links": [],
+                              "introduce": "undefined",
+                              "keywords": [],
+                              "personalities": [],
+                              "groups": [],
+                              "introduceOne": "아보카도입니다.",
+                        }} />
+                }
+            />
         </>
     )
 }

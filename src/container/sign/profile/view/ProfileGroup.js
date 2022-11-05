@@ -4,7 +4,7 @@ import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import GroupCardV2 from "component/group/card/GroupCardV2";
-import ReadmeModal from "container/group/workspace/ReadmeModal";
+import ReadmeModal from "container/group/workspace/readme/ReadmeModal";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -43,7 +43,7 @@ export default ({ user_id }) => {
         }).catch(function (error) {
             console.log(error);
         });
-    }, []);
+    }, [user_id]);
 
     return (
         <>

@@ -153,7 +153,7 @@ export default () => {
                                         onChange={handleChange('email')}
                                     />
                                     {/* type */}
-                                    <FormControl>
+                                    {/* <FormControl>
                                         <FormLabel id="demo-controlled-radio-buttons-group">회원유형</FormLabel>
                                         <RadioGroup
                                             row
@@ -165,7 +165,7 @@ export default () => {
                                             <FormControlLabel value="개인" control={<Radio />} label="개인" />
                                             <FormControlLabel value="기업" control={<Radio />} label="기업" />
                                         </RadioGroup>
-                                    </FormControl>
+                                    </FormControl> */}
                                     <MKButton
                                         color="success"
                                         variant="contained"

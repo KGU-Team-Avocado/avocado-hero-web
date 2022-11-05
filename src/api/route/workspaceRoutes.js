@@ -5,7 +5,7 @@ import NoticeContainer from "container/group/workspace/NoticeContainer";
 import ProjectRoleContainer from "container/group/workspace/ProjectRoleContainer";
 import TodoContainer from "container/group/workspace/TodoContainer";
 import CalendarContainer from "container/group/workspace/CalendarContainer";
-import ReadmeContainer from "container/group/workspace/ReadmeContainer";
+import ReadmeContainer from "container/group/workspace/readme/ReadmeContainer";
 import SettingsContainer from "container/group/workspace/SettingsContainer";
 
 
