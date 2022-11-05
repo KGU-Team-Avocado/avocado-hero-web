@@ -79,7 +79,7 @@ export default ({
                     </Button>
                     :
                     <MKButton
-                        variant="outline"
+                        variant="text"
                         // color="dark"
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
