@@ -58,6 +58,24 @@ export default (props) => {
         });
     }
 
+    const isApplicant = (user_id) => {
+        for (var i = 0; i < props?.group?.length; i++) {
+            if (user_id === props?.applicants[i]?.user_id)
+                return true;
+        }
+        return false;
+    }
+
+    const isGroupMember = (user_id) => {
+        for (var i = 0; i < group?.members?.length; i++) {
+            if (user_id === group?.members[i]?.user_id)
+                return true;
+        }
+        return false;
+    }
+
+    const [readmeCreaeteModalOpen, setReadmeCreateModalOpen] = useState(false);
+
     return (
         <>
             <Box
@@ -149,7 +167,7 @@ export default (props) => {
                 </MKButton>
                 <MKButton
                     color="secondary"
-                    onClick={() => setReadmeModalOpen(true)}
+                    onClick={() => setReadmeCreateModalOpen(true)}
 
                 >
                     수정하기(리드미 작성)
