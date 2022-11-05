@@ -5,8 +5,8 @@ export const loginCheck = async (user_id, user_password) => {
     console.log(user_id, user_password);
     try {
         const response = await axios.post("/usersRouter/login", {
-          id: user_id,
-          password: user_password,
+            id: user_id,
+            password: user_password,
         })
         console.log(response.data.user);
         return response.data.user
@@ -28,17 +28,17 @@ export const findUsers = async () => {
 export const saveJobPost = async (company) => {
 
     try {
-        const response = await axios.post("/companiesRouter/jobPost",company)
+        const response = await axios.post("/companiesRouter/jobPost", company)
         if (response.data.compIdCheck === false) {
             alert("이미 사용중인 제목입니다.");
             //setCheckError("이미 사용중인 아이디입니다");
             // return false;
-          }
-          if (response.data.success === true) {
+        }
+        if (response.data.success === true) {
             alert("채용공고 등록 성공.");
             window.location.href = "/avocado-hero-web/";
             // return true;
-          }
+        }
         // return false;
     } catch (err) {
         console.log("Error >>", err);
@@ -53,16 +53,16 @@ export const findOneUserByUserId = async (user_id) => {
             user_id: user_id
         })
         // const foundUser = response.data.user;
-        return(response.data.user)
+        return (response.data.user)
     } catch (error) {
-        
+
     }
 }
 
 
 export const getGroupById = async (group_id) => {
     try {
-        const response = await axios.post("/groupsRouter/getGroup", {_id: group_id});
+        const response = await axios.post("/groupsRouter/getGroup", { _id: group_id });
         console.log(response)
         return response.data;
     } catch (err) {
@@ -94,3 +94,28 @@ export const fetchGroupImage = async (imgURL) => {
         return null;
     }
 };
+
+export const typeName = (type) => {
+    switch (type) {
+        case "0":
+            return "베이직";
+        case "1":
+            return "프로";
+        case "2":
+            return "엔터프라이즈";
+        default:
+            return "베이직";
+    }
+    return "베이직";
+}
+
+export const updateUserType = async (user_id,type) => {
+    try {
+        const response = await axios.post("/usersRouter/updateUserType", { user_id: user_id, type:type });
+        console.log(response.data.docs)
+        return response.data;
+    } catch (err) {
+        console.log("Error >>", err);
+        return [];
+    }
+}

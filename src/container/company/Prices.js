@@ -62,7 +62,7 @@ export default (props) => {
   const handleModal = (type) => {
     setPriceModalOpen(true);
     setPriceContents({
-      type:type
+      type:type+""
     })
   }
 

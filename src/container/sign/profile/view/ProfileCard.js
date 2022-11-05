@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, Grid, Stack, Typography } from "@mui/material";
+import { Card, CardActionArea, CardContent, Chip, Grid, Stack, Typography } from "@mui/material";
 import ResponsiveCard from "component/common/ResponsiveCard";
 import TechStack from "component/common/TechStack";
 import { useState } from "react";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Avatar from "../avatar/Avatar";
 import ProfileGroup from "./ProfileGroup";
 import ProfilePortpolio from "./ProfilePortpolio";
+import * as API from "../../../../api/API";
 
 export default (props) => {
 
@@ -31,7 +32,7 @@ export default (props) => {
                                 {profile?.nickname}
                             </Typography>
                             <Typography variant="h3">
-                                {profile?.name}
+                                {profile?.name} <Chip label={`${API.typeName(profile?.type)} 플랜`} />
                             </Typography>
                             <Typography variant="h5">
                                 {profile?.user_id}
