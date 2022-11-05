@@ -57,7 +57,6 @@ export const options = [
     { type: "fe", label: "긍정적인", value: "positive", bgColor: "#004080", txtColor: '#FFFFFF' },
     { type: "fe", label: "책임감있는", value: "responsible", bgColor: "#004080", txtColor: '#FFFFFF' },
     { type: "fe", label: "노력하는", value: "trying", bgColor: "#004080", txtColor: '#FFFFFF' },
-    { type: "fe", label: "주도적인", value: "leading", bgColor: "#004080", txtColor: '#FFFFFF' },
 
 
 ];
