@@ -86,7 +86,14 @@ export default (props) => {
                         <Typography variant="h3">
                             신청하기
                         </Typography>
-                        <IconButton size="large" onClick={() => props.setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
+                        <IconButton
+                            size="large"
+                            onClick={() => {
+                                props.setOpen(false);
+                                setMessage('');
+                            }}>
+                            <ClearIcon fontSize="inherit" />
+                        </IconButton >
                     </Box>
                 </DialogTitle>
                 <DialogContent dividers={true}>
