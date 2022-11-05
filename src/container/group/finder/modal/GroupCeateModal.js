@@ -137,7 +137,7 @@ export default (props) => {
             >
                 <DialogTitle id="scroll-dialog-title">
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Typography variant="h4" variant="h3">
+                        <Typography variant="h4">
                             프로젝트 그룹 만들기
                         </Typography>
                         <IconButton size="large" onClick={() => props.setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
