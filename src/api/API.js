@@ -119,3 +119,14 @@ export const updateUserType = async (user_id,type) => {
         return [];
     }
 }
+
+export const groupFilter = async (filterData) => {
+    try {
+        const response = await axios.post("/groupsRouter/groupFiltering", filterData);
+        console.log(response.data.docs)
+        return response.data;
+    } catch (err) {
+        console.log("Error >>", err);
+        return [];
+    }
+}
