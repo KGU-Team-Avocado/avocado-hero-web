@@ -52,12 +52,17 @@ export default (props) => {
         });
     }
 
-
-
     const isApplicant = (user_id) => {
-        
-        for (var i = 0; i < props?.applicants?.length; i++) {
+        for (var i = 0; i < props?.group?.length; i++) {
             if (user_id === props?.applicants[i]?.user_id)
+                return true;
+        }
+        return false;
+    }
+
+    const isGroupMember = (user_id) => {
+        for (var i = 0; i < group?.members?.length; i++) {
+            if (user_id === group?.members[i]?.user_id)
                 return true;
         }
         return false;
@@ -148,7 +153,7 @@ export default (props) => {
                     color="success"
                     onClick={() => groupApply()}
                     fullWidth
-                    disabled={userInfo === null || (userInfo?.user_id == group?.manager) || isApplicant(userInfo.user_id)}
+                    disabled={userInfo === null || (userInfo?.user_id == group?.manager) || isApplicant(userInfo.user_id) || isGroupMember(userInfo.user_id)}
                 >
                     신청하기
                 </MKButton>
