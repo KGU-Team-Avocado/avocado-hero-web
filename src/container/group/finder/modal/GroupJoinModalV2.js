@@ -54,18 +54,14 @@ export default (props) => {
 
 
 
-    // const [groupManager, setGroupManager] = useState(null);
-
-    // useEffect(() => {
-    //     console.log("ddd"+group?.manager);
-    //     handleGroupManager(group?.manager);
-    // }, []);  
-
-    // const handleGroupManager = async (user_id) => {
-    //     await setGroupManager(await API.findOneUserByUserId(user_id));
-    // }   
-
-
+    const isApplicant = (user_id) => {
+        for (var i = 0; i < props?.applicants?.length; i++) {
+            if (user_id === props?.applicants[i]?.user_id)
+                return true;
+        }
+        return false;
+    }
+ 
     return (
         <>
             <Box
@@ -151,7 +147,7 @@ export default (props) => {
                     color="success"
                     onClick={() => groupApply()}
                     fullWidth
-                    disabled={userInfo === null || (userInfo?.user_id == group?.manager)}
+                    disabled={userInfo === null || (userInfo?.user_id == group?.manager) || isApplicant(userInfo.user_id)}
                 >
                     신청하기
                 </MKButton>

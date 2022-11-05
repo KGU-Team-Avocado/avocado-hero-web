@@ -37,19 +37,30 @@ export default () => {
     }, [])
 
     const [groupManager, setGroupManager] = useState(null);
-   
+    const [applicants, setApplicants] = useState(null);
+
     const handleGroupCard = (group) => {
         setSelectedGroup(group)
         setGroupJoinModalOpen(true)
         
         console.log("ddd"+group?.manager);
         handleGroupManager(group?.manager);
+
+        axios.post("/groupsRouter/getApplicants", {
+            group_id: group?._id,
+        }).then((response) => {
+            setApplicants(response.data);
+            console.log(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
     const handleGroupManager = async (user_id) => {
         const temp = await API.findOneUserByUserId(user_id)
         setGroupManager(temp);
-        
     } 
+
+
 
     const filterGroup = (filteredGroups) => {
         setGroups(filteredGroups);
@@ -123,7 +134,7 @@ export default () => {
                 keepMounted
                 width="md"
                 open={groupJoinModalOpen}
-                component={<GroupJoinModalV2 groupManager={groupManager} selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
+                component={<GroupJoinModalV2 applicants={applicants} groupManager={groupManager} selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
             />
             <ModalStaticBackdrop
                 keepMounted
