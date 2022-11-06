@@ -80,7 +80,7 @@ export default ({
                     :
                     <MKButton
                         variant="text"
-                        // color="dark"
+                        color="dark"
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
                         aria-haspopup="true"
