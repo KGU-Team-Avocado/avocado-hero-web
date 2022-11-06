@@ -88,31 +88,31 @@ export const DashboardSidebar = (props) => {
       onlyForMgr: false,
       showAfterEnd: true
     },
-    {
-      href: `/workspace/${project_id}/role`,
-      icon: (<UserIcon fontSize="small" />),
-      title: '역할',
-      onlyForMgr: false,
-      showAfterEnd: false
-    },
-    {
-      href: `/workspace/${project_id}/members`,
-      icon: (<UsersIcon fontSize="small" />),
-      title: '멤버관리',
-      onlyForMgr: true,
-      showAfterEnd: false
-    },
-    {
-      href: `/workspace/${project_id}/end`,
-      icon: (<XCircleIcon fontSize="small" />),
-      title: '프로젝트 종료',
-      onlyForMgr: true,
-      showAfterEnd: false
-    },
+    // {
+    //   href: `/workspace/${project_id}/role`,
+    //   icon: (<UserIcon fontSize="small" />),
+    //   title: '역할',
+    //   onlyForMgr: false,
+    //   showAfterEnd: false
+    // },
+    // {
+    //   href: `/workspace/${project_id}/members`,
+    //   icon: (<UsersIcon fontSize="small" />),
+    //   title: '멤버관리',
+    //   onlyForMgr: true,
+    //   showAfterEnd: false
+    // },
+    // {
+    //   href: `/workspace/${project_id}/end`,
+    //   icon: (<XCircleIcon fontSize="small" />),
+    //   title: '프로젝트 종료',
+    //   onlyForMgr: true,
+    //   showAfterEnd: false
+    // },
     {
       href: `/workspace/${project_id}/settings`,
       icon: (<SettingsIcon fontSize="small" />),
-      title: '설정(역할/멤버관리/프로젝트종료 합친 메뉴인데 테스트용임)',
+      title: '설정',
       onlyForMgr: false, //점검 필요
       showAfterEnd: false //점검 필요
     },
