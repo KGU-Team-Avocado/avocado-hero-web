@@ -4,11 +4,11 @@ import ResponsiveCard from "component/common/ResponsiveCard"
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader"
 import { useSelector } from "react-redux"
 import ProjectEndContainer from "./ProjectEndContainer"
-import ProjectMembersContainer from "./ProjectMembersContainer"
-import ProjectRoleContainer from "./ProjectRoleContainer"
-import { User as UserIcon } from '../../../component/workspace/icons/user';
-import { Users as UsersIcon } from '../../../component/workspace/icons/users';
-import { XCircle as XCircleIcon } from '../../../component/workspace/icons/x-circle';
+import ProjectMembersContainer from "./MembersContainer"
+import ProjectRoleContainer from "./RoleContainer"
+import { User as UserIcon } from '../../../../component/workspace/icons/user';
+import { Users as UsersIcon } from '../../../../component/workspace/icons/users';
+import { XCircle as XCircleIcon } from '../../../../component/workspace/icons/x-circle';
 
 export default () => {
 
@@ -24,9 +24,6 @@ export default () => {
             />
 
             <Stack spacing={2}>
-                <Alert>
-                    설정 (역할/멤버관리/프로젝트종료 합친 메뉴인데 테스트용임)
-                </Alert>
                 <Typography variant="h5">
                     <UserIcon /> 역할
                 </Typography>

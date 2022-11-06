@@ -1,12 +1,12 @@
-import ProjectEndContainer from "container/group/workspace/ProjectEndContainer";
+import ProjectEndContainer from "container/group/workspace/settings/ProjectEndContainer";
 import ProjectEvaluationContainer from "container/group/workspace/ProjectEvaluationContainer";
-import ProjectMembersContainer from "container/group/workspace/ProjectMembersContainer";
+import MembersContainer from "container/group/workspace/settings/MembersContainer";
 import NoticeContainer from "container/group/workspace/NoticeContainer";
-import ProjectRoleContainer from "container/group/workspace/ProjectRoleContainer";
+import RoleContainer from "container/group/workspace/settings/RoleContainer";
 import TodoContainer from "container/group/workspace/TodoContainer";
 import CalendarContainer from "container/group/workspace/CalendarContainer";
 import ReadmeContainer from "container/group/workspace/readme/ReadmeContainer";
-import SettingsContainer from "container/group/workspace/SettingsContainer";
+import SettingsContainer from "container/group/workspace/settings/SettingsContainer";
 
 
 const workspaceRoutes = [
@@ -28,11 +28,11 @@ const workspaceRoutes = [
     },
     {
         path: '/workspace/:id/role',
-        element: <ProjectRoleContainer />,
+        element: <RoleContainer />,
     },
     {
         path: '/workspace/:id/members',
-        element: <ProjectMembersContainer />,
+        element: <MembersContainer />,
     },
     {
         path: '/workspace/:id/end',

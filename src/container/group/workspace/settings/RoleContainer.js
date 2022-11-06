@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { role } from "../../../assets/tag/Role";
-import ModifyRole from "../../../component/workspace/role/ModifyRole";
-import RoleBadge from "../../../component/workspace/role/RoleBadge";
+import { role } from "../../../../assets/tag/Role";
+import ModifyRole from "../../../../component/workspace/role/ModifyRole";
+import RoleBadge from "../../../../component/workspace/role/RoleBadge";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
 import { getGroupAsync } from "api/redux/group/groupSlice";
@@ -11,7 +11,7 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 import RoleCard from "component/workspace/role/RoleCard";
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
 
-const ProjectRoleContainer = () => {
+const RoleContainer = () => {
     const group = useSelector(selectGroup);
     const dispatch = useDispatch();
 
@@ -96,4 +96,4 @@ const ProjectRoleContainer = () => {
     )
 }
 
-export default ProjectRoleContainer;
+export default RoleContainer;

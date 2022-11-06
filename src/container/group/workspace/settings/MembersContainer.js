@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import * as API from "../../../api/API";
+import * as API from "../../../../api/API";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
 import { getGroupAsync } from "api/redux/group/groupSlice";
 import { Alert, Button, Divider, FormControlLabel, FormGroup, Grid, Paper, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
-import MemberModal from "../../../component/workspace/members/MemberModal";
+import MemberModal from "../../../../component/workspace/members/MemberModal";
 
-const ProjectMembersContainer = () => {
+const MembersContainer = () => {
     const group = useSelector(selectGroup);
     const dispatch = useDispatch();
 
@@ -285,4 +285,4 @@ const ProjectMembersContainer = () => {
     )
 }
 
-export default ProjectMembersContainer;
+export default MembersContainer;

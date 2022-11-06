@@ -67,17 +67,18 @@ export const DashboardSidebar = (props) => {
     {
       href: `/workspace/${project_id}/calendar`,
       icon: (<EventNoteIcon fontSize="small" />),
-      title: '일정(아이콘 미정)',
+      title: '일정',
       onlyForMgr: false,
       showAfterEnd: true
     },
     {
       href: `/workspace/${project_id}/todo`,
       icon: (<FormatListBulletedIcon fontSize="small" />),
-      title: 'Todo(아이콘 미정)',
+      title: 'Todo',
       onlyForMgr: false,
       showAfterEnd: true
     },
+    
   ];
 
   const extraItems = [
