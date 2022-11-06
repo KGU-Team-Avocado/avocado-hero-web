@@ -8,6 +8,7 @@ import * as API from "../../../api/API";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
 import { getGroupAsync } from "api/redux/group/groupSlice";
+import ResponsiveCard from "component/common/ResponsiveCard";
 
 const DayOfTheWeek = [
     {
@@ -99,9 +100,9 @@ const CalendarContainer = () => {
             allDay: allday
         };
 
-        if (daysOfWeek.length === 0){
+        if (daysOfWeek.length === 0) {
             mode = 'nonrecursive';
-            newEvent = { 
+            newEvent = {
                 ...newEvent,
                 start: startDay,
                 end: endDay
@@ -126,8 +127,8 @@ const CalendarContainer = () => {
             mode: mode
         }).then((response) => {
             console.log(response.data);
-            const recursive = response.data.recursive.map(rec => { return {...rec, id: rec._id} })
-            const nonrecursive = response.data.nonrecursive.map(non => { return {...non, id: non._id} })
+            const recursive = response.data.recursive.map(rec => { return { ...rec, id: rec._id } })
+            const nonrecursive = response.data.nonrecursive.map(non => { return { ...non, id: non._id } })
             setEvents([...recursive, ...nonrecursive]);
             setStartDay("");
             setEndDay("");
@@ -184,7 +185,7 @@ const CalendarContainer = () => {
 
     const modifyEvent = (info) => {
         const event = events.filter((event) => event._id === info.event.id)
-        if(event[0].daysOfWeek){
+        if (event[0].daysOfWeek) {
             alert('반복일정은 수정이 불가합니다.');
             info.revert();
             return;
@@ -197,8 +198,8 @@ const CalendarContainer = () => {
             end: info.event.end,
         }).then((response) => {
             console.log(response.data);
-            const recursive = response.data.recursive.map(rec => { return {...rec, id: rec._id} })
-            const nonrecursive = response.data.nonrecursive.map(non => { return {...non, id: non._id} })
+            const recursive = response.data.recursive.map(rec => { return { ...rec, id: rec._id } })
+            const nonrecursive = response.data.nonrecursive.map(non => { return { ...non, id: non._id } })
             setEvents([...recursive, ...nonrecursive]);
         }).catch(function (error) {
             console.log(error);
@@ -208,7 +209,7 @@ const CalendarContainer = () => {
     const deleteEvent = (info) => {
         const event = events.filter((event) => event._id === info.event.id)
         let mode = 'nonrecursive';
-        if(event[0].daysOfWeek){
+        if (event[0].daysOfWeek) {
             mode = 'recursive'
         }
 
@@ -221,8 +222,8 @@ const CalendarContainer = () => {
                 mode: mode
             }).then((response) => {
                 console.log(response.data);
-                const recursive = response.data.recursive.map(rec => { return {...rec, id: rec._id} })
-                const nonrecursive = response.data.nonrecursive.map(non => { return {...non, id: non._id} })
+                const recursive = response.data.recursive.map(rec => { return { ...rec, id: rec._id } })
+                const nonrecursive = response.data.nonrecursive.map(non => { return { ...non, id: non._id } })
                 setEvents([...recursive, ...nonrecursive]);
             }).catch(function (error) {
                 console.log(error);
@@ -234,17 +235,18 @@ const CalendarContainer = () => {
         <>
             <div className="mt-3">
                 <div className="calendar-container">
+                    <ResponsiveCard>
+                        <ProjectEventCalendar
+                            events={events}
+                            handleDateClick={handleDateClick}
+                            handleShow={handleShow}
+                            dropEvent={dropEvent}
+                            resizeEvent={resizeEvent}
+                            deleteEvent={deleteEvent}
+                        />
+                    </ResponsiveCard>
 
-                    <ProjectEventCalendar 
-                        events={events}
-                        handleDateClick={handleDateClick}
-                        handleShow={handleShow}
-                        dropEvent={dropEvent}
-                        resizeEvent={resizeEvent}
-                        deleteEvent={deleteEvent}
-                    />
-
-                    <CalendarModal 
+                    <CalendarModal
                         show={show}
                         allday={allday}
                         startDay={startDay}
