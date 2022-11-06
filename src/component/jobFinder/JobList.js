@@ -77,7 +77,7 @@ export default (props) => {
                     props.postings.length > 0
                         ?
                         props.postings.map((posting) => (
-                            <Grid item xs={12} lg={6}>
+                            <Grid item xs={12} xl={3} lg={4} sm={6}>
                                 <JobPostingCardV2
                                     key={posting._id}
                                     posting={posting}
