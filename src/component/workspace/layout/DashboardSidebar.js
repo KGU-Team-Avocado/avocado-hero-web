@@ -57,13 +57,13 @@ export const DashboardSidebar = (props) => {
       onlyForMgr: false,
       showAfterEnd: true
     },
-    {
-      href: `/workspace/${project_id}/notice`,
-      icon: (<BellIcon fontSize="small" />),
-      title: '공지사항',
-      onlyForMgr: false,
-      showAfterEnd: true
-    },
+    // {
+    //   href: `/workspace/${project_id}/notice`,
+    //   icon: (<BellIcon fontSize="small" />),
+    //   title: '공지사항',
+    //   onlyForMgr: false,
+    //   showAfterEnd: true
+    // },
     {
       href: `/workspace/${project_id}/calendar`,
       icon: (<EventNoteIcon fontSize="small" />),
@@ -71,14 +71,21 @@ export const DashboardSidebar = (props) => {
       onlyForMgr: false,
       showAfterEnd: true
     },
+    // {
+    //   href: `/workspace/${project_id}/todo`,
+    //   icon: (<FormatListBulletedIcon fontSize="small" />),
+    //   title: 'Todo',
+    //   onlyForMgr: false,
+    //   showAfterEnd: true
+    // },
     {
-      href: `/workspace/${project_id}/todo`,
+      href: `/workspace/${project_id}/notice_todo`,
       icon: (<FormatListBulletedIcon fontSize="small" />),
-      title: 'Todo',
+      title: '게시판',
       onlyForMgr: false,
       showAfterEnd: true
     },
-    
+
   ];
 
   const extraItems = [

@@ -6,7 +6,7 @@ import TodoDeleteAll from "./todo/TodoDeleteAll";
 import TodoList from "./todo/TodoList";
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
 
-const TodoContainer = () => {
+const Todo = () => {
   
   //URL에서 프로젝트 id를 가져옴
   const params = useParams();
@@ -135,4 +135,4 @@ const TodoContainer = () => {
   );
 };
 
-export default TodoContainer;
+export default Todo;
