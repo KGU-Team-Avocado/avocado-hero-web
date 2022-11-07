@@ -29,9 +29,15 @@ export default () => {
 
     //무한스크롤을 위한 코드
     const [target, setTarget] = useState(null);
+    const page = 1;
 
     const fetchData = async ()=> {
-        console.log("화면끝감지");
+        //console.log("화면끝감지")
+        const response = await axios.get("/groupsRouter/getGroups");
+        const data = await response.data;
+        setGroups((prev) => prev.concat(data));
+
+        // page++;
     }
 
     useEffect(() => {
@@ -56,14 +62,14 @@ export default () => {
     }, [target]);
 
 
-    useEffect(() => {
-        axios.get("/groupsRouter/getGroups").then((response) => {
-            // console.log(JSON.stringify(response.data))
-            setGroups(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }, [])
+    // useEffect(() => {
+    //     axios.get("/groupsRouter/getGroups").then((response) => {
+    //         // console.log(JSON.stringify(response.data))
+    //         setGroups(response.data);
+    //     }).catch(function (error) {
+    //         console.log(error);
+    //     });
+    // }, [])
 
     const handleGroupCard = (group) => {
         setSelectedGroup(group)
