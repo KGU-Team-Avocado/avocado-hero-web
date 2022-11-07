@@ -13,18 +13,17 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { right } from "@popperjs/core";
 import * as API from "../../api/API"
 import { MultiSelect } from "react-multi-select-component";
-import { Box, Stack, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, Checkbox, Stack, TextField, Typography } from "@mui/material";
+import { fields } from "../../assets/tag/Field";
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const JobPosting = () => {
-
-  const tags = [
-    { label: "#리액트", value: "react" },
-    { label: "#자바", value: "java" },
-    { label: "#html", value: "html" },
-  ];
-
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedJobTags, setSelectedJobTags] = useState([]);
+  const [selectedSkillTags, setSelectedSkillTags] = useState([]);
 
   const [company, setCompany] = useState({
     name: '',
@@ -93,6 +92,8 @@ const JobPosting = () => {
       console.log('저장시도')
       await API.saveJobPost({
         ...company,
+        job_tags: selectedJobTags,
+        skill_tags: selectedSkillTags,
         description: convertedContent
       });
     }
@@ -116,22 +117,63 @@ const JobPosting = () => {
 
         <TextField label="제목" id="title" value={company.title} onChange={onInputHandler} />
 
-        <TextField label="주요업무" id="field" value={company.field} onChange={onInputHandler} />
+        <Autocomplete
+          multiple
+          options={fields.job}
+          disableCloseOnSelect
+          getOptionLabel={(option) => option.label}
+          value={selectedJobTags}
+          onChange={(event, newValue) => {
+            setSelectedJobTags(newValue);
+          }}
+          renderOption={(props, option, { selected }) => (
+            <li {...props}>
+              <Checkbox
+                icon={icon}
+                checkedIcon={checkedIcon}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+              {option.label}
+            </li>
+          )}
+          renderInput={(params) => (
+            <TextField {...params} label="직무" placeholder="직무 태그" />
+          )}
+        />
 
-        <TextField  label="모집인원" id="recruit_number" value={company.recruit_number} onChange={onInputHandler} />
+        <TextField label="모집인원" id="recruit_number" value={company.recruit_number} onChange={onInputHandler} />
 
         <TextField label="마감일" id="period" value={company.period} onChange={onInputHandler} />
 
-        <TextField  label="홈페이지" id="site" value={company.site} onChange={onInputHandler} />
+        <TextField label="홈페이지" id="site" value={company.site} onChange={onInputHandler} />
 
-
-        <Typography variant="h4">
-          태그
-        </Typography>
-        <MultiSelect
-          options={tags}
-          value={selectedTags}
-          onChange={setSelectedTags}
+        {/* <Typography variant="h4">
+          스킬
+        </Typography> */}
+        <Autocomplete
+          multiple
+          options={fields.skill}
+          disableCloseOnSelect
+          getOptionLabel={(option) => option.label}
+          value={selectedSkillTags}
+          onChange={(event, newValue) => {
+            setSelectedSkillTags(newValue);
+          }}
+          renderOption={(props, option, { selected }) => (
+            <li {...props}>
+              <Checkbox
+                icon={icon}
+                checkedIcon={checkedIcon}
+                style={{ marginRight: 8 }}
+                checked={selected}
+              />
+              {option.label}
+            </li>
+          )}
+          renderInput={(params) => (
+            <TextField {...params} label="스킬" placeholder="스킬 태그" />
+          )}
         />
 
         <Typography variant="h4">
