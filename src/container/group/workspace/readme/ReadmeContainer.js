@@ -42,7 +42,7 @@ export default () => {
                 // open={readmeCreaeteModalOpen} component={<ReadmeEditorModal readmeCreaeteModalOpen={readmeCreaeteModalOpen} setOpen={setReadmeCreateModalOpen} 
                 // />}
                 open={readmeCreaeteModalOpen}
-                componenet={<ReadmeEditorModal group={selectedGroup} setOpen={setReadmeCreateModalOpen} />}
+                component={<ReadmeEditorModal  group={selectedGroup} setOpen={setReadmeCreateModalOpen} />}
                 />
             {/* <ReadmeModal readmeCreaeteModalOpen={readmeCreaeteModalOpen} setOpen={setReadmeCreateModalOpen} ></ReadmeModal> */}
         </>
