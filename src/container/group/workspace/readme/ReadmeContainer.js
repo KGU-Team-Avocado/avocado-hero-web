@@ -5,18 +5,14 @@ import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader"
 import { useDispatch, useSelector } from "react-redux";
 import Readme from "./Readme"
 import ReadmeModal from "./ReadmeModal";
-import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
+import ModalStaticBackdrop from 
+"avocado-hero-web/src/componenet/common/modal/ModalStaticBackdrop";
 
 export default () => {
     const group = useSelector(selectGroup);
     const dispatch = useDispatch();
 
     const [readMe, setReadme] = useState('');
-
-    const handleReadmeChange = event => {
-        setReadme(event.target.value);
-        console.log(event.target.value);
-    }
 
     const [readmeCreaeteModalOpen, setReadmeCreateModalOpen] = useState(false);
 
@@ -42,9 +38,8 @@ export default () => {
             <ModalStaticBackdrop
                 keepMounted
                 width="md"
-                // open={readmeCreaeteModalOpen}
-                // component={<ReadmeModal readmeCreateModalOpen={readmeCreaeteModalOpen} setOpen={setReadmeCreateModalOpen} />}
-            />
+                open={readmeCreaeteModalOpen} component={<ReadmeModal readmeCreaeteModalOpen={readmeCreaeteModalOpen} setOpen={setReadmeCreateModalOpen} />}
+                />
         </>
     )
 }
