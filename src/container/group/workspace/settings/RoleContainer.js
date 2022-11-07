@@ -11,7 +11,7 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 import RoleCard from "component/workspace/role/RoleCard";
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
 
-const RoleContainer = () => {
+const RoleContainer = (props) => {
     const group = useSelector(selectGroup);
     const dispatch = useDispatch();
 
@@ -59,7 +59,7 @@ const RoleContainer = () => {
     return (
         <>
             <WorkspaceHeader
-                title={'역할'}
+                title={props.title}
             />
 
             <Box>
