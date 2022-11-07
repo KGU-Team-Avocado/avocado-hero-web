@@ -12,7 +12,7 @@ import GroupJoinModalV2 from "./modal/GroupJoinModalV2";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import SearchIcon from '@mui/icons-material/Search';
 import GroupFilterModal from "./modal/GroupFilterModal";
-import * as API from "../../../api/API"
+import { asCleanDays } from "@fullcalendar/react";
 
 export default () => {
 
@@ -27,6 +27,35 @@ export default () => {
     const [groups, setGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState(null);
 
+    //무한스크롤을 위한 코드
+    const [target, setTarget] = useState(null);
+
+    const fetchData = async ()=> {
+        console.log("화면끝감지");
+    }
+
+    useEffect(() => {
+        fetchData();
+    },[])
+
+    useEffect(() => {
+        let observer;
+        if(target){
+            const onIntersect = async ([entry], observer) => {
+                if(entry.isIntersecting) {
+                    observer.unobserve(entry.target);
+                    await fetchData();
+                    observer.observe(entry.target);
+                }
+            };
+
+            observer = new IntersectionObserver(onIntersect, {threshold: 1});
+            observer.observe(target);
+        }
+        return ()=> observer && observer.disconnect();
+    }, [target]);
+
+
     useEffect(() => {
         axios.get("/groupsRouter/getGroups").then((response) => {
             // console.log(JSON.stringify(response.data))
@@ -36,45 +65,9 @@ export default () => {
         });
     }, [])
 
-    const [groupManager, setGroupManager] = useState(null);
-    const [applicants, setApplicants] = useState(null);
-
     const handleGroupCard = (group) => {
         setSelectedGroup(group)
         setGroupJoinModalOpen(true)
-        
-        console.log("ddd"+group?.manager);
-        handleGroupManager(group?.manager);
-
-        axios.post("/groupsRouter/getApplicants", {
-            group_id: group?._id,
-        }).then((response) => {
-            setApplicants(response.data);
-            console.log(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }
-    const handleGroupManager = async (user_id) => {
-        const temp = await API.findOneUserByUserId(user_id)
-        setGroupManager(temp);
-    } 
-
-
-
-    // 필터링된 그룹 데이터 저장, 모달 숨김
-    const filterGroup = (filteredGroups) => {
-        setGroups(filteredGroups);
-        setGroupFilterModalOpen(false);
-    }
-
-    // 필터링을 초기화했기 때문에 다시 전체 데이터를 받아오기 위한 메소드
-    const resetGroups = () => {
-        axios.get("/groupsRouter/getGroups").then((response) => {
-            setGroups(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        });
     }
 
     return (
@@ -132,19 +125,19 @@ export default () => {
                                     key={group._id}
                                     group={group}
                                     handleGroupCard={handleGroupCard}
-
                                 />
                             </Grid>
                         ))
                         :
                         <div>그룹이 없습니다.</div>
                 }
+                <div ref={setTarget}>This is Target.</div>
             </Grid>
             <ModalStaticBackdrop
                 keepMounted
                 width="md"
                 open={groupJoinModalOpen}
-                component={<GroupJoinModalV2 applicants={applicants} groupManager={groupManager} selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
+                component={<GroupJoinModalV2 selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
             />
             <ModalStaticBackdrop
                 keepMounted
@@ -156,7 +149,7 @@ export default () => {
                 keepMounted
                 width="sm"
                 open={groupFilterModalOpen}
-                component={<GroupFilterModal filterGroup={filterGroup} resetGroups={resetGroups} setOpen={setGroupFilterModalOpen} />}
+                component={<GroupFilterModal setOpen={setGroupFilterModalOpen} />}
             />
         </>
     )
