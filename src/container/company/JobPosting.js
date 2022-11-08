@@ -13,7 +13,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { right } from "@popperjs/core";
 import * as API from "../../api/API"
 import { MultiSelect } from "react-multi-select-component";
-import { Autocomplete, Box, Checkbox, Stack, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, Checkbox, MenuItem, Stack, TextField, Typography } from "@mui/material";
 import { fields } from "../../assets/tag/Field";
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -22,15 +22,13 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const JobPosting = () => {
-  const [selectedJobTags, setSelectedJobTags] = useState([]);
+  const [selectedJobTag, setSelectedJobTag] = useState([]);
   const [selectedSkillTags, setSelectedSkillTags] = useState([]);
 
   const [company, setCompany] = useState({
     name: '',
     title: '',
-    field: '',
     recruit_number: '',
-    tag: '',
     period: '',
     site: '',
     // description:'',
@@ -43,6 +41,18 @@ const JobPosting = () => {
 
   //const [checkError, setCheckError] = useState("");
 
+  const [postingimage, setPostingImage] = useState({ preview: '', data: '' });
+  const [companyimage, setCompanyImage] = useState({ preview: '', data: '' });
+
+  const handleFileChange = (e, setState) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    }
+    console.log(img)
+    setState(img)
+  }
+
   const onInputHandler = (e) => {
     console.log(company)
     setCompany({
@@ -51,6 +61,10 @@ const JobPosting = () => {
       //  
     });
 
+  };
+
+  const handleJobTagChange = (event) => {
+    setSelectedJobTag(event.target.value);
   };
 
   const handleEditorChange = (state) => {
@@ -63,41 +77,77 @@ const JobPosting = () => {
   };
 
   const onClick = async () => {
+    const newPostingData = {
+      ...company,
+      job_tag: selectedJobTag.value,
+      skill_tags: selectedSkillTags.map((item) => {return item.value}),
+      description: convertedContent
+    };
     // e.preventDefault();
+    console.log(newPostingData)
     alert('버튼은 눌렀음')
     // console.log(Object.keys(company).map((key)=>company[key]))
-    if (company.name.length < 1) {
-      console.log('1')
-      return;
-    } else if (company.title.length < 1) {
-      console.log('2')
-      return;
-    } else if (company.field.length < 1) {
-      console.log('3')
-      return;
-    } else if (company.recruit_number.length < 1) {
-      console.log('4')
-      return;
-      // } else if (company.tag.length < 1) {
-      //   console.log('5')
-      //   return;
-    } else if (company.period.length < 1) {
-      console.log('6')
-      return;
-    } else if (company.site.length < 1) {
-      console.log('7')
-      return;
+    const hasValue = Object.values(newPostingData).includes("");
+    if (hasValue) {
+      alert('빈 칸을 모두 채워주세요')
     }
     else {
       console.log('저장시도')
-      await API.saveJobPost({
-        ...company,
-        job_tags: selectedJobTags,
-        skill_tags: selectedSkillTags,
-        description: convertedContent
-      });
+      const response = await API.saveJobPost(newPostingData);
+      console.log(response)
+      if (response.data.compIdCheck === false) {
+        alert("이미 사용중인 제목입니다.");
+        return;
+      }
+      if (response.data.success === true) {
+        if (postingimage.data !== '') {
+          alert('yes img')
+          uploadpostingImage(response.data.company._id);
+        }
+        if (companyimage.data !== '') {
+          alert('yes img')
+          uploadcompanyImage(response.data.company._id);
+        }
+        // else {
+        //   alert('no img')
+        //   window.location.reload();
+        // }
+        alert("채용공고 등록 성공.");
+        // window.location.href = "/avocado-hero-web/";
+        window.location.reload();
+
+        // return true;
+      }
     }
   };
+
+  const uploadpostingImage = async (posting_id) => {
+    let formData = new FormData()
+    formData.append('posting_id', posting_id);
+    formData.append('file', postingimage.data); //반드시 file을 마지막에 append 해야 오류가 없음!!
+    const response = await fetch('/groupsRouter/uploadposingImage', {
+      method: 'POST',
+      body: formData,
+    })
+    if (response) {
+      // window.location.reload();
+      console.log(response);
+    }
+  }
+
+  const uploadcompanyImage = async (posting_id) => {
+    let formData = new FormData()
+    formData.append('posting_id', posting_id);
+    formData.append('file', companyimage.data); //반드시 file을 마지막에 append 해야 오류가 없음!!
+    const response = await fetch('/groupsRouter/uploadcompanyImage', {
+      method: 'POST',
+      body: formData,
+    })
+    if (response) {
+      // window.location.reload();
+      console.log(response)
+    }
+  }
 
   const line = {
     height: "2px",
@@ -112,34 +162,44 @@ const JobPosting = () => {
   return (
     <>
       <Stack spacing={2}>
+        <Stack>
+          <Typography variant='h5'>공고 사진</Typography>
+          <input className='form-control' type='file' name='file' onChange={(e) => handleFileChange(e, setPostingImage)}></input>
+        </Stack>
+        {
+          postingimage.preview &&
+          <>
+            <Box my={3}>
+              <img src={postingimage.preview} width='50%' height='auto' />
+            </Box>
+          </>
+        }
+
+        <Stack>
+          <Typography variant='h5'>회사 사진</Typography>
+          <input className='form-control' type='file' name='file' onChange={(e) => handleFileChange(e, setCompanyImage)}></input>
+        </Stack>
+        {
+          companyimage.preview &&
+          <>
+            <Box my={3}>
+              <img src={companyimage.preview} width='50%' height='auto' />
+            </Box>
+          </>
+        }
 
         <TextField label="회사명" id="name" value={company.name} onChange={onInputHandler} />
 
         <TextField label="제목" id="title" value={company.title} onChange={onInputHandler} />
 
         <Autocomplete
-          multiple
-          options={fields.job}
-          disableCloseOnSelect
-          getOptionLabel={(option) => option.label}
-          value={selectedJobTags}
+          value={selectedJobTag}
           onChange={(event, newValue) => {
-            setSelectedJobTags(newValue);
+            setSelectedJobTag(newValue);
           }}
-          renderOption={(props, option, { selected }) => (
-            <li {...props}>
-              <Checkbox
-                icon={icon}
-                checkedIcon={checkedIcon}
-                style={{ marginRight: 8 }}
-                checked={selected}
-              />
-              {option.label}
-            </li>
-          )}
-          renderInput={(params) => (
-            <TextField {...params} label="직무" placeholder="직무 태그" />
-          )}
+          options={fields.job}
+          // sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="직무" />}
         />
 
         <TextField label="모집인원" id="recruit_number" value={company.recruit_number} onChange={onInputHandler} />
@@ -148,9 +208,6 @@ const JobPosting = () => {
 
         <TextField label="홈페이지" id="site" value={company.site} onChange={onInputHandler} />
 
-        {/* <Typography variant="h4">
-          스킬
-        </Typography> */}
         <Autocomplete
           multiple
           options={fields.skill}
