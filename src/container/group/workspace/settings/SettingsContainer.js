@@ -28,7 +28,7 @@ export default () => {
                     <UserIcon /> 역할
                 </Typography>
                 <ResponsiveCard>
-                    <ProjectRoleContainer />
+                    <ProjectRoleContainer title="역할" />
                 </ResponsiveCard>
                 <Typography variant="h5">
                     <UsersIcon /> 멤버 관리

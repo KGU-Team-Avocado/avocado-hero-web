@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Stack, Tooltip, Typography } from "@mui/material";
+import { Grid, Stack, Tooltip } from "@mui/material";
 import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
@@ -6,15 +6,14 @@ import MKButton from "component/common/mui-components/MKButton";
 import GroupCardV2 from "component/group/card/GroupCardV2";
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import GroupCeateModal from "./modal/GroupCeateModal";
 import GroupJoinModalV2 from "./modal/GroupJoinModalV2";
-import FilterListIcon from '@mui/icons-material/FilterList';
 import SearchIcon from '@mui/icons-material/Search';
 import GroupFilterModal from "./modal/GroupFilterModal";
-import * as API from "../../../api/API"
+import React from 'react';
 
-export default () => {
+const GroupFinderContainer = () => {
 
     const navigate = useNavigate();
 
@@ -27,54 +26,54 @@ export default () => {
     const [groups, setGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState(null);
 
-    useEffect(() => {
-        axios.get("/groupsRouter/getGroups").then((response) => {
-            // console.log(JSON.stringify(response.data))
-            setGroups(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }, [])
+    //무한스크롤을 위한 코드
+    const [target, setTarget] = useState(null);
+    let page = 1;
 
-    const [groupManager, setGroupManager] = useState(null);
-    const [applicants, setApplicants] = useState(null);
+    const fetchData = async ()=> {
+        //console.log("화면끝감지")
+        console.log(`page : ${page}`);
+        const response = await axios.get("/groupsRouter/getGroups");
+        const data = await response.data;
+        setGroups((prev) => prev.concat(data));
+
+        page++;
+    }
+
+    useEffect(() => {
+        fetchData();
+    },[])
+
+    useEffect(() => {
+        let observer;
+        if(target){
+            const onIntersect = async ([entry], observer) => {
+                if(entry.isIntersecting) {
+                    observer.unobserve(entry.target);
+                    await fetchData();
+                    observer.observe(entry.target);
+                }
+            };
+
+            observer = new IntersectionObserver(onIntersect, {threshold: 1});
+            observer.observe(target);
+        }
+        return ()=> observer && observer.disconnect();
+    }, [target]);
+
+
+    // useEffect(() => {
+    //     axios.get("/groupsRouter/getGroups").then((response) => {
+    //         // console.log(JSON.stringify(response.data))
+    //         setGroups(response.data);
+    //     }).catch(function (error) {
+    //         console.log(error);
+    //     });
+    // }, [])
 
     const handleGroupCard = (group) => {
         setSelectedGroup(group)
         setGroupJoinModalOpen(true)
-        
-        console.log("ddd"+group?.manager);
-        handleGroupManager(group?.manager);
-
-        axios.post("/groupsRouter/getApplicants", {
-            group_id: group?._id,
-        }).then((response) => {
-            setApplicants(response.data);
-            console.log(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }
-    const handleGroupManager = async (user_id) => {
-        const temp = await API.findOneUserByUserId(user_id)
-        setGroupManager(temp);
-    } 
-
-
-
-    // 필터링된 그룹 데이터 저장, 모달 숨김
-    const filterGroup = (filteredGroups) => {
-        setGroups(filteredGroups);
-        setGroupFilterModalOpen(false);
-    }
-
-    // 필터링을 초기화했기 때문에 다시 전체 데이터를 받아오기 위한 메소드
-    const resetGroups = () => {
-        axios.get("/groupsRouter/getGroups").then((response) => {
-            setGroups(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        });
     }
 
     return (
@@ -127,24 +126,24 @@ export default () => {
                     groups.length > 0
                         ?
                         groups.map((group) => (
-                            <Grid item xs={12} md={6} xxl={4}>
+                            <Grid item xs={12} md={6} xxl={4} key={group._id}>
                                 <GroupCardV2
                                     key={group._id}
                                     group={group}
                                     handleGroupCard={handleGroupCard}
-
                                 />
                             </Grid>
                         ))
                         :
                         <div>그룹이 없습니다.</div>
                 }
+                <div ref={setTarget}>This is Target.</div>
             </Grid>
             <ModalStaticBackdrop
                 keepMounted
                 width="md"
                 open={groupJoinModalOpen}
-                component={<GroupJoinModalV2 applicants={applicants} groupManager={groupManager} selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
+                component={<GroupJoinModalV2 selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
             />
             <ModalStaticBackdrop
                 keepMounted
@@ -156,8 +155,10 @@ export default () => {
                 keepMounted
                 width="sm"
                 open={groupFilterModalOpen}
-                component={<GroupFilterModal filterGroup={filterGroup} resetGroups={resetGroups} setOpen={setGroupFilterModalOpen} />}
+                component={<GroupFilterModal setOpen={setGroupFilterModalOpen} />}
             />
         </>
     )
 }
+
+export default GroupFinderContainer;

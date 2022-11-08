@@ -9,8 +9,9 @@ import { options } from '../../../../assets/tag/Tech'
 import { Box, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
+import React from "react";
 
-export default (props) => {
+const ReadmeEditorModal = ({open,setOpen}) => {
 
     const [userInfo, setUserInfo] = useState(null);
 
@@ -75,7 +76,7 @@ export default (props) => {
                         <Typography variant="h4">
                             Read me 수정
                         </Typography>
-                        <IconButton size="large" onClick={() => props.setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
+                        <IconButton size="large" onClick={() => setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
                     </Box>
                 </DialogTitle>
                 <DialogContent dividers={true}>
@@ -103,3 +104,5 @@ export default (props) => {
         </>
     )
 }
+
+export default ReadmeEditorModal;

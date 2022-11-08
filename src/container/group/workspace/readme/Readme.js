@@ -1,6 +1,6 @@
-import { Alert, Divider, Stack, Typography } from "@mui/material"
+import { Alert, Stack, Typography } from "@mui/material"
 
-export default ({ group_id }) => {
+const Readme = ({ group_id }) => {
     // group_id를 가지고 서버에서 정보를 조회해서 readme를 수신받고 그려줘야함
     return (
         <Stack>
@@ -10,3 +10,5 @@ export default ({ group_id }) => {
         </Stack>
     )
 }
+
+export default Readme;

@@ -8,6 +8,7 @@ import CalendarContainer from "container/group/workspace/CalendarContainer";
 import ReadmeContainer from "container/group/workspace/readme/ReadmeContainer";
 import SettingsContainer from "container/group/workspace/settings/SettingsContainer";
 import NoticeTodoContainer from "container/group/workspace/NoticeTodoContainer";
+import RoleContainer from "container/group/workspace/settings/RoleContainer";
 
 const workspaceRoutes = [
     {
@@ -30,10 +31,10 @@ const workspaceRoutes = [
         path: '/workspace/:id/notice_todo',
         element: <NoticeTodoContainer />,
     },
-    // {
-    //     path: '/workspace/:id/role',
-    //     element: <RoleContainer />,
-    // },
+    {
+        path: '/workspace/:id/role',
+        element: <RoleContainer title="상호평가" />,
+    },
     // {
     //     path: '/workspace/:id/members',
     //     element: <MembersContainer />,
