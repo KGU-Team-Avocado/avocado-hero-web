@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Stack, Tooltip, Typography } from "@mui/material";
+import { Grid, Stack, Tooltip } from "@mui/material";
 import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
@@ -6,15 +6,14 @@ import MKButton from "component/common/mui-components/MKButton";
 import GroupCardV2 from "component/group/card/GroupCardV2";
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import GroupCeateModal from "./modal/GroupCeateModal";
 import GroupJoinModalV2 from "./modal/GroupJoinModalV2";
-import FilterListIcon from '@mui/icons-material/FilterList';
 import SearchIcon from '@mui/icons-material/Search';
 import GroupFilterModal from "./modal/GroupFilterModal";
-import { asCleanDays } from "@fullcalendar/react";
+import React from 'react';
 
-export default () => {
+const GroupFinderContainer = () => {
 
     const navigate = useNavigate();
 
@@ -29,15 +28,16 @@ export default () => {
 
     //무한스크롤을 위한 코드
     const [target, setTarget] = useState(null);
-    const page = 1;
+    let page = 1;
 
     const fetchData = async ()=> {
         //console.log("화면끝감지")
+        console.log(`page : ${page}`);
         const response = await axios.get("/groupsRouter/getGroups");
         const data = await response.data;
         setGroups((prev) => prev.concat(data));
 
-        // page++;
+        page++;
     }
 
     useEffect(() => {
@@ -126,7 +126,7 @@ export default () => {
                     groups.length > 0
                         ?
                         groups.map((group) => (
-                            <Grid item xs={12} md={6} xxl={4}>
+                            <Grid item xs={12} md={6} xxl={4} key={group._id}>
                                 <GroupCardV2
                                     key={group._id}
                                     group={group}
@@ -160,3 +160,5 @@ export default () => {
         </>
     )
 }
+
+export default GroupFinderContainer;

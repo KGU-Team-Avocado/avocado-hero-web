@@ -9,8 +9,9 @@ import { options } from '../../../../assets/tag/Tech'
 import { Box, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
+import React from "react";
 
-export default (props) => {
+const ReadmeEditorModal = (props) => {
 
     // const [userInfo, setUserInfo] = useState(null);
 
@@ -135,3 +136,5 @@ export default (props) => {
         </>
     )
 }
+
+export default ReadmeEditorModal;

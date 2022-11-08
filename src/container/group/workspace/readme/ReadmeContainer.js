@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box, Button } from "@mui/material"
 import { selectGroup } from "api/redux/group/groupSlice";
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader"
@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Readme from "./Readme"
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import ReadmeEditorModal from "./ReadmeEditorModal";
+import React from 'react';
 
-export default () => {
+const ReadmeContainer = () => {
     const group = useSelector(selectGroup);
     const dispatch = useDispatch();
 
@@ -42,9 +43,11 @@ export default () => {
                 // open={readmeCreaeteModalOpen} component={<ReadmeEditorModal readmeCreaeteModalOpen={readmeCreaeteModalOpen} setOpen={setReadmeCreateModalOpen} 
                 // />}
                 open={readmeCreaeteModalOpen}
-                component={<ReadmeEditorModal  group={selectedGroup} setOpen={setReadmeCreateModalOpen} />}
+                component={<ReadmeEditorModal open={readmeCreaeteModalOpen} group={selectedGroup} setOpen={setReadmeCreateModalOpen} />}
                 />
             {/* <ReadmeModal readmeCreaeteModalOpen={readmeCreaeteModalOpen} setOpen={setReadmeCreateModalOpen} ></ReadmeModal> */}
         </>
     )
 }
+
+export default ReadmeContainer;

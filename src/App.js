@@ -1,3 +1,4 @@
+/* eslint-disable */
 import logo from "./logo.svg";
 import "./App.css";
 import { Link, Route, Routes } from "react-router-dom";
