@@ -28,16 +28,21 @@ const GroupFinderContainer = () => {
 
     //무한스크롤을 위한 코드
     const [target, setTarget] = useState(null);
-    let page = 1;
+    //const [skip, setSkip] = useState(1);
+    let skip = 0;
 
     const fetchData = async ()=> {
         //console.log("화면끝감지")
-        console.log(`page : ${page}`);
-        const response = await axios.get("/groupsRouter/getGroups");
+        //console.log(`page : ${page}`);
+        // const response = await axios.get("/groupsRouter/getGroups");
+        const response = await axios.post("/groupsRouter/getGroupsInfinity",{
+            skip:skip,
+        });
         const data = await response.data;
         setGroups((prev) => prev.concat(data));
 
-        page++;
+        skip += 1; //이거 왜 3?
+        console.log(skip);
     }
 
     useEffect(() => {
