@@ -1,8 +1,6 @@
-import { Alert, Box, Button, Chip, Stack, Typography } from "@mui/material"
-import { selectGroup } from "api/redux/group/groupSlice"
+import { Stack, Typography } from "@mui/material"
 import ResponsiveCard from "component/common/ResponsiveCard"
 import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader"
-import { useSelector } from "react-redux"
 import ProjectEndContainer from "./ProjectEndContainer"
 import ProjectMembersContainer from "./MembersContainer"
 import RoleContainer from "./RoleContainer"
@@ -11,8 +9,6 @@ import { Users as UsersIcon } from '../../../../component/workspace/icons/users'
 import { XCircle as XCircleIcon } from '../../../../component/workspace/icons/x-circle';
 
 const SettingsContainer = () => {
-
-    const group = useSelector(selectGroup);
 
     return (
         <>

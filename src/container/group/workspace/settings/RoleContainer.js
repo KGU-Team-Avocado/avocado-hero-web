@@ -7,9 +7,8 @@ import RoleBadge from "../../../../component/workspace/role/RoleBadge";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
 import { getGroupAsync } from "api/redux/group/groupSlice";
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import RoleCard from "component/workspace/role/RoleCard";
-import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
 
 const RoleContainer = (props) => {
     const group = useSelector(selectGroup);

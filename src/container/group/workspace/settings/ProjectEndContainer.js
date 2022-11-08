@@ -1,7 +1,6 @@
-import { Alert, AlertTitle, Box, Button, Divider, Grid, Typography } from "@mui/material";
+import { Alert, Box, Button, Typography } from "@mui/material";
 import { getGroupAsync } from "api/redux/group/groupSlice";
 import axios from "axios";
-import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 

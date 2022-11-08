@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import Modal from 'react-bootstrap/Modal';
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import * as API from "../../../../api/API";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
 import { getGroupAsync } from "api/redux/group/groupSlice";
-import { Alert, Button, Divider, FormControlLabel, FormGroup, Grid, Paper, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
-import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
+import { Alert, Button, FormControlLabel, FormGroup, Paper, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import MemberModal from "../../../../component/workspace/members/MemberModal";
 
 const MembersContainer = () => {
@@ -202,10 +199,6 @@ const MembersContainer = () => {
                 </Paper>
             }
 
-            <WorkspaceHeader
-                title={''}
-            />
-
             <Stack direction="row" justifyContent={"space-between"}>
                 <Typography variant="h5">현재 팀원</Typography>
 
@@ -260,19 +253,6 @@ const MembersContainer = () => {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
-
-            {/* <Modal show={show !== 'null'} onHide={handleClose} animation={false} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>{show.user_name}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{show.message}</Modal.Body>
-                <Modal.Footer>
-                    <Stack spacing={2} direction="row" justifyContent="center">
-                        <Button size="small" variant="outlined" onClick={() => acceptMember(applicant)} >승인</Button>
-                        <Button size="small" variant="outlined" color="error" onClick={() => rejectMember(applicant)} >반려</Button>
-                    </Stack>
-                </Modal.Footer>
-            </Modal> */}
 
             <MemberModal
                 show={show}
