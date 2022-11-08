@@ -4,14 +4,12 @@ import { initStatus } from "api/redux/user/userSlice";
 import { selectStatus } from "api/redux/user/userSlice";
 import { selectUser } from "api/redux/user/userSlice";
 import { loginAsync } from "api/redux/user/userSlice";
-import axios from "axios";
 import MKButton from "component/common/mui-components/MKButton";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import * as API from "../../../api/API"
 
-export default () => {
+const SignIn = () => {
     const sessionStorage = window.sessionStorage; //deprecated
 
     let navigate = useNavigate();
@@ -155,3 +153,5 @@ export default () => {
         </>
     )
 }
+
+export default SignIn;
