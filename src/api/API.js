@@ -29,16 +29,17 @@ export const saveJobPost = async (company) => {
 
     try {
         const response = await axios.post("/companiesRouter/jobPost", company)
-        if (response.data.compIdCheck === false) {
-            alert("이미 사용중인 제목입니다.");
-            //setCheckError("이미 사용중인 아이디입니다");
-            // return false;
-        }
-        if (response.data.success === true) {
-            alert("채용공고 등록 성공.");
-            window.location.href = "/avocado-hero-web/";
-            // return true;
-        }
+        // if (response.data.compIdCheck === false) {
+        //     alert("이미 사용중인 제목입니다.");
+        //     //setCheckError("이미 사용중인 아이디입니다");
+        //     // return false;
+        // }
+        // if (response.data.success === true) {
+        //     alert("채용공고 등록 성공.");
+        //     window.location.href = "/avocado-hero-web/";
+        //     // return true;
+        // }
+        return response;
         // return false;
     } catch (err) {
         console.log("Error >>", err);
