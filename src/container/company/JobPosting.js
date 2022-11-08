@@ -108,15 +108,8 @@ const JobPosting = () => {
           alert('yes img')
           uploadcompanyImage(response.data.company._id);
         }
-        // else {
-        //   alert('no img')
-        //   window.location.reload();
-        // }
         alert("채용공고 등록 성공.");
-        // window.location.href = "/avocado-hero-web/";
         window.location.reload();
-
-        // return true;
       }
     }
   };
@@ -125,7 +118,7 @@ const JobPosting = () => {
     let formData = new FormData()
     formData.append('posting_id', posting_id);
     formData.append('file', postingimage.data); //반드시 file을 마지막에 append 해야 오류가 없음!!
-    const response = await fetch('/groupsRouter/uploadposingImage', {
+    const response = await fetch('/companiesRouter/uploadposingImage', {
       method: 'POST',
       body: formData,
     })
@@ -139,7 +132,7 @@ const JobPosting = () => {
     let formData = new FormData()
     formData.append('posting_id', posting_id);
     formData.append('file', companyimage.data); //반드시 file을 마지막에 append 해야 오류가 없음!!
-    const response = await fetch('/groupsRouter/uploadcompanyImage', {
+    const response = await fetch('/companiesRouter/uploadcompanyImage', {
       method: 'POST',
       body: formData,
     })
