@@ -19,7 +19,7 @@ const DashboardLayoutRoot = styled('div')(({ theme }) => ({
     }
 }));
 
-export default () => {
+const WorkspaceLayout = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
 
     const group = useSelector(selectGroup);
@@ -45,7 +45,7 @@ export default () => {
                             flex: '1 1 auto',
                             flexDirection: 'column',
                             width: '100%',
-                            mx: 2
+                            m: 2
                         }}
                     >
                         <Outlet />
@@ -60,3 +60,5 @@ export default () => {
         </>
     )
 }
+
+export default WorkspaceLayout;

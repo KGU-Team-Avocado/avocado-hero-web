@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import Modal from 'react-bootstrap/Modal';
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import * as API from "../../../../api/API";
 import { useDispatch, useSelector } from "react-redux";
 import { selectGroup } from "api/redux/group/groupSlice";
 import { getGroupAsync } from "api/redux/group/groupSlice";
-import { Alert, Button, Divider, FormControlLabel, FormGroup, Grid, Paper, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
-import WorkspaceHeader from "component/workspace/layout/WorkspaceHeader";
+import { Alert, Button, FormControlLabel, FormGroup, Paper, Stack, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import MemberModal from "../../../../component/workspace/members/MemberModal";
 
 const MembersContainer = () => {
@@ -66,7 +63,7 @@ const MembersContainer = () => {
         setPage(0);
     };
 
-    const handleClose = () => {setShow('null');}
+    const handleClose = () => { setShow('null'); }
 
     const handleShow = (applicant) => {
         console.log(show);
@@ -113,7 +110,7 @@ const MembersContainer = () => {
     const cancleAccept = (member) => {
         if (!window.confirm(member.name + ' 멤버를 방출하시겠습니까?')) {
             return;
-        } 
+        }
 
         axios.post("/groupsRouter/cancleAccept", {
             user_id: member.user_id,
@@ -141,20 +138,18 @@ const MembersContainer = () => {
 
     return (
         <>
-            <WorkspaceHeader
-                title={'신청자 목록'}
-                action={
-                    <FormGroup>
-                        <FormControlLabel control={<Switch onChange={() => handleCloseApplication(!close)} />} label="마감" />
-                    </FormGroup>
-                }
-            />
+            <Stack direction="row" justifyContent={"space-between"}>
+                <Typography variant="h5">신청자 목록</Typography>
+                <FormGroup>
+                    <FormControlLabel control={<Switch onChange={() => handleCloseApplication(!close)} />} label="마감" />
+                </FormGroup>
+            </Stack>
 
             {close ?
                 <Alert severity="warning">팀원 신청이 마감되었습니다.</Alert>
                 :
-                <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                    <TableContainer sx={{ maxHeight: 440 }}>
+                <Paper sx={{ width: '100%' }}>
+                    <TableContainer >
                         <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
@@ -204,12 +199,13 @@ const MembersContainer = () => {
                 </Paper>
             }
 
-            <WorkspaceHeader
-                title={'현재 팀원'}
-            />
+            <Stack direction="row" justifyContent={"space-between"}>
+                <Typography variant="h5">현재 팀원</Typography>
 
-            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                <TableContainer sx={{ maxHeight: 440 }}>
+            </Stack>
+
+            <Paper sx={{ width: '100%' }}>
+                <TableContainer >
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
@@ -229,20 +225,20 @@ const MembersContainer = () => {
                         <TableBody>
                             {group.members.map((member, index) => (
                                 member.user_id === group.manager ? null :
-                                <TableRow hover role="checkbox" tabIndex={-1} key={member.user_id}>
-                                    {columns.map((column) => {
-                                        const value = member[column.id];
-                                        return (
-                                            <TableCell key={column.id} align={column.align}>
-                                                {column.id === 'index'
-                                                    ? index
-                                                    : column.id === 'accept' ?
-                                                        <Button size="small" variant="outlined" color="error" onClick={() => cancleAccept(member)} >방출</Button>
-                                                        : value}
-                                            </TableCell>
-                                        );
-                                    })}
-                                </TableRow>
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={member.user_id}>
+                                        {columns.map((column) => {
+                                            const value = member[column.id];
+                                            return (
+                                                <TableCell key={column.id} align={column.align}>
+                                                    {column.id === 'index'
+                                                        ? index
+                                                        : column.id === 'accept' ?
+                                                            <Button size="small" variant="outlined" color="error" onClick={() => cancleAccept(member)} >방출</Button>
+                                                            : value}
+                                                </TableCell>
+                                            );
+                                        })}
+                                    </TableRow>
                             ))}
                         </TableBody>
                     </Table>
@@ -257,19 +253,6 @@ const MembersContainer = () => {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
-
-            {/* <Modal show={show !== 'null'} onHide={handleClose} animation={false} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>{show.user_name}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{show.message}</Modal.Body>
-                <Modal.Footer>
-                    <Stack spacing={2} direction="row" justifyContent="center">
-                        <Button size="small" variant="outlined" onClick={() => acceptMember(applicant)} >승인</Button>
-                        <Button size="small" variant="outlined" color="error" onClick={() => rejectMember(applicant)} >반려</Button>
-                    </Stack>
-                </Modal.Footer>
-            </Modal> */}
 
             <MemberModal
                 show={show}

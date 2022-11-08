@@ -1,13 +1,8 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Button, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
+import { Box, Button, Divider, Drawer, Grid, Typography, useMediaQuery } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import { Selector as SelectorIcon } from '../icons/selector';
-import { User as UserIcon } from '../icons/user';
-import { Users as UsersIcon } from '../icons/users';
-import { XCircle as XCircleIcon } from '../icons/x-circle';
-import { Bell as BellIcon } from '../icons/bell';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { NavItem } from './NavItem';
 import { useSelector } from 'react-redux';
 import { selectUser } from 'api/redux/user/userSlice';
@@ -19,10 +14,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import defaultImage from '../../../assets/img/logo512.png';
 import * as API from "../../../api/API"
+import ModalStaticBackdrop from 'component/common/modal/ModalStaticBackdrop';
+import WorkspaceListModal from 'container/group/workspace/WorkspaceListModal';
 
 export const DashboardSidebar = (props) => {
   const { open, onClose } = props;
-  const router = null;
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
     defaultMatches: true,
     noSsr: false
@@ -33,6 +29,7 @@ export const DashboardSidebar = (props) => {
   const user = useSelector(selectUser);
   const navigate = useNavigate();
 
+  const [workspaceListModalOpen, setWorkspaceListModalOpen] = useState(false);
 
   const [uploadedImage, setUploadedImage] = useState(null);
 
@@ -57,13 +54,6 @@ export const DashboardSidebar = (props) => {
       onlyForMgr: false,
       showAfterEnd: true
     },
-    // {
-    //   href: `/workspace/${project_id}/notice`,
-    //   icon: (<BellIcon fontSize="small" />),
-    //   title: '공지사항',
-    //   onlyForMgr: false,
-    //   showAfterEnd: true
-    // },
     {
       href: `/workspace/${project_id}/calendar`,
       icon: (<EventNoteIcon fontSize="small" />),
@@ -71,13 +61,6 @@ export const DashboardSidebar = (props) => {
       onlyForMgr: false,
       showAfterEnd: true
     },
-    // {
-    //   href: `/workspace/${project_id}/todo`,
-    //   icon: (<FormatListBulletedIcon fontSize="small" />),
-    //   title: 'Todo',
-    //   onlyForMgr: false,
-    //   showAfterEnd: true
-    // },
     {
       href: `/workspace/${project_id}/notice_todo`,
       icon: (<FormatListBulletedIcon fontSize="small" />),
@@ -96,27 +79,6 @@ export const DashboardSidebar = (props) => {
       onlyForMgr: false,
       showAfterEnd: true
     },
-    // {
-    //   href: `/workspace/${project_id}/role`,
-    //   icon: (<UserIcon fontSize="small" />),
-    //   title: '역할',
-    //   onlyForMgr: false,
-    //   showAfterEnd: false
-    // },
-    // {
-    //   href: `/workspace/${project_id}/members`,
-    //   icon: (<UsersIcon fontSize="small" />),
-    //   title: '멤버관리',
-    //   onlyForMgr: true,
-    //   showAfterEnd: false
-    // },
-    // {
-    //   href: `/workspace/${project_id}/end`,
-    //   icon: (<XCircleIcon fontSize="small" />),
-    //   title: '프로젝트 종료',
-    //   onlyForMgr: true,
-    //   showAfterEnd: false
-    // },
     {
       href: `/workspace/${project_id}/settings`,
       icon: (<SettingsIcon fontSize="small" />),
@@ -126,20 +88,11 @@ export const DashboardSidebar = (props) => {
     },
   ]
 
-  useEffect(
-    () => {
-      // if (!router.isReady) {
-      //   return;
-      // }
-
-      if (open) {
-        onClose?.();
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    // [router.asPath]
-    []
-  );
+  useEffect(() => {
+    if (open) {
+      onClose?.();
+    }
+  }, []);
 
   const content = (
     <>
@@ -152,14 +105,29 @@ export const DashboardSidebar = (props) => {
       >
         <div>
           <Box sx={{ p: 3 }}>
-            <Button
-              onClick={() => navigate('/')}
-              variant="contained"
-              fullWidth
-              endIcon={(<HomeIcon />)}
-            >
-              메인으로 돌아가기
-            </Button>
+            <Grid container spacing={1}>
+              <Grid item xs={6}>
+                <Button
+                  onClick={() => navigate('/')}
+                  variant="contained"
+                  fullWidth
+                  endIcon={(<HomeIcon />)}
+                >
+                  메인
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  onClick={() => setWorkspaceListModalOpen(true)}
+                  variant="contained"
+                  color="info"
+                  fullWidth
+                  endIcon={(<OpenInNewIcon />)}
+                >
+                  목록
+                </Button>
+              </Grid>
+            </Grid>
           </Box>
           <Box sx={{ px: 2 }}>
             <Box
@@ -193,6 +161,7 @@ export const DashboardSidebar = (props) => {
                   className="border rounded"
                   width="50"
                   height="50"
+                  alt=""
                   src={uploadedImage}
                   onError={handleImgError}
                 />
@@ -283,6 +252,14 @@ export const DashboardSidebar = (props) => {
           </Button>
         </Box>
       </Box>
+      <ModalStaticBackdrop
+        keepMounted
+        width="md"
+        open={workspaceListModalOpen}
+        component={
+          <WorkspaceListModal user_id={user.user_id} setOpen={setWorkspaceListModalOpen}/>
+        }
+      />
     </>
   );
 

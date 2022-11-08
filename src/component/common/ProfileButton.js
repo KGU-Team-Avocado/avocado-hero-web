@@ -101,7 +101,7 @@ export default ({
                 }}
             >
                 <MenuItem onClick={() => handleClose(`/user/${userInfo.user_id}`)}>프로필</MenuItem>
-                <MenuItem onClick={() => handleClose(`myWorkspace`)}>내 워크스페이스</MenuItem>
+                <MenuItem onClick={() => handleClose(`/myWorkspace`)}>내 워크스페이스</MenuItem>
                 <MenuItem onClick={() => logout()}>로그아웃</MenuItem>
             </Menu>
         </>
