@@ -39,6 +39,11 @@ const SignIn = () => {
         event.preventDefault();
     };
 
+    const onKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            login();
+        }
+    }
 
     useEffect(() => {
         return () => {
@@ -117,6 +122,7 @@ const SignIn = () => {
                                 type={values.showPassword ? 'text' : 'password'}
                                 value={values.password}
                                 onChange={handleChange('password')}
+                                onKeyPress={onKeyPress}
                                 endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
