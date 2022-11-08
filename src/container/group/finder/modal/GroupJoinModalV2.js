@@ -9,6 +9,9 @@ import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
 import UserProfileCard from "component/jobFinder/UserProfileCard";
+import ReadmeModal from "container/group/workspace/readme/ReadmeModal";
+import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
+
 
 export default (props) => {
 
@@ -175,12 +178,12 @@ export default (props) => {
                 {/* </DialogActions> */}
             </Box>
 
-            {/* <ModalStaticBackdrop
+            <ModalStaticBackdrop
                 keepMounted
                 width="md"
-                open={readmeCreateModalOpen}
-                component={<GroupCeateModal readmeCreateModalOpen={readmeCreateModalOpen} setOpen={setReadmeCreateModalOpen} />}
-            /> */}
+                // open={readmeCreaeteModalOpen}
+                // component={<GroupCeateModal readmeCreateModalOpen={readmeCreaeteModalOpen} setOpen={setReadmeCreateModalOpen} />}
+            />
         </>
     )
 }
