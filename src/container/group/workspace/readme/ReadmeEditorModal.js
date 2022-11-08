@@ -98,7 +98,7 @@ export default (props) => {
 
                     </Stack>
                 </DialogContent>
-                <MKButton color="success" onClick={() => createReadme()} fullWidth disabled={userInfo === null}>등록하기</MKButton>
+                <MKButton color="success" onClick={() => createReadme()} fullWidth disabled={userInfo === null}>등록하기ㅇ</MKButton>
             </Box>
         </>
     )
