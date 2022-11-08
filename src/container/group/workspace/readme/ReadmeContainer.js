@@ -40,12 +40,15 @@ const ReadmeContainer = () => {
             <ModalStaticBackdrop
                 keepMounted
                 width="md"
-                // open={readmeCreaeteModalOpen} component={<ReadmeEditorModal readmeCreaeteModalOpen={readmeCreaeteModalOpen} setOpen={setReadmeCreateModalOpen} 
-                // />}
                 open={readmeCreaeteModalOpen}
-                component={<ReadmeEditorModal open={readmeCreaeteModalOpen} group={selectedGroup} setOpen={setReadmeCreateModalOpen} />}
+                component={
+                    <ReadmeEditorModal
+                        open={readmeCreaeteModalOpen}
+                        group={selectedGroup}
+                        setOpen={setReadmeCreateModalOpen}
+                    />
+                }
             />
-            {/* <ReadmeModal readmeCreaeteModalOpen={readmeCreaeteModalOpen} setOpen={setReadmeCreateModalOpen} ></ReadmeModal> */}
         </>
     )
 }
