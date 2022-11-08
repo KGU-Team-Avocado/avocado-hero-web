@@ -11,7 +11,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 import React from "react";
 
-const ReadmeEditorModal = (props) => {
+const ReadmeEditorModal = ({open,setOpen}) => {
 
     // const [userInfo, setUserInfo] = useState(null);
 
@@ -108,13 +108,13 @@ const ReadmeEditorModal = (props) => {
                         <Typography variant="h4">
                             Read me 수정
                         </Typography>
-                        <IconButton size="large" onClick={() => props.setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
+                        <IconButton size="large" onClick={() => setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
                     </Box>
                 </DialogTitle>
                 <DialogContent dividers={true}>
                     <Stack spacing={1}>
                         {
-                            props.groupCreateModalOpen &&
+                            open &&
                             <Box>
                                 <Typography variant="h4">상세소개글</Typography>
                                 <Box>

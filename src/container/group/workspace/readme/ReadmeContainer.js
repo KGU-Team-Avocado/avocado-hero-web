@@ -44,7 +44,7 @@ const ReadmeContainer = () => {
                 // />}
                 open={readmeCreaeteModalOpen}
                 component={<ReadmeEditorModal open={readmeCreaeteModalOpen} group={selectedGroup} setOpen={setReadmeCreateModalOpen} />}
-                />
+            />
             {/* <ReadmeModal readmeCreaeteModalOpen={readmeCreaeteModalOpen} setOpen={setReadmeCreateModalOpen} ></ReadmeModal> */}
         </>
     )

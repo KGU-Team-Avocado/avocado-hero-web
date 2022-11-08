@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react"
+import React from "react"
 import { Box, DialogContent, DialogTitle, Divider, IconButton, Stack, TextField, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { selectedGroup } from "api/redux/group/groupSlice";
 import Readme from "./Readme";
 
-export default ({ group, setOpen }) => {
+const ReadmeModal = ({ group, setOpen }) => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const handleGroupCard = (group) => {
         // alert(JSON.stringify(group))
@@ -76,3 +73,5 @@ export default ({ group, setOpen }) => {
         </>
     )
 }
+
+export default ReadmeModal;
