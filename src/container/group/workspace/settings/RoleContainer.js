@@ -24,8 +24,8 @@ const RoleContainer = (props) => {
     const modifyRole = (member) => {
         setEdit("");
         setSelected([]);
-        const selecteRole = selected.map((s) => {return s.value})
-        
+        const selecteRole = selected.map((s) => { return s.value })
+
         axios.post("/groupsRouter/updateRole", {
             _id: project_id,
             user_id: member.user_id,
@@ -41,31 +41,29 @@ const RoleContainer = (props) => {
     const editWho = (edit) => {
         console.log(edit)
         const user = group.members.find((mem) => mem.user_id === edit)
-        const select = user.user_role.map((role) => {return findRole(role)})
+        const select = user.user_role.map((role) => { return findRole(role) })
         setEdit(edit);
         setSelected(select)
     }
-    
+
     const cancleEdit = () => {
         setEdit("");
         setSelected([])
     }
 
     const findRole = (r) => {
-        const idx = role.findIndex((role)=>role.value===r)
+        const idx = role.findIndex((role) => role.value === r)
         return role[idx]
     }
 
     return (
         <>
-            <WorkspaceHeader
-                title={props.title}
-            />
+            <Typography variant="h5">{props.title}</Typography>
 
             <Box>
                 <Grid container rowSpacing={{ xs: 1, sm: 1, md: 2 }} columnSpacing={{ sm: 1, md: 2 }}>
                     {group.members.map((member, index) => (
-                        <RoleCard 
+                        <RoleCard
                             group={group}
                             member={member}
                             index={index}
