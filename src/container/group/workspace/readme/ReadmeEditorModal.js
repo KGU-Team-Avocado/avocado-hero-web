@@ -12,19 +12,19 @@ import MKButton from "component/common/mui-components/MKButton";
 
 export default (props) => {
 
-    // const [userInfo, setUserInfo] = useState(null);
+    const [userInfo, setUserInfo] = useState(null);
 
-    // useEffect(() => {
-    //     if (sessionStorage.getItem("user")) {
-    //         setUserInfo(JSON.parse(sessionStorage.getItem("user")));
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (sessionStorage.getItem("user")) {
+            setUserInfo(JSON.parse(sessionStorage.getItem("user")));
+        }
+    }, []);
 
-    // const [project, setProject] = useState({
-    //     group_name: '',
-    //     project_name: '',
-    //     short_description: '',
-    // })
+    const [project, setProject] = useState({
+        group_name: '',
+        project_name: '',
+        short_description: '',
+    })
 
     const [editorState, setEditorState] = useState(
         () => EditorState.createEmpty(),
@@ -40,53 +40,21 @@ export default (props) => {
         setConvertedContent(currentContentAsHTML);
     };
 
-    // const handleInput = (state) => {
-    //     console.log(state)
-    //     setProject({
-    //         ...project,
-    //         [state.target.id]: state.target.value
-    //     })
-    // }
+    const handleInput = (state) => {
+        console.log(state)
+        setProject({
+            ...project,
+            [state.target.id]: state.target.value
+        })
+    }
 
-    // const createGroup = () => {
-    //     const newGroupData = {
-    //         ...project,
-    //         long_description: convertedContent,
-    //         manager: userInfo.user_id,
-    //         members: [{
-    //             user_id: userInfo.user_id,
-    //             user_name: userInfo.name,
-    //             user_email: userInfo.email,
-    //             user_role: []
-    //         }],
-    //         close_application: false,
-    //         end_project: false
-    //         // applied : [],
-    //     }
-    //     console.log(newGroupData)
-
-    //     const hasValue = Object.values(newGroupData).includes("");
-    //     if (hasValue) {
-    //         alert('빈 칸을 모두 채워주세요')
-    //     }
-    //     else {
-    //         axios
-    //             .post("/groupsRouter/create", newGroupData)
-    //             .then((response) => {
-    //                 if (response.data.success === true) {
-    //                     // alert(JSON.stringify(response.data.group._id));
-    //                         alert('no img')
-    //                         window.location.reload();       
-    //                 }
-    //                 else {
-    //                     alert('server error.')
-    //                 }
-    //             })
-    //             .catch(function (error) {
-    //                 console.log(error);
-    //             });
-    //     }
-    // }
+    const createReadme = () => {
+        const newReadmeData = {
+            ...project,
+            read_me: convertedContent,
+        }
+        console.log(newReadmeData)
+    }
 
     return (
         <>
@@ -112,10 +80,10 @@ export default (props) => {
                 </DialogTitle>
                 <DialogContent dividers={true}>
                     <Stack spacing={1}>
-                        {
-                            props.groupCreateModalOpen &&
+
+
                             <Box>
-                                <Typography variant="h4">상세소개글</Typography>
+                                <Typography variant="h4">Read me</Typography>
                                 <Box>
                                     <Editor
                                         editorState={editorState}
@@ -127,10 +95,10 @@ export default (props) => {
                                     />
                                 </Box>
                             </Box>
-                        }
+
                     </Stack>
                 </DialogContent>
-                {/* <MKButton color="success" onClick={() => createGroup()} fullWidth disabled={userInfo === null}>등록하기</MKButton> */}
+                <MKButton color="success" onClick={() => createReadme()} fullWidth disabled={userInfo === null}>등록하기</MKButton>
             </Box>
         </>
     )

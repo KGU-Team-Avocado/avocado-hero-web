@@ -165,7 +165,7 @@ export default (props) => {
                         />
                         <TextField
                             sx={{ width: "100%" }}
-                            label="프로젝트명"
+                            label="프로젝트명d"
                             variant="outlined"
                             value={project.project_name}
                             id="project_name"
