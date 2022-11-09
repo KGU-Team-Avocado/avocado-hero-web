@@ -4,8 +4,36 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import TechStack from "component/common/TechStack";
+import defaultImage from '../../assets/img/logo512.png';
+import { useEffect, useState } from "react";
+import * as API from "../../api/API"
 
 export default (props) => {
+    const [uploadedCompanyImage, setUploadedCompanyImage] = useState(defaultImage);
+    const [uploadedPostingImage, setUploadedPostingImage] = useState(defaultImage);
+
+    useEffect(() => {
+        setGruopImage();
+    }, []);
+
+    const setGruopImage = async () => {
+        const companyImage = await API.fetchCompanyImage(props.posting.company_image); //프로필 이미지 불러오는 코드
+        const postingImage = await API.fetchCompanyImage(props.posting.posting_image);
+        console.log(companyImage);
+        if(companyImage !== null) {
+            console.log('111')
+            setUploadedCompanyImage(companyImage);
+        }
+        if(postingImage !== null) {
+            setUploadedPostingImage(postingImage);
+        }
+        //setUploadedCompanyImage(await API.fetchCompanyImage(props.posting.company_image));
+        //setUploadedPostingImage(await API.fetchCompanyImage(props.posting.posting_image));
+    }
+
+    const handleImgError = (e) => {
+        e.target.src = defaultImage;
+    }
     // 수정 예정
     return (
         <Card
@@ -25,7 +53,7 @@ export default (props) => {
             </CardActionArea> */}
             <CardHeader
                 avatar={
-                    <Avatar aria-label="recipe">
+                    <Avatar aria-label="recipe" src={uploadedCompanyImage}  >
                         회사 이미지
                     </Avatar>
                 }
@@ -39,8 +67,8 @@ export default (props) => {
             />
             <CardMedia
                 component="img"
-                height="194"
-                image="/static/images/cards/paella.jpg"
+                //height="194"
+                image={uploadedPostingImage}
                 alt="채용 공고 이미지"
             />
             <CardContent>

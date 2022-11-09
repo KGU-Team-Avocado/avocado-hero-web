@@ -131,3 +131,15 @@ export const groupFilter = async (filterData) => {
         return [];
     }
 }
+
+export const fetchCompanyImage = async (imgURL) => {
+    const res = await fetch(`/companiesRouter/companyImage/${imgURL}`);
+    const imageBlob = await res.blob();
+    const imageObjectURL = URL.createObjectURL(imageBlob);
+    if (res.status == 200) {
+        return imageObjectURL;
+    }
+    else {
+        return null;
+    }
+};
