@@ -1,4 +1,4 @@
-import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, IconButton, Stack, Typography } from "@mui/material"
+import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Divider, IconButton, Stack, Typography } from "@mui/material"
 import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -65,21 +65,27 @@ export default (props) => {
                 title={props.posting.name}
                 subheader={props.posting.job_tag}
             />
+            <Divider sx={{ margin: 0 }}/>
             <CardMedia
                 component="img"
                 //height="194"
                 image={uploadedPostingImage}
                 alt="채용 공고 이미지"
+                sx={{
+                    margin: 0
+                }}
             />
-            <CardContent>
-                <Typography variant="h6">
+            <Divider sx={{ margin: 0 }}/>
+            <CardContent sx={{ py: '8px' }}>
+                <Typography variant="h5">
                     {props.posting.title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    {props.posting.period}
+                    ~{props.posting.period}
                 </Typography>
             </CardContent>
-            <CardActions disableSpacing>
+            <Divider sx={{ margin: 0 }}/>
+            <CardActions disableSpacing sx={{ px: '24px' }}>
                 <TechStack tech_stack={props.posting.skill_tags} />
             </CardActions>
         </Card>
