@@ -4,7 +4,7 @@ import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import MKButton from "component/common/mui-components/MKButton";
 import GroupCardV2 from "component/group/card/GroupCardV2";
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import GroupCeateModal from "./modal/GroupCeateModal";
@@ -26,44 +26,52 @@ const GroupFinderContainer = () => {
     const [groups, setGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState(null);
 
+    const DATA_REQUEST_SIZE = 3;
+
     //무한스크롤을 위한 코드
     const [target, setTarget] = useState(null);
-    //const [skip, setSkip] = useState(1);
-    let skip = 0;
+    const groupDataSize = useRef(0);
 
-    const fetchData = async ()=> {
-        //console.log("화면끝감지")
-        //console.log(`page : ${page}`);
-        // const response = await axios.get("/groupsRouter/getGroups");
-        const response = await axios.post("/groupsRouter/getGroupsInfinity",{
-            skip:skip,
-        });
-        const data = await response.data;
-        setGroups((prev) => prev.concat(data));
 
-        skip += 1; //이거 왜 3?
-        console.log(skip);
+    const fetchData = async (groupDataSize) => {
+        console.log(`yeah ${groupDataSize} ${DATA_REQUEST_SIZE}`)
+        if (groupDataSize % DATA_REQUEST_SIZE === 0) {
+            // const response = await axios.get("/groupsRouter/getGroups");
+            const response = await axios.post("/groupsRouter/getGroupsInfinity", {
+                skip: groupDataSize,
+                limit:DATA_REQUEST_SIZE
+            });
+            const data = await response.data;
+            setGroups((prev) => prev.concat(data));
+            return data.length;
+        }
+        return 0;
     }
 
+
     useEffect(() => {
-        fetchData();
-    },[])
+        console.log(`yeah is loaded`)
+    }, [])
 
     useEffect(() => {
         let observer;
-        if(target){
+        let receivedDataSize = 0;
+        if (target) {
             const onIntersect = async ([entry], observer) => {
-                if(entry.isIntersecting) {
+                if (entry.isIntersecting) {
                     observer.unobserve(entry.target);
-                    await fetchData();
+                    receivedDataSize = await fetchData(groupDataSize.current);
+                    groupDataSize.current += receivedDataSize;
                     observer.observe(entry.target);
                 }
             };
-
-            observer = new IntersectionObserver(onIntersect, {threshold: 1});
+            observer = new IntersectionObserver(onIntersect, { threshold: 1 });
             observer.observe(target);
+
         }
-        return ()=> observer && observer.disconnect();
+        return () => {
+            observer && observer.disconnect();
+        }
     }, [target]);
 
 
@@ -93,7 +101,7 @@ const GroupFinderContainer = () => {
                 <MKButton
                     color="success"
                     variant="contained"
-                    onClick={()=>setGroupFilterModalOpen(true)}
+                    onClick={() => setGroupFilterModalOpen(true)}
                 >
                     <SearchIcon />
                 </MKButton>
@@ -142,7 +150,7 @@ const GroupFinderContainer = () => {
                         :
                         <div>그룹이 없습니다.</div>
                 }
-                <div ref={setTarget}>This is Target.</div>
+                <div ref={setTarget}>This is Target. (이게 스크린에 보이면 타겟을 동작 시키게 됨)</div>
             </Grid>
             <ModalStaticBackdrop
                 keepMounted
