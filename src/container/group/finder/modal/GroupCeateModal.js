@@ -10,7 +10,7 @@ import { Box, DialogContent, DialogTitle, IconButton, Stack, TextField, Typograp
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 
-export default (props) => {
+const GroupCreateModal = (props) => {
 
     const [userInfo, setUserInfo] = useState(null);
 
@@ -89,7 +89,8 @@ export default (props) => {
                         }
                     }
                     else {
-                        alert('server error.')
+                        alert('server error.'+JSON.stringify(response.data.err))
+                        console.log(response.data.err);
                     }
                 })
                 .catch(function (error) {
@@ -211,3 +212,5 @@ export default (props) => {
         </>
     )
 }
+
+export default GroupCreateModal;
