@@ -71,6 +71,11 @@ const routes = [
         route: "/jobPosting",
       },
       {
+        name: "조직관리",
+        description: "교사이신가요?",
+        route: "/organizations",
+      },
+      {
         name: "요금제",
         description: "더 다양한 기능을 사용해요",
         route: "/prices",

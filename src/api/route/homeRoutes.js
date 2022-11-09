@@ -8,6 +8,7 @@ import MultiSelectExampleContainer from "container/example/MultiSelectExampleCon
 import RankContainer from "container/example/RankContainer";
 import ReduxExample from "container/example/ReduxExample";
 import GroupFinderContainer from "container/group/finder/GroupFinderContainer";
+import OrganizationContainer from "container/group/organizations/OrganizationContainer";
 import WorkspaceListContainer from "container/group/workspace/WorkspaceListContainer";
 import HomeContainer from "container/home/HomeContainer";
 import JobFinderContainer from "container/jobFinder/JobFinderContainer";
@@ -58,6 +59,12 @@ const mainRoutes = [
         element: <JobPosting/>,
         name: '채용공고등록',
         description: '일자리를 등록해요',
+    },
+    {
+        path: '/organizations',
+        element: <OrganizationContainer/>,
+        name: '전용 조직 구성하기',
+        description: '학교/직장 조직 내에서 그룹 찾기',
     },
     {
         path: '/humanResources',
