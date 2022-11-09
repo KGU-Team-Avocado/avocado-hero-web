@@ -23,14 +23,14 @@ const SettingsContainer = () => {
                 <Typography variant="h4">
                     <UserIcon /> 역할
                 </Typography>
-                <ResponsiveCard>
-                    <RoleContainer title="역할" />
-                </ResponsiveCard>
+                {/* <ResponsiveCard> */}
+                <RoleContainer title="역할" />
+                {/* </ResponsiveCard> */}
                 <Typography variant="h4">
                     <UsersIcon /> 멤버 관리
                 </Typography>
                 {/* <ResponsiveCard> */}
-                    <ProjectMembersContainer />
+                <ProjectMembersContainer />
                 {/* </ResponsiveCard> */}
                 <Typography variant="h4">
                     <XCircleIcon /> 프로젝트 종료
