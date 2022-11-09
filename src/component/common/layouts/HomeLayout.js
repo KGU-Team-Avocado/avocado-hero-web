@@ -12,13 +12,8 @@ import DefaultNavbar from "./Navbars/DefaultNavbar";
 import DefaultFooter from "./Footers/DefaultFooter";
 import footerRoutes from "./Footers/footer.routes";
 import MKBox from "../mui-components/MKBox";
-import { useSelector } from "react-redux";
-import { selectUser } from "api/redux/user/userSlice";
-import { selectStatus } from "api/redux/user/userSlice";
 
-export default function () {
-  const user = useSelector(selectUser);
-  const status = useSelector(selectStatus)
+const HomeLayout = () => {
 
   return (
     <>
@@ -77,3 +72,5 @@ export default function () {
     </>
   );
 }
+
+export default HomeLayout;
