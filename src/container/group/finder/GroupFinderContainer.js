@@ -1,8 +1,9 @@
-import { Grid, Stack, Tooltip } from "@mui/material";
+import { Box, CircularProgress, Grid, Stack, Tooltip } from "@mui/material";
 import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import MKButton from "component/common/mui-components/MKButton";
+
 import GroupCardV2 from "component/group/card/GroupCardV2";
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux";
@@ -31,7 +32,7 @@ const GroupFinderContainer = () => {
     const [target, setTarget] = useState(null);
     const groupDataSize = useRef(0);
     // const maxGroupSize = useRef(0);
-    // const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(true);
 
     const fetchData = async (groupDataSize) => {
         console.log(`yeah ${groupDataSize} ${DATA_REQUEST_SIZE}`)
@@ -43,6 +44,10 @@ const GroupFinderContainer = () => {
             });
             const data = await response.data;
             // maxGroupSize.current = data.maxCount;
+            if(data.maxCount == groupDataSize){
+                console.log("데이터 끝");
+                setLoading(false);
+            }
             setGroups((prev) => prev.concat(data.groups));
             // if(groupDataSize.current === maxGroupSize.current){
             //     setTarget(null);
@@ -158,7 +163,14 @@ const GroupFinderContainer = () => {
                 {
                     // isLoading
                     // &&
-                    <div ref={setTarget}>This is Target. (이게 스크린에 보이면 타겟을 동작 시키게 됨)</div>
+                    //<div ref={setTarget}>This is Target. (이게 스크린에 보이면 타겟을 동작 시키게 됨)</div>
+                    isLoading
+                    ?
+                    <Box ref={setTarget}>
+                        <CircularProgress/>
+                    </Box>
+                    :
+                    <div></div>
                 }
             </Grid>
             <ModalStaticBackdrop
