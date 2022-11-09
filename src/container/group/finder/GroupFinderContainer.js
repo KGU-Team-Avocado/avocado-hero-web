@@ -26,12 +26,12 @@ const GroupFinderContainer = () => {
     const [groups, setGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState(null);
 
-    const DATA_REQUEST_SIZE = 3;
-
     //무한스크롤을 위한 코드
+    const DATA_REQUEST_SIZE = 3;
     const [target, setTarget] = useState(null);
     const groupDataSize = useRef(0);
-
+    // const maxGroupSize = useRef(0);
+    // const [isLoading, setLoading] = useState(true);
 
     const fetchData = async (groupDataSize) => {
         console.log(`yeah ${groupDataSize} ${DATA_REQUEST_SIZE}`)
@@ -39,11 +39,16 @@ const GroupFinderContainer = () => {
             // const response = await axios.get("/groupsRouter/getGroups");
             const response = await axios.post("/groupsRouter/getGroupsInfinity", {
                 skip: groupDataSize,
-                limit:DATA_REQUEST_SIZE
+                limit: DATA_REQUEST_SIZE
             });
             const data = await response.data;
-            setGroups((prev) => prev.concat(data));
-            return data.length;
+            // maxGroupSize.current = data.maxCount;
+            setGroups((prev) => prev.concat(data.groups));
+            // if(groupDataSize.current === maxGroupSize.current){
+            //     setTarget(null);
+            //     setLoading(false);
+            // }
+            return data.groups.length;
         }
         return 0;
     }
@@ -150,7 +155,11 @@ const GroupFinderContainer = () => {
                         :
                         <div>그룹이 없습니다.</div>
                 }
-                <div ref={setTarget}>This is Target. (이게 스크린에 보이면 타겟을 동작 시키게 됨)</div>
+                {
+                    // isLoading
+                    // &&
+                    <div ref={setTarget}>This is Target. (이게 스크린에 보이면 타겟을 동작 시키게 됨)</div>
+                }
             </Grid>
             <ModalStaticBackdrop
                 keepMounted
