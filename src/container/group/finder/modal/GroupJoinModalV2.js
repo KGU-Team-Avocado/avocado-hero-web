@@ -1,35 +1,26 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import TechStack from "../../../../component/common/TechStack";
 import DOMPurify from "dompurify";
 import axios from "axios";
-import { Box, Button, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Tooltip, Typography } from "@mui/material";
+import { Box, DialogContent, DialogTitle, Divider, IconButton, Tooltip, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
 import UserProfileCard from "component/jobFinder/UserProfileCard";
-import ReadmeModal from "container/group/workspace/readme/ReadmeModal";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 
 
-export default (props) => {
+const GroupJoinModalV2 = (props) => {
 
     const group = props.selectedGroup
 
     const [message, setMessage] = useState('');
 
-    const [readMe, setReadme] = useState('');
-
     const handleMessageChange = event => {
         setMessage(event.target.value);
         console.log(event.target.value);
     };
-
-    const handleReadmeChange = event => {
-        setReadme(event.target.value);
-        console.log(event.target.value);   
-    }
 
     const userInfo = useSelector(selectUser);
 
@@ -76,8 +67,6 @@ export default (props) => {
         }
         return false;
     }
-
-    const [readmeCreaeteModalOpen, setReadmeCreateModalOpen] = useState(false);
 
     return (
         <>
@@ -130,7 +119,7 @@ export default (props) => {
                     </Typography>
                     {/* findOneUserByUserId로 manager 정보 불러와서 하단에 연동해 줄 예정임 */}
                     <UserProfileCard
-                        user={{ user_id: group?.manager, name: props.groupManager?.name}}
+                        user={{ user_id: group?.manager, name: props.groupManager?.name }}
                         handleUserProfileCard={null}
                     />
                     <Tooltip title="새 창으로 이동합니다.">
@@ -164,26 +153,19 @@ export default (props) => {
                     color="success"
                     onClick={() => groupApply()}
                     fullWidth
-                    disabled={userInfo === null || (userInfo?.user_id == group?.manager) || isApplicant(userInfo.user_id) || isGroupMember(userInfo.user_id)}
+                    disabled={
+                        userInfo === null ||
+                        (userInfo?.user_id == group?.manager) ||
+                        isApplicant(userInfo.user_id) ||
+                        isGroupMember(userInfo.user_id)
+                    }
                 >
                     신청하기
                 </MKButton>
-                <MKButton
-                    color="secondary"
-                    onClick={() => setReadmeCreateModalOpen(true)}
-
-                >
-                    수정하기(리드미 작성)
-                </MKButton>
                 {/* </DialogActions> */}
             </Box>
-
-            <ModalStaticBackdrop
-                keepMounted
-                width="md"
-                // open={readmeCreaeteModalOpen}
-                // component={<GroupCeateModal readmeCreateModalOpen={readmeCreaeteModalOpen} setOpen={setReadmeCreateModalOpen} />}
-            />
         </>
     )
 }
+
+export default GroupJoinModalV2;
