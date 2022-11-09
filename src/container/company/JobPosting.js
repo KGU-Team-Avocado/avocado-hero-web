@@ -79,7 +79,7 @@ const JobPosting = () => {
   const onClick = async () => {
     const newPostingData = {
       ...company,
-      job_tag: selectedJobTag.value,
+      job_tag: selectedJobTag.label,
       skill_tags: selectedSkillTags.map((item) => {return item.value}),
       description: convertedContent
     };
