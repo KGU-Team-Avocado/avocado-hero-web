@@ -35,7 +35,7 @@ export default (props) => {
                     </IconButton>
                 }
                 title={props.posting.name}
-                subheader={props.posting.field}
+                subheader={props.posting.job_tag}
             />
             <CardMedia
                 component="img"
@@ -48,14 +48,11 @@ export default (props) => {
                     {props.posting.title}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    {props.posting.field}
+                    {props.posting.period}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                {/* <TechStack tech_stack={props.posting.tech_stack} /> */}
-                <Typography variant="body2" color="text.secondary">
-                    태그가 들어올 예정
-                </Typography>
+                <TechStack tech_stack={props.posting.skill_tags} />
             </CardActions>
         </Card>
     )
