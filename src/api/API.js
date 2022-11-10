@@ -154,3 +154,14 @@ export const createOrganization = async (organization) => {
         return [];
     }
 }
+
+export const getOrganizations = async (user_id) =>{
+    try {
+        const response = await axios.post("/groupsRouter/getOrganizations", {user_id});
+        console.log(response.data)
+        return response.data;
+    } catch (err) {
+        console.log("Error >>", err);
+        return [];
+    }
+}

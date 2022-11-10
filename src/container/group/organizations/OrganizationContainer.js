@@ -3,8 +3,12 @@ import ResponsiveCard from "component/common/ResponsiveCard";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import MKButton from "component/common/mui-components/MKButton";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OrganizationCreateModal from "./OrganizationCreateModal";
+import { useSelector } from "react-redux";
+import { selectUser } from "api/redux/user/userSlice";
+import * as API from "../../../api/API"
+
 export default function OrganizationContainer() {
 
     const steps = [
@@ -31,38 +35,17 @@ export default function OrganizationContainer() {
         },
     ];
 
-    const organizations = [
-        {
-            title: "2022-1 운영체제 수업",
-            code: "XD4D2",
-            notice: "공지공지",
-            maxTeam: 10,
-            maxMember: 5,
-        },
-        {
-            title: "2022-2 웹보안",
-            code: "F3G5H",
-            notice: "공지공지",
-            maxTeam: 10,
-            maxMember: 5,
-        },
-        {
-            title: "경기대학교 바른문제해결프로젝트",
-            code: "T1H0N",
-            notice: "공지공지",
-            maxTeam: 10,
-            maxMember: 5,
-        },
-        {
-            title: "상상기업",
-            code: "GABR1",
-            notice: "공지공지",
-            maxTeam: 10,
-            maxMember: 5,
-        }
-    ]
-
+    const user=useSelector(selectUser);
+    const [organizations, setOrganizations] = useState([]);
     const [organizationModalOpen, setOrganizationModalOpen] = useState(false);
+
+    useEffect(()=>{
+        init();
+    },[]);
+
+    const init = async () => {
+        setOrganizations(await API.getOrganizations(user?.user_id));
+    }
 
     return (
         <Stack spacing={3}>

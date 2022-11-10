@@ -11,7 +11,7 @@ const OrganizationCreateModal = (props) => {
     const user = useSelector(selectUser);
 
     const [organization, setOrganization] = useState({
-        user_id: user.user_id,
+        user_id: user?.user_id,
         title: "",
         code: "",
         notice: "",
