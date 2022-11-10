@@ -146,13 +146,6 @@ const GroupCreateModal = (props) => {
                 </DialogTitle>
                 <DialogContent dividers={true}>
                     <Stack spacing={1}>
-                        <Typography variant="h4">조직 코드 (필수 아님)</Typography>
-                        <TextField
-                            sx={{ width: "100%" }}
-                            label="조직 코드"
-                            variant="outlined"
-                            value={"구현 예정"}
-                        />
                         <Stack>
                             <Typography variant='h4' my={1}>대표 사진</Typography>
                             <input className='form-control' type='file' name='file' onChange={handleFileChange}></input>

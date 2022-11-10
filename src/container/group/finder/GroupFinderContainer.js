@@ -124,6 +124,7 @@ const GroupFinderContainer = () => {
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
+                mb={5}
             >
                 <MKButton
                     color="success"
@@ -155,9 +156,6 @@ const GroupFinderContainer = () => {
                         </MKButton>
                     </Tooltip>
                 </Stack>
-            </Stack>
-            <Stack mb={5}>
-                ↑ 조직 코드를 안내받으셨나요?
             </Stack>
 
             <Grid

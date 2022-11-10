@@ -1,4 +1,4 @@
-import { Alert, Box, Grid, Stack, TextField, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import ResponsiveCard from "component/common/ResponsiveCard";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import MKButton from "component/common/mui-components/MKButton";
@@ -38,6 +38,7 @@ export default function OrganizationContainer() {
     const user = useSelector(selectUser);
     const [organizations, setOrganizations] = useState([]);
     const [organizationModalOpen, setOrganizationModalOpen] = useState(false);
+    const [groups, setGroups] = useState([]);
 
     useEffect(() => {
         init();
@@ -92,7 +93,9 @@ export default function OrganizationContainer() {
                         organizations.length > 0 ?
                             organizations.map((org) =>
                                 <Grid item xs={12} md={6}>
-                                    <ResponsiveCard>
+                                    <ResponsiveCard
+                                        actionArea
+                                    >
                                         <Stack direction={"row"} justifyContent="space-between">
                                             <Typography variant="h5">{org.title}</Typography>
                                             <Typography variant="h3">{org.code}<ContentCopyIcon fontSize="small" /></Typography>
@@ -106,6 +109,11 @@ export default function OrganizationContainer() {
                             </Grid>
                     }
                 </Grid>
+            </Box>
+
+            <Box>
+                <Typography variant="h5">선택한 조직에 속한 그룹</Typography>
+
             </Box>
 
             <ModalStaticBackdrop
