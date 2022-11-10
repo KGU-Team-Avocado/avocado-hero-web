@@ -35,13 +35,13 @@ export default function OrganizationContainer() {
         },
     ];
 
-    const user=useSelector(selectUser);
+    const user = useSelector(selectUser);
     const [organizations, setOrganizations] = useState([]);
     const [organizationModalOpen, setOrganizationModalOpen] = useState(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         init();
-    },[]);
+    }, []);
 
     const init = async () => {
         setOrganizations(await API.getOrganizations(user?.user_id));
@@ -89,26 +89,23 @@ export default function OrganizationContainer() {
                     spacing={2}
                 >
                     {
-                        organizations.map((org) =>
-                            <Grid item xs={12} md={6}>
-                                <ResponsiveCard>
-                                    <Stack direction={"row"} justifyContent="space-between">
-                                        <Typography variant="h5">{org.title}</Typography>
-                                        <Typography variant="h3">{org.code}<ContentCopyIcon fontSize="small" /></Typography>
-                                    </Stack>
-                                </ResponsiveCard>
+                        organizations.length > 0 ?
+                            organizations.map((org) =>
+                                <Grid item xs={12} md={6}>
+                                    <ResponsiveCard>
+                                        <Stack direction={"row"} justifyContent="space-between">
+                                            <Typography variant="h5">{org.title}</Typography>
+                                            <Typography variant="h3">{org.code}<ContentCopyIcon fontSize="small" /></Typography>
+                                        </Stack>
+                                    </ResponsiveCard>
+                                </Grid>
+                            )
+                            :
+                            <Grid item xs={12}>
+                                <Typography variant="h6">소유한 조직이 없습니다.</Typography>
                             </Grid>
-                        )
                     }
                 </Grid>
-            </Box>
-            <Box>
-                <Alert>위 카드를 누르면 떠야하는 기능. 공지사항과 최대 팀 수, 최대 팀원 수는 워크스페이스와 조직 검색 등 전반에 걸쳐 등장할 예정</Alert>
-                <Typography variant="h5">조직 설정</Typography>
-                <TextField label="공지사항" fullWidth />
-                <TextField label="최대 팀 수" fullWidth />
-                <TextField label="최대 팀원 수" fullWidth />
-                <Typography>이 자리에는 이 조직에 속한 그룹들이 리스트로 한눈에 보여야 한다. 리스트에는 그룹명, 팀원 이름 등이 떠야 함.</Typography>
             </Box>
 
             <ModalStaticBackdrop
