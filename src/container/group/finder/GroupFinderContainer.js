@@ -31,6 +31,7 @@ const GroupFinderContainer = () => {
     const DATA_REQUEST_SIZE = 3;
     const [target, setTarget] = useState(null);
     const groupDataSize = useRef(0);
+    const [isLoading, setLoading] = useState(true);
 
     const fetchData = async (groupDataSize) => {
         console.log(`infinity ${groupDataSize} ${DATA_REQUEST_SIZE}`)
@@ -42,6 +43,9 @@ const GroupFinderContainer = () => {
             const data = await response.data;
             setGroups((prev) => prev.concat(data.groups));
             return data.groups.length;
+        }
+        else{
+            setLoading(false);
         }
         return 0;
     }
@@ -141,6 +145,7 @@ const GroupFinderContainer = () => {
                         <div>그룹이 없습니다.</div>
                 }
                 {
+                    isLoading&&
                     <Box ref={setTarget}>
                         <CircularProgress/>
                     </Box>
