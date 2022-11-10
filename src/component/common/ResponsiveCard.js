@@ -15,13 +15,13 @@ const ResponsiveCard = ({ children, to, actionArea, onClick }) => {
                 actionArea
                     ?
                     <CardActionArea
-                        sx={{
-                            height: '100%',
-                            width: '100%',
-                            alignItems: 'flex-start',
-                            flexGrow: 1,
-                            flexDirection: 'column',
-                        }}
+                        // sx={{
+                        //     height: '100%',
+                        //     width: '100%',
+                        //     alignItems: 'flex-start',
+                        //     flexGrow: 1,
+                        //     flexDirection: 'column',
+                        // }}
                     >
                         <Box sx={{
                             p: {
