@@ -1,6 +1,10 @@
 import { Alert, Box, Grid, Icon, Stack, TextField, Typography } from "@mui/material";
 import ResponsiveCard from "component/common/ResponsiveCard";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import MKButton from "component/common/mui-components/MKButton";
+import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
+import { useState } from "react";
+import OrganizationCreateModal from "./OrganizationCreateModal";
 export default function OrganizationContainer() {
 
     const steps = [
@@ -58,6 +62,8 @@ export default function OrganizationContainer() {
         }
     ]
 
+    const [organizationModalOpen, setOrganizationModalOpen] = useState(false);
+
     return (
         <Stack spacing={3}>
             <Box>
@@ -84,6 +90,13 @@ export default function OrganizationContainer() {
                     </Grid>
                 )}
             </Box>
+
+            <MKButton
+                color="success"
+                onClick={()=>setOrganizationModalOpen(true)}
+            >
+                조직 생성하기
+            </MKButton>
 
             <Box>
                 <Typography variant="h5">내가 소유한 조직</Typography>
@@ -113,6 +126,17 @@ export default function OrganizationContainer() {
                 <TextField label="최대 팀원 수" fullWidth/>
                 <Typography>이 자리에는 이 조직에 속한 그룹들이 리스트로 한눈에 보여야 한다. 리스트에는 그룹명, 팀원 이름 등이 떠야 함.</Typography>
             </Box>
+
+            <ModalStaticBackdrop
+                keepMounted
+                width="md"
+                open={organizationModalOpen}
+                component={
+                    <OrganizationCreateModal
+                        setOpen={setOrganizationModalOpen}
+                    />
+                }
+            />
 
         </Stack>
     )
