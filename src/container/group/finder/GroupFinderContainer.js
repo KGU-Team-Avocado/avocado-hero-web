@@ -13,6 +13,7 @@ import GroupJoinModalV2 from "./modal/GroupJoinModalV2";
 import SearchIcon from '@mui/icons-material/Search';
 import GroupFilterModal from "./modal/GroupFilterModal";
 import React from 'react';
+import OrganizationEnterModal from "./modal/OrganizationEnterModal";
 
 const GroupFinderContainer = () => {
 
@@ -23,6 +24,7 @@ const GroupFinderContainer = () => {
     const [groupCreateModalOpen, setGroupCreateModalOpen] = useState(false);
     const [groupJoinModalOpen, setGroupJoinModalOpen] = useState(false);
     const [groupFilterModalOpen, setGroupFilterModalOpen] = useState(false);
+    const [organizationEnterModalOpen, setOrganizationEnterModalOpen] = useState(false);
 
     const [groups, setGroups] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState(null);
@@ -119,12 +121,20 @@ const GroupFinderContainer = () => {
 
     return (
         <>
-
+            <Stack mb={3}>
+                <MKButton
+                    variant="outlined"
+                    color="error"
+                    onClick={() => setOrganizationEnterModalOpen(true)}
+                >
+                    조직 코드가 있으신가요?
+                </MKButton>
+            </Stack>
             <Stack
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
-                mb={5}
+                mb={3}
             >
                 <MKButton
                     color="success"
@@ -203,6 +213,13 @@ const GroupFinderContainer = () => {
                 open={groupFilterModalOpen}
                 component={<GroupFilterModal filterGroup={filterGroup} resetGroups={resetGroups} setOpen={setGroupFilterModalOpen} />}
             />
+            <ModalStaticBackdrop
+                keepMounted
+                width="sm"
+                open={organizationEnterModalOpen}
+                component={<OrganizationEnterModal setOpen={setOrganizationEnterModalOpen} />}
+            />
+
         </>
     )
 }
