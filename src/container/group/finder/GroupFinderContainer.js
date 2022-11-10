@@ -31,28 +31,16 @@ const GroupFinderContainer = () => {
     const DATA_REQUEST_SIZE = 3;
     const [target, setTarget] = useState(null);
     const groupDataSize = useRef(0);
-    // const maxGroupSize = useRef(0);
-    const [isLoading, setLoading] = useState(true);
 
     const fetchData = async (groupDataSize) => {
-        console.log(`yeah ${groupDataSize} ${DATA_REQUEST_SIZE}`)
+        console.log(`infinity ${groupDataSize} ${DATA_REQUEST_SIZE}`)
         if (groupDataSize % DATA_REQUEST_SIZE === 0) {
-            // const response = await axios.get("/groupsRouter/getGroups");
             const response = await axios.post("/groupsRouter/getGroupsInfinity", {
                 skip: groupDataSize,
                 limit: DATA_REQUEST_SIZE
             });
             const data = await response.data;
-            // maxGroupSize.current = data.maxCount;
-            if(data.maxCount == groupDataSize){
-                console.log("데이터 끝");
-                setLoading(false);
-            }
             setGroups((prev) => prev.concat(data.groups));
-            // if(groupDataSize.current === maxGroupSize.current){
-            //     setTarget(null);
-            //     setLoading(false);
-            // }
             return data.groups.length;
         }
         return 0;
@@ -60,7 +48,7 @@ const GroupFinderContainer = () => {
 
 
     useEffect(() => {
-        console.log(`yeah is loaded`)
+        console.log(`infinity scroll is mounted`)
     }, [])
 
     useEffect(() => {
@@ -83,16 +71,6 @@ const GroupFinderContainer = () => {
             observer && observer.disconnect();
         }
     }, [target]);
-
-
-    // useEffect(() => {
-    //     axios.get("/groupsRouter/getGroups").then((response) => {
-    //         // console.log(JSON.stringify(response.data))
-    //         setGroups(response.data);
-    //     }).catch(function (error) {
-    //         console.log(error);
-    //     });
-    // }, [])
 
     const handleGroupCard = (group) => {
         setSelectedGroup(group)
@@ -163,16 +141,9 @@ const GroupFinderContainer = () => {
                         <div>그룹이 없습니다.</div>
                 }
                 {
-                    // isLoading
-                    // &&
-                    //<div ref={setTarget}>This is Target. (이게 스크린에 보이면 타겟을 동작 시키게 됨)</div>
-                    isLoading
-                    ?
                     <Box ref={setTarget}>
                         <CircularProgress/>
                     </Box>
-                    :
-                    <div></div>
                 }
             </Grid>
             <ModalStaticBackdrop
