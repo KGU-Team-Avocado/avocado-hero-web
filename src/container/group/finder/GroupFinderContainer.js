@@ -3,7 +3,7 @@ import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import MKButton from "component/common/mui-components/MKButton";
-
+import * as API from "../../../api/API"
 import GroupCardV2 from "component/group/card/GroupCardV2";
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux";
@@ -44,7 +44,7 @@ const GroupFinderContainer = () => {
             setGroups((prev) => prev.concat(data.groups));
             return data.groups.length;
         }
-        else{
+        else {
             setLoading(false);
         }
         return 0;
@@ -76,9 +76,45 @@ const GroupFinderContainer = () => {
         }
     }, [target]);
 
+    const [groupManager, setGroupManager] = useState(null);
+    const [applicants, setApplicants] = useState(null);
+
     const handleGroupCard = (group) => {
         setSelectedGroup(group)
         setGroupJoinModalOpen(true)
+
+        console.log("ddd" + group?.manager);
+        handleGroupManager(group?.manager);
+
+        axios.post("/groupsRouter/getApplicants", {
+            group_id: group?._id,
+        }).then((response) => {
+            setApplicants(response.data);
+            console.log(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    const handleGroupManager = async (user_id) => {
+        const temp = await API.findOneUserByUserId(user_id)
+        setGroupManager(temp);
+    }
+
+
+
+    // 필터링된 그룹 데이터 저장, 모달 숨김
+    const filterGroup = (filteredGroups) => {
+        setGroups(filteredGroups);
+        setGroupFilterModalOpen(false);
+    }
+
+    // 필터링을 초기화했기 때문에 다시 전체 데이터를 받아오기 위한 메소드
+    const resetGroups = () => {
+        axios.get("/groupsRouter/getGroups").then((response) => {
+            setGroups(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (
@@ -145,9 +181,9 @@ const GroupFinderContainer = () => {
                         <div>그룹이 없습니다.</div>
                 }
                 {
-                    isLoading&&
+                    isLoading &&
                     <Box ref={setTarget}>
-                        <CircularProgress/>
+                        <CircularProgress />
                     </Box>
                 }
             </Grid>
@@ -167,7 +203,7 @@ const GroupFinderContainer = () => {
                 keepMounted
                 width="sm"
                 open={groupFilterModalOpen}
-                component={<GroupFilterModal setOpen={setGroupFilterModalOpen} />}
+                component={<GroupFilterModal filterGroup={filterGroup} resetGroups={resetGroups} setOpen={setGroupFilterModalOpen} />}
             />
         </>
     )

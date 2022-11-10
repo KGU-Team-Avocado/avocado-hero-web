@@ -10,7 +10,7 @@ import * as API from '../../../../api/API';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-export default (props) => {
+const GroupFilterModal = (props) => {
     const [selected, setSelected] = useState([]);
     const [filterData, setFilterData] = useState({
         group_name: "",
@@ -102,3 +102,5 @@ export default (props) => {
         </>
     )
 }
+
+export default GroupFilterModal;
