@@ -1,4 +1,4 @@
-import { Alert, Box, Grid, Icon, Stack, TextField, Typography } from "@mui/material";
+import { Alert, Box, Grid, Stack, TextField, Typography } from "@mui/material";
 import ResponsiveCard from "component/common/ResponsiveCard";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import MKButton from "component/common/mui-components/MKButton";
@@ -69,6 +69,7 @@ export default function OrganizationContainer() {
             <Box>
                 {steps.map((step) =>
                     <Grid
+                        key={step.number}
                         container
                         justifyContent="center"
                         alignItems="center"
@@ -93,7 +94,7 @@ export default function OrganizationContainer() {
 
             <MKButton
                 color="success"
-                onClick={()=>setOrganizationModalOpen(true)}
+                onClick={() => setOrganizationModalOpen(true)}
             >
                 조직 생성하기
             </MKButton>
@@ -121,9 +122,9 @@ export default function OrganizationContainer() {
             <Box>
                 <Alert>위 카드를 누르면 떠야하는 기능. 공지사항과 최대 팀 수, 최대 팀원 수는 워크스페이스와 조직 검색 등 전반에 걸쳐 등장할 예정</Alert>
                 <Typography variant="h5">조직 설정</Typography>
-                <TextField label="공지사항" fullWidth/>
-                <TextField label="최대 팀 수" fullWidth/>
-                <TextField label="최대 팀원 수" fullWidth/>
+                <TextField label="공지사항" fullWidth />
+                <TextField label="최대 팀 수" fullWidth />
+                <TextField label="최대 팀원 수" fullWidth />
                 <Typography>이 자리에는 이 조직에 속한 그룹들이 리스트로 한눈에 보여야 한다. 리스트에는 그룹명, 팀원 이름 등이 떠야 함.</Typography>
             </Box>
 

@@ -110,9 +110,9 @@ export const typeName = (type) => {
     return "베이직";
 }
 
-export const updateUserType = async (user_id,type) => {
+export const updateUserType = async (user_id, type) => {
     try {
-        const response = await axios.post("/usersRouter/updateUserType", { user_id: user_id, type:type });
+        const response = await axios.post("/usersRouter/updateUserType", { user_id: user_id, type: type });
         console.log(response.data.docs)
         return response.data;
     } catch (err) {
@@ -143,3 +143,14 @@ export const fetchCompanyImage = async (imgURL) => {
         return null;
     }
 };
+
+export const createOrganization = async (organization) => {
+    try {
+        const response = await axios.post("/groupsRouter/createOrganization", organization);
+        console.log(response.data.docs)
+        return response.data;
+    } catch (err) {
+        console.log("Error >>", err);
+        return [];
+    }
+}
