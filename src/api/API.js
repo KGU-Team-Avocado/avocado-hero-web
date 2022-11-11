@@ -143,3 +143,16 @@ export const fetchCompanyImage = async (imgURL) => {
         return null;
     }
 };
+
+export const saveReadme = async (group_id) => {
+    try {
+        const response = await axios.post("/groupsRouter/modifyReadme", {_id: group_id });
+        console.log(response);
+        return response.data;
+        // return false;
+    } catch (err) {
+        console.log("Error >>", err);
+        return [];
+    }
+
+}

@@ -62,7 +62,7 @@ const ReadmeEditorModal = ({ open, setOpen }) => {
         //     if (response.data.compIdCheck === false) {
         //         alert("이미 사용중인 제목입니다.");
         //         return;
-        // }
+        // } 수정
         alert("리드미 등록 성공");
         window.location.reload();
     }
