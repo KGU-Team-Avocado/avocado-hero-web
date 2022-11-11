@@ -8,6 +8,8 @@ import ClearIcon from '@mui/icons-material/Clear';
 import React from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
+import * as API from "../../../../api/API"
+import axios from "axios";
 
 const ReadmeEditorModal = ({ open, setOpen }) => {
 
@@ -41,12 +43,28 @@ const ReadmeEditorModal = ({ open, setOpen }) => {
         })
     }
 
-    const createReadme = () => {
+    const createReadme = async () => {
         const newReadmeData = {
             ...project,
             read_me: convertedContent,
         }
         console.log(newReadmeData)
+        alert('버튼을 눌렀음')
+        // const hasValue = Object.values(newReadmeData).includes("");
+        // if (hasValue) {
+        //     alert('빈 칸을 모두 채워주세요')
+        // }
+        // else {
+        //     console.log('저장시도')
+        //     const response = await API.saveReadme(newReadmeData);
+        //     console.log(response)
+        // }
+        //     if (response.data.compIdCheck === false) {
+        //         alert("이미 사용중인 제목입니다.");
+        //         return;
+        // }
+        alert("리드미 등록 성공");
+        window.location.reload();
     }
 
     return (
@@ -98,7 +116,7 @@ const ReadmeEditorModal = ({ open, setOpen }) => {
                         fullWidth
                         disabled={userInfo === null}
                     >
-                        등록하기ㅇ
+                        등록하기
                     </Button>
                 </Stack>
             </Box>
