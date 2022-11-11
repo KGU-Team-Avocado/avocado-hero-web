@@ -8,6 +8,7 @@ import MultiSelectExampleContainer from "container/example/MultiSelectExampleCon
 import RankContainer from "container/example/RankContainer";
 import ReduxExample from "container/example/ReduxExample";
 import GroupFinderContainer from "container/group/finder/GroupFinderContainer";
+import OrganizationGroupFinderContainer from "container/group/finder/OrganizationGroupFinderContainer";
 import OrganizationContainer from "container/group/organizations/OrganizationContainer";
 import WorkspaceListContainer from "container/group/workspace/WorkspaceListContainer";
 import HomeContainer from "container/home/HomeContainer";
@@ -27,6 +28,12 @@ const mainRoutes = [
     {
         path: '/groupFinder',
         element: <GroupFinderContainer/>,
+        name: '그룹찾기',
+        description: '원하는 그룹을 찾아보아요',
+    },
+    {
+        path: '/groupFinder/:code',
+        element: <OrganizationGroupFinderContainer/>,
         name: '그룹찾기',
         description: '원하는 그룹을 찾아보아요',
     },
