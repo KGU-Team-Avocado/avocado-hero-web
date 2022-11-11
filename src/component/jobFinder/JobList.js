@@ -84,6 +84,9 @@ export default (props) => {
                                     key={posting._id}
                                     posting={posting}
                                     handleClick={handleClick}
+                                    bookmarkBtn={bookmarkBtn}
+                                    bookMarkSave={bookMarkSave}
+                                    bookMarkDelete={bookMarkDelete}
                                 />
                             </Grid>
                         ))
