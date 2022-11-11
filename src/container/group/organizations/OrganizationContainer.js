@@ -45,7 +45,7 @@ export default function OrganizationContainer() {
     }, []);
 
     const init = async () => {
-        setOrganizations(await API.getOrganizations(user?.user_id));
+        setOrganizations(await API.getOrganizationsByUserId(user?.user_id));
     }
 
     return (

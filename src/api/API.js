@@ -155,7 +155,7 @@ export const createOrganization = async (organization) => {
     }
 }
 
-export const getOrganizations = async (user_id) =>{
+export const getOrganizationsByUserId = async (user_id) =>{
     try {
         const response = await axios.post("/groupsRouter/getOrganizations", {user_id});
         console.log(response.data)
@@ -163,5 +163,13 @@ export const getOrganizations = async (user_id) =>{
     } catch (err) {
         console.log("Error >>", err);
         return [];
+    }
+}
+
+export const getOrganizationByCode = async (code) => {
+    try {
+        
+    } catch (error) {
+        
     }
 }
