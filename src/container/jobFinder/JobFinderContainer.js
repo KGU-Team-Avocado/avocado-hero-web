@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from "axios";
 import JobPostingCard from "./JobPostingCard"
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import { BiBookmark } from "react-icons/bi";
 import JobList from "../../component/jobFinder/JobList";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Button, ButtonGroup, Stack, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import MKButton from "component/common/mui-components/MKButton";
 
 export default () => {
@@ -16,6 +16,7 @@ export default () => {
     const [postings, setPostings] = useState([]);
     const [bookmarks, setBookmarks] = useState([]);
 
+    const [alignment, setAlignment] = useState('false');
 
     useEffect(() => {
         console.log('리스트')
@@ -55,6 +56,11 @@ export default () => {
         });
     }
 
+    const handleChange = (event, newAlignment) => {
+        setAlignment(newAlignment);
+        setOnOff(newAlignment === "true" ? true : false);
+    };
+
     return (
         <>
             <Box
@@ -71,22 +77,17 @@ export default () => {
                     {
                         userInfo !== null
                         &&
-                        <Stack spacing={1} direction="row">
-                            <MKButton
-                                variant={onOff ? 'outlined' : 'contained'}
-                                color='dark'
-                                onClick={() => setOnOff(false)}
-                            >
-                                전체보기
-                            </MKButton>
-                            <MKButton
-                                variant={onOff ? 'contained' : 'outlined'}
-                                color='dark'
-                                onClick={() => setOnOff(true)}
-                            >
-                                북마크보기
-                            </MKButton>
-                        </Stack>
+                        <ToggleButtonGroup
+                            color="success"
+                            value={alignment}
+                            exclusive
+                            onChange={handleChange}
+                            size="small"
+                            aria-label="Platform"
+                        >
+                            <ToggleButton value="false">전체보기</ToggleButton>
+                            <ToggleButton value="true">북마크보기</ToggleButton>
+                        </ToggleButtonGroup>
                     }
                 </Box>
             </Box>
