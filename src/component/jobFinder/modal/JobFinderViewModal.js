@@ -6,6 +6,7 @@ import DOMPurify from "dompurify";
 import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
+import TechStack from "component/common/TechStack";
 
 export default (props) => {
     const { selected, bookmarkBtn, bookMarkSave, bookMarkDelete } = props;
@@ -52,10 +53,10 @@ export default (props) => {
                                 <p>{selected?.name}</p>
                                 <hr />
                                 <h5><b>주요업무</b></h5>
-                                <p>{selected?.field}</p>
+                                <p>{selected?.job_tag}</p>
                                 <hr />
                                 <h5><b>태그</b></h5>
-                                <p>{selected?.tag}</p>
+                                <TechStack tech_stack={selected ? selected.skill_tags : []} />
                                 <hr />
                                 <h5><b >상세소개글</b></h5>
                                 <div dangerouslySetInnerHTML={createMarkup(selected?.description)}></div>
