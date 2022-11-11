@@ -1,5 +1,6 @@
 import { Avatar, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Divider, IconButton, Stack, Typography } from "@mui/material"
 import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
+import BookmarkRoundedIcon from '@mui/icons-material/BookmarkRounded';
 import TechStack from "component/common/TechStack";
 import defaultImage from '../../assets/img/logo512.png';
 import { useEffect, useState } from "react";
@@ -26,6 +27,14 @@ export default (props) => {
         }
     }
 
+    const handleBookMark = () => {
+        if (props.bookmarkBtn) {
+            props.bookMarkDelete(props.posting?._id)
+        } else {
+            props.bookMarkSave(props.posting?._id)
+        }
+    }
+
     // 수정 예정
     return (
         <Card
@@ -41,8 +50,13 @@ export default (props) => {
                     </Avatar>
                 }
                 action={
-                    <IconButton aria-label="book mark">
-                        <BookmarkBorderRoundedIcon />
+                    <IconButton 
+                        aria-label="book mark" 
+                        onClick={(e) => { 
+                            e.stopPropagation(); // 이벤트 버블링 방지 (handleClick 실행x)
+                            handleBookMark(); 
+                        }}>
+                        {props.bookmarkBtn ? <BookmarkRoundedIcon color="warning" /> : <BookmarkBorderRoundedIcon />}
                     </IconButton>
                 }
                 title={props.posting.name}
