@@ -34,8 +34,8 @@ const mainRoutes = [
     {
         path: '/groupFinder/:code',
         element: <OrganizationGroupFinderContainer/>,
-        name: '그룹찾기',
-        description: '원하는 그룹을 찾아보아요',
+        name: '조직 내 그룹찾기',
+        description: '조직 내에서 원하는 그룹을 찾아보아요',
     },
     {
         path: '/myWorkspace',
