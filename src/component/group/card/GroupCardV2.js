@@ -4,7 +4,7 @@ import TechStack from "../../common/TechStack"
 import * as API from "../../../api/API"
 import defaultImage from '../../../assets/img/logo512.png';
 
-export default (props) => {
+const GroupCardV2 = (props) => {
 
     const [uploadedImage, setUploadedImage] = useState(null);
 
@@ -30,6 +30,7 @@ export default (props) => {
                         className="border rounded-top"
                         width="100%"
                         height="200"
+                        alt=""
                         src={uploadedImage}
                         onError={handleImgError}
                     />
@@ -50,11 +51,13 @@ export default (props) => {
                     <Typography variant="body2">
                         {props.group.short_description}
                     </Typography>
-                    <Typography>
+                    <Box>
                         <TechStack tech_stack={props.group.tech_stack} />
-                    </Typography>
+                    </Box>
                 </CardContent>
             </CardActionArea>
         </Card>
     )
 }
+
+export default GroupCardV2;
