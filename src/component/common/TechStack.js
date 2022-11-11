@@ -1,6 +1,6 @@
 import { options } from '../../assets/tag/Tech'
 
-export default (props) => {
+const TechStack = (props) => {
     //사용된 tech 기술 번호만 넘겨서 해당하는 것만 return 해줄 계획으로 만듦
     const findTech = (t) => {
         const idx = options.findIndex((tech)=>tech.value===t)
@@ -13,3 +13,5 @@ export default (props) => {
         </div>
     )
 }
+
+export default TechStack;
