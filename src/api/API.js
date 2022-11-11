@@ -110,9 +110,9 @@ export const typeName = (type) => {
     return "베이직";
 }
 
-export const updateUserType = async (user_id,type) => {
+export const updateUserType = async (user_id, type) => {
     try {
-        const response = await axios.post("/usersRouter/updateUserType", { user_id: user_id, type:type });
+        const response = await axios.post("/usersRouter/updateUserType", { user_id: user_id, type: type });
         console.log(response.data.docs)
         return response.data;
     } catch (err) {
@@ -154,5 +154,36 @@ export const saveReadme = async (group_id) => {
         console.log("Error >>", err);
         return [];
     }
+}
 
+export const createOrganization = async (organization) => {
+    try {
+        const response = await axios.post("/groupsRouter/createOrganization", organization);
+        console.log(response.data.docs)
+        return response.data;
+    } catch (err) {
+        console.log("Error >>", err);
+        return [];
+    }
+
+}
+
+export const getOrganizationsByUserId = async (user_id) =>{
+    try {
+        const response = await axios.post("/groupsRouter/getOrganizations", {user_id});
+        console.log(response.data)
+        return response.data;
+    } catch (err) {
+        console.log("Error >>", err);
+        return [];
+    }
+}
+
+export const getOrganizationByCode = async (code) => {
+    try {
+        const response = await axios.post("/groupsRouter/getOrganization", {code});
+        return response.data;
+    } catch (error) {
+        
+    }
 }

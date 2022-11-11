@@ -1,6 +1,14 @@
-import { Alert, Box, Grid, Icon, Stack, TextField, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import ResponsiveCard from "component/common/ResponsiveCard";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import MKButton from "component/common/mui-components/MKButton";
+import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
+import { useEffect, useState } from "react";
+import OrganizationCreateModal from "./OrganizationCreateModal";
+import { useSelector } from "react-redux";
+import { selectUser } from "api/redux/user/userSlice";
+import * as API from "../../../api/API"
+
 export default function OrganizationContainer() {
 
     const steps = [
@@ -27,42 +35,25 @@ export default function OrganizationContainer() {
         },
     ];
 
-    const organizations = [
-        {
-            title: "2022-1 운영체제 수업",
-            code: "XD4D2",
-            notice: "공지공지",
-            maxTeam: 10,
-            maxMember: 5,
-        },
-        {
-            title: "2022-2 웹보안",
-            code: "F3G5H",
-            notice: "공지공지",
-            maxTeam: 10,
-            maxMember: 5,
-        },
-        {
-            title: "경기대학교 바른문제해결프로젝트",
-            code: "T1H0N",
-            notice: "공지공지",
-            maxTeam: 10,
-            maxMember: 5,
-        },
-        {
-            title: "상상기업",
-            code: "GABR1",
-            notice: "공지공지",
-            maxTeam: 10,
-            maxMember: 5,
-        }
-    ]
+    const user = useSelector(selectUser);
+    const [organizations, setOrganizations] = useState([]);
+    const [organizationModalOpen, setOrganizationModalOpen] = useState(false);
+    const [groups, setGroups] = useState([]);
+
+    useEffect(() => {
+        init();
+    }, []);
+
+    const init = async () => {
+        setOrganizations(await API.getOrganizationsByUserId(user?.user_id));
+    }
 
     return (
         <Stack spacing={3}>
             <Box>
                 {steps.map((step) =>
                     <Grid
+                        key={step.number}
                         container
                         justifyContent="center"
                         alignItems="center"
@@ -85,6 +76,13 @@ export default function OrganizationContainer() {
                 )}
             </Box>
 
+            <MKButton
+                color="success"
+                onClick={() => setOrganizationModalOpen(true)}
+            >
+                조직 생성하기
+            </MKButton>
+
             <Box>
                 <Typography variant="h5">내가 소유한 조직</Typography>
                 <Grid
@@ -92,27 +90,42 @@ export default function OrganizationContainer() {
                     spacing={2}
                 >
                     {
-                        organizations.map((org) =>
-                            <Grid item xs={12} md={6}>
-                                <ResponsiveCard>
-                                    <Stack direction={"row"} justifyContent="space-between">
-                                        <Typography variant="h5">{org.title}</Typography>
-                                        <Typography variant="h3">{org.code}<ContentCopyIcon fontSize="small" /></Typography>
-                                    </Stack>
-                                </ResponsiveCard>
+                        organizations.length > 0 ?
+                            organizations.map((org) =>
+                                <Grid item xs={12} md={6}>
+                                    <ResponsiveCard
+                                        actionArea
+                                    >
+                                        <Stack direction={"row"} justifyContent="space-between">
+                                            <Typography variant="h5">{org.title}</Typography>
+                                            <Typography variant="h3">{org.code}<ContentCopyIcon fontSize="small" /></Typography>
+                                        </Stack>
+                                    </ResponsiveCard>
+                                </Grid>
+                            )
+                            :
+                            <Grid item xs={12}>
+                                <Typography variant="h6">소유한 조직이 없습니다.</Typography>
                             </Grid>
-                        )
                     }
                 </Grid>
             </Box>
+
             <Box>
-                <Alert>위 카드를 누르면 떠야하는 기능. 공지사항과 최대 팀 수, 최대 팀원 수는 워크스페이스와 조직 검색 등 전반에 걸쳐 등장할 예정</Alert>
-                <Typography variant="h5">조직 설정</Typography>
-                <TextField label="공지사항" fullWidth/>
-                <TextField label="최대 팀 수" fullWidth/>
-                <TextField label="최대 팀원 수" fullWidth/>
-                <Typography>이 자리에는 이 조직에 속한 그룹들이 리스트로 한눈에 보여야 한다. 리스트에는 그룹명, 팀원 이름 등이 떠야 함.</Typography>
+                <Typography variant="h5">선택한 조직에 속한 그룹</Typography>
+
             </Box>
+
+            <ModalStaticBackdrop
+                keepMounted
+                width="md"
+                open={organizationModalOpen}
+                component={
+                    <OrganizationCreateModal
+                        setOpen={setOrganizationModalOpen}
+                    />
+                }
+            />
 
         </Stack>
     )
