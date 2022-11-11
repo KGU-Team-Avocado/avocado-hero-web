@@ -36,15 +36,24 @@ export default () => {
 
     useEffect(() => {
         if (userInfo) {
-            axios.post("/bookmarksRouter/getMyBookmark", { user_id: userInfo.user_id }).then((response) => {
-                console.log(JSON.stringify(response.data))
-                setBookmarks(response.data);
-            }).catch(function (error) {
-                console.log(error);
-            });
+            // axios.post("/bookmarksRouter/getMyBookmark", { user_id: userInfo.user_id }).then((response) => {
+            //     console.log(JSON.stringify(response.data))
+            //     setBookmarks(response.data);
+            // }).catch(function (error) {
+            //     console.log(error);
+            // });
+            getBookmatrkList();
         }
     }, [userInfo]);
 
+    const getBookmatrkList = () => {
+        axios.post("/bookmarksRouter/getMyBookmark", { user_id: userInfo.user_id }).then((response) => {
+            console.log(JSON.stringify(response.data))
+            setBookmarks(response.data);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
 
     return (
         <>
@@ -81,7 +90,7 @@ export default () => {
                     }
                 </Box>
             </Box>
-            <JobList postings={onOff ? bookmarks : postings} userInfo={userInfo} bookmarks={bookmarks} />
+            <JobList postings={onOff ? bookmarks : postings} userInfo={userInfo} bookmarks={bookmarks} getBookmatrkList={getBookmatrkList} />
         </>
     )
 }

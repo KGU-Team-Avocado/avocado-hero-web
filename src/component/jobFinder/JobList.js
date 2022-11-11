@@ -34,7 +34,8 @@ export default (props) => {
                 console.log(response.data);
                 alert("북마크에 추가되었습니다.");
                 setBookmarkBtn(true);
-                navigate("/jobFinder");
+                props.getBookmatrkList();
+                setPostingModalOpen(false);
             })
             .catch(function (error) {
                 console.log(error);
@@ -51,7 +52,8 @@ export default (props) => {
                 console.log(response.data);
                 alert("북마크에서 삭제되었습니다.");
                 setBookmarkBtn(false);
-                navigate("/jobFinder");
+                props.getBookmatrkList();
+                setPostingModalOpen(false);
             })
             .catch(function (error) {
                 console.log(error);
