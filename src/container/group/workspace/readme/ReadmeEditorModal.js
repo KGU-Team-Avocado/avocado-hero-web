@@ -10,16 +10,14 @@ import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
 import * as API from "../../../../api/API"
 import axios from "axios";
+import { selectGroup } from "api/redux/group/groupSlice";
 
 const ReadmeEditorModal = ({ open, setOpen }) => {
 
     const userInfo = useSelector(selectUser);
+    const group = useSelector(selectGroup);
 
-    const [project, setProject] = useState({
-        group_name: '',
-        project_name: '',
-        short_description: '',
-    })
+    const [readmeText, setReadmeText] = useState('')
 
     const [editorState, setEditorState] = useState(
         () => EditorState.createEmpty(),
@@ -37,22 +35,17 @@ const ReadmeEditorModal = ({ open, setOpen }) => {
 
     const handleInput = (state) => {
         console.log(state)
-        setProject({
-            ...project,
-            [state.target.id]: state.target.value
-        })
+        setReadmeText(state.target.value)
     }
 
-    const createReadme = async (project) => {
-        const newReadmeData = {
-            ...project,
-            read_me: convertedContent,
-        }
-        console.log(newReadmeData)
+    const createReadme = async () => {
         alert('버튼을 눌렀음')
         console.log('저장시도')
-        const response = await API.saveReadme(newReadmeData);
-        console.log('저장 완');
+        const response = await API.saveReadme({
+            id:group._id,
+            read_me: convertedContent,
+        });
+        console.log(response);
         // const hasValue = Object.values(newReadmeData).includes("");
         // if (hasValue) {
         //     alert('빈 칸을 모두 채워주세요')
