@@ -151,15 +151,21 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                 </DialogTitle>
                 <DialogContent dividers={true}>
                     <Stack spacing={1}>
-                        <Stack>
+                        <Stack mb={2}>
                             <Typography variant='h4' my={1}>대표 사진</Typography>
                             <input className='form-control' type='file' name='file' onChange={handleFileChange}></input>
                         </Stack>
                         {image.preview && <>
                             <Box my={3}>
-                                <img src={image.preview} width='100%' height='300' />
+                                <img src={image.preview} width='100%' height='300' alt="" />
                             </Box>
                         </>
+                        }
+                        {
+                            code.code&&
+                            <Box>
+                                <TextField helperText="이 페이지에서 그룹 등록시 조직 내에서만 검색이 가능합니다." label='조직 코드' value={code.code} disabled fullWidth/>
+                            </Box>
                         }
                         <TextField
                             sx={{ width: "100%" }}
