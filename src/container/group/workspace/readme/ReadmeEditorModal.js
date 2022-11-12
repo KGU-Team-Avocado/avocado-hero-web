@@ -35,7 +35,7 @@ const ReadmeEditorModal = ({ open, setOpen }) => {
         alert('버튼을 눌렀음')
         console.log('저장시도')
         const response = await API.saveReadme({
-            id:group._id,
+            id: group._id,
             read_me: convertedContent,
         });
         console.log(response);
@@ -60,7 +60,7 @@ const ReadmeEditorModal = ({ open, setOpen }) => {
                 <DialogTitle id="scroll-dialog-title">
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Typography variant="h4">
-                            Read me 수정
+                            Read me 수정하기
                         </Typography>
                         <IconButton size="large" onClick={() => setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
                     </Box>
@@ -70,17 +70,14 @@ const ReadmeEditorModal = ({ open, setOpen }) => {
 
 
                         <Box>
-                            <Typography variant="h4">Read me</Typography>
-                            <Box>
-                                <Editor
-                                    editorState={editorState}
-                                    toolbarClassName="toolbarClassName"
-                                    wrapperClassName="wrapperClassName"
-                                    editorClassName="editorClassName"
-                                    onEditorStateChange={handleEditorChange}
-                                    editorStyle={{ height: 300, margin: 12, borderWidth: 0.5, padding: 10, borderRadius: "2px" }}
-                                />
-                            </Box>
+                            <Editor
+                                editorState={editorState}
+                                toolbarClassName="toolbarClassName"
+                                wrapperClassName="wrapperClassName"
+                                editorClassName="editorClassName"
+                                onEditorStateChange={handleEditorChange}
+                                editorStyle={{ height: 300, margin: 12, borderWidth: 0.5, padding: 10, borderRadius: "2px" }}
+                            />
                         </Box>
 
                     </Stack>
