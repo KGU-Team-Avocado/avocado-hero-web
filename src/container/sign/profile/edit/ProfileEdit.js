@@ -23,6 +23,7 @@ const ProfileEdit = (props) => {
     // const [selectedFields, setSelectedFields] = useState([
     //     // Object.entries(profile.user_field)
     // ]); // 여기에 현재 저장된 거를 넣어야 함 ?
+    const [selectedFields, setSelectedFields] = useState([]);
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [selectedPersonals, setSelectedPersonals] = useState([]);
 
@@ -33,20 +34,21 @@ const ProfileEdit = (props) => {
         setProfile(props.profile);
         console.log('profileEdit 출력' + props.profile);
 
-        setSelected(props.profile.fields.map((field) => { return findProfile(field) }))
+        // setSelected(props.profile.fields.map((field) => { return findProfile(field) }))
+        setSelectedFields(props.profile.fields && props.profile.fields.map((field) => { return findField(field) }))
         setSelectedKeywords(props.profile.keywords && props.profile.keywords.map((keyword) => { return findKeyword(keyword) }))
         setSelectedPersonals(props.profile.personalities && props.profile.personalities.map((personal) => { return findPersonal(personal) }))
     }, [props.profile]);
 
     const modifyOption = () => {
         setSelected([]);
-        const selectedFields = selected.map((s) => { return s.value })
+        // const selectedFields = selected.map((s) => { return s.value })
 
         axios.post("/usersRouter/profileUpdate", {
             user_id: profile.user_id,
-            fields: selectedFields,
-            // keywords: selectedKeywords.map((s) => s.value),
-            // personalities: selectedPersonals.map((s) => s.value)
+            // user_field: selectedFields,
+            // user_keyword: selectedKeywords.map((s) => s.value),
+            // user_personality: selectedPersonals.map((s) => s.value)
         }).then((response) => {
             console.log(response.data);
         }).catch(function (error) {
@@ -62,12 +64,12 @@ const ProfileEdit = (props) => {
         // const select = profile.fields.map((field) => {return findProfile(field)});
         // setSelected(select)
 
-        setSelected(profile.fields.map((field) => { return findProfile(field) }))
+        setSelectedFields(profile.fields.map((field) => { return findField(field) }))
         setSelectedKeywords(profile.keywords.map((keyword) => { return findKeyword(keyword) }))
         setSelectedPersonals(profile.personalities.map((personal) => { return findPersonal(personal) }))
     }
 
-    const findProfile = (r) => {
+    const findField = (r) => {
         const idx = fields.findIndex((field) => field.value === r)
         return fields[idx]
     }
@@ -85,17 +87,9 @@ const ProfileEdit = (props) => {
     const fields = [
         { label: "프론트", value: "front-end" },
         { label: "백엔드", value: "back-end" },
-        { label: "웹디자인", value: "web-design" },
         { label: "서버", value: "server" },
-        { label: "기획/전략/PM", value: "enterprise" },
-        { label: "개발/프로그래밍", value: "coding" },
-        { label: "IoT", value: "IoT"},
-        { label: "데이터베이스", value: "database" },
-        { label: "보안", value: "security" },
-        { label: "네트워크", value: "network" },
-        { label: "게임 프로그래밍", value: "game" },
-        { label: "ui/ux", value: "ui-ux" },
-        { label: "사무", value: "office" },
+        { label: "기획", value: "enterprise" },
+        { label: "개발", value: "coding" },
     ];
 
     const keywords = [
@@ -173,7 +167,7 @@ const ProfileEdit = (props) => {
                 introduce: profile.introduce,
                 belongs: profile.belongs,
                 links: profile.links,
-                // fields: selectedFields.map((s) => s.value),
+                fields: selectedFields.map((s) => s.value),
                 keywords: selectedKeywords.map((s) => s.value),
                 personalities: selectedPersonals.map((s) => s.value)
             })
