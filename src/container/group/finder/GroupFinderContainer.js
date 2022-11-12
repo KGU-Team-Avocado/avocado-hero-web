@@ -1,19 +1,17 @@
-import { Box, CircularProgress, Grid, Stack, Tooltip } from "@mui/material";
+import { Stack, Tooltip } from "@mui/material";
 import { selectUser } from "api/redux/user/userSlice";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import MKButton from "component/common/mui-components/MKButton";
-import * as API from "../../../api/API"
-import GroupCardV2 from "component/group/card/GroupCardV2";
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import GroupCeateModal from "./modal/GroupCeateModal";
-import GroupJoinModalV2 from "./modal/GroupJoinModalV2";
 import SearchIcon from '@mui/icons-material/Search';
 import GroupFilterModal from "./modal/GroupFilterModal";
 import React from 'react';
 import OrganizationEnterModal from "./modal/OrganizationEnterModal";
+import InfinityScrollGroupList from "./InfinityScrollGroupList";
 
 const GroupFinderContainer = () => {
 
@@ -22,87 +20,11 @@ const GroupFinderContainer = () => {
     const user = useSelector(selectUser);
 
     const [groupCreateModalOpen, setGroupCreateModalOpen] = useState(false);
-    const [groupJoinModalOpen, setGroupJoinModalOpen] = useState(false);
     const [groupFilterModalOpen, setGroupFilterModalOpen] = useState(false);
     const [organizationEnterModalOpen, setOrganizationEnterModalOpen] = useState(false);
 
     const [groups, setGroups] = useState([]);
-    const [selectedGroup, setSelectedGroup] = useState(null);
-
-    //무한스크롤을 위한 코드
-    const DATA_REQUEST_SIZE = 3;
-    const [target, setTarget] = useState(null);
-    const groupDataSize = useRef(0);
     const [isLoading, setLoading] = useState(true);
-
-    const fetchData = async (groupDataSize) => {
-        console.log(`infinity ${groupDataSize} ${DATA_REQUEST_SIZE}`)
-        if (groupDataSize % DATA_REQUEST_SIZE === 0) {
-            const response = await axios.post("/groupsRouter/getGroupsInfinity", {
-                skip: groupDataSize,
-                limit: DATA_REQUEST_SIZE
-            });
-            const data = await response.data;
-            setGroups((prev) => prev.concat(data.groups));
-            return data.groups.length;
-        }
-        else {
-            setLoading(false);
-        }
-        return 0;
-    }
-
-
-    useEffect(() => {
-        console.log(`infinity scroll is mounted`)
-    }, [])
-
-    useEffect(() => {
-        let observer;
-        let receivedDataSize = 0;
-        if (target) {
-            const onIntersect = async ([entry], observer) => {
-                if (entry.isIntersecting) {
-                    observer.unobserve(entry.target);
-                    receivedDataSize = await fetchData(groupDataSize.current);
-                    groupDataSize.current += receivedDataSize;
-                    observer.observe(entry.target);
-                }
-            };
-            observer = new IntersectionObserver(onIntersect, { threshold: 1 });
-            observer.observe(target);
-
-        }
-        return () => {
-            observer && observer.disconnect();
-        }
-    }, [target]);
-
-    const [groupManager, setGroupManager] = useState(null);
-    const [applicants, setApplicants] = useState(null);
-
-    const handleGroupCard = (group) => {
-        setSelectedGroup(group)
-        setGroupJoinModalOpen(true)
-
-        console.log("ddd" + group?.manager);
-        handleGroupManager(group?.manager);
-
-        axios.post("/groupsRouter/getApplicants", {
-            group_id: group?._id,
-        }).then((response) => {
-            setApplicants(response.data);
-            console.log(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }
-    const handleGroupManager = async (user_id) => {
-        const temp = await API.findOneUserByUserId(user_id)
-        setGroupManager(temp);
-    }
-
-
 
     // 필터링된 그룹 데이터 저장, 모달 숨김
     const filterGroup = (filteredGroups) => {
@@ -168,39 +90,14 @@ const GroupFinderContainer = () => {
                 </Stack>
             </Stack>
 
-            <Grid
-                container
-                spacing={1}
-                alignItems="stretch"
-            >
-                {
-                    groups.length > 0
-                        ?
-                        groups.map((group) => (
-                            <Grid item xs={12} md={6} xxl={4} key={group._id}>
-                                <GroupCardV2
-                                    key={group._id}
-                                    group={group}
-                                    handleGroupCard={handleGroupCard}
-                                />
-                            </Grid>
-                        ))
-                        :
-                        <div>그룹이 없습니다.</div>
-                }
-                {
-                    isLoading &&
-                    <Box ref={setTarget}>
-                        <CircularProgress />
-                    </Box>
-                }
-            </Grid>
-            <ModalStaticBackdrop
-                keepMounted
-                width="md"
-                open={groupJoinModalOpen}
-                component={<GroupJoinModalV2 selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
+            <InfinityScrollGroupList
+                code={null}
+                groups={groups}
+                setGroups={setGroups}
+                isLoading={isLoading}
+                setLoading={setLoading}
             />
+
             <ModalStaticBackdrop
                 keepMounted
                 width="md"

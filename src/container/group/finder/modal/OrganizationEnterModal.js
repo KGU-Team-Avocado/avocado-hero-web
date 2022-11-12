@@ -1,5 +1,5 @@
 import ClearIcon from '@mui/icons-material/Clear';
-import { Box, DialogContent, DialogTitle, IconButton, TextField, Typography } from '@mui/material';
+import { Alert, Box, DialogContent, DialogTitle, IconButton, TextField, Typography } from '@mui/material';
 import MKButton from 'component/common/mui-components/MKButton';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -59,6 +59,7 @@ const OrganizationEnterModal = (props) => {
                     <Typography variant='h5'>
                         입장 코드를 입력하세요
                     </Typography>
+                    <Alert>4KFWQ</Alert>
                     <TextField label="CODE" value={code} onChange={hanldeCodeInput} fullWidth/>
                     {
                         message&&<Typography color={"error"}>{message}</Typography>
