@@ -43,13 +43,16 @@ const ReadmeEditorModal = ({ open, setOpen }) => {
         })
     }
 
-    const createReadme = async () => {
+    const createReadme = async (project) => {
         const newReadmeData = {
             ...project,
             read_me: convertedContent,
         }
         console.log(newReadmeData)
         alert('버튼을 눌렀음')
+        console.log('저장시도')
+        const response = await API.saveReadme(newReadmeData);
+        console.log('저장 완');
         // const hasValue = Object.values(newReadmeData).includes("");
         // if (hasValue) {
         //     alert('빈 칸을 모두 채워주세요')

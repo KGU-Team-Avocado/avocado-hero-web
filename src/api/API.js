@@ -144,9 +144,10 @@ export const fetchCompanyImage = async (imgURL) => {
     }
 };
 
-export const saveReadme = async (group_id) => {
+export const saveReadme = async (project) => {
     try {
-        const response = await axios.post("/groupsRouter/modifyReadme", {_id: group_id });
+        const response = await axios.post("/groupsRouter/modifyReadme", {project: project});
+        console.log("여기까지 오심");
         console.log(response);
         return response.data;
         // return false;
@@ -174,6 +175,7 @@ export const getOrganizationsByUserId = async (user_id) =>{
         console.log(response.data)
         return response.data;
     } catch (err) {
+      
         console.log("Error >>", err);
         return [];
     }
