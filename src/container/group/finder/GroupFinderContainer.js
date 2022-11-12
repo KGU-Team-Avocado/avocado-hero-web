@@ -16,7 +16,6 @@ import InfinityScrollGroupList from "./InfinityScrollGroupList";
 const GroupFinderContainer = () => {
 
     const navigate = useNavigate();
-
     const user = useSelector(selectUser);
 
     const [groupCreateModalOpen, setGroupCreateModalOpen] = useState(false);
