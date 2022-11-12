@@ -9,7 +9,7 @@ import * as API from "../../../../api/API"
 
 export default () => {
     const params = useParams(); //url로 넘어온 파라미터를 받는 역할 (App.js 의 :id 참고)
-    const user_id = params.id; //(params의 :id를 받는 역할)
+    const user_id = params.id; //(params의 :id를 받는 역할) ???
     const [user, setUser] = useState(null);
 
     useEffect(() => {
