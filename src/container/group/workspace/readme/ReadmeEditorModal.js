@@ -17,8 +17,6 @@ const ReadmeEditorModal = ({ open, setOpen }) => {
     const userInfo = useSelector(selectUser);
     const group = useSelector(selectGroup);
 
-    const [readmeText, setReadmeText] = useState('')
-
     const [editorState, setEditorState] = useState(
         () => EditorState.createEmpty(),
     );
@@ -33,11 +31,6 @@ const ReadmeEditorModal = ({ open, setOpen }) => {
         setConvertedContent(currentContentAsHTML);
     };
 
-    const handleInput = (state) => {
-        console.log(state)
-        setReadmeText(state.target.value)
-    }
-
     const createReadme = async () => {
         alert('버튼을 눌렀음')
         console.log('저장시도')
@@ -46,19 +39,6 @@ const ReadmeEditorModal = ({ open, setOpen }) => {
             read_me: convertedContent,
         });
         console.log(response);
-        // const hasValue = Object.values(newReadmeData).includes("");
-        // if (hasValue) {
-        //     alert('빈 칸을 모두 채워주세요')
-        // }
-        // else {
-        //     console.log('저장시도')
-        //     const response = await API.saveReadme(newReadmeData);
-        //     console.log(response)
-        // }
-        //     if (response.data.compIdCheck === false) {
-        //         alert("이미 사용중인 제목입니다.");
-        //         return;
-        // } 수정
         alert("리드미 등록 성공");
         window.location.reload();
     }
