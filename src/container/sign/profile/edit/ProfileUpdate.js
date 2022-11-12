@@ -24,7 +24,7 @@ export default () => {
                 console.log(foundUser);
                 setUser(foundUser);
             }
-            else {
+            else { 
                 return alert("조회된 아이디가 없습니다.")
             }
         }).catch(function (error) {
