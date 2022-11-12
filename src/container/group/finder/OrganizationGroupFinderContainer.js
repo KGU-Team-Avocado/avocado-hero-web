@@ -1,12 +1,18 @@
-import { Alert, Stack, Typography } from "@mui/material";
+import { Alert, Box, Stack, Tooltip, Typography } from "@mui/material";
+import { selectUser } from "api/redux/user/userSlice";
+import MKButton from "component/common/mui-components/MKButton";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import * as API from '../../../api/API';
+import GroupCreateButton from "./GroupCreateButton";
 import InfinityScrollGroupList from "./InfinityScrollGroupList";
 
 const OrganizationGroupFinderContainer = () => {
     const params = useParams(); //url로 넘어온 파라미터를 받는 역할 (App.js 의 :id 참고)
     const code = params.code; //(params의 :code를 받는 역할)
+    const navigate = useNavigate();
+    const user = useSelector(selectUser);
 
     const [organization, setOrganization] = useState(null);
 
@@ -47,9 +53,34 @@ const OrganizationGroupFinderContainer = () => {
                                 {organization.code}
                             </Typography>
                         </Stack>
+                        <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                            mb={3}
+                        >
+                            <Box></Box>
+                            <Stack
+                                direction="row"
+                                spacing={1}
+                            >
+                                <Tooltip title={user ? "나의 워크스페이스 목록을 조회합니다." : "로그인이 필요한 메뉴입니다."}>
+                                    <MKButton
+                                        variant="outlined"
+                                        color={user ? "success" : "secondary"}
+                                        onClick={() => user && navigate('/myWorkspace/')}
+                                    >
+                                        내 워크스페이스 보기
+                                    </MKButton>
+                                </Tooltip>
+                                <GroupCreateButton code={code} />
+                            </Stack>
+                        </Stack>
+
                         <Alert>
                             {organization.notice}
                         </Alert>
+
                         <Alert color="warning">
                             조직 관리자가 설정한 최대 팀의 갯수는 {organization.maxTeam}팀이며, 팀 당 최대 인원은 {organization.maxMember}명 입니다.
                         </Alert>
