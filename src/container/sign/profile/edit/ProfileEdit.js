@@ -22,7 +22,7 @@ const ProfileEdit = (props) => {
 
     // const [selectedFields, setSelectedFields] = useState([
     //     // Object.entries(profile.user_field)
-    // ]); // 여기에 현재 저장된 거를 넣어야 함 ?
+    // ]); // 여기에 현재 저장된 거를 넣어야 함 ? ? ?
     const [selectedFields, setSelectedFields] = useState([]);
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [selectedPersonals, setSelectedPersonals] = useState([]);
