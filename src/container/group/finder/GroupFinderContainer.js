@@ -12,13 +12,13 @@ import GroupFilterModal from "./modal/GroupFilterModal";
 import React from 'react';
 import OrganizationEnterModal from "./modal/OrganizationEnterModal";
 import InfinityScrollGroupList from "./InfinityScrollGroupList";
+import GroupCreateButton from "./GroupCreateButton";
 
 const GroupFinderContainer = () => {
 
     const navigate = useNavigate();
     const user = useSelector(selectUser);
-
-    const [groupCreateModalOpen, setGroupCreateModalOpen] = useState(false);
+    
     const [groupFilterModalOpen, setGroupFilterModalOpen] = useState(false);
     const [organizationEnterModalOpen, setOrganizationEnterModalOpen] = useState(false);
 
@@ -77,15 +77,7 @@ const GroupFinderContainer = () => {
                             내 워크스페이스 보기
                         </MKButton>
                     </Tooltip>
-                    <Tooltip title={user ? "새 프로젝트를 등록하여 팀원을 모집합니다." : "로그인이 필요한 메뉴입니다."}>
-                        <MKButton
-                            variant="contained"
-                            color={user ? "info" : "secondary"}
-                            onClick={() => user && setGroupCreateModalOpen(true)}
-                        >
-                            프로젝트 등록하기
-                        </MKButton>
-                    </Tooltip>
+                    <GroupCreateButton code={null}/>
                 </Stack>
             </Stack>
 
@@ -95,13 +87,6 @@ const GroupFinderContainer = () => {
                 setGroups={setGroups}
                 isLoading={isLoading}
                 setLoading={setLoading}
-            />
-
-            <ModalStaticBackdrop
-                keepMounted
-                width="md"
-                open={groupCreateModalOpen}
-                component={<GroupCeateModal groupCreateModalOpen={groupCreateModalOpen} setOpen={setGroupCreateModalOpen} />}
             />
             <ModalStaticBackdrop
                 keepMounted
