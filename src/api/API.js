@@ -145,14 +145,15 @@ export const fetchCompanyImage = async (imgURL) => {
 };
 
 export const saveReadme = async (project) => {
+    console.log("여기는?"); // 오심
     try {
-        const response = await axios.post("/groupsRouter/modifyReadme", {project: project});
+        const response = await axios.post("/groupsRouter/modifyReadme", project);
         console.log("여기까지 오심");
         console.log(response);
         return response.data;
         // return false;
     } catch (err) {
-        console.log("Error >>", err);
+        console.log("Error >>", err); // 여기가 에러가 나심
         return [];
     }
 }
