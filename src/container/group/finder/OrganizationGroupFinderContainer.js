@@ -1,4 +1,4 @@
-import { Alert, Box, Stack, Tooltip, Typography } from "@mui/material";
+import { Alert, Stack, Tooltip, Typography } from "@mui/material";
 import { selectUser } from "api/redux/user/userSlice";
 import MKButton from "component/common/mui-components/MKButton";
 import { useEffect, useState } from "react";
@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import * as API from '../../../api/API';
 import GroupCreateButton from "./GroupCreateButton";
 import InfinityScrollGroupList from "./InfinityScrollGroupList";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const OrganizationGroupFinderContainer = () => {
     const params = useParams(); //url로 넘어온 파라미터를 받는 역할 (App.js 의 :id 참고)
@@ -59,7 +60,13 @@ const OrganizationGroupFinderContainer = () => {
                             alignItems="center"
                             mb={3}
                         >
-                            <Box></Box>
+                            <MKButton
+                                color="error"
+                                variant="outlined"
+                                onClick={() => navigate('/groupFinder')}
+                            >
+                                <ArrowBackIcon />돌아가기
+                            </MKButton>
                             <Stack
                                 direction="row"
                                 spacing={1}
