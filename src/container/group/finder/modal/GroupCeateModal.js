@@ -9,16 +9,20 @@ import { options } from '../../../../assets/tag/Tech'
 import { Box, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
+import { useSelector } from "react-redux";
+import { selectUser } from "api/redux/user/userSlice";
 
-const GroupCreateModal = (props) => {
+const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
 
-    const [userInfo, setUserInfo] = useState(null);
+    // const [userInfo, setUserInfo] = useState(null);
 
-    useEffect(() => {
-        if (sessionStorage.getItem("user")) {
-            setUserInfo(JSON.parse(sessionStorage.getItem("user")));
-        }
-    }, []);
+    const userInfo = useSelector(selectUser);
+
+    // useEffect(() => {
+    //     if (sessionStorage.getItem("user")) {
+    //         setUserInfo(JSON.parse(sessionStorage.getItem("user")));
+    //     }
+    // }, []);
 
     const [project, setProject] = useState({
         group_name: '',
@@ -64,8 +68,9 @@ const GroupCreateModal = (props) => {
                 user_role: []
             }],
             close_application: false,
-            end_project: false
+            end_project: false,
             // applied : [],
+            code: code.code,
         }
         console.log(newGroupData)
 
@@ -141,7 +146,7 @@ const GroupCreateModal = (props) => {
                         <Typography variant="h4">
                             프로젝트 그룹 만들기
                         </Typography>
-                        <IconButton size="large" onClick={() => props.setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
+                        <IconButton size="large" onClick={() => setOpen(false)}><ClearIcon fontSize="inherit" /></IconButton >
                     </Box>
                 </DialogTitle>
                 <DialogContent dividers={true}>
@@ -166,7 +171,7 @@ const GroupCreateModal = (props) => {
                         />
                         <TextField
                             sx={{ width: "100%" }}
-                            label="프로젝트명dㅇ"
+                            label="프로젝트명"
                             variant="outlined"
                             value={project.project_name}
                             id="project_name"
@@ -190,7 +195,7 @@ const GroupCreateModal = (props) => {
                             />
                         </Box>
                         {
-                            props.groupCreateModalOpen &&
+                            groupCreateModalOpen &&
                             <Box>
                                 <Typography variant="h4">상세소개글</Typography>
                                 <Box>

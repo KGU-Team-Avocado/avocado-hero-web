@@ -24,7 +24,7 @@ const GroupCreateButton = (code) => {
                 keepMounted
                 width="md"
                 open={groupCreateModalOpen}
-                component={<GroupCreateModal groupCreateModalOpen={groupCreateModalOpen} setOpen={setGroupCreateModalOpen} />}
+                component={<GroupCreateModal code={code} groupCreateModalOpen={groupCreateModalOpen} setOpen={setGroupCreateModalOpen} />}
             />
         </>
     )
