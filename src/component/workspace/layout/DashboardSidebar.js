@@ -16,6 +16,7 @@ import defaultImage from '../../../assets/img/logo512.png';
 import * as API from "../../../api/API"
 import ModalStaticBackdrop from 'component/common/modal/ModalStaticBackdrop';
 import WorkspaceListModal from 'container/group/workspace/WorkspaceListModal';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 
 export const DashboardSidebar = (props) => {
   const { open, onClose } = props;
@@ -68,7 +69,13 @@ export const DashboardSidebar = (props) => {
       onlyForMgr: false,
       showAfterEnd: true
     },
-
+    {
+      href: `/workspace/${project_id}/products`,
+      icon: (<LocalGroceryStoreIcon fontSize="small" />),
+      title: '판매/펀딩',
+      onlyForMgr: false,
+      showAfterEnd: true
+    },
   ];
 
   const extraItems = [
