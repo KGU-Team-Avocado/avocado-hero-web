@@ -14,15 +14,7 @@ import { selectUser } from "api/redux/user/userSlice";
 
 const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
 
-    // const [userInfo, setUserInfo] = useState(null);
-
     const userInfo = useSelector(selectUser);
-
-    // useEffect(() => {
-    //     if (sessionStorage.getItem("user")) {
-    //         setUserInfo(JSON.parse(sessionStorage.getItem("user")));
-    //     }
-    // }, []);
 
     const [project, setProject] = useState({
         group_name: '',
