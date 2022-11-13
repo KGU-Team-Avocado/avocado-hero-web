@@ -9,7 +9,7 @@ import ReadmeContainer from "container/group/workspace/readme/ReadmeContainer";
 import SettingsContainer from "container/group/workspace/settings/SettingsContainer";
 import NoticeTodoContainer from "container/group/workspace/NoticeTodoContainer";
 import RoleContainer from "container/group/workspace/settings/RoleContainer";
-import ProductsContainer from "container/group/workspace/products/ProductsContainer";
+import SupportsContainer from "container/group/workspace/supports/SupportsContainer";
 
 const workspaceRoutes = [
     {
@@ -33,8 +33,8 @@ const workspaceRoutes = [
         element: <NoticeTodoContainer />,
     },
     {
-        path: '/workspace/:id/products',
-        element: <ProductsContainer />,
+        path: '/workspace/:id/supports',
+        element: <SupportsContainer />,
     },
     {
         path: '/workspace/:id/role',
