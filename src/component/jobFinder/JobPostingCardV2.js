@@ -15,14 +15,13 @@ export default (props) => {
     }, []);
 
     const setGruopImage = async () => {
-        const companyImage = await API.fetchCompanyImage(props.posting.company_image); //프로필 이미지 불러오는 코드
-        const postingImage = await API.fetchCompanyImage(props.posting.posting_image);
-        console.log(companyImage);
-        if(companyImage !== null) {
+        if(props.posting.company_image !== null) {
             console.log('111')
+            const companyImage = await API.fetchCompanyImage(props.posting.company_image); //프로필 이미지 불러오는 코드
             setUploadedCompanyImage(companyImage);
         }
-        if(postingImage !== null) {
+        if(props.posting.posting_image !== null) {
+            const postingImage = await API.fetchCompanyImage(props.posting.posting_image);
             setUploadedPostingImage(postingImage);
         }
     }
@@ -45,7 +44,7 @@ export default (props) => {
         >
             <CardHeader
                 avatar={
-                    <Avatar aria-label="recipe" src={uploadedCompanyImage}  >
+                    <Avatar aria-label="recipe" alt={props.posting.name} src={uploadedCompanyImage}  >
                         회사 이미지
                     </Avatar>
                 }
@@ -67,7 +66,7 @@ export default (props) => {
 
             <CardMedia
                 component="img"
-                //height="194"
+                height="150"
                 image={uploadedPostingImage}
                 alt="채용 공고 이미지"
                 sx={{
@@ -75,7 +74,7 @@ export default (props) => {
                 }}
             />
 
-            <Divider sx={{ margin: 0 }}/>
+            <Divider sx={{ marginTop: 0 }}/>
 
             <CardContent sx={{ py: '8px' }}>
                 <Typography variant="h5">
@@ -84,13 +83,11 @@ export default (props) => {
                 <Typography variant="body2" color="text.secondary">
                     ~{props.posting.period}
                 </Typography>
-            </CardContent>
 
-            <Divider sx={{ margin: 0 }}/>
-            
-            <CardActions disableSpacing sx={{ px: '24px' }}>
+                <Divider />
+
                 <TechStack tech_stack={props.posting.skill_tags} />
-            </CardActions>
+            </CardContent>
         </Card>
     )
 }
