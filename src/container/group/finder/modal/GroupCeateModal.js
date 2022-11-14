@@ -11,6 +11,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
+import { locals } from "../../../../assets/tag/Local"
 
 const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
 
@@ -46,12 +47,18 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
 
 
     const [selected, setSelected] = useState([]);
+    const [selectedLocals1, setSelectedLocals1] = useState([]);
+    const [selectedLocals2, setSelectedLocals2] = useState([]);
+    const [selectedLocals3, setSelectedLocals3] = useState([]);
 
     const createGroup = () => {
         const newGroupData = {
             ...project,
             long_description: convertedContent,
             tech_stack: selected.map((s) => s.value),
+            local1: selectedLocals1.map((s) => s.value), // (new)지역
+            local2: selectedLocals2.map((s) => s.value), // (new)지역
+            local3: selectedLocals3.map((s) => s.value), // (new)지역
             manager: userInfo.user_id,
             members: [{
                 user_id: userInfo.user_id,
@@ -190,6 +197,25 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                 value={selected}
                                 onChange={setSelected}
                                 labelledBy="Select"
+                            />
+                            <Typography variant="h4">지역</Typography>
+                            <MultiSelect
+                                options={locals}
+                                value={selectedLocals1}
+                                onChange={setSelectedLocals1}
+                                labelledBy="Local1"
+                            />
+                            <MultiSelect
+                                options={locals}
+                                value={selectedLocals2}
+                                onChange={setSelectedLocals2}
+                                labelledBy="Local2"
+                            />
+                            <MultiSelect
+                                options={locals}
+                                value={selectedLocals3}
+                                onChange={setSelectedLocals3}
+                                labelledBy="Local3"
                             />
                         </Box>
                         {
