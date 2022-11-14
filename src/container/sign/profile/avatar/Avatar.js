@@ -3,7 +3,7 @@ import AvatarEditButton from "./AvatarEditButton";
 import * as API from '../../../../api/API';
 import defaultImage from '../../../../assets/img/logo512.png';
 
-export default ({ user_id, imgURL, edit }) => {
+const Avatar = ({ user_id, imgURL, edit }) => {
     const [uploadedImage, setUploadedImage] = useState(null);
 
     useEffect(() => {
@@ -23,6 +23,7 @@ export default ({ user_id, imgURL, edit }) => {
             <div className="itemCenter">
                 <img
                     className="border rounded-circle"
+                    alt=''
                     width="140"
                     height="140"
                     src={uploadedImage}
@@ -35,3 +36,5 @@ export default ({ user_id, imgURL, edit }) => {
         </>
     )
 }
+
+export default Avatar;
