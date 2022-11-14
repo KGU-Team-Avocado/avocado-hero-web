@@ -83,6 +83,6 @@ const ProfileCard = (props) => {
             <ProfileGroup user_id={profile?.user_id}/>
             <ProfilePortpolio />
         </>
-    )
-}
+    );
+};
 export default ProfileCard; 

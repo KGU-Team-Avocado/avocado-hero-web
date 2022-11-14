@@ -35,7 +35,7 @@ const SignUp = () => {
         console.log(JSON.stringify(values));
         if (Object.values(values).every((val) => val.length > 0)) {
             // 회원가입 허용
-            alert('회원가입 시켜줄게')
+            alert('회원가입 시켜줄게');
             axios
                 .post("/usersRouter/register", {
                     user_id: values.id,
@@ -50,7 +50,7 @@ const SignUp = () => {
                         alert("이미 사용중인 아이디입니다.");
                     }
                     if (response.data.success === true) {
-                        navigate('/')
+                        navigate('/');
                         // window.location.href = ""; //홈에서 회원가입 하는 사람을 위해서는 그냥 refresh가 더 나음
                     }
                 })
@@ -61,9 +61,9 @@ const SignUp = () => {
         }
         else {
             // 다시 입력하라고 난리
-            alert('안돼 돌아가')
+            alert('안돼 돌아가');
         }
-    }
+    };
     return (
         <>
             <Card sx={{
@@ -181,6 +181,6 @@ const SignUp = () => {
                 </CardContent>
             </Card>
         </>
-    )
-}
-export default SignUp 
+    );
+};
+export default SignUp; 

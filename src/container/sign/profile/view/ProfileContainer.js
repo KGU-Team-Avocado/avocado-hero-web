@@ -5,7 +5,7 @@ import MKButton from 'component/common/mui-components/MKButton';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import * as API from "../../../../api/API"
+import * as API from "../../../../api/API";
 import ProfileCard from './ProfileCard';
 
 
@@ -23,10 +23,10 @@ const ProfileContainer = () => {
     }, [profile_id]);
 
     const getAndSetUserProfile = async (profile_id) => {
-        const temp = await API.findOneUserByUserId(profile_id)
+        const temp = await API.findOneUserByUserId(profile_id);
         await setProfile(temp);
         setLoaded(true);
-    }
+    };
 
     return (
         <>
@@ -98,7 +98,7 @@ const ProfileContainer = () => {
                     </Box>
             }
         </>
-    )
-}
+    );
+};
 
 export default ProfileContainer;

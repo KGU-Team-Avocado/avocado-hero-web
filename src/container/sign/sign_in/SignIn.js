@@ -43,14 +43,14 @@ const SignIn = () => {
         if (e.key === 'Enter') {
             login();
         }
-    }
+    };
 
     useEffect(() => {
         return () => {
             //clean up function으로 나갈 때 status를 초기 상태인 idle로 되돌려줌
             dispatch(initStatus());
-        }
-    }, [])
+        };
+    }, []);
 
     useEffect(() => {
         // 로그인 성공 시
@@ -75,7 +75,7 @@ const SignIn = () => {
             default:
                 return "?????";
         }
-    }
+    };
 
     const statusButtonText = (status) => {
         switch (status) {
@@ -88,7 +88,7 @@ const SignIn = () => {
             default:
                 return "?????";
         }
-    }
+    };
 
     return (
         <>
@@ -157,7 +157,7 @@ const SignIn = () => {
                 </CardContent>
             </Card>
         </>
-    )
-}
+    );
+};
 
 export default SignIn;

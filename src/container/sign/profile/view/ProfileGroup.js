@@ -23,15 +23,15 @@ const ProfileGroup = ({ user_id }) => {
         // }
         setSelectedGroup(group);
         setGroupReadmeModalOpen(true);
-    }
+    };
 
     useEffect(() => {
         // API로 분리할 필요성이 있음
         axios.post("/groupsRouter/getMyGroup", {
             user_id: user_id,
         }).then((response) => {
-            setOnGroups(response.data.filter((group) => group.end_project === false))
-            setOffGroups(response.data.filter((group) => group.end_project === true))
+            setOnGroups(response.data.filter((group) => group.end_project === false));
+            setOffGroups(response.data.filter((group) => group.end_project === true));
         }).catch(function (error) {
             console.log(error);
         });
@@ -106,8 +106,8 @@ const ProfileGroup = ({ user_id }) => {
                 component={<ReadmeModal group={selectedGroup} setOpen={setGroupReadmeModalOpen} />}
             />
         </>
-    )
-}
+    );
+};
 
 
 export default ProfileGroup; 

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import RoleCard from "component/group/card/RoleCard";
-import { ResponsiveBar } from '@nivo/bar'
+import { ResponsiveBar } from '@nivo/bar';
 
 const ProfilePortpolio = () => {
     // const [groups, setGroups] = useState([]);
@@ -27,12 +27,12 @@ const ProfilePortpolio = () => {
         if (window.confirm(group.project_name + '으로 이동하시겠습니까?')) {
             window.location.href = "/project/" + group._id;
         }
-    }
+    };
     const sessionStorage = window.sessionStorage;
 
     useEffect(() => {
         if (sessionStorage.getItem("user")) {
-            const userInfo = JSON.parse(sessionStorage.getItem("user"))
+            const userInfo = JSON.parse(sessionStorage.getItem("user"));
             axios.post("/groupsRouter/getAppliedGroup", {
                 user_id: userInfo.user_id,
             }).then((response) => {
@@ -165,7 +165,7 @@ const ProfilePortpolio = () => {
                 ]}
                 role="application"
                 ariaLabel="Nivo bar chart demo"
-                barAriaLabel={function(e){return e.id+": "+e.formattedValue+" in country: "+e.indexValue}}
+                barAriaLabel={function(e){return e.id+": "+e.formattedValue+" in country: "+e.indexValue;}}
                 
             />
             </div>
@@ -212,7 +212,7 @@ const ProfilePortpolio = () => {
                                                 key={group._id}
                                                 group={group}
                                                 setSelectedGroup={setSelectedGroup}
-                                        />
+                                        />;
                                         }
                                     })
                                 }
@@ -224,7 +224,7 @@ const ProfilePortpolio = () => {
             </div>
             
         </>
-    )
-}
+    );
+};
 
 export default ProfilePortpolio;
