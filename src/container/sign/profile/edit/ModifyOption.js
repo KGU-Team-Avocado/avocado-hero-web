@@ -1,6 +1,6 @@
 import { MultiSelect } from "react-multi-select-component";
 
-const ModifyOption = ({option, selected, setSelected, modifyOption}) => {
+const ModifyOption = ({option, selected, setSelected}) => {
     return (
         <div>
             <MultiSelect
@@ -14,7 +14,7 @@ const ModifyOption = ({option, selected, setSelected, modifyOption}) => {
                 {/* <button type="button" className="btn btn-danger" onClick={() => cancleEdit("")} data-bs-dismiss="modal">취소</button> */}
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default ModifyOption;

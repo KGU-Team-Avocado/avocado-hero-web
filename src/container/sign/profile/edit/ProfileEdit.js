@@ -1,8 +1,6 @@
 import axios from "axios";
-import { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -13,7 +11,6 @@ import '../profile.css';
 import InputGroup from 'react-bootstrap/InputGroup';
 import ModifyOption from "./ModifyOption";
 import Avatar from "../avatar/Avatar";
-import AvatarEditButton from "../avatar/AvatarEditButton";
 
 const ProfileEdit = (props) => {
     const [edit, setEdit] = useState(false);
@@ -35,9 +32,9 @@ const ProfileEdit = (props) => {
         console.log('profileEdit 출력' + props.profile);
 
         // setSelected(props.profile.fields.map((field) => { return findProfile(field) }))
-        setSelectedFields(props.profile.fields && props.profile.fields.map((field) => { return findField(field) }))
-        setSelectedKeywords(props.profile.keywords && props.profile.keywords.map((keyword) => { return findKeyword(keyword) }))
-        setSelectedPersonals(props.profile.personalities && props.profile.personalities.map((personal) => { return findPersonal(personal) }))
+        setSelectedFields(props.profile.fields && props.profile.fields.map((field) => { return findField(field); }));
+        setSelectedKeywords(props.profile.keywords && props.profile.keywords.map((keyword) => { return findKeyword(keyword); }));
+        setSelectedPersonals(props.profile.personalities && props.profile.personalities.map((personal) => { return findPersonal(personal); }));
     }, [props.profile]);
 
     const modifyOption = () => {
@@ -55,34 +52,34 @@ const ProfileEdit = (props) => {
             console.log(error);
         });
         setEdit(false);
-    }
+    };
 
-    const editWho = () => {
-        setEdit(true);
-        console.log(profile)
+    // const editWho = () => {
+    //     setEdit(true);
+    //     console.log(profile);
 
-        // const select = profile.fields.map((field) => {return findProfile(field)});
-        // setSelected(select)
+    //     // const select = profile.fields.map((field) => {return findProfile(field)});
+    //     // setSelected(select)
 
-        setSelectedFields(profile.fields.map((field) => { return findField(field) }))
-        setSelectedKeywords(profile.keywords.map((keyword) => { return findKeyword(keyword) }))
-        setSelectedPersonals(profile.personalities.map((personal) => { return findPersonal(personal) }))
-    }
+    //     setSelectedFields(profile.fields.map((field) => { return findField(field); }));
+    //     setSelectedKeywords(profile.keywords.map((keyword) => { return findKeyword(keyword); }));
+    //     setSelectedPersonals(profile.personalities.map((personal) => { return findPersonal(personal); }));
+    // };
 
     const findField = (r) => {
-        const idx = fields.findIndex((field) => field.value === r)
-        return fields[idx]
-    }
+        const idx = fields.findIndex((field) => field.value === r);
+        return fields[idx];
+    };
 
     const findKeyword = (p) => {
-        const idx = keywords.findIndex((keyword) => keyword.value === p)
-        return keywords[idx]
-    }
+        const idx = keywords.findIndex((keyword) => keyword.value === p);
+        return keywords[idx];
+    };
 
     const findPersonal = (q) => {
-        const idx = personals.findIndex((personal) => personal.value === q)
-        return personals[idx]
-    }
+        const idx = personals.findIndex((personal) => personal.value === q);
+        return personals[idx];
+    };
 
     const fields = [
         { label: "프론트", value: "front-end" },
@@ -152,8 +149,8 @@ const ProfileEdit = (props) => {
         setProfile({
             ...profile,
             [e.target.name]: e.target.value
-        })
-    }
+        });
+    };
 
     const onClickSubmit = () => {
         axios
@@ -189,22 +186,22 @@ const ProfileEdit = (props) => {
     const [countLink, setCountLink] = useState([0]);
 
     const onAddDetailDiv = () => {
-        let countArr = [...countList]
-        let counter = countArr.slice(-1)[0]
-        counter += 1
-        countArr.push(counter)	// index 사용 X
+        let countArr = [...countList];
+        let counter = countArr.slice(-1)[0];
+        counter += 1;
+        countArr.push(counter);	// index 사용 X
         // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
-        setCountList(countArr)
-    }
+        setCountList(countArr);
+    };
 
     const onAddLink = () => {
-        let countArr = [...countLink]
-        let counter = countArr.slice(-1)[0]
-        counter += 1
-        countArr.push(counter)	// index 사용 X
+        let countArr = [...countLink];
+        let counter = countArr.slice(-1)[0];
+        counter += 1;
+        countArr.push(counter);	// index 사용 X
         // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
-        setCountLink(countArr)
-    }
+        setCountLink(countArr);
+    };
 
 
     // const onAddLink = () => {
@@ -270,7 +267,7 @@ const ProfileEdit = (props) => {
                     <h3>프로필 수정</h3>
                     <Container>
                         <Row>
-                            <div class="col-xl-3" >
+                            <div className="col-xl-3" >
                                 <Card style={{ margin: '10px 0' }}>
                                     <Card.Body>
                                         {/* <div class="itemCenter">
@@ -318,12 +315,12 @@ const ProfileEdit = (props) => {
                             </Card.Body>
                         </Card>
                             </div>
-                            <div class="col-xl-9">
+                            <div className="col-xl-9">
                                 <Card style={{ margin: '10px 0' }}>
                                     <Card.Body>
                                         <Card.Title>기본 정보</Card.Title>
                                         <Card.Text>
-                                            <div class="item"><div class="contentTitle">소속</div>
+                                            <div className="item"><div className="contentTitle">소속</div>
                                                 {/* <AddInput countList={countList} /> */}
 
 
@@ -346,7 +343,7 @@ const ProfileEdit = (props) => {
                                             /> */}
                                      
                                             </div>
-                                            <div class="item"><div class="contentTitle">분야</div>
+                                            <div className="item"><div className="contentTitle">분야</div>
                                                 {/* 여기부터 수정 버튼까 삭제해도됨 */}
                                                 {edit == true ?
                                                     <>
@@ -377,7 +374,7 @@ const ProfileEdit = (props) => {
                                     /> */}
                                             </div>
 
-                                            <div class="item">
+                                            <div className="item">
                                                 {/* <AddInput countList={countLink} />
                                     <Button onClick={onAddLink}>+</Button>
                                      <Form.Control type="text" name="links" placeholder=""
@@ -409,21 +406,21 @@ const ProfileEdit = (props) => {
                                     <Card.Body>
                                         <Card.Title>세부 정보</Card.Title>
                                         <Card.Text>
-                                            <div class="item"><div class="contentTitle">키워드</div>
+                                            <div className="item"><div className="contentTitle">키워드</div>
                                                 <MultiSelect
                                                     options={keywords}
                                                     value={selectedKeywords}
                                                     onChange={setSelectedKeywords}
                                                 />
                                             </div>
-                                            <div class="item"><div class="contentTitle">성향</div>
+                                            <div className="item"><div className="contentTitle">성향</div>
                                                 <MultiSelect
                                                     options={personals}
                                                     value={selectedPersonals}
                                                     onChange={setSelectedPersonals}
                                                 />
                                             </div>
-                                            <div class="item">
+                                            <div className="item">
                                                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                                     <Form.Label>소개글</Form.Label>
                                                     <Form.Control as="textarea" name="introduce" placeholder="" rows={3} onChange={handleInput}
@@ -440,7 +437,7 @@ const ProfileEdit = (props) => {
                 </>
             }
         </>
-    )
-}
+    );
+};
 
 export default ProfileEdit;

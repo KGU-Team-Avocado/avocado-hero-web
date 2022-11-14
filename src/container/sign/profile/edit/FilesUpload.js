@@ -19,9 +19,9 @@ function FilesUpload() {
 
     axios
       .post("http://localhost:4000/api/user-profile", formData, {})
-    // form-data, x-www-form-urlencoded 등의 파일을 보낼 때에는 헤더를 추가해줘야 한다.
-    // 위의 형식은 { headers: { 'Content-Type': 'multipart/form-data' } } 이다.
-    // 하지만 headers 의 기본 Content-Type 이 multipart/form-data 이므로 생략 가능하다.
+      // form-data, x-www-form-urlencoded 등의 파일을 보낼 때에는 헤더를 추가해줘야 한다.
+      // 위의 형식은 { headers: { 'Content-Type': 'multipart/form-data' } } 이다.
+      // 하지만 headers 의 기본 Content-Type 이 multipart/form-data 이므로 생략 가능하다.
       .then((res) => {
         console.log(res);
       });
