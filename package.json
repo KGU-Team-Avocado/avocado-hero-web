@@ -60,6 +60,11 @@
     "redux-persist": "^6.0.0",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
