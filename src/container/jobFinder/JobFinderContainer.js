@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import axios from "axios";
-import JobPostingCard from "./JobPostingCard"
 // import Button from "react-bootstrap/Button";
-import { BiBookmark } from "react-icons/bi";
 import JobList from "../../component/jobFinder/JobList";
-import { Box, Button, ButtonGroup, Stack, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
-import MKButton from "component/common/mui-components/MKButton";
+import { Box, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 
-export default () => {
+const JobFinderContainer = () => {
 
     const [onOff, setOnOff] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
@@ -19,13 +16,13 @@ export default () => {
     const [alignment, setAlignment] = useState('false');
 
     useEffect(() => {
-        console.log('리스트')
+        console.log('리스트');
         if (sessionStorage.getItem("user")) {
             setUserInfo(JSON.parse(sessionStorage.getItem("user")));
         }
 
         axios.get("/companiesRouter/getPost").then((response) => {
-            console.log(JSON.stringify(response.data))
+            console.log(JSON.stringify(response.data));
             setPostings(response.data);
         }).catch(function (error) {
             console.log(error);
@@ -49,12 +46,12 @@ export default () => {
 
     const getBookmatrkList = () => {
         axios.post("/bookmarksRouter/getMyBookmark", { user_id: userInfo.user_id }).then((response) => {
-            console.log(JSON.stringify(response.data))
+            console.log(JSON.stringify(response.data));
             setBookmarks(response.data);
         }).catch(function (error) {
             console.log(error);
         });
-    }
+    };
 
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
@@ -93,5 +90,6 @@ export default () => {
             </Box>
             <JobList postings={onOff ? bookmarks : postings} userInfo={userInfo} bookmarks={bookmarks} getBookmatrkList={getBookmatrkList} />
         </>
-    )
-}
+    );
+};
+export default JobFinderContainer; 

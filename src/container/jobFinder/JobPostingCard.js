@@ -1,5 +1,6 @@
-export default (props) => {
-    
+//@deprecated
+const JobPostingCard = (props) => {
+
     return (
         <div>
             <div className="list-group list-group-light">
@@ -26,8 +27,10 @@ export default (props) => {
             </div>
 
         </div>
-    )
-}
+    );
+};
+
+export default JobPostingCard;
 
 // export default (props) => {
 //     return (
