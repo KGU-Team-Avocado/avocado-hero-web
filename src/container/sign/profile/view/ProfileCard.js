@@ -1,23 +1,12 @@
-import { Card, CardActionArea, CardContent, Chip, Grid, Stack, Typography } from "@mui/material";
+import { Chip, Grid, Stack, Typography } from "@mui/material";
 import ResponsiveCard from "component/common/ResponsiveCard";
 import TechStack from "component/common/TechStack";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Avatar from "../avatar/Avatar";
 import ProfileGroup from "./ProfileGroup";
 import ProfilePortpolio from "./ProfilePortpolio";
 import * as API from "../../../../api/API";
 
-export default (props) => {
-
-    const navigate = useNavigate();
-    const [groups, setGroups] = useState([]);
-
-    const setSelectedGroup = (group) => {
-        if (window.confirm(group.project_name + '으로 이동하시겠습니까?')) {
-            navigate(`/workspace/${group._id}`);
-        }
-    }
+const ProfileCard = (props) => {
 
     const profile = props.profile;
 
@@ -96,3 +85,4 @@ export default (props) => {
         </>
     )
 }
+export default ProfileCard; 
