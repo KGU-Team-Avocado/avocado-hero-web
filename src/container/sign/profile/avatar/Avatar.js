@@ -13,11 +13,11 @@ const Avatar = ({ user_id, imgURL, edit }) => {
 
     const setProfileImage = async () => {
         setUploadedImage(await API.fetchProfileImage(imgURL)); //프로필 이미지 불러오는 코드
-    }
+    };
 
     const handleImgError = (e) => {
         e.target.src = defaultImage;
-    }
+    };
 
     return (
         <>
@@ -35,7 +35,7 @@ const Avatar = ({ user_id, imgURL, edit }) => {
                 }
             </div>
         </>
-    )
-}
+    );
+};
 
 export default Avatar;
