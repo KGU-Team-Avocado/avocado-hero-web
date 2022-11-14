@@ -1,12 +1,12 @@
-import { Box, Button, FormControl, Stack, Typography } from '@mui/material';
+import { Box, FormControl, Stack, Typography } from '@mui/material';
 import { refreshUserAsync } from 'api/redux/user/userSlice';
 import { selectUser } from 'api/redux/user/userSlice'
 import MKButton from 'component/common/mui-components/MKButton';
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import * as API from '../../../../api/API';
+import React from 'react';
 
-export default ({ setUploadedImage }) => {
+const AvatarEditButton =  ({ setUploadedImage }) => {
   const user = useSelector(selectUser);
   const [image, setImage] = useState({ preview: '', data: '' })
   const dispatch = useDispatch();
@@ -60,3 +60,4 @@ export default ({ setUploadedImage }) => {
     </FormControl>
   )
 }
+export default AvatarEditButton;

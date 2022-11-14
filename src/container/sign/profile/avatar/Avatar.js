@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AvatarEditButton from "./AvatarEditButton";
 import * as API from '../../../../api/API';
 import defaultImage from '../../../../assets/img/logo512.png';
+import React from 'react';
 
 const Avatar = ({ user_id, imgURL, edit }) => {
     const [uploadedImage, setUploadedImage] = useState(null);
