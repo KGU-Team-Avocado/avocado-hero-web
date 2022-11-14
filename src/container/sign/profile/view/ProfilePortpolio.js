@@ -1,10 +1,5 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { role } from "../../../../assets/tag/Role";
-import * as API from "../../../../api/API";
-import { CardMembership, Groups } from "@mui/icons-material";
-import GroupCard from "../../../../component/group/card/GroupCard";
+import { useEffect, useState } from "react";
 import RoleCard from "component/group/card/RoleCard";
 import { ResponsiveBar } from '@nivo/bar'
 
@@ -33,7 +28,6 @@ const ProfilePortpolio = () => {
             window.location.href = "/project/" + group._id;
         }
     }
-    const [appliedGroups, setAppliedGroups] = useState([]);
     const sessionStorage = window.sessionStorage;
 
     useEffect(() => {

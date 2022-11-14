@@ -9,7 +9,7 @@ const SignUpContainer = () => {
         direction="row"
         justifyContent="center"
       >
-        <SignUp/>
+        <SignUp />
       </Stack>
 
     </>

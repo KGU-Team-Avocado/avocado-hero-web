@@ -1,14 +1,14 @@
 import axios from "axios";
 
-import { useRef, useState } from "react";
-import { Card, CardContent, FormControl, FormControlLabel, FormLabel, IconButton, InputAdornment, InputLabel, OutlinedInput, Radio, RadioGroup, Stack, TextField, Typography } from "@mui/material";
+import { useState } from "react";
+import { Card, CardContent, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Stack, TextField, Typography } from "@mui/material";
 import MKButton from "component/common/mui-components/MKButton";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
 
-export default () => {
+const SignUp = () => {
     let navigate = useNavigate();
 
     const user = useSelector(selectUser);
@@ -183,3 +183,4 @@ export default () => {
         </>
     )
 }
+export default SignUp 
