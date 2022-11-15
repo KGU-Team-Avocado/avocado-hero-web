@@ -21,9 +21,6 @@ const ProfilePortpolio = () => {
     useEffect(() => {
         if (sessionStorage.getItem("user")) {
             const userInfo = JSON.parse(sessionStorage.getItem("user"));
-            const role_statistics = role.map((r) => {return {"id": r.value, "label": r.label, "value": 1}})
-            setRoleStatistics(role_statistics);
-            console.log(role_statistics);
             // axios.post("/groupsRouter/getAppliedGroup", {
             //     user_id: userInfo.user_id,
             // }).then((response) => {
@@ -35,11 +32,21 @@ const ProfilePortpolio = () => {
                 user_id: userInfo.user_id,
             }).then((response) => {
                 setGroups(response.data);
+                formatRoleData(response.data, userInfo.user_id);
             }).catch(function (error) {
                 console.log(error);
             });
         }
     }, []);
+
+    const formatRoleData = (groups, user_id) => {
+        const role_statistics = role.map((r) => {return {"id": r.value, "label": r.label, "value": 0}})
+        groups.map((group) => {
+            const user_role = group.members.find((m) => m.user_id === user_id).user_role;
+            user_role?.map((r) => role_statistics.find(rs => rs.id === r).value += 1)
+        })
+        setRoleStatistics(role_statistics);
+    }
 
 
     return (
