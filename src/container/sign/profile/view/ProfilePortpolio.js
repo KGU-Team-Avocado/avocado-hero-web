@@ -4,23 +4,6 @@ import RoleCard from "component/group/card/RoleCard";
 import { ResponsiveBar } from '@nivo/bar';
 
 const ProfilePortpolio = () => {
-    // const [groups, setGroups] = useState([]);
-
-    // useEffect(() => {
-
-    //     if (sessionStorage.getItem("user")) {
-    //         const userInfo = JSON.parse(sessionStorage.getItem("user"))
-    //         axios.post("/groupsRouter/getMyGroup", {
-    //             user_id: userInfo.user_id,
-    //         }).then((response) => {
-    //             setGroups(response.data);
-
-    //         }).catch(function (error) {
-    //             console.log(error);
-    //         });
-    //     }
-    // }, []);
-
     const [groups, setGroups] = useState([]);
     const setSelectedGroup = (group) => {
         // alert(JSON.stringify(group))
@@ -33,13 +16,13 @@ const ProfilePortpolio = () => {
     useEffect(() => {
         if (sessionStorage.getItem("user")) {
             const userInfo = JSON.parse(sessionStorage.getItem("user"));
-            axios.post("/groupsRouter/getAppliedGroup", {
-                user_id: userInfo.user_id,
-            }).then((response) => {
-                setAppliedGroups(response.data);
-            }).catch(function (error) {
-                console.log(error);
-            });
+            // axios.post("/groupsRouter/getAppliedGroup", {
+            //     user_id: userInfo.user_id,
+            // }).then((response) => {
+            //     setAppliedGroups(response.data);
+            // }).catch(function (error) {
+            //     console.log(error);
+            // });
             axios.post("/groupsRouter/getMyGroup", {
                 user_id: userInfo.user_id,
             }).then((response) => {
@@ -75,23 +58,7 @@ const ProfilePortpolio = () => {
                       "friesColor": "hsl(355, 70%, 50%)",
                       "donut": 51,
                       "donutColor": "hsl(8, 70%, 50%)"
-                    },
-                    // {
-                    //   "country": "AE",
-                    //   "hot dog": 181,
-                    //   "hot dogColor": "hsl(104, 70%, 50%)",
-                    //   "burger": 108,
-                    //   "burgerColor": "hsl(158, 70%, 50%)",
-                    //   "sandwich": 198,
-                    //   "sandwichColor": "hsl(71, 70%, 50%)",
-                    //   "kebab": 168,
-                    //   "kebabColor": "hsl(344, 70%, 50%)",
-                    //   "fries": 75,
-                    //   "friesColor": "hsl(325, 70%, 50%)",
-                    //   "donut": 128,
-                    //   "donutColor": "hsl(299, 70%, 50%)"
-                    // },
-                    
+                    }, 
                   ]}
                 keys={[
                     'hot dog',
@@ -170,7 +137,7 @@ const ProfilePortpolio = () => {
             />
             </div>
 
-            <div className="my-3">
+            {/* <div className="my-3">
                     <br />
                     
                     <h4>현재 소속 그룹의 역할</h4>
@@ -180,14 +147,15 @@ const ProfilePortpolio = () => {
                             ?
                             <>
                                 {
-                                    groups.map((group) => (
-                                        <RoleCard
-                                            key={group._id}
-                                            group={group}
-                                            setSelectedGroup={setSelectedGroup}
-                                            
-                                        />
-                                    ))
+                                    groups.map((group) => {
+                                        if (group.end_project === false) {
+                                            return <RoleCard
+                                                key={group._id}
+                                                group={group}
+                                                setSelectedGroup={setSelectedGroup}
+                                            />
+                                        }
+                                    })
                                 }
                             </>
                             :
@@ -207,7 +175,7 @@ const ProfilePortpolio = () => {
                             <>
                                 {
                                     groups.map((group) => {
-                                        if (group.end_project == true) {
+                                        if (group.end_project === true) {
                                             return <RoleCard
                                                 key={group._id}
                                                 group={group}
@@ -221,7 +189,7 @@ const ProfilePortpolio = () => {
                             <div>프로젝트가 없습니다.</div>
                     }
                 </div>
-            </div>
+            </div> */}
             
         </>
     );
