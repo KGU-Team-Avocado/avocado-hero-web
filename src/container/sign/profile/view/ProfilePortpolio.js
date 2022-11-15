@@ -2,9 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import RoleCard from "component/group/card/RoleCard";
 import { ResponsiveBar } from '@nivo/bar';
+import { role } from "../../../../assets/tag/Role";
+import ProfilePieChart from "./ProfilePieChart";
 
 const ProfilePortpolio = () => {
     const [groups, setGroups] = useState([]);
+    const [roleStatistics, setRoleStatistics] = useState([])
+
+
     const setSelectedGroup = (group) => {
         // alert(JSON.stringify(group))
         if (window.confirm(group.project_name + '으로 이동하시겠습니까?')) {
@@ -16,6 +21,9 @@ const ProfilePortpolio = () => {
     useEffect(() => {
         if (sessionStorage.getItem("user")) {
             const userInfo = JSON.parse(sessionStorage.getItem("user"));
+            const role_statistics = role.map((r) => {return {"id": r.value, "label": r.label, "value": 1}})
+            setRoleStatistics(role_statistics);
+            console.log(role_statistics);
             // axios.post("/groupsRouter/getAppliedGroup", {
             //     user_id: userInfo.user_id,
             // }).then((response) => {
@@ -136,6 +144,8 @@ const ProfilePortpolio = () => {
                 
             />
             </div>
+
+            <ProfilePieChart data={roleStatistics} />
 
             {/* <div className="my-3">
                     <br />
