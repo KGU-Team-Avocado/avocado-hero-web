@@ -9,7 +9,7 @@ const Funding = () => {
                 펀딩 페이지
             </ResponsiveCard>
         </Stack>
-    )
-}
+    );
+};
 
 export default Funding;
