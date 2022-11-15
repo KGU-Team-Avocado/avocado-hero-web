@@ -27,13 +27,12 @@ const Products = () => {
         },
     ];
     return (
-        <Box>
+        <Stack spacing={2}>
             <Stack
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
                 spacing={2}
-                mb={2}
             >
                 <Typography variant="h5"><LocalGroceryStoreIcon />히어로 매장</Typography>
                 {/* <Button variant="contained" color="success">등록하기</Button> */}
@@ -94,7 +93,7 @@ const Products = () => {
                 }
 
             </Grid>
-        </Box>
+        </Stack>
     );
 };
 export default Products;

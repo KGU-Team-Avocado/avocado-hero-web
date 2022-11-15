@@ -1,4 +1,4 @@
-import { Button, Chip, Grid, Stack, Typography } from "@mui/material";
+import { Alert, Button, Chip, Grid, Stack, Typography } from "@mui/material";
 import StoreIcon from '@mui/icons-material/Store';
 import ResponsiveCard from "component/common/ResponsiveCard";
 
@@ -40,8 +40,11 @@ const Place = () => {
     ];
 
     return (
-        <Stack>
+        <Stack spacing={2}>
             <Typography variant="h5"><StoreIcon />장소대여</Typography>
+            <Alert>
+                공간을 빌려드립니다.
+            </Alert>
             <Grid
                 container
                 rowSpacing={{ xs: 1, sm: 1, md: 2 }}
