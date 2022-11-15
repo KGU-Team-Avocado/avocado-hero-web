@@ -1,7 +1,7 @@
 import { Box, CircularProgress, Grid } from "@mui/material";
 import GroupCardV2 from "component/group/card/GroupCardV2";
 import { useEffect, useRef, useState } from "react";
-import * as API from "../../../api/API"
+import * as API from "../../../api/API";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import GroupJoinModalV2 from "./modal/GroupJoinModalV2";
@@ -10,16 +10,14 @@ const InfinityScrollGroupList = ({ code, groups, setGroups, isLoading, setLoadin
 
     const [selectedGroup, setSelectedGroup] = useState(null);
     const [groupJoinModalOpen, setGroupJoinModalOpen] = useState(false);
-    const [applicants, setApplicants] = useState(null);
-    const [groupManager, setGroupManager] = useState(null);
     //무한스크롤을 위한 코드
     const DATA_REQUEST_SIZE = 3;
     const [target, setTarget] = useState(null);
     const groupDataSize = useRef(0);
-
-    const fetchData = async (groupDataSize) => {
-        console.log(`infinity ${groupDataSize} ${DATA_REQUEST_SIZE}`)
-        if (groupDataSize % DATA_REQUEST_SIZE <= DATA_REQUEST_SIZE) {
+    const groupMaxSize = useRef(1);
+    const fetchData = async (groupDataSize, groupMaxSize) => {
+        console.log(`infinity ${groupDataSize} ${DATA_REQUEST_SIZE} || groupMaxSize : ${groupMaxSize}`);
+        if (groupDataSize != groupMaxSize) {
             const response = await axios.post("/groupsRouter/getGroupsInfinity", {
                 code: code,
                 skip: groupDataSize,
@@ -27,19 +25,19 @@ const InfinityScrollGroupList = ({ code, groups, setGroups, isLoading, setLoadin
             });
             const data = await response.data;
             setGroups((prev) => prev.concat(data.groups));
-            return data.groups.length;
+            let results = { length: data.groups.length, maxCount: data.maxCount };
+            return results;
         }
         else {
             setLoading(false);
         }
-        return 0;
-    }
+        return { length: 0, maxCount: 0 };
+    };
 
     const handleGroupCard = (group) => {
-        setSelectedGroup(group)
-        setGroupJoinModalOpen(true)
+        setSelectedGroup(group);
+        setGroupJoinModalOpen(true);
 
-        console.log("ddd" + group?.manager);
         handleGroupManager(group?.manager);
 
         axios.post("/groupsRouter/getApplicants", {
@@ -50,21 +48,22 @@ const InfinityScrollGroupList = ({ code, groups, setGroups, isLoading, setLoadin
         }).catch(function (error) {
             console.log(error);
         });
-    }
+    };
     const handleGroupManager = async (user_id) => {
-        const temp = await API.findOneUserByUserId(user_id)
+        const temp = await API.findOneUserByUserId(user_id);
         setGroupManager(temp);
-    }
+    };
 
     useEffect(() => {
         let observer;
-        let receivedDataSize = 0;
+        let received = 0;
         if (target) {
             const onIntersect = async ([entry], observer) => {
                 if (entry.isIntersecting) {
                     observer.unobserve(entry.target);
-                    receivedDataSize = await fetchData(groupDataSize.current);
-                    groupDataSize.current += receivedDataSize;
+                    received = await fetchData(groupDataSize.current, groupMaxSize.current);
+                    groupDataSize.current += received.length;
+                    groupMaxSize.current = received.maxCount;
                     observer.observe(entry.target);
                 }
             };
@@ -74,7 +73,7 @@ const InfinityScrollGroupList = ({ code, groups, setGroups, isLoading, setLoadin
         }
         return () => {
             observer && observer.disconnect();
-        }
+        };
     }, [target]);
 
 
@@ -115,6 +114,6 @@ const InfinityScrollGroupList = ({ code, groups, setGroups, isLoading, setLoadin
                 component={<GroupJoinModalV2 selectedGroup={selectedGroup} setOpen={setGroupJoinModalOpen} />}
             />
         </>
-    )
-}
+    );
+};
 export default InfinityScrollGroupList;
