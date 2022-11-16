@@ -6,6 +6,7 @@ import { role } from "../../../../assets/tag/Role";
 import ProfilePieChart from "./ProfilePieChart";
 import { Alert, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import ProfileRadar from "./ProfileRadar";
 
 const ProfilePortpolio = () => {
     const navigate = useNavigate();
@@ -171,6 +172,8 @@ const ProfilePortpolio = () => {
                         프로젝트 리스트 보기
                     </Button>} severity="info">역할 통계 데이터가 존재하지 않습니다. 프로젝트에 참여하여 새로운 역할을 받아보세요!</Alert>
             }
+
+            <ProfileRadar />
 
             {/* <div className="my-3">
                     <br />
