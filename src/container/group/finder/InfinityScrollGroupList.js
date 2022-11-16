@@ -37,21 +37,6 @@ const InfinityScrollGroupList = ({ code, groups, setGroups, isLoading, setLoadin
     const handleGroupCard = (group) => {
         setSelectedGroup(group);
         setGroupJoinModalOpen(true);
-
-        handleGroupManager(group?.manager);
-
-        axios.post("/groupsRouter/getApplicants", {
-            group_id: group?._id,
-        }).then((response) => {
-            setApplicants(response.data);
-            console.log(response.data);
-        }).catch(function (error) {
-            console.log(error);
-        });
-    };
-    const handleGroupManager = async (user_id) => {
-        const temp = await API.findOneUserByUserId(user_id);
-        setGroupManager(temp);
     };
 
     useEffect(() => {
