@@ -1,7 +1,6 @@
-import { Box, CircularProgress, Grid } from "@mui/material";
+import { Box, CircularProgress, Grid, Stack } from "@mui/material";
 import GroupCardV2 from "component/group/card/GroupCardV2";
 import { useEffect, useRef, useState } from "react";
-import * as API from "../../../api/API";
 import axios from "axios";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import GroupJoinModalV2 from "./modal/GroupJoinModalV2";
@@ -87,9 +86,19 @@ const InfinityScrollGroupList = ({ code, groups, setGroups, isLoading, setLoadin
                 }
                 {
                     isLoading &&
-                    <Box ref={setTarget}>
-                        <CircularProgress />
-                    </Box>
+                    <Grid item xs={12}>
+                        <Stack
+                            direction="row"
+                            justifyContent="center"
+                            alignItems="center"
+                            spacing={2}
+                            py={5}
+                        >
+                            <Box ref={setTarget}>
+                                <CircularProgress />
+                            </Box>
+                        </Stack>
+                    </Grid>
                 }
             </Grid>
             <ModalStaticBackdrop
