@@ -39,73 +39,12 @@ const ProfilePieChart = ({data}) => {
                 }}
                 defs={[
                     {
-                        id: 'dots',
-                        // type: 'patternDots',
-                        background: 'inherit',
-                        color: 'rgba(255, 255, 255, 0.3)',
-                        size: 4,
-                        padding: 1,
-                        stagger: true
-                    },
-                    {
-                        id: 'lines',
-                        // type: 'patternLines',
-                        background: 'inherit',
-                        color: 'rgba(255, 255, 255, 0.3)',
-                        rotation: -45,
-                        lineWidth: 6,
-                        spacing: 10
+                        id: 'custom',
+                        background: 'inherit'
                     }
                 ]}
                 fill={[
-                    {
-                        match: {
-                            id: 'project-manager'
-                        },
-                        id: 'dots'
-                    },
-                    {
-                        match: {
-                            id: 'front-end'
-                        },
-                        id: 'dots'
-                    },
-                    {
-                        match: {
-                            id: 'back-end'
-                        },
-                        id: 'dots'
-                    },
-                    {
-                        match: {
-                            id: 'server'
-                        },
-                        id: 'dots'
-                    },
-                    {
-                        match: {
-                            id: 'enterprise'
-                        },
-                        id: 'lines'
-                    },
-                    {
-                        match: {
-                            id: 'schedule-management'
-                        },
-                        id: 'lines'
-                    },
-                    {
-                        match: {
-                            id: 'design'
-                        },
-                        id: 'lines'
-                    },
-                    {
-                        match: {
-                            id: 'testing'
-                        },
-                        id: 'lines'
-                    }
+                    { match: '*', id: 'custom' }
                 ]}
                 legends={[
                     {
@@ -133,7 +72,6 @@ const ProfilePieChart = ({data}) => {
                     }
                 ]}
             />
-            <div>hello</div>
         </div>
     )
 }
