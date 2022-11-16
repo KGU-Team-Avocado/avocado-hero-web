@@ -47,18 +47,18 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
 
 
     const [selected, setSelected] = useState([]);
-    const [selectedLocals1, setSelectedLocals1] = useState([]);
-    const [selectedLocals2, setSelectedLocals2] = useState([]);
-    const [selectedLocals3, setSelectedLocals3] = useState([]);
+    // const [selectedLocals1, setSelectedLocals1] = useState([]);
+    // const [selectedLocals2, setSelectedLocals2] = useState([]);
+    // const [selectedLocals3, setSelectedLocals3] = useState([]);
 
     const createGroup = () => {
         const newGroupData = {
             ...project,
             long_description: convertedContent,
             tech_stack: selected.map((s) => s.value),
-            local1: selectedLocals1.map((s) => s.value), // (new)지역
-            local2: selectedLocals2.map((s) => s.value), // (new)지역
-            local3: selectedLocals3.map((s) => s.value), // (new)지역
+            // local1: selectedLocals1.map((s) => s.value), // (new)지역
+            // local2: selectedLocals2.map((s) => s.value), // (new)지역
+            // local3: selectedLocals3.map((s) => s.value), // (new)지역
             manager: userInfo.user_id,
             members: [{
                 user_id: userInfo.user_id,
@@ -198,7 +198,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                 onChange={setSelected}
                                 labelledBy="Select"
                             />
-                            <Typography variant="h4">지역</Typography>
+                            {/* <Typography variant="h4">지역</Typography>
                             <MultiSelect
                                 options={locals}
                                 value={selectedLocals1}
@@ -216,7 +216,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                 value={selectedLocals3}
                                 onChange={setSelectedLocals3}
                                 labelledBy="Local3"
-                            />
+                            /> */}
                         </Box>
                         {
                             groupCreateModalOpen &&
