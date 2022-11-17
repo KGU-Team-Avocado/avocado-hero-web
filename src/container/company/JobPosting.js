@@ -134,17 +134,7 @@ const JobPosting = () => {
       console.log(response)
     }
   }
-
-  const line = {
-    height: "2px",
-    width: "500px",
-    overflow: "visible",
-    color: "#999",
-    position: "relative",
-    margin: "2em auto",
-    background: "linear-gradient(to right, transparent, #999, transparent)",
-  }
-
+  
   return (
     <>
       <Stack spacing={2}>

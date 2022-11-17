@@ -3,17 +3,21 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
-import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
 import { tags } from '../../../../assets/tag/tags'
-import { Box, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, Checkbox, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
 
+    const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+    const checkedIcon = <CheckBoxIcon fontSize="small" />;
+    
     const userInfo = useSelector(selectUser);
 
     const [project, setProject] = useState({
@@ -45,19 +49,13 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
     }
 
 
-    const [selected, setSelected] = useState([]);
-    // const [selectedLocals1, setSelectedLocals1] = useState([]);
-    // const [selectedLocals2, setSelectedLocals2] = useState([]);
-    // const [selectedLocals3, setSelectedLocals3] = useState([]);
+    const [selectedSkillTags, setSelectedSkillTags] = useState([]);
 
     const createGroup = () => {
         const newGroupData = {
             ...project,
             long_description: convertedContent,
-            tech_stack: selected.map((s) => s.value),
-            // local1: selectedLocals1.map((s) => s.value), // (new)지역
-            // local2: selectedLocals2.map((s) => s.value), // (new)지역
-            // local3: selectedLocals3.map((s) => s.value), // (new)지역
+            tech_stack: selectedSkillTags.map((s) => s.value),
             manager: userInfo.user_id,
             members: [{
                 user_id: userInfo.user_id,
@@ -191,31 +189,30 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                         />
                         <Box>
                             <Typography variant="h4">Tech Stack</Typography>
-                            <MultiSelect
+                            <Autocomplete
+                                multiple
                                 options={tags.tech}
-                                value={selected}
-                                onChange={setSelected}
-                                labelledBy="Select"
+                                disableCloseOnSelect
+                                getOptionLabel={(option) => option.label}
+                                value={selectedSkillTags}
+                                onChange={(event, newValue) => {
+                                    setSelectedSkillTags(newValue);
+                                }}
+                                renderOption={(props, option, { selected }) => (
+                                    <li {...props}>
+                                        <Checkbox
+                                            icon={icon}
+                                            checkedIcon={checkedIcon}
+                                            style={{ marginRight: 8 }}
+                                            checked={selected}
+                                        />
+                                        {option.label}
+                                    </li>
+                                )}
+                                renderInput={(params) => (
+                                    <TextField {...params} label="기술" placeholder="기술" />
+                                )}
                             />
-                            {/* <Typography variant="h4">지역</Typography>
-                            <MultiSelect
-                                options={locals}
-                                value={selectedLocals1}
-                                onChange={setSelectedLocals1}
-                                labelledBy="Local1"
-                            />
-                            <MultiSelect
-                                options={locals}
-                                value={selectedLocals2}
-                                onChange={setSelectedLocals2}
-                                labelledBy="Local2"
-                            />
-                            <MultiSelect
-                                options={locals}
-                                value={selectedLocals3}
-                                onChange={setSelectedLocals3}
-                                labelledBy="Local3"
-                            /> */}
                         </Box>
                         {
                             groupCreateModalOpen &&
