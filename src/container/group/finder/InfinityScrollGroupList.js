@@ -73,7 +73,7 @@ const InfinityScrollGroupList = ({ code, groups, setGroups, isLoading, setLoadin
                     groups.length > 0
                         ?
                         groups.map((group) => (
-                            <Grid item xs={12} md={6} xxl={4} key={group._id}>
+                            <Grid item xs={12} xl={6} key={group._id}>
                                 <GroupCardV2
                                     key={group._id}
                                     group={group}
