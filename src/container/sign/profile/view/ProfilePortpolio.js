@@ -11,9 +11,12 @@ import ProfileRadar from "./ProfileRadar";
 const ProfilePortpolio = () => {
     const navigate = useNavigate();
 
+    const [user, setUser] = useState(null);
     const [groups, setGroups] = useState([]);
     const [roleStatistics, setRoleStatistics] = useState([])
     const [showRoleStatistics, setShowRoleStatistics] = useState(false)
+    const [evalStatistics, setEvalStatistics] = useState([])
+    const [showEvalStatistics, setShowEvalStatistics] = useState(false)
 
     const setSelectedGroup = (group) => {
         // alert(JSON.stringify(group))
@@ -26,13 +29,16 @@ const ProfilePortpolio = () => {
     useEffect(() => {
         if (sessionStorage.getItem("user")) {
             const userInfo = JSON.parse(sessionStorage.getItem("user"));
-            // axios.post("/groupsRouter/getAppliedGroup", {
-            //     user_id: userInfo.user_id,
-            // }).then((response) => {
-            //     setAppliedGroups(response.data);
-            // }).catch(function (error) {
-            //     console.log(error);
-            // });
+            setUser(userInfo);
+            axios.post("/evaluationsRouter/getEvalStatistics", {
+                user_id: userInfo.user_id,
+            }).then((response) => {
+                setEvalStatistics(response.data[0].score_eval);
+                setShowEvalStatistics(true);
+            }).catch(function (error) {
+                console.log(error);
+            });
+
             axios.post("/groupsRouter/getMyGroup", {
                 user_id: userInfo.user_id,
             }).then((response) => {
@@ -173,7 +179,7 @@ const ProfilePortpolio = () => {
                     </Button>} severity="info">역할 통계 데이터가 존재하지 않습니다. 프로젝트에 참여하여 새로운 역할을 받아보세요!</Alert>
             }
 
-            <ProfileRadar />
+            <ProfileRadar data={evalStatistics} user_id={user?.user_id} />
 
             {/* <div className="my-3">
                     <br />
