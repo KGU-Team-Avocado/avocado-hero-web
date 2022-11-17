@@ -33,8 +33,10 @@ const ProfilePortpolio = () => {
             axios.post("/evaluationsRouter/getEvalStatistics", {
                 user_id: userInfo.user_id,
             }).then((response) => {
-                setEvalStatistics(response.data[0].score_eval);
-                setShowEvalStatistics(true);
+                if (response.data !== []) {
+                    setEvalStatistics(response.data[0].score_eval);
+                    setShowEvalStatistics(true);
+                }
             }).catch(function (error) {
                 console.log(error);
             });
@@ -174,12 +176,18 @@ const ProfilePortpolio = () => {
             {showRoleStatistics ?
                 <ProfilePieChart data={roleStatistics} />
                 : <Alert action={
-                    <Button color="error" size="large" onClick={() => goProjectList()}>
+                    <Button color="error" size="large" onClick={() => navigate(`/groupFinder`)}>
                         프로젝트 리스트 보기
                     </Button>} severity="info">역할 통계 데이터가 존재하지 않습니다. 프로젝트에 참여하여 새로운 역할을 받아보세요!</Alert>
             }
 
-            <ProfileRadar data={evalStatistics} user_id={user?.user_id} />
+            {showEvalStatistics ?
+                <ProfileRadar data={evalStatistics} user_id={user?.user_id} />
+                : <Alert action={
+                    <Button color="error" size="large" onClick={() => navigate(`/myWorkspace`)}>
+                        내 워크스페이스 가기
+                    </Button>} severity="info">상호평가 통계 데이터가 존재하지 않습니다. 프로젝트 워크스페이스로 이동해 종료 프로젝트에서 상호평가를 진행해보세요!</Alert>
+            }
 
             {/* <div className="my-3">
                     <br />
