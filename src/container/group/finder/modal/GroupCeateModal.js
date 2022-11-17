@@ -1,18 +1,16 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
 import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
-import { options } from '../../../../assets/tag/Tech'
 import { tags } from '../../../../assets/tag/tags'
 import { Box, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
-import { locals } from "../../../../assets/tag/Local"
 
 const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
 
