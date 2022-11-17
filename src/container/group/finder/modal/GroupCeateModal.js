@@ -6,6 +6,7 @@ import { EditorState } from 'draft-js';
 import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
 import { options } from '../../../../assets/tag/Tech'
+import { tags } from '../../../../assets/tag/tags'
 import { Box, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
@@ -161,9 +162,9 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                         </>
                         }
                         {
-                            code.code&&
+                            code.code &&
                             <Box>
-                                <TextField helperText="이 페이지에서 그룹 등록시 조직 내에서만 검색이 가능합니다." label='조직 코드' value={code.code} disabled fullWidth/>
+                                <TextField helperText="이 페이지에서 그룹 등록시 조직 내에서만 검색이 가능합니다." label='조직 코드' value={code.code} disabled fullWidth />
                             </Box>
                         }
                         <TextField
@@ -193,7 +194,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                         <Box>
                             <Typography variant="h4">Tech Stack</Typography>
                             <MultiSelect
-                                options={options}
+                                options={tags.tech}
                                 value={selected}
                                 onChange={setSelected}
                                 labelledBy="Select"
