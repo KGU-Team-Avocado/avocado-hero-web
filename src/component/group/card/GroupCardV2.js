@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import TechStack from "../../common/TechStack"
 import * as API from "../../../api/API"
 import defaultImage from '../../../assets/img/logo512.png';
+import BadgeStack from "component/common/BadgeStack";
 
 const GroupCardV2 = (props) => {
 
@@ -52,7 +53,8 @@ const GroupCardV2 = (props) => {
                         {props.group.short_description}
                     </Typography>
                     <Box>
-                        <TechStack tech_stack={props.group.tech_stack} />
+                        {/* <TechStack tech_stack={props.group.tech_stack} /> */}
+                        <BadgeStack type='tech' stack={props.group.tech_stack} />
                     </Box>
                 </CardContent>
             </CardActionArea>
