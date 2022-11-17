@@ -1,9 +1,11 @@
+import { Box, Paper, Typography } from '@mui/material';
 import { ResponsiveRadar } from '@nivo/radar'
 
 const ProfileRadar = ({data, user_id}) => {
     return (
-        <div style={{ width: '100%', height: '500px', margin: '0 auto' }}>
-            <div>상호 평가 통계(데이터 구현 예정)</div>
+        <Paper>
+            <Typography variant='h5' align='center' pt={2}>상호평가 점수</Typography>
+            <div style={{ width: '100%', height: '500px', margin: '0 auto' }}>
             <ResponsiveRadar
                 data={data}
                 keys={[user_id]}
@@ -23,7 +25,8 @@ const ProfileRadar = ({data, user_id}) => {
                 dotLabel="value"
                 dotLabelYOffset={24}
             />
-        </div>
+            </div>
+        </Paper>
     )
 }
 

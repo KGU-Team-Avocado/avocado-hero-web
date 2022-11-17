@@ -4,7 +4,7 @@ import RoleCard from "component/group/card/RoleCard";
 import { ResponsiveBar } from '@nivo/bar';
 import { role } from "../../../../assets/tag/Role";
 import ProfilePieChart from "./ProfilePieChart";
-import { Alert, Button } from "@mui/material";
+import { Alert, Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ProfileRadar from "./ProfileRadar";
 
@@ -73,11 +73,11 @@ const ProfilePortpolio = () => {
     return (
         <>
             <div className="pt-3 pb-2 mb-3 border-bottom">
-                <h1 className="h2">역할</h1>
+                <h1 className="h2">통계</h1>
             </div>
 
             {/* 그래프 */}
-            <div style={{ width: '100%', height: '300px', margin: '0 auto' }}>
+            {/* <div style={{ width: '100%', height: '300px', margin: '0 auto' }}>
                 <ResponsiveBar
                     data={[
                         {
@@ -171,9 +171,9 @@ const ProfilePortpolio = () => {
                     barAriaLabel={function (e) { return e.id + ": " + e.formattedValue + " in country: " + e.indexValue; }}
 
                 />
-            </div>
+            </div> */}
 
-            {showRoleStatistics ?
+            {/* {showRoleStatistics ?
                 <ProfilePieChart data={roleStatistics} />
                 : <Alert action={
                     <Button color="error" size="large" onClick={() => navigate(`/groupFinder`)}>
@@ -181,13 +181,31 @@ const ProfilePortpolio = () => {
                     </Button>} severity="info">역할 통계 데이터가 존재하지 않습니다. 프로젝트에 참여하여 새로운 역할을 받아보세요!</Alert>
             }
 
-            {showEvalStatistics ?
-                <ProfileRadar data={evalStatistics} user_id={user?.user_id} />
-                : <Alert action={
-                    <Button color="error" size="large" onClick={() => navigate(`/myWorkspace`)}>
-                        내 워크스페이스 가기
-                    </Button>} severity="info">상호평가 통계 데이터가 존재하지 않습니다. 프로젝트 워크스페이스로 이동해 종료 프로젝트에서 상호평가를 진행해보세요!</Alert>
-            }
+            <div style={{ width: '100%', height: 'auto', margin: '0 auto' }}>
+                {showEvalStatistics ?
+                    <ProfileRadar data={evalStatistics} user_id={user?.user_id} />
+                    : <Alert action={
+                        <Button color="error" size="large" onClick={() => navigate(`/myWorkspace`)}>
+                            내 워크스페이스 가기
+                        </Button>} severity="info">상호평가 통계 데이터가 존재하지 않습니다. 프로젝트 워크스페이스로 이동해 종료 프로젝트에서 상호평가를 진행해보세요!</Alert>
+                }
+            </div> */}
+            <Grid container spacing={1}>
+                    {showRoleStatistics ?
+                        <Grid item sm={12} lg={6} minHeight={160}><ProfilePieChart data={roleStatistics} /></Grid>
+                        : <Grid xs={12}><Alert action={
+                            <Button color="error" size="large" onClick={() => navigate(`/groupFinder`)}>
+                                프로젝트 리스트 보기
+                            </Button>} severity="info">역할 통계 데이터가 존재하지 않습니다. 프로젝트에 참여하여 새로운 역할을 받아보세요!</Alert></Grid>
+                    }
+                {showEvalStatistics ?
+                    <Grid item sm={12} lg={6} minHeight={160}><ProfileRadar data={evalStatistics} user_id={user?.user_id} /></Grid>
+                    : <Grid xs={12}><Alert action={
+                        <Button color="error" size="large" onClick={() => navigate(`/myWorkspace`)}>
+                            내 워크스페이스 가기
+                        </Button>} severity="info">상호평가 통계 데이터가 존재하지 않습니다. 프로젝트 워크스페이스로 이동해 종료 프로젝트에서 상호평가를 진행해보세요!</Alert></Grid>
+                }
+            </Grid>
 
             {/* <div className="my-3">
                     <br />
