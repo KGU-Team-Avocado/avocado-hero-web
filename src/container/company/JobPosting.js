@@ -1,20 +1,13 @@
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import div from "react-bootstrap/Container";
-import axios from "axios";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { convertToHTML } from 'draft-convert';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { right } from "@popperjs/core";
 import * as API from "../../api/API"
-import { MultiSelect } from "react-multi-select-component";
-import { Autocomplete, Box, Checkbox, MenuItem, Stack, TextField, Typography } from "@mui/material";
-import { fields } from "../../assets/tag/Field";
+import { Autocomplete, Box, Checkbox, Stack, TextField, Typography } from "@mui/material";
+import { tags } from "../../assets/tag/tags";
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
@@ -24,7 +17,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const JobPosting = () => {
   const [selectedJobTag, setSelectedJobTag] = useState([]);
   const [selectedSkillTags, setSelectedSkillTags] = useState([]);
-
+  console.log(tags.job)
   const [company, setCompany] = useState({
     name: '',
     title: '',
@@ -190,7 +183,7 @@ const JobPosting = () => {
           onChange={(event, newValue) => {
             setSelectedJobTag(newValue);
           }}
-          options={fields.job}
+          options={tags.job}
           // sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="직무" />}
         />
@@ -203,7 +196,7 @@ const JobPosting = () => {
 
         <Autocomplete
           multiple
-          options={fields.skill}
+          options={tags.tech}
           disableCloseOnSelect
           getOptionLabel={(option) => option.label}
           value={selectedSkillTags}
