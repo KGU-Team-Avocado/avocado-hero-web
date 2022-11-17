@@ -136,7 +136,6 @@ const ProjectEvaluationContainer = () => {
 
     const saveEvaluation = () => {
         evaluation_index.map((element) => {
-            delete element.label;
             delete element.value;
             element.questions.map((q) => {
                 delete q.question;

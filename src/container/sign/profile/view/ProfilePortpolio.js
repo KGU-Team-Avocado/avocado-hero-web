@@ -6,13 +6,17 @@ import { role } from "../../../../assets/tag/Role";
 import ProfilePieChart from "./ProfilePieChart";
 import { Alert, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import ProfileRadar from "./ProfileRadar";
 
 const ProfilePortpolio = () => {
     const navigate = useNavigate();
 
+    const [user, setUser] = useState(null);
     const [groups, setGroups] = useState([]);
     const [roleStatistics, setRoleStatistics] = useState([])
     const [showRoleStatistics, setShowRoleStatistics] = useState(false)
+    const [evalStatistics, setEvalStatistics] = useState([])
+    const [showEvalStatistics, setShowEvalStatistics] = useState(false)
 
     const setSelectedGroup = (group) => {
         // alert(JSON.stringify(group))
@@ -25,13 +29,18 @@ const ProfilePortpolio = () => {
     useEffect(() => {
         if (sessionStorage.getItem("user")) {
             const userInfo = JSON.parse(sessionStorage.getItem("user"));
-            // axios.post("/groupsRouter/getAppliedGroup", {
-            //     user_id: userInfo.user_id,
-            // }).then((response) => {
-            //     setAppliedGroups(response.data);
-            // }).catch(function (error) {
-            //     console.log(error);
-            // });
+            setUser(userInfo);
+            axios.post("/evaluationsRouter/getEvalStatistics", {
+                user_id: userInfo.user_id,
+            }).then((response) => {
+                if (response.data !== []) {
+                    setEvalStatistics(response.data[0].score_eval);
+                    setShowEvalStatistics(true);
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+
             axios.post("/groupsRouter/getMyGroup", {
                 user_id: userInfo.user_id,
             }).then((response) => {
@@ -167,9 +176,17 @@ const ProfilePortpolio = () => {
             {showRoleStatistics ?
                 <ProfilePieChart data={roleStatistics} />
                 : <Alert action={
-                    <Button color="error" size="large" onClick={() => goProjectList()}>
+                    <Button color="error" size="large" onClick={() => navigate(`/groupFinder`)}>
                         프로젝트 리스트 보기
                     </Button>} severity="info">역할 통계 데이터가 존재하지 않습니다. 프로젝트에 참여하여 새로운 역할을 받아보세요!</Alert>
+            }
+
+            {showEvalStatistics ?
+                <ProfileRadar data={evalStatistics} user_id={user?.user_id} />
+                : <Alert action={
+                    <Button color="error" size="large" onClick={() => navigate(`/myWorkspace`)}>
+                        내 워크스페이스 가기
+                    </Button>} severity="info">상호평가 통계 데이터가 존재하지 않습니다. 프로젝트 워크스페이스로 이동해 종료 프로젝트에서 상호평가를 진행해보세요!</Alert>
             }
 
             {/* <div className="my-3">

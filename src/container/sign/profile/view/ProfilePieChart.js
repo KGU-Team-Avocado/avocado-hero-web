@@ -37,6 +37,7 @@ const ProfilePieChart = ({data}) => {
                         ]
                     ]
                 }}
+                colors={{ scheme: 'green_blue' }}
                 defs={[
                     {
                         id: 'custom',
