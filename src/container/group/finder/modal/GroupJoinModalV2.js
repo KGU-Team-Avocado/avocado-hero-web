@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
 import UserProfileCard from "component/jobFinder/UserProfileCard";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
+import BadgeStack from "component/common/BadgeStack";
 
 
 const GroupJoinModalV2 = (props) => {
@@ -112,7 +113,7 @@ const GroupJoinModalV2 = (props) => {
                     <Typography variant="h5">
                         Tech Stack
                     </Typography>
-                    <TechStack tech_stack={group ? group.tech_stack : []} />
+                    <BadgeStack type='tech' stack={group ? group.tech_stack : []} />
                     <Divider />
                     <Typography variant="h5">
                         팀장
