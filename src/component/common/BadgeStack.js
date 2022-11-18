@@ -20,6 +20,7 @@ const BadgeStack = ({ stack, type }) => {
                             backgroundColor: option?.bgColor, 
                             color: option?.txtColor,
                             marginRight:3,
+                            marginBottom:3,
                         }}
                     />
                     :
