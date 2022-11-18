@@ -16,7 +16,7 @@ const InfinityScrollGroupList = ({ code, groups, setGroups, isLoading, setLoadin
     const groupMaxSize = useRef(1);
     const fetchData = async (groupDataSize, groupMaxSize) => {
         console.log(`infinity ${groupDataSize} ${DATA_REQUEST_SIZE} || groupMaxSize : ${groupMaxSize}`);
-        if (groupDataSize != groupMaxSize) {
+        if (groupDataSize !== groupMaxSize) {
             const response = await axios.post("/groupsRouter/getGroupsInfinity", {
                 code: code,
                 skip: groupDataSize,
