@@ -119,10 +119,10 @@ const GroupJoinModalV2 = (props) => {
                         팀장
                     </Typography>
                     {/* findOneUserByUserId로 manager 정보 불러와서 하단에 연동해 줄 예정임 */}
-                    <UserProfileCard
+                    {/* <UserProfileCard
                         user={{ user_id: group?.manager, name: props.groupManager?.name }}
                         handleUserProfileCard={null}
-                    />
+                    /> */}
                     <Tooltip title="새 창으로 이동합니다.">
                         <MKButton
                             variant="contained"
