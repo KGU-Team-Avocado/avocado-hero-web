@@ -54,7 +54,7 @@ const ProfileGroup = ({ user_id }) => {
                             <>
                                 {
                                     onGroups.map((group) => (
-                                        <Grid item xs={12} md={6} xxl={4} key={group._id}>
+                                        <Grid item xs={12} xl={6} key={group._id}>
                                             <GroupCardV2
                                                 group={group}
                                                 handleGroupCard={handleGroupCard}
@@ -84,7 +84,7 @@ const ProfileGroup = ({ user_id }) => {
                             <>
                                 {
                                     offGroups.map((group) => (
-                                        <Grid item xs={12} md={6} xxl={4} key={group._id}>
+                                        <Grid item xs={12} xl={6} key={group._id}>
                                             <GroupCardV2
                                                 group={group}
                                                 handleGroupCard={handleGroupCard}
