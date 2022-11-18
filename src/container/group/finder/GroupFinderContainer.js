@@ -29,6 +29,7 @@ const GroupFinderContainer = () => {
     const filterGroup = (filteredGroups) => {
         setGroups(filteredGroups);
         setGroupFilterModalOpen(false);
+        setLoading(false);
     }
 
     // 필터링을 초기화했기 때문에 다시 전체 데이터를 받아오기 위한 메소드
