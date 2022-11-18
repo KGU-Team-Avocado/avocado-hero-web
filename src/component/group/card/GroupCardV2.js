@@ -94,24 +94,50 @@ const GroupCardV2 = (props) => {
 
                 </Grid>
                 <Grid item xs={12} md={7}>
-                    <Stack direction="row" justifyContent="space-between">
+                    <Stack
+                        direction="column"
+                        justifyContent="space-between"
+                        spacing={2}
+                        sx={{ height: '100%' }}
+                    >
+                        <Stack direction="row" justifyContent="space-between" sx={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                            <Box>
+                                <Chip label={props.group.group_name} color="secondary" variant="outlined" />
+                            </Box>
+                            <Box>
+                                <Chip label={props.group.close_application ? "모집종료" : "모집중"} color={props.group.close_application ? "error" : "success"} />
+                            </Box>
+                        </Stack>
                         <Box>
-                            <Chip label={props.group.group_name} color="secondary" variant="outlined" />
+                            <Typography
+                                gutterBottom
+                                variant="h3"
+                                sx={{
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: '1',
+                                    WebkitBoxOrient: 'vertical',
+                                }}
+                            >
+                                {props.group.project_name}
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: '3',
+                                    WebkitBoxOrient: 'vertical',
+                                }}
+                            >
+                                {props.group.short_description}
+                            </Typography>
                         </Box>
-                        <Box>
-                            <Chip label={props.group.close_application ? "모집종료" : "모집중"} color={props.group.close_application ? "error" : "success"} />
+                        <Box sx={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                            <BadgeStack type='tech' stack={props.group.tech_stack} />
                         </Box>
                     </Stack>
-                    <Typography gutterBottom variant="h3">
-                        {props.group.project_name}
-                    </Typography>
-
-                    <Typography variant="body2">
-                        {props.group.short_description}
-                    </Typography>
-                    <Box>
-                        <BadgeStack type='tech' stack={props.group.tech_stack} />
-                    </Box>
                 </Grid>
             </Grid>
         </ResponsiveCard>
