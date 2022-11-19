@@ -2,12 +2,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ImageIcon from '@mui/icons-material/Image';
 import WorkIcon from '@mui/icons-material/Work';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
-import { useEffect } from 'react';
-const GroupInfo = ({group}) => {
-    useEffect(()=>{
-
-    },[group]);
+import { Avatar, List, ListItem, ListItemAvatar, ListItemText, Tooltip } from '@mui/material';
+import MKButton from 'component/common/mui-components/MKButton';
+const GroupInfo = ({ group }) => {
     return (
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             {
@@ -51,7 +48,17 @@ const GroupInfo = ({group}) => {
                                 <BeachAccessIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="팀장" secondary={group?.manager} />
+                        <ListItemText primary="팀장" secondary={
+                            <Tooltip title="새 창으로 이동합니다.">
+                                <MKButton
+                                    variant="contained"
+                                    color="info"
+                                    size="small"
+                                    onClick={() => window.open(`user/${group?.manager}`)}
+                                >
+                                    {group?.manager}의 프로필 보기
+                                </MKButton>
+                            </Tooltip>} />
                     </ListItem>
                     <ListItem>
                         <ListItemAvatar>

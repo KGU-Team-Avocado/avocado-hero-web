@@ -10,6 +10,7 @@ import { selectUser } from "api/redux/user/userSlice";
 import UserProfileCard from "component/jobFinder/UserProfileCard";
 import ModalStaticBackdrop from "component/common/modal/ModalStaticBackdrop";
 import BadgeStack from "component/common/BadgeStack";
+import GroupInfo from "component/group/common/GroupInfo";
 
 
 const GroupJoinModalV2 = (props) => {
@@ -100,43 +101,16 @@ const GroupJoinModalV2 = (props) => {
                     </Box>
                 </DialogTitle>
                 <DialogContent dividers={true}>
-                    <Typography variant="h4">
-                        {group?.group_name}
-                    </Typography>
-                    <Typography variant="h3">
-                        {group?.project_name}
-                    </Typography>
+                    <GroupInfo group={group} />
                     <Typography variant="h5">
-                        {group?.short_description}
+                        상세 소개
                     </Typography>
+                    <div dangerouslySetInnerHTML={createMarkup(group?.long_description)}></div>
                     <Divider />
                     <Typography variant="h5">
                         Tech Stack
                     </Typography>
                     <BadgeStack type='tech' stack={group ? group.tech_stack : []} />
-                    <Divider />
-                    <Typography variant="h5">
-                        팀장
-                    </Typography>
-                    {/* findOneUserByUserId로 manager 정보 불러와서 하단에 연동해 줄 예정임 */}
-                    {/* <UserProfileCard
-                        user={{ user_id: group?.manager, name: props.groupManager?.name }}
-                        handleUserProfileCard={null}
-                    /> */}
-                    <Tooltip title="새 창으로 이동합니다.">
-                        <MKButton
-                            variant="contained"
-                            color="info"
-                            onClick={() => window.open(`user/${group?.manager}`)}
-                        >
-                            {group?.manager}의 프로필 보기
-                        </MKButton>
-                    </Tooltip>
-                    <Divider />
-                    <Typography variant="h5">
-                        상세 소개
-                    </Typography>
-                    <div dangerouslySetInnerHTML={createMarkup(group?.long_description)}></div>
                     <Divider />
                     <Typography variant="h5">
                         자기소개서
@@ -148,6 +122,7 @@ const GroupJoinModalV2 = (props) => {
                         onChange={handleMessageChange}
                         className="w-100"
                     />
+
                 </DialogContent>
                 {/* <DialogActions> */}
                 <MKButton
