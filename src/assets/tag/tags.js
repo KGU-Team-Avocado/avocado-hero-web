@@ -66,4 +66,20 @@ export const tags = {
         { type: "fe", label: "책임감있는", value: "responsible", bgColor: "#004080", txtColor: '#FFFFFF' },
         { type: "fe", label: "노력하는", value: "trying", bgColor: "#004080", txtColor: '#FFFFFF' },
     ],
+    projects:[
+        { type: "it", label: "웹(풀스택)", value: "web", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "웹(프론트엔드)", value: "web-frontend", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "웹(백엔드)", value: "web-backend", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "앱(Android)", value: "app-android", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "앱(iOS)", value: "app-ios", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "앱(하이브리드)", value: "app-hybrid", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "게임", value: "game", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "서버", value: "server", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "데이터베이스", value: "database", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "라즈베리파이", value: "raspberry-pi", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "인공지능", value: "ai", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "빅데이터", value: "bigdata", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "IoT", value: "iot", bgColor: "#004080", txtColor: '#FFFFFF' },
+        { type: "it", label: "테스트", value: "test", bgColor: "#004080", txtColor: '#FFFFFF' },
+    ]
 }
