@@ -148,7 +148,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                 <DialogContent dividers={true}>
                     <Stack spacing={1}>
                         <Stack mb={2}>
-                            <Typography variant='h4' my={1}>대표 사진</Typography>
+                            <Typography variant='h5' my={1}>대표 사진</Typography>
                             <input className='form-control' type='file' name='file' onChange={handleFileChange}></input>
                         </Stack>
                         {image.preview && <>
@@ -181,14 +181,41 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                         />
                         <TextField
                             sx={{ width: "100%" }}
-                            label="간단소개글"
+                            label="카드에 보여줄 간단소개글 (1줄 이내로 권장)"
                             variant="outlined"
                             value={project.short_description}
                             id="short_description"
                             onChange={handleInput}
                         />
                         <Box>
-                            <Typography variant="h4">Tech Stack</Typography>
+                            <Typography variant="h5">프로젝트 분류 (미완성)</Typography>
+                            <Autocomplete
+                                multiple
+                                options={tags.projects}
+                                disableCloseOnSelect
+                                getOptionLabel={(option) => option.label}
+                                value={selectedSkillTags}
+                                onChange={(event, newValue) => {
+                                    // setSelectedSkillTags(newValue);
+                                }}
+                                renderOption={(props, option, { selected }) => (
+                                    <li {...props}>
+                                        <Checkbox
+                                            icon={icon}
+                                            checkedIcon={checkedIcon}
+                                            style={{ marginRight: 8 }}
+                                            checked={selected}
+                                        />
+                                        {option.label}
+                                    </li>
+                                )}
+                                renderInput={(params) => (
+                                    <TextField {...params} label="분류" placeholder="분류" />
+                                )}
+                            />
+                        </Box>
+                        <Box>
+                            <Typography variant="h5">이 프로젝트에서 사용하는 기술은...</Typography>
                             <Autocomplete
                                 multiple
                                 options={tags.tech}
@@ -214,10 +241,64 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                 )}
                             />
                         </Box>
+                        <Box>
+                            <Typography variant="h5">지원자가 이런 성향이었으면 좋겠어요. (미완성)</Typography>
+                            <Autocomplete
+                                multiple
+                                options={tags.personal}
+                                disableCloseOnSelect
+                                getOptionLabel={(option) => option.label}
+                                value={selectedSkillTags}
+                                onChange={(event, newValue) => {
+                                    // setSelectedSkillTags(newValue);
+                                }}
+                                renderOption={(props, option, { selected }) => (
+                                    <li {...props}>
+                                        <Checkbox
+                                            icon={icon}
+                                            checkedIcon={checkedIcon}
+                                            style={{ marginRight: 8 }}
+                                            checked={selected}
+                                        />
+                                        {option.label}
+                                    </li>
+                                )}
+                                renderInput={(params) => (
+                                    <TextField {...params} label="성향" placeholder="성향" />
+                                )}
+                            />
+                        </Box>
+                        <Box>
+                            <Typography variant="h5">이 포지션을 맡아줄 사람이 반드시 필요해요.(미완성)</Typography>
+                            <Autocomplete
+                                multiple
+                                options={tags.role}
+                                disableCloseOnSelect
+                                getOptionLabel={(option) => option.label}
+                                value={selectedSkillTags}
+                                onChange={(event, newValue) => {
+                                    // setSelectedSkillTags(newValue);
+                                }}
+                                renderOption={(props, option, { selected }) => (
+                                    <li {...props}>
+                                        <Checkbox
+                                            icon={icon}
+                                            checkedIcon={checkedIcon}
+                                            style={{ marginRight: 8 }}
+                                            checked={selected}
+                                        />
+                                        {option.label}
+                                    </li>
+                                )}
+                                renderInput={(params) => (
+                                    <TextField {...params} label="포지션" placeholder="포지션" />
+                                )}
+                            />
+                        </Box>
                         {
                             groupCreateModalOpen &&
                             <Box>
-                                <Typography variant="h4">상세소개글</Typography>
+                                <Typography variant="h5">상세소개글</Typography>
                                 <Box>
                                     <Editor
                                         editorState={editorState}
