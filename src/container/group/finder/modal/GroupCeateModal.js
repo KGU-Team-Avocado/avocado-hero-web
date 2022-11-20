@@ -48,14 +48,20 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
         })
     }
 
-
+    const [selectedProjectTags, setSelectedProjectTags] = useState([]);
     const [selectedSkillTags, setSelectedSkillTags] = useState([]);
+    const [selectedPersonalTags, setSelectedPersonalTags] = useState([]);
+    const [selectedRoleTags, setSelectedRoleTags] = useState([]);
+    
 
     const createGroup = () => {
         const newGroupData = {
             ...project,
             long_description: convertedContent,
+            project_stack: selectedProjectTags.map((s) => s.value),
             tech_stack: selectedSkillTags.map((s) => s.value),
+            personal_stack: selectedPersonalTags.map((s) => s.value),
+            role_stack: selectedRoleTags.map((s) => s.value),
             manager: userInfo.user_id,
             members: [{
                 user_id: userInfo.user_id,
@@ -67,6 +73,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
             end_project: false,
             // applied : [],
             code: code.code,
+            capacity:100,
         }
         console.log(newGroupData)
 
@@ -195,9 +202,9 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                 options={tags.projects}
                                 disableCloseOnSelect
                                 getOptionLabel={(option) => option.label}
-                                value={selectedSkillTags}
+                                value={selectedProjectTags}
                                 onChange={(event, newValue) => {
-                                    // setSelectedSkillTags(newValue);
+                                    setSelectedProjectTags(newValue);
                                 }}
                                 renderOption={(props, option, { selected }) => (
                                     <li {...props}>
@@ -211,7 +218,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                     </li>
                                 )}
                                 renderInput={(params) => (
-                                    <TextField {...params} label="프로젝트 분류 (미완성)" placeholder="분류" />
+                                    <TextField {...params} label="프로젝트 분류" placeholder="분류" />
                                 )}
                             />
                         </Box>
@@ -247,9 +254,9 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                 options={tags.personal}
                                 disableCloseOnSelect
                                 getOptionLabel={(option) => option.label}
-                                value={selectedSkillTags}
+                                value={selectedPersonalTags}
                                 onChange={(event, newValue) => {
-                                    // setSelectedSkillTags(newValue);
+                                    setSelectedPersonalTags(newValue);
                                 }}
                                 renderOption={(props, option, { selected }) => (
                                     <li {...props}>
@@ -263,7 +270,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                     </li>
                                 )}
                                 renderInput={(params) => (
-                                    <TextField {...params} label="지원자가 이런 성향이었으면 좋겠어요. (미완성)" placeholder="성향" />
+                                    <TextField {...params} label="지원자가 이런 성향이었으면 좋겠어요." placeholder="성향" />
                                 )}
                             />
                         </Box>
@@ -273,9 +280,9 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                 options={tags.role}
                                 disableCloseOnSelect
                                 getOptionLabel={(option) => option.label}
-                                value={selectedSkillTags}
+                                value={selectedRoleTags}
                                 onChange={(event, newValue) => {
-                                    // setSelectedSkillTags(newValue);
+                                    setSelectedRoleTags(newValue);
                                 }}
                                 renderOption={(props, option, { selected }) => (
                                     <li {...props}>
@@ -289,7 +296,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                     </li>
                                 )}
                                 renderInput={(params) => (
-                                    <TextField {...params} label="이 포지션을 맡아줄 사람이 반드시 필요해요.(미완성)" placeholder="포지션" />
+                                    <TextField {...params} label="이 포지션을 맡아줄 사람이 반드시 필요해요." placeholder="포지션" />
                                 )}
                             />
                         </Box>
