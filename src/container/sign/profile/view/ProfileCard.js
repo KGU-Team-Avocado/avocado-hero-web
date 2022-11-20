@@ -58,7 +58,7 @@ const ProfileCard = (props) => {
                             <Typography>{profile && <TechStack tech_stack={profile?.fields} />}</Typography>
                             <Typography variant="h4">링크</Typography>
                             <Typography>
-                                <a href={profile && profile?.links}>{profile && profile?.links}</a>
+                                <a href={profile && profile?.links} target="_blank" rel="noreferrer">{profile && profile?.links}</a>
                             </Typography>
                         </ResponsiveCard>
                         <ResponsiveCard>
