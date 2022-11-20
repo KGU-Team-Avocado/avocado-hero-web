@@ -5,6 +5,7 @@ import MKButton from "component/common/mui-components/MKButton";
 import { useNavigate } from "react-router-dom";
 import Readme from "./Readme";
 import GroupInfo from "component/group/common/GroupInfo";
+import BadgeStack from "component/common/BadgeStack";
 
 const ReadmeModal = ({ group, setOpen }) => {
 
@@ -41,11 +42,14 @@ const ReadmeModal = ({ group, setOpen }) => {
                     </Box>
                 </DialogTitle>
                 <DialogContent dividers={true}>
-                    <Stack spacing={1}>
-                        <GroupInfo group={group} />
-                        <Divider />
-                        <Readme group_id={group?._id} />
-                    </Stack>
+                    <GroupInfo group={group} />
+                    <Divider />
+                    <Readme group_id={group?._id} />
+                    <Divider />
+                    <Typography variant="h5">
+                        Tech Stack
+                    </Typography>
+                    <BadgeStack type='tech' stack={group ? group.tech_stack : []} />
                 </DialogContent>
                 <MKButton color="success" onClick={() => handleGroupCard(group)} fullWidth>워크스페이스로 이동하기</MKButton>
             </Box>
