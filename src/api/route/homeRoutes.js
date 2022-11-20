@@ -14,6 +14,7 @@ import WorkspaceListContainer from "container/group/workspace/WorkspaceListConta
 import HomeContainer from "container/home/HomeContainer";
 import JobFinderContainer from "container/jobFinder/JobFinderContainer";
 import ProfileUpdate from "container/sign/profile/edit/ProfileUpdate";
+import ProfileEditV2 from "container/sign/profile/edit_v2/ProfileEditV2";
 import ProfileContainer from "container/sign/profile/view/ProfileContainer";
 import SignInContainer from "container/sign/sign_in/SignInContainer";
 import SignUpContainer from "container/sign/sign_up/SignUpContainer";
@@ -54,6 +55,12 @@ const mainRoutes = [
         element: <ProfileUpdate/>,
         name: '프로필 수정',
         description: 'ㅋㅋ',
+    },
+    {
+        path: '/user/profile/update/:id',
+        element: <ProfileEditV2/>,
+        name: '프로필 수정',
+        description: 'v2',
     },
     {
         path: '/jobFinder',

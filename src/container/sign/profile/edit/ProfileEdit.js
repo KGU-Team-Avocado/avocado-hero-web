@@ -54,18 +54,6 @@ const ProfileEdit = (props) => {
         setEdit(false);
     };
 
-    // const editWho = () => {
-    //     setEdit(true);
-    //     console.log(profile);
-
-    //     // const select = profile.fields.map((field) => {return findProfile(field)});
-    //     // setSelected(select)
-
-    //     setSelectedFields(profile.fields.map((field) => { return findField(field); }));
-    //     setSelectedKeywords(profile.keywords.map((keyword) => { return findKeyword(keyword); }));
-    //     setSelectedPersonals(profile.personalities.map((personal) => { return findPersonal(personal); }));
-    // };
-
     const findField = (r) => {
         const idx = fields.findIndex((field) => field.value === r);
         return fields[idx];
@@ -120,29 +108,6 @@ const ProfileEdit = (props) => {
         { label: "노력하는", value: "trying" },
         { label: "주도적인", value: "leading" },
     ];
-
-
-    // props.profile.fields.map(())
-
-    // setSelectedFields = [
-    //     { label: ,
-    //     value: }
-    // ]
-
-    // profile.fields.length > 0 
-    // ? 
-    // (
-    //     profile.fields.map((profile.fields) => 
-    //     setSelectedFields(profile.fields))
-    // )
-    // :
-    // (
-
-    // )
-
-    // useEffect(() => {
-    //     setSelectedFields(props.profile.fields)
-    // }, [props.profile.fields]);
 
     const handleInput = (e) => {
         console.log(e);
@@ -202,62 +167,6 @@ const ProfileEdit = (props) => {
         // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
         setCountLink(countArr);
     };
-
-
-    // const onAddLink = () => {
-    //     let countLink = [...countList];
-    //     let counter = countLink.slice(-1)[0];
-    //     counter += 1;
-    //     countLink.push(counter);
-    //     setCountList(countLink);
-    // }
-
-
-//     const onClickBelong = () => {
-//         // 현재 input의 내용을 배열에 저장하고 input을 하나 더 만드는 함수
-
-//         let countArr = [...countList]
-//         let counter = countArr.slice(-1)[0]
-//         counter += 1
-//         countArr.push(counter)	// index 사용 X
-//         // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
-//         setCountList(countArr)
-//     }
-
-//     // 입력창 추가 삭제 기능
-
-// const onAddDetailDiv = () => {
-//     let countArr = [...countList]
-//     let counter = countArr.slice(-1)[0]
-//     counter += 1
-//     countArr.push(counter)	// index 사용 X
-//     // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
-//     setCountList(countArr)
-//     // axios
-//     // .post("usersRouter/profileUpdate", {
-//     //     fields: selectedFields.map((s) => s.value),
-//     //     // keywords: selectedKeywords.map((s) => s.value),
-//     //     // personalities: selectedPersonals.map((s) => s.value)
-//     // })
-//     // .then((response) => {
-//     //     console.log(response);
-//     //     if (response.data.success === true) {
-//     //         window.location.href = "/";
-//     //     } // 여기 안 됨
-//     // })
-//     // .catch(function (error) {
-//     //     console.log(error);
-//     // });
-// };
-
-// const onAddLink = () => {
-//     let countArr = [...countLink]
-//     let counter = countArr.slice(-1)[0]
-//     counter += 1
-//     countArr.push(counter)	// index 사용 X
-//     // countArr[counter] = counter	// index 사용 시 윗줄 대신 사용	
-//     setCountLink(countArr)
-// }
 
     return (
         <>
@@ -337,10 +246,6 @@ const ProfileEdit = (props) => {
                                                     </Button>
                                                 </InputGroup>
                                                 <AddInput countList={countList} onAddDetailDiv={onAddDetailDiv}/>
-                                    {/* <Form.Control type="text" name="belongs" placeholder=""
-                                                value={profile.belongs}
-                                                onChange={handleInput}
-                                            /> */}
                                      
                                             </div>
                                             <div className="item"><div className="contentTitle">분야</div>
@@ -358,7 +263,6 @@ const ProfileEdit = (props) => {
                                                     <>
                                                     </>
                                                 }
-                                                {/* <button type="button" className="btn btn-secondary me-2" onClick={() => editWho()} >수정</button> */}
 
                                                 <ModifyOption
                                                     option={fields}
@@ -366,21 +270,9 @@ const ProfileEdit = (props) => {
                                                     setSelected={setSelected}
                                                     modifyOption={modifyOption}
                                                 />
-
-                                                {/* <MultiSelect
-                                        options={fields}
-                                        value={selectedFields}
-                                        onChange={setSelectedFields}
-                                    /> */}
                                             </div>
 
                                             <div className="item">
-                                                {/* <AddInput countList={countLink} />
-                                    <Button onClick={onAddLink}>+</Button>
-                                     <Form.Control type="text" name="links" placeholder=""
-                                                value={profile.links}
-                                                onChange={handleInput}
-                                            /> */}
                                                 <Form.Label htmlFor="basic-url">링크</Form.Label>
                                                 <InputGroup className="mb-3">
                                                     <InputGroup.Text id="basic-addon3">

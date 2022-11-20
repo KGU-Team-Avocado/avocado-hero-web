@@ -74,6 +74,14 @@ const ProfileContainer = () => {
                                     {
                                         user?.user_id === profile.user_id
                                             ?
+                                            <>
+                                                                                        <MKButton
+                                                variant="contained"
+                                                color="info"
+                                                onClick={() => navigate(`/user/profile/update/${profile.user_id}`)}
+                                            >
+                                                프로필 수정(v2)
+                                            </MKButton>
                                             <MKButton
                                                 variant="contained"
                                                 color="info"
@@ -81,6 +89,8 @@ const ProfileContainer = () => {
                                             >
                                                 프로필 수정
                                             </MKButton>
+                                            </>
+
                                             :
                                             <></>
                                     }
