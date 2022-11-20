@@ -5,7 +5,7 @@ import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
 import axios from "axios";
 import { tags } from '../../../../assets/tag/tags'
-import { Autocomplete, Box, Checkbox, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, Checkbox, DialogContent, DialogTitle, Divider, IconButton, Stack, TextField, Typography } from "@mui/material";
 import ClearIcon from '@mui/icons-material/Clear';
 import MKButton from "component/common/mui-components/MKButton";
 import { useSelector } from "react-redux";
@@ -163,6 +163,8 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                 <TextField helperText="이 페이지에서 그룹 등록시 조직 내에서만 검색이 가능합니다." label='조직 코드' value={code.code} disabled fullWidth />
                             </Box>
                         }
+                        <Divider/>
+                        <Typography variant='h5' my={1}>기본 정보</Typography>
                         <TextField
                             sx={{ width: "100%" }}
                             label="그룹명"
@@ -188,7 +190,6 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                             onChange={handleInput}
                         />
                         <Box>
-                            <Typography variant="h5">프로젝트 분류 (미완성)</Typography>
                             <Autocomplete
                                 multiple
                                 options={tags.projects}
@@ -210,12 +211,11 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                     </li>
                                 )}
                                 renderInput={(params) => (
-                                    <TextField {...params} label="분류" placeholder="분류" />
+                                    <TextField {...params} label="프로젝트 분류 (미완성)" placeholder="분류" />
                                 )}
                             />
                         </Box>
                         <Box>
-                            <Typography variant="h5">이 프로젝트에서 사용하는 기술은...</Typography>
                             <Autocomplete
                                 multiple
                                 options={tags.tech}
@@ -237,12 +237,11 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                     </li>
                                 )}
                                 renderInput={(params) => (
-                                    <TextField {...params} label="기술" placeholder="기술" />
+                                    <TextField {...params} label="이 프로젝트에서 사용하는 기술은..." placeholder="기술" />
                                 )}
                             />
                         </Box>
                         <Box>
-                            <Typography variant="h5">지원자가 이런 성향이었으면 좋겠어요. (미완성)</Typography>
                             <Autocomplete
                                 multiple
                                 options={tags.personal}
@@ -264,12 +263,11 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                     </li>
                                 )}
                                 renderInput={(params) => (
-                                    <TextField {...params} label="성향" placeholder="성향" />
+                                    <TextField {...params} label="지원자가 이런 성향이었으면 좋겠어요. (미완성)" placeholder="성향" />
                                 )}
                             />
                         </Box>
                         <Box>
-                            <Typography variant="h5">이 포지션을 맡아줄 사람이 반드시 필요해요.(미완성)</Typography>
                             <Autocomplete
                                 multiple
                                 options={tags.role}
@@ -291,10 +289,11 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                                     </li>
                                 )}
                                 renderInput={(params) => (
-                                    <TextField {...params} label="포지션" placeholder="포지션" />
+                                    <TextField {...params} label="이 포지션을 맡아줄 사람이 반드시 필요해요.(미완성)" placeholder="포지션" />
                                 )}
                             />
                         </Box>
+                        <Divider/>
                         {
                             groupCreateModalOpen &&
                             <Box>
