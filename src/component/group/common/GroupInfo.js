@@ -44,16 +44,8 @@ const GroupInfo = ({ group }) => {
                             </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary="팀장" secondary={
-                            <Tooltip title="새 창으로 이동합니다.">
-                                <MKButton
-                                    variant="contained"
-                                    color="info"
-                                    size="small"
-                                    onClick={() => window.open(`user/${group?.manager}`)}
-                                >
-                                    {group?.manager}의 프로필 보기
-                                </MKButton>
-                            </Tooltip>} />
+                            <a href={`user/${group?.manager}`}  target="_blank" rel="noreferrer">{group?.manager}의 프로필 보기</a>
+                        } />
                     </ListItem>
                     <ListItem>
                         <ListItemAvatar>
