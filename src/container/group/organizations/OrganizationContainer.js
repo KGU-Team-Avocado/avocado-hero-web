@@ -80,15 +80,18 @@ export default function OrganizationContainer() {
                 )}
             </Box>
 
-            <MKButton
-                color="success"
-                onClick={() => setOrganizationModalOpen(true)}
-            >
-                조직 생성하기
-            </MKButton>
+
 
             <Box>
-                <Typography variant="h5">내가 소유한 조직</Typography>
+                <Stack mb={3} direction={"row"} justifyContent={"space-between"}>
+                    <Typography variant="h5">내가 소유한 조직</Typography>
+                    <MKButton
+                        color="success"
+                        onClick={() => setOrganizationModalOpen(true)}
+                    >
+                        조직 생성하기
+                    </MKButton>
+                </Stack>
                 <Grid
                     container
                     spacing={2}
@@ -99,7 +102,7 @@ export default function OrganizationContainer() {
                                 <Grid item xs={12} md={6}>
                                     <ResponsiveCard
                                         actionArea
-                                        onClick={()=>getGroupsByCode(org.code)}
+                                        onClick={() => getGroupsByCode(org.code)}
                                     >
                                         <Stack direction={"row"} justifyContent="space-between">
                                             <Typography variant="h5">{org.title}</Typography>
@@ -117,8 +120,18 @@ export default function OrganizationContainer() {
             </Box>
 
             <Box>
-                <Typography variant="h5">선택한 조직에 속한 그룹</Typography>
-                <Typography>{JSON.stringify(groups)}</Typography>
+                <Typography variant="h5">선택한 조직에 속한 그룹 (수정예정)</Typography>
+
+                {
+                    groups.length > 0 ?
+                        groups.map(group =>
+                            <Typography>
+                                {group.group_name}{group.project_name}{group.members.length}
+                            </Typography>
+                        )
+                        :
+                        <Typography>소속된 그룹이 없습니다.</Typography>
+                }
             </Box>
 
             <ModalStaticBackdrop
