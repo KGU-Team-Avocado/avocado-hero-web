@@ -187,3 +187,14 @@ export const getOrganizationByCode = async (code) => {
         
     }
 }
+
+export const getGroupByCode = async (code) => {
+    try {
+        const response = await axios.post("/groupsRouter/getGroupByCode", { code: code });
+        console.log(response)
+        return response.data;
+    } catch (err) {
+        console.log("Error >>", err);
+        return [];
+    }
+}

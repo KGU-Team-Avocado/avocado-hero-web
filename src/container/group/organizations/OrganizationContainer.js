@@ -48,6 +48,10 @@ export default function OrganizationContainer() {
         setOrganizations(await API.getOrganizationsByUserId(user?.user_id));
     }
 
+    const getGroupsByCode = async (code) => {
+        setGroups(await API.getGroupByCode(code));
+    }
+
     return (
         <Stack spacing={3}>
             <Box>
@@ -95,6 +99,7 @@ export default function OrganizationContainer() {
                                 <Grid item xs={12} md={6}>
                                     <ResponsiveCard
                                         actionArea
+                                        onClick={()=>getGroupsByCode(org.code)}
                                     >
                                         <Stack direction={"row"} justifyContent="space-between">
                                             <Typography variant="h5">{org.title}</Typography>
@@ -113,7 +118,7 @@ export default function OrganizationContainer() {
 
             <Box>
                 <Typography variant="h5">선택한 조직에 속한 그룹</Typography>
-
+                <Typography>{JSON.stringify(groups)}</Typography>
             </Box>
 
             <ModalStaticBackdrop
