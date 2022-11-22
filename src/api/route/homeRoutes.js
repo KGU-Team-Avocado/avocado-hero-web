@@ -23,7 +23,7 @@ const mainRoutes = [
     {
         path: '/',
         element: <HomeContainer/>,
-        name: '아보카도 히어로는...',
+        name: '히어로는...',
         description: '팀 프로젝트의 처음부터 끝까지 함께하는 국내 유일의 서비스입니다.',
     },
     {
@@ -42,25 +42,25 @@ const mainRoutes = [
         path: '/myWorkspace',
         element: <WorkspaceListContainer/>,
         name: '내 워크스페이스',
-        description: '속한 그룹 나옴',
+        description: '현재 소속된 프로젝트를 확인해보아요',
     },
     {
         path: '/user/:id',
         element: <ProfileContainer/>,
         name: '프로필',
-        description: 'ㅋㅋ',
+        description: '조회',
     },
     {
         path: '/user/ProfileUpdate/:id',
         element: <ProfileUpdate/>,
-        name: '프로필 수정',
-        description: 'ㅋㅋ',
+        name: '프로필',
+        description: '수정',
     },
     {
         path: '/user/profile/update/:id',
         element: <ProfileEditV2/>,
-        name: '프로필 수정',
-        description: 'v2',
+        name: '프로필',
+        description: '수정',
     },
     {
         path: '/jobFinder',
@@ -71,20 +71,20 @@ const mainRoutes = [
     {
         path: '/jobPosting',
         element: <JobPosting/>,
-        name: '채용공고등록',
+        name: '채용공고 등록',
         description: '일자리를 등록해요',
     },
     {
         path: '/organizations',
         element: <OrganizationContainer/>,
-        name: '전용 조직 구성하기',
+        name: '조직 구성하기',
         description: '학교/직장 조직 내에서 그룹 찾기',
     },
     {
         path: '/humanResources',
         element: <HumanResources/>,
         name: '채용 제의하기',
-        description: '인재 찾기ㅇㅇ',
+        description: '인재를 찾아보아요',
     },
     {
         path: '/prices',
@@ -96,7 +96,7 @@ const mainRoutes = [
         path: '/signin',
         element: <SignInContainer/>,
         name: '로그인',
-        description: '누구냐 넌',
+        description: '로그인 하시고 더 많은 기능을 사용해보세요!',
     },
     {
         path: '/signup',
