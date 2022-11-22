@@ -65,11 +65,12 @@ export default () => {
                             </Stack>
                         </Grid>
                         <Grid item xs={12} xl={6}>
+                            
                             <Stack
                                 m={2}
                             >
                                 <UserProfileCard
-                                    user={{ user_id: 'gabrielyoon7', name: '윤주현' }}
+                                    user={{ user_id: 'hero', name: '히어로' }}
                                     handleUserProfileCard={handleUserProfileCard}
                                 />
                             </Stack>
@@ -85,23 +86,23 @@ export default () => {
                     <ProfileViewModal
                         setOpen={setProfileCardModalOpen}
                         profile={{
-                              "user_id": "user",
+                              "user_id": "hero",
                               "user_password": "1234",
-                              "name": "아보카도",
+                              "name": "히어로",
                               "email": "avocado@gmail.com",
                               "type": "개인",
                               "phoneNumber": "010-0000-0000",
-                              "age": "9개월",
+                              "age": "25",
                               "nickname": "아보카도히어로",
                               "imgURL": "undefined",
-                              "belongs": [],
-                              "fields": [],
-                              "links": [],
-                              "introduce": "undefined",
-                              "keywords": [],
-                              "personalities": [],
+                              "belongs": ["아보카도 대학교"],
+                              "fields": [""],
+                              "links": ["https://github.com/avocado"],
+                              "introduce": "팀 프로젝트의 처음부터 끝까지 함께하는 국내 유일의 서비스입니다.",
+                              "keywords": ["react", "java"],
+                              "personalities": ["creative", "cautious"],
                               "groups": [],
-                              "introduceOne": "아보카도입니다.",
+                              "introduceOne": "아보카도 히어로",
                         }} />
                 }
             />
