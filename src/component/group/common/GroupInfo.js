@@ -53,7 +53,7 @@ const GroupInfo = ({ group }) => {
                                 <GroupsIcon />
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary="인원수" secondary={group?.members?.length} />
+                        <ListItemText primary="인원수" secondary={`${group?.members?.length}/${group?.capacity}명`} />
                     </ListItem>
                     <ListItem>
                         <ListItemAvatar>
