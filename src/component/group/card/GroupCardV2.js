@@ -5,6 +5,7 @@ import * as API from "../../../api/API"
 import defaultImage from '../../../assets/img/logo512.png';
 import BadgeStack from "component/common/BadgeStack";
 import ResponsiveCard from "component/common/ResponsiveCard";
+import { tags } from '../../../assets/tag/tags'
 
 const GroupCardV2 = (props) => {
 
@@ -23,42 +24,13 @@ const GroupCardV2 = (props) => {
         e.target.src = defaultImage;
     }
 
-    return (
-        // <Card sx={{ borderRadius: 5 }}
-        //     onClick={() => props.handleGroupCard(props.group)}>
-        //     <CardActionArea>
-        //         <Stack align="center">
-        //             <img
-        //                 className="border rounded-top"
-        //                 width="100%"
-        //                 height="200"
-        //                 alt=""
-        //                 src={uploadedImage}
-        //                 onError={handleImgError}
-        //             />
-        //         </Stack>
-        //         <CardContent>
-        //             <Stack direction="row" justifyContent="space-between">
-        //                 <Box>
-        //                     <Chip label={props.group.group_name} color="secondary" variant="outlined" />
-        //                 </Box>
-        //                 <Box>
-        //                     <Chip label={props.group.close_application ? "모집종료" : "모집중"} color={props.group.close_application ? "error" : "success"} />
-        //                 </Box>
-        //             </Stack>
-        //             <Typography gutterBottom variant="h3">
-        //                 {props.group.project_name}
-        //             </Typography>
+    const findOptionByValue = (value) => {
+        const options = tags['projects'];
+        const idx = options.findIndex((tag) => tag.value === value);
+        return options[idx];
+    }
 
-        //             <Typography variant="body2">
-        //                 {props.group.short_description}
-        //             </Typography>
-        //             <Box>
-        //                 <BadgeStack type='tech' stack={props.group.tech_stack} />
-        //             </Box>
-        //         </CardContent>
-        //     </CardActionArea>
-        // </Card>
+    return (
         <ResponsiveCard
             actionArea
             onClick={() => props.handleGroupCard(props.group)}
@@ -102,7 +74,7 @@ const GroupCardV2 = (props) => {
                     >
                         <Stack direction="row" justifyContent="space-between" sx={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
                             <Box>
-                                <Chip label={props.group.project_stack} color="secondary" variant="outlined" />
+                                <Chip label={findOptionByValue(props.group.project_stack).label} color="secondary" variant="outlined" />
                             </Box>
                             <Box>
                                 <Chip label={props.group.close_application ? "모집종료" : "모집중"} color={props.group.close_application ? "error" : "success"} />
