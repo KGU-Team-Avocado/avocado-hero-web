@@ -31,7 +31,7 @@ const GroupFilterModal = (props) => {
         const newfilterData = {
             group_name: inputTN.current.value,
             project_name: inputPN.current.value,
-            manager: inputMID.current.value,
+            // manager: inputMID.current.value,
             // tech_stack: selected.map((item) => {return item.value})
             project_stack: selectedProjectTags.map((s) => s.value),
             tech_stack: selectedSkillTags.map((s) => s.value),
