@@ -1,10 +1,8 @@
-import { Box, Card, CardActionArea, CardContent, CardMedia, Grid, Skeleton, Typography } from "@mui/material"
+import { Box, Card, CardActionArea, Grid, Stack, Typography } from "@mui/material"
+import BadgeStack from "component/common/BadgeStack";
 import Avatar from "container/sign/profile/avatar/Avatar";
-import { useEffect, useState } from "react";
-import * as API from '../../api/API';
-import defaultImage from '../../assets/img/logo512.png';
 
-export default ({ user, handleUserProfileCard }) => {
+const UserProfileCard = ({ user, handleUserProfileCard }) => {
 
     return (
         <Card sx={{ borderRadius: 5 }}
@@ -20,18 +18,30 @@ export default ({ user, handleUserProfileCard }) => {
                             <Typography gutterBottom variant="h4">
                                 {`${user.name}(${user.user_id})`}
                             </Typography>
-                            <Typography variant="h6" color="text.secondary">
-                                희망 직무 : ㅇㅇㅇ
-                            </Typography>
-                            <Typography variant="h6" color="text.secondary">
-                                평점 : 5.0
-                            </Typography>
-                            <Typography variant="h6" color="text.secondary">
-                                대표 프로젝트 : ㅇㅇㅇㅇㅇㅇㅇ
-                            </Typography>
-                            <Typography variant="h6" color="text.secondary">
-                                선호하는 기술 : ㅇㅇㅇㅇㅇ
-                            </Typography>
+                            <Stack direction={"row"} alignItems="center" spacing={2} sx={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                                <Typography variant="h6" color="text.secondary">
+                                    성격
+                                </Typography>
+                                <Box>
+                                    <BadgeStack type='personal' stack={user.personalities ?? []} />
+                                </Box>
+                            </Stack>
+                            <Stack direction={"row"} alignItems="center" spacing={2} sx={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                                <Typography variant="h6" color="text.secondary">
+                                    관심 분야
+                                </Typography>
+                                <Box>
+                                    <BadgeStack type='projects' stack={user.fields ?? []} />
+                                </Box>
+                            </Stack>
+                            <Stack direction={"row"} alignItems="center" spacing={2} sx={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                                <Typography variant="h6" color="text.secondary">
+                                    선호하는 기술
+                                </Typography>
+                                <Box>
+                                    <BadgeStack type='tech' stack={user.keywords ?? []} />
+                                </Box>
+                            </Stack>
                         </Grid>
                     </Grid>
                 </Box>
@@ -39,3 +49,5 @@ export default ({ user, handleUserProfileCard }) => {
         </Card>
     )
 }
+
+export default UserProfileCard;
