@@ -3,6 +3,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import GroupsIcon from '@mui/icons-material/Groups';
+import WorkIcon from '@mui/icons-material/Work';
 
 // Images
 import logoCT from "assets/images/logo-ct-dark.png";
@@ -36,37 +38,55 @@ export default {
   ],
   menus: [
     {
-      name: "company",
+      name: "POINT",
       items: [
-        { name: "about us", href: "https://www.creative-tim.com/presentation" },
-        { name: "freebies", href: "https://www.creative-tim.com/templates/free" },
-        { name: "premium tools", href: "https://www.creative-tim.com/templates/premium" },
-        { name: "blog", href: "https://www.creative-tim.com/blog" },
+        { 
+          name: "포인트",
+          route: "/example/bestworker",
+        },
       ],
     },
     {
-      name: "resources",
+      name: "PROJECT",
       items: [
-        { name: "illustrations", href: "https://iradesign.io/" },
-        { name: "bits & snippets", href: "https://www.creative-tim.com/bits" },
-        { name: "affiliate program", href: "https://www.creative-tim.com/affiliates/new" },
+        {
+          name: "프로젝트",
+          route: "/groupFinder",
+        },
       ],
     },
     {
-      name: "help & support",
+      name: "JOB",
       items: [
-        { name: "contact us", href: "https://www.creative-tim.com/contact-us" },
-        { name: "knowledge center", href: "https://www.creative-tim.com/knowledge-center" },
-        { name: "custom development", href: "https://services.creative-tim.com/" },
-        { name: "sponsorships", href: "https://www.creative-tim.com/sponsorships" },
+        {
+          name: "일자리",
+          route: "/jobFinder",
+        },
       ],
     },
     {
-      name: "legal",
+      name: "PREMIUM",
       items: [
-        { name: "terms & conditions", href: "https://www.creative-tim.com/terms" },
-        { name: "privacy policy", href: "https://www.creative-tim.com/privacy" },
-        { name: "licenses (EULA)", href: "https://www.creative-tim.com/license" },
+        {
+          name: "인재찾기",
+          description: "인재를 직접 찾아보아요!",
+          route: "/humanResources",
+        },
+        {
+          name: "채용공고",
+          description: "채용공고는 여기에서!",
+          route: "/jobPosting",
+        },
+        {
+          name: "조직관리",
+          description: "교사이신가요?",
+          route: "/organizations",
+        },
+        {
+          name: "요금제",
+          description: "더 다양한 기능을 사용해요",
+          route: "/prices",
+        },
       ],
     },
   ],
@@ -87,3 +107,4 @@ export default {
     </MKTypography>
   ),
 };
+
