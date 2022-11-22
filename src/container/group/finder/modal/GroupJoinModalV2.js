@@ -15,7 +15,7 @@ import GroupInfo from "component/group/common/GroupInfo";
 
 const GroupJoinModalV2 = (props) => {
 
-    const group = props.selectedGroup
+    const group = props.selectedGroup;
 
     const [message, setMessage] = useState('');
 
@@ -105,12 +105,20 @@ const GroupJoinModalV2 = (props) => {
                     <Typography variant="h5">
                         상세 소개
                     </Typography>
-                    <div dangerouslySetInnerHTML={createMarkup(group?.long_description)}></div>
+                    <div dangerouslySetInnerHTML={createMarkup(group?.long_description)} style={{minHeight:'300px'}}></div>
                     <Divider />
                     <Typography variant="h5">
                         Tech Stack
                     </Typography>
                     <BadgeStack type='tech' stack={group ? group.tech_stack : []} />
+                    <Typography variant="h5">
+                        이런 성향을 원해요
+                    </Typography>
+                    <BadgeStack type='personal' stack={group ? group.personal_stack : []} />
+                    <Typography variant="h5">
+                        이런 역할이 반드시 필요해요
+                    </Typography>
+                    <BadgeStack type='role' stack={group ? group.role_stack : []} />
                     <Divider />
                     <Typography variant="h5">
                         자기소개서

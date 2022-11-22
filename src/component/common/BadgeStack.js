@@ -13,18 +13,19 @@ const BadgeStack = ({ stack, type }) => {
             {stack.map((value) => {
                 const option = findOptionByValue(value);
                 return (
-                    option?
-                    <Chip
-                        label={option?.label}
-                        style={{ 
-                            backgroundColor: option?.bgColor, 
-                            color: option?.txtColor,
-                            marginRight:3,
-                            marginBottom:3,
-                        }}
-                    />
-                    :
-                    null
+                    option ?
+                        <Chip
+                            key={option?.value}
+                            label={option?.label}
+                            style={{
+                                backgroundColor: option?.bgColor,
+                                color: option?.txtColor,
+                                marginRight: 3,
+                                marginBottom: 3,
+                            }}
+                        />
+                        :
+                        null
                 )
             }
             )}
