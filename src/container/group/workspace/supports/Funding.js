@@ -59,19 +59,7 @@ const Funding = () => {
                                 <Chip label={"웹서비스"} />
                                 <Typography variant="h5">{"그룹지원프로그램"}</Typography>
                                 <Typography variant="h6">{"히어로"}</Typography>
-                                <Typography>{"저희를 후원하시고 다음에 싼 가격으로 이용하셈"}</Typography>
-                                <Stack
-                                    direction="row"
-                                    justifyContent="end"
-                                    alignItems="center"
-                                    spacing={2}
-                                >
-
-                                    <Button variant="contained" onClick={()=>setFunding({
-                                        ...funding,
-                                        now:funding.now+1000
-                                    })}>후원하기</Button>
-                                </Stack>
+                                <Typography>{"서버 비용 펀딩을 바랍니다. 다양한 혜택을 미리 선보여드립니다. 더 싼 가격에 이용하세요."}</Typography>
                             </Grid>
                         </Grid>
                     </ResponsiveCard>
