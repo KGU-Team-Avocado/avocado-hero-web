@@ -61,13 +61,6 @@ export default (props) => {
     }
 
     const handleClick = (posting) => {
-        const idx = props.bookmarks.findIndex((bookmarks) => bookmarks._id === posting._id);
-        if (idx == -1) {
-            setBookmarkBtn(false);
-        }
-        else {
-            setBookmarkBtn(true);
-        }
         setPostingModalOpen(true);
         setSelected(posting);
     }
@@ -84,9 +77,9 @@ export default (props) => {
                                     key={posting._id}
                                     posting={posting}
                                     handleClick={handleClick}
-                                    bookmarkBtn={bookmarkBtn}
                                     bookMarkSave={bookMarkSave}
                                     bookMarkDelete={bookMarkDelete}
+                                    bookmarkBtn={props.bookmarks.findIndex((bookmark) => bookmark._id === posting._id) >= 0}
                                 />
                             </Grid>
                         ))
@@ -103,7 +96,7 @@ export default (props) => {
                 component={<JobFinderViewModal
                     setOpen={setPostingModalOpen}
                     selected={selected}
-                    bookmarkBtn={bookmarkBtn}
+                    bookmarkBtn={props.bookmarks.findIndex((bookmark) => bookmark._id === selected?._id) >= 0}
                     bookMarkSave={bookMarkSave}
                     bookMarkDelete={bookMarkDelete}
                 />}
