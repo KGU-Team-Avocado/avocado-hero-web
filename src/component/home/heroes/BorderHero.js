@@ -96,7 +96,7 @@ export default () => {
                               "nickname": "아보카도히어로",
                               "imgURL": "undefined",
                               "belongs": ["아보카도 대학교"],
-                              "fields": [""],
+                              "fields": [],
                               "links": ["https://github.com/avocado"],
                               "introduce": "팀 프로젝트의 처음부터 끝까지 함께하는 국내 유일의 서비스입니다.",
                               "keywords": ["react", "java"],
