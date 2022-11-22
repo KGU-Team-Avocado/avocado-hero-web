@@ -80,15 +80,15 @@ const ProfileContainer = () => {
                                                 color="info"
                                                 onClick={() => navigate(`/user/profile/update/${profile.user_id}`)}
                                             >
-                                                프로필 수정(v2)
+                                                프로필 수정
                                             </MKButton>
-                                            <MKButton
+                                            {/* <MKButton
                                                 variant="contained"
                                                 color="info"
                                                 onClick={() => navigate(`/user/ProfileUpdate/${profile.user_id}`)}
                                             >
                                                 프로필 수정
-                                            </MKButton>
+                                            </MKButton> */}
                                             </>
 
                                             :

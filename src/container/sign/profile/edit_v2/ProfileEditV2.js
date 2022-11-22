@@ -65,7 +65,7 @@ const ProfileEditV2 = () => {
                 console.log(error);
             });
 
-        navigate('/user/profile.user_id')
+        navigate(`/user/${profile.user_id}`)
     };
 
     return (
@@ -73,7 +73,6 @@ const ProfileEditV2 = () => {
             {
                 profile &&
                 <>
-                    {JSON.stringify(profile)}
                     <Typography variant="h3">프로필 수정</Typography>
                     <Box marginBottom={2}>
                         <ResponsiveCard>
