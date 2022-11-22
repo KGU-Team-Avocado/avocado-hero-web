@@ -14,7 +14,7 @@ const RoleCard = ({group, member, index, roleBadge, modifyRole, edit, editWho}) 
                     image="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                     alt="Live from space album cover"
                 />
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <Typography component="div" variant="caption">
                             {member.user_id === group.manager ?
@@ -31,7 +31,7 @@ const RoleCard = ({group, member, index, roleBadge, modifyRole, edit, editWho}) 
                             :
                             <>
                                 {roleBadge}
-                                <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1, mt: 1 }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
                                     {group.end_project ?
                                         <Link type="button" className="btn btn-secondary me-2" to={"/workspace/" + project_id + '/evaluation/' + member.user_id} >평가하기</Link>
                                         :

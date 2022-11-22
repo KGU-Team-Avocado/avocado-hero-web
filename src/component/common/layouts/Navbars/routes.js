@@ -82,48 +82,48 @@ const routes = [
       },
     ],
   },
-  {
-    name: "개발모드",
-    icon: <GitHubIcon />,
-    columns: 1,
-    rowsPerColumn: 2,
-    collapse: [
-      {
-        name: "테스트",
-        collapse: [
-          {
-            name: "레퍼런스",
-            route: "/example",
-          },
-          {
-            name: "멀티 셀렉트",
-            route: "/example/multiSelectExample",
-          },
-          {
-            name: "파일 업로드",
-            route: "/example/fileUpload",
-          },
-          {
-            name: "리덕스",
-            route: "/example/redux",
-          },
-        ],
-      },
-      {
-        name: "기타",
-        collapse: [
-          {
-            name: "활동포인트",
-            route: "/example/bestworker",
-          },
-          {
-            name: "데이터베이스 조회",
-            route: "/example/database",
-          },
-        ],
-      },
-    ],
-  },
+  // {
+  //   name: "개발모드",
+  //   icon: <GitHubIcon />,
+  //   columns: 1,
+  //   rowsPerColumn: 2,
+  //   collapse: [
+  //     {
+  //       name: "테스트",
+  //       collapse: [
+  //         {
+  //           name: "레퍼런스",
+  //           route: "/example",
+  //         },
+  //         {
+  //           name: "멀티 셀렉트",
+  //           route: "/example/multiSelectExample",
+  //         },
+  //         {
+  //           name: "파일 업로드",
+  //           route: "/example/fileUpload",
+  //         },
+  //         {
+  //           name: "리덕스",
+  //           route: "/example/redux",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       name: "기타",
+  //       collapse: [
+  //         {
+  //           name: "활동포인트",
+  //           route: "/example/bestworker",
+  //         },
+  //         {
+  //           name: "데이터베이스 조회",
+  //           route: "/example/database",
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
 ];
 
 export default routes;

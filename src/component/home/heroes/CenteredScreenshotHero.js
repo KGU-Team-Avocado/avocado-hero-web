@@ -36,7 +36,7 @@ export default ({navigate}) => {
                     <MKButton variant="contained" color="warning" size="large" onClick={()=>navigate('/groupFinder')}>프로젝트 찾기</MKButton>
                     <MKButton variant="outlined" color="dark" size="large" onClick={()=>navigate('/workspace/630b7190409e908dbc8a1633')}>워크스페이스 구경하기</MKButton>
                 </Stack>
-                <div className="overflow-hidden" style={{ "maxHeight": "30vh" }}>
+                <div className="overflow-hidden">
                     <div className="container px-5">
                         <img src={image1} className="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy" />
                     </div>
