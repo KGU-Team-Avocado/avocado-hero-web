@@ -36,21 +36,21 @@ const GroupCardV2 = (props) => {
             onClick={() => props.handleGroupCard(props.group)}
         >
             <Grid container spacing={5}>
-                <Grid item xs={12} md={5}>
-                    <Stack
+                {/* <Grid item xs={12} md={5}> */}
+                    {/* <Stack
                         direction="row"
                         justifyContent="center"
                         alignItems="center"
                         spacing={2}
-                    >
-                        <img
+                    > */}
+                        {/* <img
                             className="border rounded-top"
                             width="100%"
                             //  height=""
                             alt=""
                             src={uploadedImage}
                             onError={handleImgError}
-                        />
+                        /> */}
                         {/* <Box
                             sx={{
                                 width: 150,
@@ -62,10 +62,10 @@ const GroupCardV2 = (props) => {
                                 },
                             }}
                         /> */}
-                    </Stack>
+                    {/* </Stack> */}
 
-                </Grid>
-                <Grid item xs={12} md={7}>
+                {/* </Grid> */}
+                <Grid item xs={12} md={13}>
                     <Stack
                         direction="column"
                         justifyContent="space-between"
