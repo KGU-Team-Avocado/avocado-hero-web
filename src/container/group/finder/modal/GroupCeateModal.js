@@ -24,6 +24,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
         group_name: '',
         project_name: '',
         short_description: '',
+        capacity: 0,
     })
 
     const [editorState, setEditorState] = useState(
@@ -73,7 +74,6 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
             end_project: false,
             // applied : [],
             code: code.code,
-            capacity:100,
         }
         console.log(newGroupData)
 
@@ -194,6 +194,15 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                             variant="outlined"
                             value={project.short_description}
                             id="short_description"
+                            onChange={handleInput}
+                        />
+                        <TextField
+                            sx={{ width: "100%" }}
+                            label="모집 인원"
+                            variant="outlined"
+                            type="number"
+                            value={project.capacity}
+                            id="capacity"
                             onChange={handleInput}
                         />
                         <Box>
