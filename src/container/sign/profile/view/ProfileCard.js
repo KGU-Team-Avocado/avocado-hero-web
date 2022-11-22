@@ -1,10 +1,10 @@
 import { Chip, Grid, Stack, Typography } from "@mui/material";
 import ResponsiveCard from "component/common/ResponsiveCard";
-import TechStack from "component/common/TechStack";
 import Avatar from "../avatar/Avatar";
 import ProfileGroup from "./ProfileGroup";
 import ProfilePortpolio from "./ProfilePortpolio";
 import * as API from "../../../../api/API";
+import BadgeStack from "component/common/BadgeStack";
 
 const ProfileCard = (props) => {
 
@@ -55,7 +55,7 @@ const ProfileCard = (props) => {
                                 {profile && profile?.belongs}
                             </Typography>
                             <Typography variant="h4">분야</Typography>
-                            <Typography>{profile && <TechStack tech_stack={profile?.fields} />}</Typography>
+                            {profile && <BadgeStack type='projects' stack={profile?.fields} />}
                             <Typography variant="h4">링크</Typography>
                             <Typography>
                                 <a href={profile && profile?.links} target="_blank" rel="noreferrer">{profile && profile?.links}</a>
@@ -64,16 +64,9 @@ const ProfileCard = (props) => {
                         <ResponsiveCard>
                             <Typography variant="h3">세부 정보</Typography>
                             <Typography variant="h4">키워드</Typography>
-                            <Typography>{profile && <TechStack tech_stack={profile?.keywords} />}</Typography>
+                            {profile && <BadgeStack type='tech' stack={profile?.keywords} />}
                             <Typography variant="h4">성향</Typography>
-                            <Typography>
-                                {
-                                    profile &&
-                                    <TechStack
-                                        tech_stack={profile.personalities}
-                                    />
-                                }
-                            </Typography>
+                            {profile && <BadgeStack type='personal' stack={profile?.personalities} />}
                             <Typography variant="h4">소개글</Typography>
                             <Typography>{profile && profile?.introduce}</Typography>
                         </ResponsiveCard>
