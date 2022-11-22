@@ -102,7 +102,7 @@ const GroupCardV2 = (props) => {
                     >
                         <Stack direction="row" justifyContent="space-between" sx={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
                             <Box>
-                                <Chip label={props.group.group_name} color="secondary" variant="outlined" />
+                                <Chip label={props.group.project_stack} color="secondary" variant="outlined" />
                             </Box>
                             <Box>
                                 <Chip label={props.group.close_application ? "모집종료" : "모집중"} color={props.group.close_application ? "error" : "success"} />

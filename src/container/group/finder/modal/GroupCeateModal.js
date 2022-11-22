@@ -48,7 +48,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
         })
     }
 
-    const [selectedProjectTags, setSelectedProjectTags] = useState([]);
+    const [selectedProjectTags, setSelectedProjectTags] = useState(null);
     const [selectedSkillTags, setSelectedSkillTags] = useState([]);
     const [selectedPersonalTags, setSelectedPersonalTags] = useState([]);
     const [selectedRoleTags, setSelectedRoleTags] = useState([]);
@@ -58,7 +58,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
         const newGroupData = {
             ...project,
             long_description: convertedContent,
-            project_stack: selectedProjectTags.map((s) => s.value),
+            project_stack: selectedProjectTags.value,
             tech_stack: selectedSkillTags.map((s) => s.value),
             personal_stack: selectedPersonalTags.map((s) => s.value),
             role_stack: selectedRoleTags.map((s) => s.value),
@@ -198,7 +198,7 @@ const GroupCreateModal = ({ code, groupCreateModalOpen, setOpen }) => {
                         />
                         <Box>
                             <Autocomplete
-                                multiple
+                                // multiple
                                 options={tags.projects}
                                 disableCloseOnSelect
                                 getOptionLabel={(option) => option.label}
