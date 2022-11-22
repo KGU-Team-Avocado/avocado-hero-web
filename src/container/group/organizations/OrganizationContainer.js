@@ -8,6 +8,8 @@ import OrganizationCreateModal from "./OrganizationCreateModal";
 import { useSelector } from "react-redux";
 import { selectUser } from "api/redux/user/userSlice";
 import * as API from "../../../api/API"
+import GroupJoinModalV2 from "../finder/modal/GroupJoinModalV2";
+import ReadmeModal from "../workspace/readme/ReadmeModal";
 
 export default function OrganizationContainer() {
 
@@ -39,6 +41,13 @@ export default function OrganizationContainer() {
     const [organizations, setOrganizations] = useState([]);
     const [organizationModalOpen, setOrganizationModalOpen] = useState(false);
     const [groups, setGroups] = useState([]);
+    const [selectedGroup, setSelectedGroup] = useState(null);
+    const [groupViewModalOpen, setGroupViewModalOpen] = useState(false);
+
+    const handleGroupCard = (group) => {
+        setSelectedGroup(group);
+        setGroupViewModalOpen(true);
+    };
 
     useEffect(() => {
         init();
@@ -120,18 +129,28 @@ export default function OrganizationContainer() {
             </Box>
 
             <Box>
-                <Typography variant="h5">선택한 조직에 속한 그룹 (수정예정)</Typography>
+                <Typography variant="h5">선택한 조직에 속한 그룹</Typography>
+                <Stack spacing={1}>
+                    {
+                        groups.length > 0 ?
+                            groups.map(group =>
+                                <ResponsiveCard actionArea onClick={() => handleGroupCard(group)}>
+                                    <Stack direction={"row"} justifyContent="space-between">
+                                        <Typography>
+                                            {group.group_name}({group.project_name})
+                                        </Typography>
+                                        <Typography>
+                                            {group.members.length}명
+                                        </Typography>
+                                    </Stack>
+                                </ResponsiveCard>
 
-                {
-                    groups.length > 0 ?
-                        groups.map(group =>
-                            <Typography>
-                                {group.group_name}{group.project_name}{group.members.length}
-                            </Typography>
-                        )
-                        :
-                        <Typography>소속된 그룹이 없습니다.</Typography>
-                }
+                            )
+                            :
+                            <Typography>소속된 그룹이 없습니다.</Typography>
+                    }
+                </Stack>
+
             </Box>
 
             <ModalStaticBackdrop
@@ -144,7 +163,12 @@ export default function OrganizationContainer() {
                     />
                 }
             />
-
+            <ModalStaticBackdrop
+                keepMounted
+                width="md"
+                open={groupViewModalOpen}
+                component={<ReadmeModal group={selectedGroup} setOpen={setGroupViewModalOpen} />}
+            />
         </Stack>
     )
 }
