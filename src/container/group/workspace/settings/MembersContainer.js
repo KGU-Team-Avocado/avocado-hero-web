@@ -71,8 +71,6 @@ const MembersContainer = () => {
     }
 
     const acceptMember = (applicant) => {
-        console.log(applicant)
-
         axios.post("/groupsRouter/acceptApplicant", {
             _id: applicant._id,
             group_id: applicant.group_id,
@@ -83,7 +81,6 @@ const MembersContainer = () => {
                 user_role: []
             }
         }).then((response) => {
-            console.log(response.data);
             setApplicants(response.data.applicants);
             dispatch(getGroupAsync(project_id))
         }).catch(function (error) {
@@ -175,8 +172,8 @@ const MembersContainer = () => {
                                                         ? index + 1
                                                         : column.id === 'accept' ?
                                                             <Stack spacing={2} direction="row" justifyContent="center">
-                                                                <Button size="small" variant="outlined" onClick={() => acceptMember(applicant)} >승인</Button>
-                                                                <Button size="small" variant="outlined" color="error" onClick={() => rejectMember(applicant)} >반려</Button>
+                                                                <Button size="small" variant="outlined" onClick={(e) => { e.stopPropagation(); acceptMember(applicant)}} >승인</Button>
+                                                                <Button size="small" variant="outlined" color="error" onClick={(e) => { e.stopPropagation(); rejectMember(applicant)}} >반려</Button>
                                                             </Stack>
                                                             : value}
                                                 </TableCell>
