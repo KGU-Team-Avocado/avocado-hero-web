@@ -7,10 +7,10 @@
 ## Authors
 
 - [@gabrielyoon7 (윤주현, Gabriel Ju Hyun Yoon)](https://github.com/gabrielyoon7)
-- [@ (남진수)](https://github.com/)
+- [@wwwls99 (남진수)](https://github.com/wwwls99)
 - [@soyoung125 (박소영)](https://github.com/soyoung125)
-- [@ (김도희)](https://github.com/)
-- [@ (김세은)](https://github.com/)
+- [@hido02 (김도희)](https://github.com/hido02)
+- [@seeun01 (김세은)](https://github.com/seeun01)
 - [@yeonsu00 (김연수)](https://github.com/yeonsu00)
 
 
