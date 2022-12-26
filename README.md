@@ -119,7 +119,7 @@
 Clone the project
 
 ```bash
-  git clone https://github.com/KGU-Team-Avocado/avocado-hero-web
+  git clone https://github.com/KGU-Team-Avocado/avocado-hero-web.git
 ```
 
 Go to the project directory
